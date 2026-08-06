@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* High-performance image rendering & GPU acceleration */
+img {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+body {
+  @apply bg-ivory text-charcoal font-sans antialiased;
+  background-color: #FAF9F6;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(212, 175, 55, 0.08), transparent 40%),
+    radial-gradient(circle at 88% 8%, rgba(128, 0, 32, 0.06), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(212, 175, 55, 0.06), transparent 55%);
+}
+
+/* Ornate divider dots */
+.ornament::before,
+.ornament::after {
+  content: '';
+  display: inline-block;
+  height: 1px;
+  width: clamp(30px, 12vw, 120px);
+  vertical-align: middle;
+  background: linear-gradient(90deg, transparent, #D4AF37);
+  margin: 0 14px;
+}
+.ornament::after {
+  background: linear-gradient(90deg, #D4AF37, transparent);
+}
+
+/* Gold shimmering text */
+.text-shimmer {
+  background: linear-gradient(90deg, #A67C1A, #E8C766, #A67C1A);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: #F5EFE0; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#D4AF37, #A67C1A);
+  border-radius: 8px;
+  border: 2px solid #F5EFE0;
+}
+
+/* Mandala background pattern */
+.mandala-bg {
+  background-image:
+    repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 18px, rgba(212, 175, 55, 0.05) 19px, transparent 20px);
+}
+
+/* Form inputs */
+.pkt-input {
+  @apply w-full rounded-lg border-2 border-gold/30 bg-ivory/60 px-4 py-2.5 text-charcoal
+         outline-none transition-all placeholder:text-charcoal/40
+         focus:border-gold focus:bg-white focus:ring-2 focus:ring-gold/20;
+}
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* GIF background — lock to eyes area, crisp render, no jitter */
+.gif-bg {
+  object-fit: cover;
+  object-position: center 28%;
+  filter: brightness(0.88) saturate(1.12) contrast(1.04);
+  /* Prevent sub-pixel jitter on GIF loops */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: auto;
+  image-rendering: -webkit-optimize-contrast;
+}
