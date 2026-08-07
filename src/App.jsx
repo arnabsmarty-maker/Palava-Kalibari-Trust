@@ -2064,7 +2064,7 @@ const SPONSORSHIP_PACKAGES = [
   },
 ]
 
-function SponsorshipSection() {
+function SponsorshipSection({ onSponsor }) {
   const getMailHref = (pkg) => {
     const subject = `Sponsorship Enquiry — ${pkg.tier} Package (${pkg.price})`
     const body = `Hello Palava Kalibari Trust Team,\n\nI am interested in exploring the ${pkg.tier} Sponsorship Package (${pkg.price}) for Durga Puja 2026.\n\nCompany / Organization Name:\nContact Person:\nPhone Number:\nEmail:\n\nPlease share the formal Sponsorship Deck & MOU details.\n\nThank you!`
