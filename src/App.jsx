@@ -1070,11 +1070,15 @@ function Field({ label, children }) {
 }
 
 // ══════════════════════════════════════════════════════════════
-// DURGA PUJA NIRGHANTA
+// DURGA PUJA NIRGHANTA & EVENT YEAR SECTION
 // ══════════════════════════════════════════════════════════════
 function DurgaSection({ onOpenYearEvents }) {
-  const [active, setActive] = useState(NIRGHANTA[0].id)
-  const day = NIRGHANTA.find((d) => d.id === active)
+  const [selectedYear, setSelectedYear] = useState('2025-2026')
+  const [activeNirghanta, setActiveNirghanta] = useState(NIRGHANTA[0].id)
+
+  const currentYearData = YEAR_EVENTS_DATA[selectedYear] || YEAR_EVENTS_DATA['2025-2026']
+  const day = NIRGHANTA.find((d) => d.id === activeNirghanta)
+
   return (
     <section id="durga" className="relative text-ivory-warm">
 
@@ -1102,82 +1106,148 @@ function DurgaSection({ onOpenYearEvents }) {
         </div>
       </div>
 
-      {/* ── ZONE 2: Schedule panel — solid dark background, fully readable ── */}
+      {/* ── ZONE 2: Event Year Selection, Write-ups & Schedule Panel ── */}
       <div className="bg-gradient-to-b from-maroon-deep via-[#3a0010] to-[#1a0008]">
         <div className="max-w-5xl mx-auto px-4 pt-10 pb-20">
 
-          {/* Glowing Year Event Archive Dropdown Bar */}
-          <div className="reveal mb-10 p-4 rounded-2xl bg-black/60 border-2 border-gold/60 shadow-[0_0_25px_rgba(255,215,0,0.5)] max-w-3xl mx-auto text-center">
-            <div className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-2.5 flex items-center justify-center gap-2">
-              <CalendarDays className="w-4 h-4 text-gold-bright" /> Redirect to Dedicated Event Page by Year:
+          {/* Glowing 4-Year Event Selection Bar */}
+          <div className="reveal mb-10 p-4 rounded-2xl bg-black/70 border-2 border-gold/60 shadow-[0_0_25px_rgba(255,215,0,0.5)] max-w-3xl mx-auto text-center">
+            <div className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-3 flex items-center justify-center gap-2">
+              <CalendarDays className="w-4 h-4 text-gold-bright" /> Select Event Year to View Events &amp; Write-ups:
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
-              <button
-                onClick={() => onOpenYearEvents && onOpenYearEvents('2023-2024')}
-                className="py-2.5 px-2 rounded-xl bg-gold/10 border border-gold/40 text-ivory-warm font-bold text-xs sm:text-sm hover:bg-gold hover:text-maroon-deep transition-all shadow-md animate-pulse"
-              >
-                📜 2023–2024
-              </button>
-              <button
-                onClick={() => onOpenYearEvents && onOpenYearEvents('2024-2025')}
-                className="py-2.5 px-2 rounded-xl bg-gold/10 border border-gold/40 text-ivory-warm font-bold text-xs sm:text-sm hover:bg-gold hover:text-maroon-deep transition-all shadow-md animate-pulse"
-              >
-                📅 2024–2025
-              </button>
-              <button
-                onClick={() => onOpenYearEvents && onOpenYearEvents('2025-2026')}
-                className="py-2.5 px-2 rounded-xl bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold text-xs sm:text-sm hover:scale-[1.03] transition-all shadow-[0_0_15px_rgba(255,215,0,0.8)] border border-white/40 animate-pulse"
-              >
-                ★ 2025–2026
-              </button>
-              <button
-                onClick={() => onOpenYearEvents && onOpenYearEvents('2026-2027')}
-                className="py-2.5 px-2 rounded-xl bg-gold/10 border border-gold/40 text-ivory-warm font-bold text-xs sm:text-sm hover:bg-gold hover:text-maroon-deep transition-all shadow-md animate-pulse"
-              >
-                🚀 2026–2027
-              </button>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              {[
+                { key: '2023-2024', label: '📜 2023–2024' },
+                { key: '2024-2025', label: '📅 2024–2025' },
+                { key: '2025-2026', label: '★ 2025–2026' },
+                { key: '2026-2027', label: '🚀 2026–2027' },
+              ].map((item) => {
+                const isActive = item.key === selectedYear
+                return (
+                  <button
+                    key={item.key}
+                    onClick={() => setSelectedYear(item.key)}
+                    className={`py-2.5 px-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all ${
+                      isActive
+                        ? 'bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep shadow-[0_0_18px_rgba(255,215,0,0.85)] scale-105 border-2 border-white/60'
+                        : 'bg-gold/10 border border-gold/30 text-ivory-warm hover:bg-gold hover:text-maroon-deep'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                )
+              })}
             </div>
           </div>
 
-          {/* Section heading */}
+          {/* Dynamic Year Write-up & Heading */}
           <div className="reveal text-center mb-10">
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-ivory-warm leading-tight">
-              Durga Puja 2026
-              <span className="block text-gold-bright text-2xl md:text-3xl mt-1 font-normal tracking-wide">
-                Puja Nirghanta
-              </span>
+            <span className="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 text-gold-bright px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-3">
+              <CalendarDays className="w-3.5 h-3.5" /> Events &amp; Write-ups ({currentYearData.year})
+            </span>
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-ivory-warm leading-tight">
+              {currentYearData.title}
             </h2>
-            <p className="mt-3 text-ivory-cream/65 text-sm tracking-wide">
-              {DURGA_EVENT.dates} &nbsp;•&nbsp; {DURGA_EVENT.location}
+            <p className="mt-3 text-ivory-cream/80 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed">
+              {currentYearData.subtitle}
             </p>
             <div className="mt-4 mx-auto h-px w-32 bg-gradient-to-r from-transparent via-gold to-transparent" />
           </div>
 
-          {/* Tithi tabs */}
-          <div className="reveal flex flex-wrap justify-center gap-2 mb-8">
-            {NIRGHANTA.map((d) => {
-              const on = d.id === active
-              return (
-                <button
-                  key={d.id}
-                  onClick={() => setActive(d.id)}
-                  className={`relative px-4 py-2.5 rounded-full text-sm font-semibold border-2 transition-all duration-200 ${
-                    on
-                      ? 'bg-gold text-maroon-deep border-gold shadow-[0_0_18px_rgba(212,175,55,0.5)] scale-105'
-                      : 'border-gold/30 text-gold-bright hover:border-gold hover:bg-gold/10'
-                  }`}
-                >
-                  {d.sacred && (
-                    <Flame className={`inline w-4 h-4 mr-1 ${on ? 'text-maroon-deep' : 'text-gold'}`} />
-                  )}
-                  {d.tithi}
-                  <span className={`block text-[10px] font-normal ${on ? 'text-maroon' : 'text-ivory-cream/55'}`}>
-                    {d.day}
+          {/* Integrated Events Cards Grid for Selected Year */}
+          <div className="reveal grid md:grid-cols-3 gap-6 mb-10">
+            {currentYearData.events.map((ev, idx) => (
+              <div
+                key={idx}
+                className="group flex flex-col rounded-2xl bg-gradient-to-b from-[#25000c] to-[#140006] border-2 border-gold/40 overflow-hidden hover:border-gold hover:scale-[1.02] transition-all duration-300 shadow-xl"
+              >
+                {/* Event Photo */}
+                <div className="relative h-48 w-full overflow-hidden bg-black">
+                  <img
+                    src={ev.image}
+                    alt={ev.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#140006] via-black/20 to-transparent" />
+                  <span className="absolute bottom-2.5 left-3 text-[11px] font-bold text-gold-bright bg-black/70 border border-gold/50 px-2.5 py-0.5 rounded-full">
+                    {ev.date}
                   </span>
-                </button>
-              )
-            })}
+                </div>
+
+                {/* Event Info */}
+                <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+                  <div>
+                    <h3 className="font-display font-bold text-base text-ivory-warm leading-snug group-hover:text-gold-bright transition-colors">
+                      {ev.title}
+                    </h3>
+                    <p className="text-[11px] text-gold/80 mt-1 flex items-center gap-1 font-medium">
+                      <MapPin className="w-3 h-3 text-gold shrink-0" /> {ev.venue}
+                    </p>
+                  </div>
+
+                  <ul className="space-y-1.5 text-xs text-ivory-cream/85 border-t border-gold/20 pt-3">
+                    {ev.highlights.map((h, i) => (
+                      <li key={i} className="flex items-start gap-1.5">
+                        <span className="text-gold shrink-0 mt-0.5">✦</span>
+                        <span className="leading-relaxed">{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
           </div>
+
+          {/* Standalone Page Redirect Link CTA */}
+          <div className="reveal text-center mb-14">
+            <button
+              onClick={() => onOpenYearEvents && onOpenYearEvents(selectedYear)}
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold px-6 py-3 rounded-full shadow-[0_0_20px_rgba(255,215,0,0.8)] hover:scale-105 transition-all text-sm border border-white/50"
+            >
+              <span>Open Dedicated Standalone Page for {currentYearData.year}</span>
+              <ChevronRight className="w-4 h-4 stroke-[3]" />
+            </button>
+          </div>
+
+          {/* ── Durga Puja Nirghanta Schedule Tabs ── */}
+          <div className="reveal border-t border-gold/30 pt-10">
+            <div className="text-center mb-8">
+              <span className="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 text-gold-bright px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
+                <Flame className="w-3.5 h-3.5 text-gold" /> Official Festival Schedule
+              </span>
+              <h3 className="font-display text-3xl font-bold text-ivory-warm mt-2">
+                Durga Puja Nirghanta
+              </h3>
+              <p className="text-xs text-ivory-cream/70 mt-1">
+                {DURGA_EVENT.dates} • {DURGA_EVENT.location}
+              </p>
+            </div>
+
+            {/* Tithi tabs */}
+            <div className="flex flex-wrap justify-center gap-2 mb-8">
+              {NIRGHANTA.map((d) => {
+                const on = d.id === activeNirghanta
+                return (
+                  <button
+                    key={d.id}
+                    onClick={() => setActiveNirghanta(d.id)}
+                    className={`relative px-4 py-2.5 rounded-full text-sm font-semibold border-2 transition-all duration-200 ${
+                      on
+                        ? 'bg-gold text-maroon-deep border-gold shadow-[0_0_18px_rgba(212,175,55,0.5)] scale-105'
+                        : 'border-gold/30 text-gold-bright hover:border-gold hover:bg-gold/10'
+                    }`}
+                  >
+                    {d.sacred && (
+                      <Flame className={`inline w-4 h-4 mr-1 ${on ? 'text-maroon-deep' : 'text-gold'}`} />
+                    )}
+                    {d.tithi}
+                    <span className={`block text-[10px] font-normal ${on ? 'text-maroon' : 'text-ivory-cream/55'}`}>
+                      {d.day}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
 
           {/* Day detail card */}
           <div className="reveal max-w-3xl mx-auto">
@@ -1243,6 +1313,7 @@ function DurgaSection({ onOpenYearEvents }) {
               )}
             </div>
           </div>
+        </div>
 
         </div>
       </div>
