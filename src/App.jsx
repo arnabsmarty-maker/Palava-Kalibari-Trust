@@ -62,9 +62,9 @@ const NAV = [
   { label: 'Home', href: '#home' },
   { label: 'Events', href: '#durga' },
   { label: 'Durga Puja 2026', href: '#durga' },
-  { label: 'Annadan', href: '#annadan' },
   { label: 'Donate', href: '#donate' },
   { label: 'Sponsorship', href: '#sponsorship' },
+  { label: 'About Us', href: '#about' },
   { label: 'Contact Us', href: '#contact' },
 ]
 
@@ -356,34 +356,32 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
                   {eventsDropdownOpen && (
                     <div className="absolute top-full left-0 mt-2 w-56 p-1.5 rounded-2xl bg-[#1c000a] border-2 border-gold/60 shadow-[0_0_25px_rgba(255,215,0,0.5)] backdrop-blur-md z-50 animate-fade-up">
                       <div className="text-[10px] uppercase font-bold tracking-widest text-gold/70 px-3 py-1.5 border-b border-gold/20 flex items-center justify-between">
-                        <span>Select Event Year</span>
+                        <span>Select Event</span>
                         <Sparkles className="w-3 h-3 text-gold" />
                       </div>
                       
-                      <button
-                        onClick={() => {
-                          setEventsDropdownOpen(false)
-                          if (onOpenYearEvents) onOpenYearEvents('2023-2024')
-                        }}
+                      <a
+                        href="#annadan"
+                        onClick={() => setEventsDropdownOpen(false)}
                         className="w-full text-left px-3.5 py-2 rounded-xl text-xs font-bold text-ivory-warm hover:bg-gold hover:text-maroon-deep transition-all flex items-center justify-between group/item my-0.5"
                       >
                         <span className="flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-amber-200" />
-                          2023–2024 Events (Foundational)
+                          <span className="w-2 h-2 rounded-full bg-rose-500" />
+                          Annadan
                         </span>
                         <ChevronRight className="w-3.5 h-3.5 opacity-60 group-hover/item:translate-x-1 transition-transform" />
-                      </button>
+                      </a>
 
                       <button
                         onClick={() => {
                           setEventsDropdownOpen(false)
-                          if (onOpenYearEvents) onOpenYearEvents('2024-2025')
+                          if (onOpenYearEvents) onOpenYearEvents('2026-2027')
                         }}
                         className="w-full text-left px-3.5 py-2 rounded-xl text-xs font-bold text-ivory-warm hover:bg-gold hover:text-maroon-deep transition-all flex items-center justify-between group/item my-0.5"
                       >
                         <span className="flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-gold animate-ping" />
-                          2024–2025 Events
+                          <span className="w-2 h-2 rounded-full bg-rose-400" />
+                          2026–2027 Events (Upcoming)
                         </span>
                         <ChevronRight className="w-3.5 h-3.5 opacity-60 group-hover/item:translate-x-1 transition-transform" />
                       </button>
@@ -405,13 +403,27 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
                       <button
                         onClick={() => {
                           setEventsDropdownOpen(false)
-                          if (onOpenYearEvents) onOpenYearEvents('2026-2027')
+                          if (onOpenYearEvents) onOpenYearEvents('2024-2025')
                         }}
                         className="w-full text-left px-3.5 py-2 rounded-xl text-xs font-bold text-ivory-warm hover:bg-gold hover:text-maroon-deep transition-all flex items-center justify-between group/item my-0.5"
                       >
                         <span className="flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-rose-400" />
-                          2026–2027 Events (Upcoming)
+                          <span className="w-2 h-2 rounded-full bg-gold animate-ping" />
+                          2024–2025 Events
+                        </span>
+                        <ChevronRight className="w-3.5 h-3.5 opacity-60 group-hover/item:translate-x-1 transition-transform" />
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          setEventsDropdownOpen(false)
+                          if (onOpenYearEvents) onOpenYearEvents('2023-2024')
+                        }}
+                        className="w-full text-left px-3.5 py-2 rounded-xl text-xs font-bold text-ivory-warm hover:bg-gold hover:text-maroon-deep transition-all flex items-center justify-between group/item my-0.5"
+                      >
+                        <span className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-amber-200" />
+                          2023–2024 Events (Foundational)
                         </span>
                         <ChevronRight className="w-3.5 h-3.5 opacity-60 group-hover/item:translate-x-1 transition-transform" />
                       </button>
