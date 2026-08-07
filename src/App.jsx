@@ -1960,22 +1960,42 @@ function AboutSection() {
             </div>
 
             {/* Our Vision Box */}
-            <div className="lg:col-span-5 rounded-3xl p-8 bg-gradient-to-b from-[#2a000d] via-[#1a0008] to-[#100005] border-2 border-gold/60 shadow-[0_0_30px_rgba(255,215,0,0.25)] flex flex-col justify-between relative overflow-hidden">
+            <div className="lg:col-span-5 rounded-3xl p-6 md:p-8 bg-gradient-to-b from-[#2a000d] via-[#1a0008] to-[#100005] border-2 border-gold/60 shadow-[0_0_30px_rgba(255,215,0,0.25)] flex flex-col justify-between relative overflow-hidden space-y-5">
               <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
                 <Crown className="w-32 h-32 text-gold" />
               </div>
 
               <div>
-                <span className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold px-3.5 py-1 rounded-full text-xs uppercase tracking-wider mb-4 shadow-md">
+                <span className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold px-3.5 py-1 rounded-full text-xs uppercase tracking-wider mb-3.5 shadow-md">
                   <Crown className="w-3.5 h-3.5" /> Our Vision
                 </span>
-                <h3 className="font-display text-2xl md:text-3xl font-extrabold text-gold-bright mb-4">
+                <h3 className="font-display text-2xl md:text-3xl font-extrabold text-gold-bright mb-3">
                   Establishing a Grand Kalibari &amp; Welfare Initiatives
                 </h3>
-                <p className="text-sm text-ivory-cream/90 font-light leading-relaxed">
+
+                {/* Divine Maa Kali Image Showcase */}
+                <div className="relative rounded-2xl overflow-hidden border-2 border-gold/50 shadow-xl my-4 group h-56 sm:h-64">
+                  <img
+                    src="/maa-kali-sanctuary.jpg"
+                    alt="Sacred Maa Kali Shrine Vision - Palava Kalibari Trust"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between z-10">
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-gold-bright bg-black/80 backdrop-blur border border-gold/50 px-3 py-1 rounded-full shadow">
+                      <Sparkles className="w-3.5 h-3.5 text-gold-bright" /> Sacred Kalibari Vision
+                    </span>
+                    <span className="text-[10px] text-ivory-cream/80 bg-maroon-deep/90 border border-gold/30 px-2.5 py-0.5 rounded-md font-semibold">
+                      Maa Kali Shrine
+                    </span>
+                  </div>
+                </div>
+
+                <p className="text-xs md:text-sm text-ivory-cream/90 font-light leading-relaxed">
                   We want to be an association which is entrusted with the objective of establishing a grand Kalibari in the vicinity of Palava, and as one of the premiere associations in upholding the values &amp; ethos of Bengali culture and heritage in Palava city &amp; around Dombivli, engaged with other communities in multiple welfare activities for the benefit of society.
                 </p>
-                <div className="mt-5 p-4 rounded-2xl bg-black/60 border border-gold/40 shadow-inner">
+
+                <div className="mt-4 p-4 rounded-2xl bg-black/60 border border-gold/40 shadow-inner">
                   <div className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-1.5 flex items-center gap-1.5">
                     <Heart className="w-4 h-4 text-rose-500 fill-rose-500" /> Medical Accommodation Welfare Facility:
                   </div>
@@ -1985,7 +2005,7 @@ function AboutSection() {
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-gold/20 flex items-center justify-between text-xs text-gold/80 font-bold">
+              <div className="pt-4 border-t border-gold/20 flex items-center justify-between text-xs text-gold/80 font-bold">
                 <span>✦ Community First</span>
                 <span>✦ Cultural Ethos</span>
                 <span>✦ Social Welfare</span>
