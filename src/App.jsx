@@ -3067,6 +3067,7 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
     venue: ev.venue,
     eventIndex: idx,
     description: ev.description,
+    highlights: ev.highlights,
   }))
 
   useEffect(() => {
@@ -3089,7 +3090,7 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
     <div className="min-h-screen bg-[#070002] text-ivory-warm">
       <Header onJoin={onJoin} onSponsor={onSponsor} onOpenYearEvents={onNavigateYear} />
 
-      <main className="pt-24 pb-20 max-w-7xl mx-auto px-4 space-y-6">
+      <main className="pt-24 pb-20 max-w-6xl mx-auto px-4 space-y-6">
         
         {/* Top Header & Breadcrumb */}
         <div className="flex flex-wrap items-center justify-between gap-4 pt-4">
@@ -3141,7 +3142,7 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
         {/* Year Title Header */}
         <div className="text-left pt-2 pb-1">
           <span className="inline-flex items-center gap-2 bg-gold/15 border border-gold/40 text-gold-bright font-extrabold tracking-widest uppercase text-xs px-3.5 py-1 rounded-full mb-2">
-            <CalendarDays className="w-3.5 h-3.5" /> {data.year} Photo Gallery &amp; Event Feed
+            <CalendarDays className="w-3.5 h-3.5" /> {data.year} Events &amp; Photo Gallery
           </span>
           <h1 className="font-display text-3xl md:text-5xl font-extrabold text-gold-bright leading-tight">
             {data.title}
@@ -3152,158 +3153,121 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
         </div>
 
         {/* ══════════════════════════════════════════════════════════════
-            70% PICTURE SHOWCASE (LEFT) & 30% EVENTS FEED (RIGHT)
+            SINGLE FULL-SCREEN STACK: 80% PICTURE STAGE & 20% WRITE-UPS
            ══════════════════════════════════════════════════════════════ */}
-        <div className="flex flex-col lg:flex-row gap-6 items-stretch">
+        <div className="w-full flex flex-col rounded-3xl border-2 border-gold/60 overflow-hidden shadow-[0_0_40px_rgba(255,215,0,0.35)]">
 
-          {/* ── LEFT COLUMN: 70% Photo Showcase with Auto-Changing Slideshow ── */}
-          <div className="w-full lg:w-[70%] flex flex-col rounded-3xl bg-black border-2 border-gold/60 overflow-hidden shadow-[0_0_35px_rgba(255,215,0,0.3)] relative min-h-[480px] md:min-h-[600px] justify-between">
+          {/* ── TOP ~80%: Full Width Auto-Changing Picture Stage ── */}
+          <div className="relative w-full h-[450px] sm:h-[550px] md:h-[650px] bg-black overflow-hidden">
+            {slides.map((s, idx) => (
+              <img
+                key={idx}
+                src={s.image}
+                alt={s.title}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                  idx === slideIndex ? 'opacity-100 scale-105' : 'opacity-0 scale-100 pointer-events-none'
+                }`}
+                style={{ transitionProperty: 'opacity, transform' }}
+              />
+            ))}
             
-            {/* Auto-Changing Slide Image */}
-            <div className="absolute inset-0 w-full h-full overflow-hidden">
-              {slides.map((s, idx) => (
-                <img
-                  key={idx}
-                  src={s.image}
-                  alt={s.title}
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-                    idx === slideIndex ? 'opacity-100 scale-105' : 'opacity-0 scale-100 pointer-events-none'
-                  }`}
-                  style={{ transitionProperty: 'opacity, transform' }}
-                />
-              ))}
-              {/* Vignette & Gradient Overlays */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#070002] via-black/40 to-black/30" />
-            </div>
+            {/* Vignette Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
 
-            {/* Top Bar inside Canvas */}
-            <div className="relative z-10 p-4 md:p-6 flex items-center justify-between">
-              <span className="inline-flex items-center gap-2 bg-black/75 border border-gold/60 text-gold-bright text-xs font-extrabold px-3.5 py-1.5 rounded-full shadow-lg backdrop-blur animate-pulse">
-                <Sparkles className="w-3.5 h-3.5 text-gold-bright" /> {data.year} Photo Gallery • {slideIndex + 1} of {slides.length}
+            {/* Top Bar over Picture */}
+            <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between">
+              <span className="inline-flex items-center gap-2 bg-black/75 border border-gold/60 text-gold-bright text-xs font-extrabold px-4 py-1.5 rounded-full shadow-lg backdrop-blur animate-pulse">
+                <Sparkles className="w-3.5 h-3.5 text-gold-bright" /> Photo {slideIndex + 1} of {slides.length} • Auto-Changing
               </span>
 
               {/* Pause/Play Button */}
               <button
                 onClick={() => setIsPlaying(!isPlaying)}
-                className="bg-black/70 hover:bg-gold hover:text-maroon-deep text-gold-bright border border-gold/50 p-2 rounded-full transition-all text-xs font-bold flex items-center gap-1 backdrop-blur"
+                className="bg-black/75 hover:bg-gold hover:text-maroon-deep text-gold-bright border border-gold/50 p-2.5 rounded-full transition-all text-xs font-bold flex items-center gap-1 backdrop-blur shadow-lg"
                 title={isPlaying ? 'Pause Auto Slideshow' : 'Play Auto Slideshow'}
               >
                 {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
               </button>
             </div>
+          </div>
 
-            {/* Bottom Overlay Info inside 70% Canvas */}
-            <div className="relative z-10 p-6 md:p-8 bg-gradient-to-t from-[#070002] via-[#070002]/90 to-transparent">
-              <span className="text-xs font-extrabold text-gold-bright bg-maroon-deep/90 border border-gold/50 px-3 py-1 rounded-full">
-                {currentSlide.date}
-              </span>
-              <h2 className="font-display text-2xl md:text-4xl font-extrabold text-gold-bright mt-3 leading-snug drop-shadow-md">
-                {currentSlide.title}
-              </h2>
-              <p className="text-xs text-gold/80 flex items-center gap-1.5 font-medium mt-1">
-                <MapPin className="w-3.5 h-3.5 text-gold shrink-0" /> {currentSlide.venue}
-              </p>
-              {currentSlide.description && (
-                <p className="text-xs md:text-sm text-ivory-cream/90 font-light leading-relaxed mt-2.5 max-w-3xl italic">
-                  "{currentSlide.description}"
+          {/* ── BOTTOM ~20%: Single Event Write-Up & Details Panel ── */}
+          <div className="p-6 md:p-8 bg-gradient-to-b from-[#20000a] via-[#140006] to-[#0a0003] space-y-6">
+            
+            {/* Header Info */}
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-gold/20">
+              <div>
+                <span className="text-xs font-extrabold text-gold-bright bg-maroon-deep border border-gold/50 px-3 py-1 rounded-full uppercase tracking-wider">
+                  {currentSlide.date}
+                </span>
+                <h2 className="font-display text-2xl md:text-4xl font-extrabold text-gold-bright mt-2 leading-snug">
+                  {currentSlide.title}
+                </h2>
+                <p className="text-xs md:text-sm text-gold/80 flex items-center gap-1.5 font-medium mt-1">
+                  <MapPin className="w-4 h-4 text-gold shrink-0" /> {currentSlide.venue}
                 </p>
-              )}
+              </div>
 
-              {/* Arrow Controls & Dot Indicators */}
-              <div className="flex items-center justify-between mt-5 pt-3 border-t border-gold/30">
+              {/* Arrow Navigation & Slide Dots */}
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setSlideIndex((prev) => (prev - 1 + slides.length) % slides.length)}
+                  className="p-2.5 rounded-full bg-black/70 border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all shadow-md"
+                  title="Previous Event Photo"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+
                 <div className="flex items-center gap-1.5">
                   {slides.map((_, i) => (
                     <button
                       key={i}
                       onClick={() => setSlideIndex(i)}
-                      className={`h-2 rounded-full transition-all duration-300 ${
-                        i === slideIndex ? 'w-8 bg-gold' : 'w-2 bg-white/40 hover:bg-white/70'
+                      className={`h-2.5 rounded-full transition-all duration-300 ${
+                        i === slideIndex ? 'w-8 bg-gold' : 'w-2.5 bg-white/30 hover:bg-white/60'
                       }`}
                     />
                   ))}
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => setSlideIndex((prev) => (prev - 1 + slides.length) % slides.length)}
-                    className="p-2 rounded-full bg-black/70 border border-gold/40 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all"
-                  >
-                    <ChevronLeft className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={() => setSlideIndex((prev) => (prev + 1) % slides.length)}
-                    className="p-2 rounded-full bg-black/70 border border-gold/40 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all"
-                  >
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
-                </div>
+                <button
+                  onClick={() => setSlideIndex((prev) => (prev + 1) % slides.length)}
+                  className="p-2.5 rounded-full bg-black/70 border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all shadow-md"
+                  title="Next Event Photo"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
               </div>
             </div>
-          </div>
 
-          {/* ── RIGHT COLUMN: 30% Events Timeline Feed ── */}
-          <div className="w-full lg:w-[30%] flex flex-col space-y-4">
-            <div className="p-4 rounded-2xl bg-gradient-to-b from-[#20000a] to-[#120005] border-2 border-gold/50 text-center shadow-lg">
-              <span className="text-xs font-extrabold uppercase tracking-widest text-gold-bright flex items-center justify-center gap-1.5">
-                <CalendarDays className="w-4 h-4 text-gold" /> Events Feed ({data.year})
-              </span>
-              <p className="text-[11px] text-ivory-cream/70 mt-1">
-                Click any event below to view its photo in the 70% showcase
-              </p>
-            </div>
+            {/* Single Write-Up Text Description */}
+            {currentSlide.description && (
+              <div className="p-4 md:p-5 rounded-2xl bg-black/50 border border-gold/30">
+                <h4 className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-1.5">
+                  Event Story &amp; Write-Up:
+                </h4>
+                <p className="text-sm md:text-base text-ivory-cream/90 font-light leading-relaxed italic">
+                  "{currentSlide.description}"
+                </p>
+              </div>
+            )}
 
-            {/* Events List Cards (30% Width Column) */}
-            <div className="flex-1 space-y-3.5 overflow-y-auto pr-1">
-              {data.events.map((ev, idx) => {
-                const isActive = slideIndex === idx
-                return (
-                  <div
-                    key={idx}
-                    onClick={() => setSlideIndex(idx)}
-                    className={`cursor-pointer p-4 rounded-2xl border-2 transition-all duration-300 ${
-                      isActive
-                        ? 'bg-gradient-to-r from-[#3a0010] to-[#200008] border-gold shadow-[0_0_20px_rgba(255,215,0,0.5)] scale-[1.02]'
-                        : 'bg-black/60 border-gold/30 hover:border-gold/60 hover:bg-black/80'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-[10px] font-extrabold text-gold-bright uppercase tracking-wider bg-gold/15 border border-gold/30 px-2 py-0.5 rounded-md">
-                        {ev.date}
-                      </span>
-                      {isActive && (
-                        <span className="text-[10px] font-bold text-emerald-400 flex items-center gap-1 animate-pulse">
-                          ● Viewing Photo
-                        </span>
-                      )}
-                    </div>
-
-                    <h3 className="font-display font-bold text-base text-ivory-warm leading-snug group-hover:text-gold-bright">
-                      {ev.title}
-                    </h3>
-                    <p className="text-[11px] text-gold/80 mt-1 flex items-center gap-1 font-medium">
-                      <MapPin className="w-3 h-3 text-gold shrink-0" /> {ev.venue}
-                    </p>
-
-                    {/* Write-up snippet */}
-                    {ev.description && (
-                      <p className="text-xs text-ivory-cream/80 font-light leading-relaxed mt-2 pt-2 border-t border-gold/15 line-clamp-3 italic">
-                        "{ev.description}"
-                      </p>
-                    )}
-
-                    {/* Highlights */}
-                    <ul className="mt-2.5 pt-2 border-t border-gold/10 space-y-1 text-[11px] text-ivory-cream/75">
-                      {ev.highlights.map((h, i) => (
-                        <li key={i} className="flex items-start gap-1">
-                          <span className="text-gold shrink-0 mt-0.5">✦</span>
-                          <span className="leading-tight">{h}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )
-              })}
-            </div>
+            {/* Key Highlights List */}
+            {currentSlide.highlights && currentSlide.highlights.length > 0 && (
+              <div className="pt-2">
+                <h4 className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-2">
+                  Key Highlights &amp; Activities:
+                </h4>
+                <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs text-ivory-cream/85">
+                  {currentSlide.highlights.map((h, i) => (
+                    <li key={i} className="flex items-start gap-2 p-2 rounded-xl bg-gold/5 border border-gold/20">
+                      <span className="text-gold shrink-0 mt-0.5">✦</span>
+                      <span className="leading-relaxed">{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
           </div>
 
