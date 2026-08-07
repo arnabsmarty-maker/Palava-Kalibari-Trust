@@ -16,6 +16,8 @@ import {
   Check,
   ShieldCheck,
   ChevronRight,
+  ChevronLeft,
+  Pause,
   Facebook,
   Youtube,
   Instagram,
@@ -3158,165 +3160,262 @@ const YEAR_EVENTS_DATA = {
 
 function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }) {
   const data = YEAR_EVENTS_DATA[yearKey] || YEAR_EVENTS_DATA['2025-2026']
+  const [slideIndex, setSlideIndex] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(true)
+
+  // Extract all photos from events
+  const slides = data.events.map((ev, idx) => ({
+    image: ev.image,
+    title: ev.title,
+    date: ev.date,
+    venue: ev.venue,
+    eventIndex: idx,
+    description: ev.description,
+  }))
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
+    setSlideIndex(0)
   }, [yearKey])
 
+  // Auto-changing slideshow timer (every 4 seconds)
+  useEffect(() => {
+    if (!isPlaying || slides.length === 0) return
+    const interval = setInterval(() => {
+      setSlideIndex((prev) => (prev + 1) % slides.length)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [isPlaying, slides.length])
+
+  const currentSlide = slides[slideIndex] || slides[0]
+
   return (
-    <div className="min-h-screen bg-[#0a0003] text-ivory-warm">
+    <div className="min-h-screen bg-[#070002] text-ivory-warm">
       <Header onJoin={onJoin} onSponsor={onSponsor} onOpenYearEvents={onNavigateYear} />
-      
-      {/* ── FULL SPACE PICTURE HERO BANNER ── */}
-      <section className="relative w-full min-h-[55vh] md:min-h-[65vh] flex items-end justify-center overflow-hidden pt-24 pb-12 border-b-2 border-gold/40">
-        {/* Full space picture background */}
-        <img
-          src={data.events[0]?.image || '/durga-idol-pratima.jpg'}
-          alt={data.title}
-          className="absolute inset-0 w-full h-full object-cover object-center filter brightness-75 scale-105 transition-all duration-700"
-        />
+
+      <main className="pt-24 pb-20 max-w-7xl mx-auto px-4 space-y-6">
         
-        {/* Dark gradient overlay for text clarity */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0003] via-[#0a0003]/60 to-black/40" />
-
-        {/* Full-bleed banner content */}
-        <div className="relative z-10 max-w-6xl mx-auto px-4 w-full text-left">
-          
-          {/* Breadcrumb & Navigation */}
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-            <div className="flex items-center gap-2 text-xs font-bold text-gold-bright bg-black/60 backdrop-blur px-4 py-1.5 rounded-full border border-gold/40 shadow-lg">
-              <button onClick={onGoHome} className="hover:underline flex items-center gap-1 text-ivory-cream/80">
-                Home
-              </button>
-              <span>/</span>
-              <span className="text-gold/80">Events Archive</span>
-              <span>/</span>
-              <span className="text-gold-bright font-extrabold">{data.year}</span>
-            </div>
-
-            <button
-              onClick={onGoHome}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-gold-bright to-gold-deep text-maroon-deep font-extrabold text-xs px-5 py-2 rounded-full shadow-[0_0_15px_rgba(255,215,0,0.6)] hover:scale-105 transition-all"
-            >
-              ← Back to Main Home Page
+        {/* Top Header & Breadcrumb */}
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-4">
+          <div className="flex items-center gap-2 text-xs font-bold text-gold-bright bg-black/60 backdrop-blur px-4 py-1.5 rounded-full border border-gold/40 shadow-lg">
+            <button onClick={onGoHome} className="hover:underline flex items-center gap-1 text-ivory-cream/80">
+              Home
             </button>
+            <span>/</span>
+            <span className="text-gold/80">Events Archive</span>
+            <span>/</span>
+            <span className="text-gold-bright font-extrabold">{data.year}</span>
           </div>
 
-          {/* Banner Title & Description */}
-          <div className="max-w-4xl">
-            <span className="inline-flex items-center gap-2 bg-black/60 border border-gold/60 text-gold-bright font-extrabold tracking-widest uppercase text-xs px-4 py-1.5 rounded-full mb-3 backdrop-blur shadow-[0_0_20px_rgba(255,215,0,0.7)] animate-pulse">
-              <CalendarDays className="w-4 h-4 text-gold-bright" /> Full Screen View — {data.year}
-            </span>
-            <h1 className="font-display text-4xl md:text-6xl font-extrabold text-gold-bright leading-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
-              {data.title}
-            </h1>
-            <p className="text-base md:text-xl text-ivory-warm mt-3 font-light leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
-              {data.subtitle}
-            </p>
-          </div>
+          <button
+            onClick={onGoHome}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-gold-bright to-gold-deep text-maroon-deep font-extrabold text-xs px-5 py-2 rounded-full shadow-[0_0_15px_rgba(255,215,0,0.6)] hover:scale-105 transition-all"
+          >
+            ← Back to Main Home Page
+          </button>
+        </div>
 
-          {/* Glowing 4-Year Page Redirection Switcher */}
-          <div className="mt-8 p-4 rounded-2xl bg-black/80 backdrop-blur border-2 border-gold/60 shadow-[0_0_30px_rgba(255,215,0,0.6)] max-w-4xl">
-            <div className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-3 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-gold-bright" /> Switch Full Screen Event Year:
+        {/* Glowing 4-Year Page Redirection Switcher */}
+        <div className="p-4 rounded-2xl bg-black/80 backdrop-blur border-2 border-gold/60 shadow-[0_0_25px_rgba(255,215,0,0.5)]">
+          <div className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-2.5 flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-gold-bright" /> Select Event Year — 70% Photo Showcase &amp; 30% Events View:
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            {[
+              { key: '2023-2024', label: '📜 2023–2024' },
+              { key: '2024-2025', label: '📅 2024–2025' },
+              { key: '2025-2026', label: '★ 2025–2026' },
+              { key: '2026-2027', label: '🚀 2026–2027' },
+            ].map((item) => {
+              const active = item.key === yearKey
+              return (
+                <button
+                  key={item.key}
+                  onClick={() => onNavigateYear(item.key)}
+                  className={`py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all text-center ${
+                    active
+                      ? 'bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep shadow-[0_0_20px_rgba(255,215,0,0.85)] scale-[1.03] border-2 border-white/60'
+                      : 'bg-gold/10 border border-gold/30 text-ivory-warm hover:bg-gold hover:text-maroon-deep'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Year Title Header */}
+        <div className="text-left pt-2 pb-1">
+          <span className="inline-flex items-center gap-2 bg-gold/15 border border-gold/40 text-gold-bright font-extrabold tracking-widest uppercase text-xs px-3.5 py-1 rounded-full mb-2">
+            <CalendarDays className="w-3.5 h-3.5" /> {data.year} Photo Gallery &amp; Event Feed
+          </span>
+          <h1 className="font-display text-3xl md:text-5xl font-extrabold text-gold-bright leading-tight">
+            {data.title}
+          </h1>
+          <p className="text-sm md:text-base text-ivory-cream/80 mt-1 font-light">
+            {data.subtitle}
+          </p>
+        </div>
+
+        {/* ══════════════════════════════════════════════════════════════
+            70% PICTURE SHOWCASE (LEFT) & 30% EVENTS FEED (RIGHT)
+           ══════════════════════════════════════════════════════════════ */}
+        <div className="flex flex-col lg:flex-row gap-6 items-stretch">
+
+          {/* ── LEFT COLUMN: 70% Photo Showcase with Auto-Changing Slideshow ── */}
+          <div className="w-full lg:w-[70%] flex flex-col rounded-3xl bg-black border-2 border-gold/60 overflow-hidden shadow-[0_0_35px_rgba(255,215,0,0.3)] relative min-h-[480px] md:min-h-[600px] justify-between">
+            
+            {/* Auto-Changing Slide Image */}
+            <div className="absolute inset-0 w-full h-full overflow-hidden">
+              {slides.map((s, idx) => (
+                <img
+                  key={idx}
+                  src={s.image}
+                  alt={s.title}
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                    idx === slideIndex ? 'opacity-100 scale-105' : 'opacity-0 scale-100 pointer-events-none'
+                  }`}
+                  style={{ transitionProperty: 'opacity, transform' }}
+                />
+              ))}
+              {/* Vignette & Gradient Overlays */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#070002] via-black/40 to-black/30" />
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              {[
-                { key: '2023-2024', label: '📜 2023–2024' },
-                { key: '2024-2025', label: '📅 2024–2025' },
-                { key: '2025-2026', label: '★ 2025–2026' },
-                { key: '2026-2027', label: '🚀 2026–2027' },
-              ].map((item) => {
-                const active = item.key === yearKey
-                return (
+
+            {/* Top Bar inside 70% Canvas */}
+            <div className="relative z-10 p-4 md:p-6 flex items-center justify-between">
+              <span className="inline-flex items-center gap-2 bg-black/75 border border-gold/60 text-gold-bright text-xs font-extrabold px-3.5 py-1.5 rounded-full shadow-lg backdrop-blur animate-pulse">
+                <Sparkles className="w-3.5 h-3.5 text-gold-bright" /> Auto-Changing Photo Showcase • {slideIndex + 1} of {slides.length}
+              </span>
+
+              {/* Pause/Play Button */}
+              <button
+                onClick={() => setIsPlaying(!isPlaying)}
+                className="bg-black/70 hover:bg-gold hover:text-maroon-deep text-gold-bright border border-gold/50 p-2 rounded-full transition-all text-xs font-bold flex items-center gap-1 backdrop-blur"
+                title={isPlaying ? 'Pause Auto Slideshow' : 'Play Auto Slideshow'}
+              >
+                {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+              </button>
+            </div>
+
+            {/* Bottom Overlay Info inside 70% Canvas */}
+            <div className="relative z-10 p-6 md:p-8 bg-gradient-to-t from-[#070002] via-[#070002]/90 to-transparent">
+              <span className="text-xs font-extrabold text-gold-bright bg-maroon-deep/90 border border-gold/50 px-3 py-1 rounded-full">
+                {currentSlide.date}
+              </span>
+              <h2 className="font-display text-2xl md:text-4xl font-extrabold text-gold-bright mt-3 leading-snug drop-shadow-md">
+                {currentSlide.title}
+              </h2>
+              <p className="text-xs text-gold/80 flex items-center gap-1.5 font-medium mt-1">
+                <MapPin className="w-3.5 h-3.5 text-gold shrink-0" /> {currentSlide.venue}
+              </p>
+              {currentSlide.description && (
+                <p className="text-xs md:text-sm text-ivory-cream/90 font-light leading-relaxed mt-2.5 max-w-3xl italic">
+                  "{currentSlide.description}"
+                </p>
+              )}
+
+              {/* Arrow Controls & Dot Indicators */}
+              <div className="flex items-center justify-between mt-5 pt-3 border-t border-gold/30">
+                <div className="flex items-center gap-1.5">
+                  {slides.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setSlideIndex(i)}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        i === slideIndex ? 'w-8 bg-gold' : 'w-2 bg-white/40 hover:bg-white/70'
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-2">
                   <button
-                    key={item.key}
-                    onClick={() => onNavigateYear(item.key)}
-                    className={`py-3 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all text-center ${
-                      active
-                        ? 'bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep shadow-[0_0_20px_rgba(255,215,0,0.85)] scale-[1.03] border-2 border-white/60'
-                        : 'bg-gold/10 border border-gold/30 text-ivory-warm hover:bg-gold hover:text-maroon-deep'
+                    onClick={() => setSlideIndex((prev) => (prev - 1 + slides.length) % slides.length)}
+                    className="p-2 rounded-full bg-black/70 border border-gold/40 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => setSlideIndex((prev) => (prev + 1) % slides.length)}
+                    className="p-2 rounded-full bg-black/70 border border-gold/40 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── RIGHT COLUMN: 30% Events Timeline Feed ── */}
+          <div className="w-full lg:w-[30%] flex flex-col space-y-4">
+            <div className="p-4 rounded-2xl bg-gradient-to-b from-[#20000a] to-[#120005] border-2 border-gold/50 text-center shadow-lg">
+              <span className="text-xs font-extrabold uppercase tracking-widest text-gold-bright flex items-center justify-center gap-1.5">
+                <CalendarDays className="w-4 h-4 text-gold" /> Events Feed ({data.year})
+              </span>
+              <p className="text-[11px] text-ivory-cream/70 mt-1">
+                Click any event below to view its photo in the 70% showcase
+              </p>
+            </div>
+
+            {/* Events List Cards (30% Width Column) */}
+            <div className="flex-1 space-y-3.5 overflow-y-auto pr-1">
+              {data.events.map((ev, idx) => {
+                const isActive = slideIndex === idx
+                return (
+                  <div
+                    key={idx}
+                    onClick={() => setSlideIndex(idx)}
+                    className={`cursor-pointer p-4 rounded-2xl border-2 transition-all duration-300 ${
+                      isActive
+                        ? 'bg-gradient-to-r from-[#3a0010] to-[#200008] border-gold shadow-[0_0_20px_rgba(255,215,0,0.5)] scale-[1.02]'
+                        : 'bg-black/60 border-gold/30 hover:border-gold/60 hover:bg-black/80'
                     }`}
                   >
-                    {item.label}
-                  </button>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-[10px] font-extrabold text-gold-bright uppercase tracking-wider bg-gold/15 border border-gold/30 px-2 py-0.5 rounded-md">
+                        {ev.date}
+                      </span>
+                      {isActive && (
+                        <span className="text-[10px] font-bold text-emerald-400 flex items-center gap-1 animate-pulse">
+                          ● Viewing Photo
+                        </span>
+                      )}
+                    </div>
+
+                    <h3 className="font-display font-bold text-base text-ivory-warm leading-snug group-hover:text-gold-bright">
+                      {ev.title}
+                    </h3>
+                    <p className="text-[11px] text-gold/80 mt-1 flex items-center gap-1 font-medium">
+                      <MapPin className="w-3 h-3 text-gold shrink-0" /> {ev.venue}
+                    </p>
+
+                    {/* Write-up snippet */}
+                    {ev.description && (
+                      <p className="text-xs text-ivory-cream/80 font-light leading-relaxed mt-2 pt-2 border-t border-gold/15 line-clamp-3 italic">
+                        "{ev.description}"
+                      </p>
+                    )}
+
+                    {/* Highlights */}
+                    <ul className="mt-2.5 pt-2 border-t border-gold/10 space-y-1 text-[11px] text-ivory-cream/75">
+                      {ev.highlights.map((h, i) => (
+                        <li key={i} className="flex items-start gap-1">
+                          <span className="text-gold shrink-0 mt-0.5">✦</span>
+                          <span className="leading-tight">{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )
               })}
             </div>
+
           </div>
 
         </div>
-      </section>
 
-      {/* ── DOWNWARD VERTICAL EVENTS FEED (NO CASCADED CARDS) ── */}
-      <main className="py-16 max-w-6xl mx-auto px-4 space-y-12">
-        <div className="text-center mb-8">
-          <span className="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 text-gold-bright px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
-            <CalendarDays className="w-4 h-4 text-gold" /> Events Timeline ({data.year})
-          </span>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-ivory-warm mt-2">
-            Chronological Downward Events Feed
-          </h2>
-          <div className="mt-3 mx-auto h-0.5 w-24 bg-gradient-to-r from-transparent via-gold to-transparent" />
-        </div>
-
-        {/* Downward Vertical Event Blocks */}
-        {data.events.map((ev, idx) => (
-          <div
-            key={idx}
-            className="group relative flex flex-col lg:flex-row items-stretch rounded-3xl bg-gradient-to-b from-[#20000a] via-[#140006] to-[#0a0003] border-2 border-gold/50 overflow-hidden shadow-2xl hover:border-gold transition-all duration-300"
-          >
-            {/* Left Column: Full Feature Photo Banner */}
-            <div className="lg:w-5/12 relative min-h-[260px] lg:min-h-[320px] overflow-hidden bg-black shrink-0">
-              <img
-                src={ev.image}
-                alt={ev.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-black/30 lg:to-[#140006]" />
-              <span className="absolute top-4 left-4 z-10 text-xs font-extrabold text-gold-bright bg-maroon-deep/90 border border-gold/60 px-3.5 py-1.5 rounded-full shadow-xl">
-                {ev.date}
-              </span>
-            </div>
-
-            {/* Right Column: Full Write-up & Event Details */}
-            <div className="lg:w-7/12 p-6 md:p-8 flex flex-col justify-between space-y-4">
-              <div>
-                <span className="inline-block text-[11px] font-bold uppercase tracking-widest text-gold/70 mb-1">
-                  Event Milestone #{idx + 1}
-                </span>
-                <h3 className="font-display font-bold text-2xl md:text-3xl text-gold-bright leading-snug">
-                  {ev.title}
-                </h3>
-                <p className="text-xs md:text-sm text-gold/80 mt-1.5 flex items-center gap-1.5 font-medium">
-                  <MapPin className="w-4 h-4 text-gold shrink-0" /> {ev.venue}
-                </p>
-                
-                {/* Full Write-up Paragraph */}
-                {ev.description && (
-                  <p className="text-sm md:text-base text-ivory-cream/90 font-light leading-relaxed mt-4 pt-4 border-t border-gold/20 italic">
-                    "{ev.description}"
-                  </p>
-                )}
-              </div>
-
-              {/* Highlights Bulleted List */}
-              <div className="border-t border-gold/20 pt-4">
-                <h4 className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-2">
-                  Key Highlights &amp; Activities:
-                </h4>
-                <ul className="grid sm:grid-cols-2 gap-2 text-xs text-ivory-cream/85">
-                  {ev.highlights.map((h, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="text-gold shrink-0 mt-0.5">✦</span>
-                      <span className="leading-relaxed">{h}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        ))}
       </main>
 
       <Footer onSponsor={onSponsor} />
