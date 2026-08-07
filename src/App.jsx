@@ -286,7 +286,7 @@ function InstagramIcon({ className = "w-6 h-6" }) {
 // ══════════════════════════════════════════════════════════════
 // HEADER
 // ══════════════════════════════════════════════════════════════
-function Header({ onJoin }) {
+function Header({ onJoin, onSponsor }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
@@ -445,7 +445,7 @@ function Header({ onJoin }) {
 // ══════════════════════════════════════════════════════════════
 // HERO
 // ══════════════════════════════════════════════════════════════
-function Hero({ onJoin }) {
+function Hero({ onJoin, onSponsor }) {
   const [video, setVideo] = useState(false)
   // Welcome line shows once on first open, then fades so the video is clear.
   const [intro, setIntro] = useState(true)
@@ -2179,7 +2179,7 @@ function SponsorshipSection() {
 // ══════════════════════════════════════════════════════════════
 // OFFICIAL SPONSORS & CO-SPONSORS LOGO SHOWCASE
 // ══════════════════════════════════════════════════════════════
-function OurSponsorsSection() {
+function OurSponsorsSection({ onSponsor }) {
   const sponsors = [
     {
       name: 'Utkala Banga',
@@ -2335,7 +2335,7 @@ function OurSponsorsSection() {
 // ══════════════════════════════════════════════════════════════
 // IDOL & PATRON SPONSORS (AUTO-CHANGING CAROUSEL)
 // ══════════════════════════════════════════════════════════════
-function IdolSponsorSection() {
+function IdolSponsorSection({ onSponsor }) {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const patronSlides = [
