@@ -1915,11 +1915,11 @@ function AboutSection() {
   ]
 
   const trustees = [
-    { name: 'Ar. Namranil Mukherjee', title: 'Trustee', image: '/trustee-namranil.jpg' },
-    { name: 'Saurabh Ghosh', title: 'Trustee', image: '/trustee-saurabh.jpg' },
-    { name: 'Rajat Sain', title: 'Trustee', image: '/trustee-rajat.jpg' },
     { name: 'Prasenjeet Bagchi', title: 'Trustee', image: '/trustee-prasenjeet.jpg' },
+    { name: 'Rajat Sain', title: 'Trustee', image: '/trustee-rajat.jpg' },
     { name: 'Debashish Bhattacharjee', title: 'Trustee', image: '/trustee-debashish.jpg' },
+    { name: 'Saurabh Ghosh', title: 'Trustee', image: '/trustee-saurabh.jpg' },
+    { name: 'Ar. Namranil Mukherjee', title: 'Trustee', image: '/trustee-namranil.jpg' },
     { name: 'Indranil Mukherjee', title: 'Trustee', image: '/trustee-indranil.jpg' },
   ]
 
@@ -2672,19 +2672,19 @@ function IdolSponsorSection({ onSponsor }) {
       id: 'sourav-ghosh',
       badge: 'An All weather Friend',
       subBadge: 'Palava Kalibari Trust',
-      title: 'Sourav & Adrija Ghosh',
+      title: 'Saurabh & Adrija Ghosh',
       subtitleTag: 'Trustee / Entrepreneur',
       description: (
         <>
           Palava Kalibari Trust acknowledges and extends heartfelt appreciation to{' '}
-          <strong className="text-gold-bright font-semibold">Sourav &amp; Adrija Ghosh (Trustee &amp; Entrepreneur)</strong> as{' '}
+          <strong className="text-gold-bright font-semibold">Saurabh &amp; Adrija Ghosh (Trustee &amp; Entrepreneur)</strong> as{' '}
           <strong className="text-gold-bright font-semibold">An All weather Friend</strong> providing essential infrastructure, ensuring a safe and seamless celebration.
         </>
       ),
       bgImage: IMG.patronSouravGhosh,
       bgPosition: 'center 40%',
       cardImage: IMG.patronSouravGhosh,
-      cardLabel: 'Sourav & Adrija Ghosh — Trustee / Entrepreneur',
+      cardLabel: 'Saurabh & Adrija Ghosh — Trustee / Entrepreneur',
       pills: [
         { num: '★', text: 'An All weather Friend' },
         { num: 'PKT', text: 'Trustee & Entrepreneur' },
@@ -3223,10 +3223,10 @@ const YEAR_EVENTS_DATA = {
         date: 'October 16 – 20, 2026',
         venue: 'Gate No. 2, Lodha Palava Phase 2',
         image: '/durga-idol-pratima.jpg',
-        description: 'The pinnacle 5-day cultural extravaganza celebrating Durga Puja 2026 with sponsored Maa Durga Pratima idol, An All weather Friend support by Sourav & Adrija Ghosh, 1,000+ daily Annadan Seba, and mega stage performances.',
+        description: 'The pinnacle 5-day cultural extravaganza celebrating Durga Puja 2026 with sponsored Maa Durga Pratima idol, An All weather Friend support by Saurabh & Adrija Ghosh, 1,000+ daily Annadan Seba, and mega stage performances.',
         highlights: [
           '10,000+ expected visitors across 5 festive days',
-          'An All weather Friend support by Sourav & Adrija Ghosh & Sponsored Durga Idol',
+          'An All weather Friend support by Saurabh & Adrija Ghosh & Sponsored Durga Idol',
           'Platinum, Gold & Silver brand partnerships & 1,000+ daily Annadan Seba',
         ],
       },
