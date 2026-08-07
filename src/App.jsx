@@ -361,9 +361,23 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
                       <button
                         onClick={() => {
                           setEventsDropdownOpen(false)
+                          if (onOpenYearEvents) onOpenYearEvents('2023-2024')
+                        }}
+                        className="w-full text-left px-3.5 py-2 rounded-xl text-xs font-bold text-ivory-warm hover:bg-gold hover:text-maroon-deep transition-all flex items-center justify-between group/item my-0.5"
+                      >
+                        <span className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-amber-200" />
+                          2023–2024 Events (Foundational)
+                        </span>
+                        <ChevronRight className="w-3.5 h-3.5 opacity-60 group-hover/item:translate-x-1 transition-transform" />
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          setEventsDropdownOpen(false)
                           if (onOpenYearEvents) onOpenYearEvents('2024-2025')
                         }}
-                        className="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold text-ivory-warm hover:bg-gold hover:text-maroon-deep transition-all flex items-center justify-between group/item my-0.5"
+                        className="w-full text-left px-3.5 py-2 rounded-xl text-xs font-bold text-ivory-warm hover:bg-gold hover:text-maroon-deep transition-all flex items-center justify-between group/item my-0.5"
                       >
                         <span className="flex items-center gap-2">
                           <span className="w-2 h-2 rounded-full bg-gold animate-ping" />
@@ -377,7 +391,7 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
                           setEventsDropdownOpen(false)
                           if (onOpenYearEvents) onOpenYearEvents('2025-2026')
                         }}
-                        className="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold text-gold-bright bg-gold/10 border border-gold/30 hover:bg-gold hover:text-maroon-deep transition-all flex items-center justify-between group/item my-0.5"
+                        className="w-full text-left px-3.5 py-2 rounded-xl text-xs font-bold text-gold-bright bg-gold/10 border border-gold/30 hover:bg-gold hover:text-maroon-deep transition-all flex items-center justify-between group/item my-0.5"
                       >
                         <span className="flex items-center gap-2">
                           <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
@@ -391,7 +405,7 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
                           setEventsDropdownOpen(false)
                           if (onOpenYearEvents) onOpenYearEvents('2026-2027')
                         }}
-                        className="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold text-ivory-warm hover:bg-gold hover:text-maroon-deep transition-all flex items-center justify-between group/item my-0.5"
+                        className="w-full text-left px-3.5 py-2 rounded-xl text-xs font-bold text-ivory-warm hover:bg-gold hover:text-maroon-deep transition-all flex items-center justify-between group/item my-0.5"
                       >
                         <span className="flex items-center gap-2">
                           <span className="w-2 h-2 rounded-full bg-rose-400" />
@@ -467,13 +481,22 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
             <div className="text-[10px] font-bold uppercase tracking-widest text-gold-bright mb-1.5 px-2 flex items-center gap-1.5">
               <CalendarDays className="w-3.5 h-3.5" /> Event Archives by Year
             </div>
-            <div className="grid grid-cols-3 gap-1.5">
+            <div className="grid grid-cols-4 gap-1">
+              <button
+                onClick={() => {
+                  setOpen(false)
+                  if (onOpenYearEvents) onOpenYearEvents('2023-2024')
+                }}
+                className="py-1.5 px-1 rounded-lg bg-gold/10 border border-gold/30 text-ivory-cream text-[11px] font-bold text-center hover:bg-gold hover:text-maroon-deep"
+              >
+                2023–24
+              </button>
               <button
                 onClick={() => {
                   setOpen(false)
                   if (onOpenYearEvents) onOpenYearEvents('2024-2025')
                 }}
-                className="py-1.5 px-2 rounded-lg bg-gold/10 border border-gold/30 text-ivory-cream text-xs font-bold text-center hover:bg-gold hover:text-maroon-deep"
+                className="py-1.5 px-1 rounded-lg bg-gold/10 border border-gold/30 text-ivory-cream text-[11px] font-bold text-center hover:bg-gold hover:text-maroon-deep"
               >
                 2024–25
               </button>
@@ -482,7 +505,7 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
                   setOpen(false)
                   if (onOpenYearEvents) onOpenYearEvents('2025-2026')
                 }}
-                className="py-1.5 px-2 rounded-lg bg-gold text-maroon-deep text-xs font-extrabold text-center shadow-md"
+                className="py-1.5 px-1 rounded-lg bg-gold text-maroon-deep text-[11px] font-extrabold text-center shadow-md"
               >
                 2025–26 ★
               </button>
@@ -491,7 +514,7 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
                   setOpen(false)
                   if (onOpenYearEvents) onOpenYearEvents('2026-2027')
                 }}
-                className="py-1.5 px-2 rounded-lg bg-gold/10 border border-gold/30 text-ivory-cream text-xs font-bold text-center hover:bg-gold hover:text-maroon-deep"
+                className="py-1.5 px-1 rounded-lg bg-gold/10 border border-gold/30 text-ivory-cream text-[11px] font-bold text-center hover:bg-gold hover:text-maroon-deep"
               >
                 2026–27
               </button>
@@ -1084,26 +1107,32 @@ function DurgaSection({ onOpenYearEvents }) {
         <div className="max-w-5xl mx-auto px-4 pt-10 pb-20">
 
           {/* Glowing Year Event Archive Dropdown Bar */}
-          <div className="reveal mb-10 p-4 rounded-2xl bg-black/60 border-2 border-gold/60 shadow-[0_0_25px_rgba(255,215,0,0.5)] max-w-2xl mx-auto text-center">
+          <div className="reveal mb-10 p-4 rounded-2xl bg-black/60 border-2 border-gold/60 shadow-[0_0_25px_rgba(255,215,0,0.5)] max-w-3xl mx-auto text-center">
             <div className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-2.5 flex items-center justify-center gap-2">
-              <CalendarDays className="w-4 h-4 text-gold-bright" /> Select Event Year Archive:
+              <CalendarDays className="w-4 h-4 text-gold-bright" /> Redirect to Dedicated Event Page by Year:
             </div>
-            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
+              <button
+                onClick={() => onOpenYearEvents && onOpenYearEvents('2023-2024')}
+                className="py-2.5 px-2 rounded-xl bg-gold/10 border border-gold/40 text-ivory-warm font-bold text-xs sm:text-sm hover:bg-gold hover:text-maroon-deep transition-all shadow-md animate-pulse"
+              >
+                📜 2023–2024
+              </button>
               <button
                 onClick={() => onOpenYearEvents && onOpenYearEvents('2024-2025')}
-                className="py-2.5 px-3 rounded-xl bg-gold/10 border border-gold/40 text-ivory-warm font-bold text-xs sm:text-sm hover:bg-gold hover:text-maroon-deep transition-all shadow-md animate-pulse"
+                className="py-2.5 px-2 rounded-xl bg-gold/10 border border-gold/40 text-ivory-warm font-bold text-xs sm:text-sm hover:bg-gold hover:text-maroon-deep transition-all shadow-md animate-pulse"
               >
                 📅 2024–2025
               </button>
               <button
                 onClick={() => onOpenYearEvents && onOpenYearEvents('2025-2026')}
-                className="py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold text-xs sm:text-sm hover:scale-[1.03] transition-all shadow-[0_0_15px_rgba(255,215,0,0.8)] border border-white/40 animate-pulse"
+                className="py-2.5 px-2 rounded-xl bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold text-xs sm:text-sm hover:scale-[1.03] transition-all shadow-[0_0_15px_rgba(255,215,0,0.8)] border border-white/40 animate-pulse"
               >
                 ★ 2025–2026
               </button>
               <button
                 onClick={() => onOpenYearEvents && onOpenYearEvents('2026-2027')}
-                className="py-2.5 px-3 rounded-xl bg-gold/10 border border-gold/40 text-ivory-warm font-bold text-xs sm:text-sm hover:bg-gold hover:text-maroon-deep transition-all shadow-md animate-pulse"
+                className="py-2.5 px-2 rounded-xl bg-gold/10 border border-gold/40 text-ivory-warm font-bold text-xs sm:text-sm hover:bg-gold hover:text-maroon-deep transition-all shadow-md animate-pulse"
               >
                 🚀 2026–2027
               </button>
@@ -2845,13 +2874,52 @@ Thank you!`
 }
 
 // ══════════════════════════════════════════════════════════════
-// YEAR EVENTS DATA & MODAL (2024-25, 2025-26, 2026-27)
+// YEAR EVENTS DATA & STANDALONE DEDICATED PAGE VIEW
 // ══════════════════════════════════════════════════════════════
 const YEAR_EVENTS_DATA = {
+  '2023-2024': {
+    year: '2023–2024',
+    title: 'Inaugural Events & Foundation Year (2023–2024)',
+    subtitle: 'The foundational journey of Palava Kalibari Trust & community formation',
+    events: [
+      {
+        title: 'Palava Kalibari Trust Foundation & Community Meetup',
+        date: 'November 2023',
+        venue: 'Palava Phase 2 Community Center',
+        image: '/about-trust-reg.jpg',
+        highlights: [
+          'First formal assembly of resident Bengali families in Palava',
+          'Initiation of official Public Trust registration under Govt. of Maharashtra (Reg: F-8722)',
+          'Establishment of founding Trustee Committee',
+        ],
+      },
+      {
+        title: 'Inaugural Saraswati Puja 2024',
+        date: 'February 14, 2024',
+        venue: 'Palava Phase 2 Club House Ground',
+        image: '/about-saraswati-puja.jpg',
+        highlights: [
+          'Inaugural Saraswati Puja pushpanjali & bhog prasad',
+          'Kids Sit & Draw competition & Hathe Khori ceremony',
+          'Cultural music & Rabindra Sangeet performances',
+        ],
+      },
+      {
+        title: 'Poila Boishakh 1431 (Bengali New Year 2024)',
+        date: 'April 14, 2024',
+        venue: 'Palava Community Pavilion',
+        image: '/about-organizers-duo.jpg',
+        highlights: [
+          'Noboborsho community feast & traditional sweet distribution',
+          'Prabhat Pheri & cultural evening by resident artists',
+        ],
+      },
+    ],
+  },
   '2024-2025': {
     year: '2024–2025',
     title: 'Events & Celebrations (2024–2025)',
-    subtitle: 'Reliving our inaugural grand celebrations and cultural milestones',
+    subtitle: 'Reliving our inaugural grand Durga Puja celebrations and cultural milestones',
     events: [
       {
         title: 'Durga Utsav 2024 Pandal Celebration',
@@ -2962,84 +3030,128 @@ const YEAR_EVENTS_DATA = {
   },
 }
 
-function YearEventsModal({ selectedYear, onChangeYear, onClose }) {
-  const data = YEAR_EVENTS_DATA[selectedYear] || YEAR_EVENTS_DATA['2025-2026']
+function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }) {
+  const data = YEAR_EVENTS_DATA[yearKey] || YEAR_EVENTS_DATA['2025-2026']
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [yearKey])
 
   return (
-    <Modal onClose={onClose} maxW="max-w-4xl">
-      <div className="p-1 rounded-2xl bg-gradient-to-br from-amber-400 via-gold to-amber-600 shadow-2xl">
-        <div className="rounded-xl overflow-hidden bg-gradient-to-b from-[#1c000a] via-[#120006] to-[#0a0003] p-6 text-ivory-warm max-h-[85vh] overflow-y-auto">
-          
-          {/* Header */}
-          <div className="text-center mb-6 border-b border-gold/20 pb-4">
-            <span className="inline-flex items-center gap-2 bg-gold/20 border border-gold/40 text-gold-bright font-extrabold tracking-widest uppercase text-xs px-4 py-1.5 rounded-full mb-2 shadow-[0_0_15px_rgba(255,215,0,0.6)] animate-pulse">
-              <CalendarDays className="w-4 h-4 text-gold-bright" /> Event Year Archive
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold text-gold-bright">
-              {data.title}
-            </h2>
-            <p className="text-xs md:text-sm text-ivory-cream/80 mt-1 max-w-lg mx-auto">
-              {data.subtitle}
-            </p>
+    <div className="min-h-screen bg-[#0d0004] text-ivory-warm">
+      <Header onJoin={onJoin} onSponsor={onSponsor} onOpenYearEvents={onNavigateYear} />
+      
+      {/* Main Page Content */}
+      <main className="pt-24 pb-20">
+        
+        {/* Dedicated Hero Banner */}
+        <section className="relative py-16 overflow-hidden bg-gradient-to-b from-[#24000b] via-maroon-deep to-[#120005] border-b border-gold/30">
+          <div className="absolute inset-0 mandala-bg opacity-15" />
+          <div className="relative max-w-6xl mx-auto px-4">
+            
+            {/* Breadcrumb & Back Button */}
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+              <div className="flex items-center gap-2 text-xs font-semibold text-gold-bright">
+                <button onClick={onGoHome} className="hover:underline flex items-center gap-1 text-ivory-cream/70">
+                  Home
+                </button>
+                <span>/</span>
+                <span className="text-gold/80">Events Archive</span>
+                <span>/</span>
+                <span className="text-gold-bright font-bold">{data.year}</span>
+              </div>
 
-            {/* Glowing Year Switcher Bar */}
-            <div className="mt-4 flex items-center justify-center gap-2">
-              {['2024-2025', '2025-2026', '2026-2027'].map((y) => {
-                const label = y.replace('-', '–')
-                const active = y === selectedYear
-                return (
-                  <button
-                    key={y}
-                    onClick={() => onChangeYear(y)}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                      active
-                        ? 'bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep shadow-[0_0_18px_rgba(255,215,0,0.8)] scale-105 border border-white/50'
-                        : 'bg-black/40 border border-gold/30 text-ivory-cream/80 hover:text-white hover:border-gold'
-                    }`}
-                  >
-                    {label} {y === '2025-2026' ? '★' : ''}
-                  </button>
-                )
-              })}
+              <button
+                onClick={onGoHome}
+                className="inline-flex items-center gap-2 bg-black/50 border border-gold/40 text-gold-bright text-xs font-bold px-4 py-2 rounded-full hover:bg-gold hover:text-maroon-deep transition-all shadow-md"
+              >
+                ← Back to Main Home Page
+              </button>
             </div>
-          </div>
 
-          {/* Events Grid */}
-          <div className="grid md:grid-cols-3 gap-5">
+            {/* Page Header */}
+            <div className="text-left max-w-3xl">
+              <span className="inline-flex items-center gap-2 bg-gold/20 border border-gold/40 text-gold-bright font-extrabold tracking-widest uppercase text-xs px-4 py-1.5 rounded-full mb-3 shadow-[0_0_15px_rgba(255,215,0,0.6)] animate-pulse">
+                <CalendarDays className="w-4 h-4 text-gold-bright" /> Dedicated Event Page — {data.year}
+              </span>
+              <h1 className="font-display text-4xl md:text-5xl font-extrabold text-gold-bright leading-tight">
+                {data.title}
+              </h1>
+              <p className="text-base md:text-lg text-ivory-cream/80 mt-3 font-light">
+                {data.subtitle}
+              </p>
+            </div>
+
+            {/* Glowing 4-Year Page Redirection Switcher */}
+            <div className="mt-10 p-4 rounded-2xl bg-black/60 border-2 border-gold/60 shadow-[0_0_25px_rgba(255,215,0,0.5)]">
+              <div className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-3 flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-gold-bright" /> Redirect to Other Event Page Years:
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                {[
+                  { key: '2023-2024', label: '2023–2024' },
+                  { key: '2024-2025', label: '2024–2025' },
+                  { key: '2025-2026', label: '2025–2026 ★' },
+                  { key: '2026-2027', label: '2026–2027 🚀' },
+                ].map((item) => {
+                  const active = item.key === yearKey
+                  return (
+                    <button
+                      key={item.key}
+                      onClick={() => onNavigateYear(item.key)}
+                      className={`py-3 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all text-center ${
+                        active
+                          ? 'bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep shadow-[0_0_20px_rgba(255,215,0,0.85)] scale-[1.03] border-2 border-white/60'
+                          : 'bg-gold/10 border border-gold/30 text-ivory-warm hover:bg-gold hover:text-maroon-deep'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* Event Cards Section */}
+        <section className="py-16 max-w-6xl mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {data.events.map((ev, idx) => (
               <div
                 key={idx}
-                className="group flex flex-col rounded-2xl bg-black/60 border border-gold/30 overflow-hidden hover:border-gold transition-all duration-300 shadow-lg"
+                className="group flex flex-col rounded-2xl bg-gradient-to-b from-[#23000c] to-[#120005] border-2 border-gold/40 overflow-hidden hover:border-gold hover:scale-[1.02] transition-all duration-300 shadow-xl"
               >
                 {/* Event Photo */}
-                <div className="relative h-44 w-full overflow-hidden bg-black">
+                <div className="relative h-52 w-full overflow-hidden bg-black">
                   <img
                     src={ev.image}
                     alt={ev.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-                  <span className="absolute bottom-2.5 left-3 text-[11px] font-bold text-gold-bright bg-black/60 border border-gold/40 px-2.5 py-0.5 rounded-full">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#120005] via-black/20 to-transparent" />
+                  <span className="absolute bottom-3 left-3 text-xs font-bold text-gold-bright bg-black/70 border border-gold/50 px-3 py-1 rounded-full shadow-md">
                     {ev.date}
                   </span>
                 </div>
 
-                {/* Event Details */}
-                <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
+                {/* Event Info */}
+                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                   <div>
-                    <h3 className="font-display font-bold text-base text-ivory-warm leading-tight group-hover:text-gold-bright transition-colors">
+                    <h3 className="font-display font-bold text-xl text-ivory-warm leading-snug group-hover:text-gold-bright transition-colors">
                       {ev.title}
                     </h3>
-                    <p className="text-[11px] text-gold/70 mt-1 flex items-center gap-1">
-                      <MapPin className="w-3 h-3 text-gold shrink-0" /> {ev.venue}
+                    <p className="text-xs text-gold/80 mt-2 flex items-center gap-1.5 font-medium">
+                      <MapPin className="w-3.5 h-3.5 text-gold shrink-0" /> {ev.venue}
                     </p>
                   </div>
 
-                  <ul className="space-y-1.5 text-xs text-ivory-cream/80 border-t border-gold/10 pt-2.5">
+                  <ul className="space-y-2 text-xs text-ivory-cream/85 border-t border-gold/20 pt-4">
                     {ev.highlights.map((h, i) => (
-                      <li key={i} className="flex items-start gap-1.5">
+                      <li key={i} className="flex items-start gap-2">
                         <span className="text-gold shrink-0 mt-0.5">✦</span>
-                        <span>{h}</span>
+                        <span className="leading-relaxed">{h}</span>
                       </li>
                     ))}
                   </ul>
@@ -3047,10 +3159,12 @@ function YearEventsModal({ selectedYear, onChangeYear, onClose }) {
               </div>
             ))}
           </div>
+        </section>
 
-        </div>
-      </div>
-    </Modal>
+      </main>
+
+      <Footer onSponsor={onSponsor} />
+    </div>
   )
 }
 
@@ -3061,20 +3175,61 @@ export default function App() {
   useReveal()
   const [booking, setBooking] = useState(null)
   const [sponsorModal, setSponsorModal] = useState(false)
-  const [yearEventsModal, setYearEventsModal] = useState(null)
+  const [routeHash, setRouteHash] = useState(window.location.hash || '#home')
   const joinRef = useRef(null)
 
-  const goJoin = () => joinRef.current && joinRef.current()
+  useEffect(() => {
+    const onHashChange = () => {
+      setRouteHash(window.location.hash || '#home')
+    }
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
+  const goJoin = () => {
+    if (routeHash.startsWith('#events-')) {
+      window.location.hash = '#membership'
+    } else if (joinRef.current) {
+      joinRef.current()
+    }
+  }
+
   const openSponsor = () => setSponsorModal(true)
-  const openYearEvents = (year) => setYearEventsModal(year)
+
+  const navigateYearEvents = (yearKey) => {
+    window.location.hash = `#events-${yearKey}`
+  }
+
+  const goHome = () => {
+    window.location.hash = '#home'
+  }
+
+  // Check if current URL route is a dedicated year event page (e.g. #events-2023-2024)
+  const isEventsPage = routeHash.startsWith('#events-')
+  const currentEventYear = isEventsPage ? routeHash.replace('#events-', '') : null
+
+  if (isEventsPage && currentEventYear) {
+    return (
+      <>
+        <YearEventsPage
+          yearKey={currentEventYear}
+          onNavigateYear={navigateYearEvents}
+          onGoHome={goHome}
+          onJoin={goJoin}
+          onSponsor={openSponsor}
+        />
+        {sponsorModal && <SponsorModal onClose={() => setSponsorModal(false)} />}
+      </>
+    )
+  }
 
   return (
     <div className="min-h-screen">
-      <Header onJoin={goJoin} onSponsor={openSponsor} onOpenYearEvents={openYearEvents} />
+      <Header onJoin={goJoin} onSponsor={openSponsor} onOpenYearEvents={navigateYearEvents} />
       <main>
         <Hero onJoin={goJoin} onSponsor={openSponsor} />
         <IlishSection onBook={setBooking} />
-        <DurgaSection onOpenYearEvents={openYearEvents} />
+        <DurgaSection onOpenYearEvents={navigateYearEvents} />
         <AnnadanSection />
         <DonationSection />
         <MembershipSection registerJoinRef={joinRef} />
@@ -3087,13 +3242,6 @@ export default function App() {
 
       {booking && <BookingModal platter={booking} onClose={() => setBooking(null)} />}
       {sponsorModal && <SponsorModal onClose={() => setSponsorModal(false)} />}
-      {yearEventsModal && (
-        <YearEventsModal
-          selectedYear={yearEventsModal}
-          onChangeYear={setYearEventsModal}
-          onClose={() => setYearEventsModal(null)}
-        />
-      )}
     </div>
   )
 }
