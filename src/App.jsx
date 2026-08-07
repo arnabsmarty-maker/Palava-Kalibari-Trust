@@ -96,6 +96,8 @@ const IMG = {
   sponsorNovoInsurance: '/sponsor-novo-insurance.png', // Novo Insurance logo
   sponsorCanaraBank: '/sponsor-canara-bank.png', // Canara Bank logo
   sponsorSencoJewellers: '/sponsor-senco-jewellers.png', // Senco Gold & Diamonds logo
+  sponsorTezOil: '/sponsor-tez-oil.png', // Tez Mustard Oil logo
+  sponsorCroma: '/sponsor-croma.png', // Croma logo
 }
 
 // Renders the real photo if it exists in /public, otherwise a graceful,
@@ -2158,6 +2160,18 @@ function OurSponsorsSection() {
       logo: IMG.sponsorSencoJewellers,
       url: 'https://sencogoldanddiamonds.com/?srsltid=AfmBOopeUC5YMB8e37u6ux6BB0qiZJOK7EvEtLk53_TRX6hmzJG_Csmh',
       desc: 'Jeweller for Generations',
+    },
+    {
+      name: 'Tez Mustard Oil',
+      logo: IMG.sponsorTezOil,
+      url: 'https://reconoil.com/',
+      desc: 'Purity & Culinary Partner',
+    },
+    {
+      name: 'Croma',
+      logo: IMG.sponsorCroma,
+      url: 'https://www.croma.com/?srsltid=AfmBOor7vBeU0nFuFrJApJtVsjXJbSx5-kfG3aNutTrpxxWDjszi56a1',
+      desc: 'Electronics & Retail Partner',
     },
   ]
 
