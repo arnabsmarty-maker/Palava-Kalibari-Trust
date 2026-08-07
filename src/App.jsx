@@ -1852,7 +1852,7 @@ function DonationSection() {
 }
 
 // ══════════════════════════════════════════════════════════════
-// ABOUT
+// ABOUT, VISION & OUR TRUSTEES
 // ══════════════════════════════════════════════════════════════
 function AboutSection() {
   const [currentImg, setCurrentImg] = useState(0)
@@ -1885,15 +1885,16 @@ function AboutSection() {
     },
   ]
 
-  const stats = [
-    { icon: Users, label: 'Community-Led', value: 'By Residents' },
-    { icon: Landmark, label: 'Registered Trust', value: 'F-8722' },
-    { icon: Sparkles, label: 'Culture First', value: 'Bengali Heritage' },
-    { icon: CalendarDays, label: 'Year-Round', value: 'Engagement' },
+  const trustees = [
+    { name: 'Ar. Namranil Mukherjee', title: 'Trustee', image: '/trustee-namranil.jpg' },
+    { name: 'Saurabh Ghosh', title: 'Trustee', image: '/trustee-saurabh.jpg' },
+    { name: 'Rajat Sain', title: 'Trustee', image: '/trustee-rajat.jpg' },
+    { name: 'Prasenjeet Bagchi', title: 'Trustee', image: '/trustee-prasenjeet.jpg' },
+    { name: 'Debashish Bhattacharjee', title: 'Trustee', image: '/trustee-debashish.jpg' },
+    { name: 'Indranil Mukherjee', title: 'Trustee', image: '/trustee-indranil.jpg' },
   ]
 
   useEffect(() => {
-    // Preload carousel slide images for instant smooth transitions
     slides.forEach((s) => {
       const img = new Image()
       img.src = s.src
@@ -1907,81 +1908,170 @@ function AboutSection() {
   const activeSlide = slides[currentImg]
 
   return (
-    <section id="about" className="relative min-h-[620px] md:min-h-[700px] overflow-hidden text-ivory-warm">
-      {/* Full-scale background image carousel */}
-      <div className="absolute inset-0 z-0 overflow-hidden bg-black">
-        {slides.map((slide, idx) => (
-          <img
-            key={idx}
-            src={slide.src}
-            alt={slide.title}
-            loading={idx === 0 ? "eager" : "lazy"}
-            decoding="async"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${
-              idx === currentImg ? 'opacity-100 z-10' : 'opacity-0 z-0'
-            }`}
+    <section id="about" className="py-24 relative bg-gradient-to-b from-[#0a0003] via-[#160007] to-[#0a0003] text-ivory-warm">
+      <div className="max-w-7xl mx-auto px-4 space-y-16">
+        
+        {/* ── GET TO KNOW US & OUR VISION ── */}
+        <div className="reveal">
+          <SectionTitle
+            eyebrow="Get To Know Us"
+            title="About Palava Kalibari Trust"
+            subtitle="Preserving, celebrating, and passing on the timeless richness of Bengali culture and heritage in its truest form."
+            dark
           />
-        ))}
 
-        {/* Minimal top scrim — keeps 90% of photo 100% clear */}
-        <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/60 to-transparent pointer-events-none z-10" />
-      </div>
-
-      {/* Top Header Badge — subtle top-left pin */}
-      <div className="relative z-20 max-w-7xl mx-auto w-full px-4 pt-6 flex justify-between items-center">
-        <span className="inline-flex items-center gap-2 bg-black/60 border border-gold/40 text-gold-bright font-bold tracking-[0.2em] uppercase text-[11px] px-3.5 py-1 rounded-full backdrop-blur-md">
-          <Heart className="w-3.5 h-3.5 text-gold-bright" /> Who We Are
-        </span>
-        <span className="hidden md:inline-flex items-center gap-2 text-xs text-ivory-cream/80 bg-black/50 px-3 py-1 rounded-full backdrop-blur border border-white/10">
-          <Sparkles className="w-3.5 h-3.5 text-gold" /> {slides.length} Gallery Photos
-        </span>
-      </div>
-
-      {/* BOTTOM 10% WRITEUPS & CONTROLS STRIP */}
-      <div className="absolute bottom-0 inset-x-0 z-20 bg-gradient-to-t from-[#100005] via-[#180007]/90 to-transparent pt-12 pb-6 px-4">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-
-          {/* Left: Compact Title & Copy */}
-          <div className="max-w-xl">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-gold-bright flex items-center justify-center md:justify-start gap-2">
-              About Palava Kalibari Trust
-            </h2>
-            <p className="text-xs md:text-sm text-ivory-cream/90 mt-1 line-clamp-2 leading-relaxed">
-              {TRUST.whoWeAre}
-            </p>
-          </div>
-
-          {/* Center: Compact Stats Pills */}
-          <div className="flex items-center gap-2 shrink-0 flex-wrap justify-center">
-            {stats.map((s, i) => (
-              <div key={i} className="px-3 py-1.5 rounded-xl border border-gold/30 bg-black/60 backdrop-blur text-center">
-                <div className="font-display text-xs md:text-sm font-extrabold text-gold-bright">{s.value}</div>
-                <div className="text-[9px] font-semibold text-ivory-cream/70 uppercase tracking-wider">{s.label}</div>
+          <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+            {/* Story Paragraphs */}
+            <div className="lg:col-span-7 rounded-3xl p-8 bg-black/60 border-2 border-gold/40 shadow-2xl backdrop-blur space-y-5 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-2 text-gold-bright text-xs uppercase font-extrabold tracking-widest mb-3">
+                  <Sparkles className="w-4 h-4 text-gold-bright" /> Our Foundation &amp; Journey
+                </div>
+                <p className="text-sm md:text-base text-ivory-cream/90 font-light leading-relaxed">
+                  <strong className="text-gold-bright font-semibold">Palava Kalibari Trust (PKT)</strong> is the heartfelt vision of a group of spirited Bengalis united by a shared dream — to preserve, celebrate, and pass on the timeless richness of Bengali culture and heritage in its truest form.
+                </p>
+                <p className="text-sm md:text-base text-ivory-cream/85 font-light leading-relaxed mt-4">
+                  In a township like Palava, where many cultural associations thrive, a strong desire emerged for a sacred space that could serve as the spiritual and cultural nucleus for Bengalis — a <strong className="text-gold-bright font-semibold">Kalibari</strong>, the very soul of our traditions. This collective longing brought like-minded residents together, leading to the formation of Palava Kalibari Trust — a community-driven initiative dedicated to upholding our deep-rooted values through festivals, rituals, and cultural celebrations that every Bengali can relate to and take pride in.
+                </p>
+                <p className="text-sm md:text-base text-ivory-cream/85 font-light leading-relaxed mt-4 italic border-l-2 border-gold/50 pl-4 py-1 bg-gold/5 rounded-r-xl">
+                  "Today, PKT is more than just an organization — it's a growing family, committed to upholding our cultural roots through festivals, rituals, and events that every Bengali can connect with. We aim to pass on our legacy with pride, unity, and devotion."
+                </p>
               </div>
-            ))}
-          </div>
 
-          {/* Right: Slide Indicators & Caption */}
-          <div className="flex flex-col items-center md:items-end gap-1.5 shrink-0">
-            <div className="flex items-center gap-2 text-[11px] text-ivory-cream/80 bg-black/50 px-3 py-1 rounded-full border border-white/10">
-              <Sparkles className="w-3 h-3 text-gold" />
-              <span className="font-bold text-gold-bright">{activeSlide.title}</span>
-              <div className="flex items-center gap-1 ml-1">
-                {slides.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentImg(idx)}
-                    className={`h-1.5 rounded-full transition-all ${
-                      idx === currentImg ? 'w-4 bg-gold' : 'w-1.5 bg-white/40'
-                    }`}
-                    aria-label={`Slide ${idx + 1}`}
-                  />
-                ))}
+              <div className="pt-4 border-t border-gold/20 flex flex-wrap items-center gap-4 text-xs font-semibold text-gold/90">
+                <span className="flex items-center gap-1.5 bg-maroon-deep/80 border border-gold/40 px-3 py-1.5 rounded-full">
+                  <Landmark className="w-3.5 h-3.5 text-gold-bright" /> Govt Regd Trust: F–8722
+                </span>
+                <span className="flex items-center gap-1.5 bg-maroon-deep/80 border border-gold/40 px-3 py-1.5 rounded-full">
+                  <Users className="w-3.5 h-3.5 text-gold-bright" /> 100% Resident Community-Driven
+                </span>
+              </div>
+            </div>
+
+            {/* Our Vision Box */}
+            <div className="lg:col-span-5 rounded-3xl p-8 bg-gradient-to-b from-[#2a000d] via-[#1a0008] to-[#100005] border-2 border-gold/60 shadow-[0_0_30px_rgba(255,215,0,0.25)] flex flex-col justify-between relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+                <Crown className="w-32 h-32 text-gold" />
+              </div>
+
+              <div>
+                <span className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold px-3.5 py-1 rounded-full text-xs uppercase tracking-wider mb-4 shadow-md">
+                  <Crown className="w-3.5 h-3.5" /> Our Vision
+                </span>
+                <h3 className="font-display text-2xl md:text-3xl font-extrabold text-gold-bright mb-4">
+                  Establishing a Grand Kalibari &amp; Welfare Initiatives
+                </h3>
+                <p className="text-sm text-ivory-cream/90 font-light leading-relaxed">
+                  We want to be an association which is entrusted with the objective of establishing a grand Kalibari in the vicinity of Palava, and as one of the premiere associations in upholding the values &amp; ethos of Bengali culture and heritage in Palava city &amp; around Dombivli, engaged with other communities in multiple welfare activities for the benefit of society.
+                </p>
+                <div className="mt-5 p-4 rounded-2xl bg-black/60 border border-gold/40 shadow-inner">
+                  <div className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-1.5 flex items-center gap-1.5">
+                    <Heart className="w-4 h-4 text-rose-500 fill-rose-500" /> Medical Accommodation Welfare Facility:
+                  </div>
+                  <p className="text-xs md:text-sm text-ivory-cream/85 leading-relaxed font-light">
+                    Within different welfare activities, we will also create and run a <strong className="text-gold-bright font-semibold">critical illness (cancer, renal, liver &amp; other) patient's subsidised accommodation facility</strong> during treatment in and around Mumbai.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-gold/20 flex items-center justify-between text-xs text-gold/80 font-bold">
+                <span>✦ Community First</span>
+                <span>✦ Cultural Ethos</span>
+                <span>✦ Social Welfare</span>
               </div>
             </div>
           </div>
-
         </div>
+
+        {/* ── OUR TRUSTEES SHOWCASE ── */}
+        <div className="reveal space-y-8 pt-4">
+          <div className="text-center max-w-3xl mx-auto">
+            <span className="inline-flex items-center gap-2 text-gold-deep font-semibold tracking-[0.25em] uppercase text-xs">
+              <Sparkles className="w-4 h-4" /> Leadership &amp; Guardianship
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-gold-bright mt-2">
+              Our Trustees
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mt-4" />
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+            {trustees.map((t, idx) => (
+              <div
+                key={idx}
+                className="group rounded-2xl bg-black/70 border-2 border-gold/40 hover:border-gold p-3.5 text-center transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(255,215,0,0.4)] flex flex-col items-center justify-between"
+              >
+                <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-xl overflow-hidden border-2 border-gold/50 shadow-md mb-3 group-hover:border-gold transition-colors relative bg-maroon-deep">
+                  <img
+                    src={t.image}
+                    alt={t.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <div>
+                  <h4 className="font-display font-bold text-sm sm:text-base text-gold-bright leading-tight group-hover:text-amber-300 transition-colors">
+                    {t.name}
+                  </h4>
+                  <span className="inline-block mt-1 text-[11px] font-semibold text-ivory-cream/70 bg-gold/10 border border-gold/30 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                    {t.title}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── PKT COMMUNITY PHOTO SHOWCASE CAROUSEL ── */}
+        <div className="reveal rounded-3xl overflow-hidden border-2 border-gold/50 shadow-[0_0_35px_rgba(255,215,0,0.25)] relative h-[380px] md:h-[480px]">
+          {slides.map((slide, idx) => (
+            <img
+              key={idx}
+              src={slide.src}
+              alt={slide.title}
+              loading={idx === 0 ? "eager" : "lazy"}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-out ${
+                idx === currentImg ? 'opacity-100 scale-105' : 'opacity-0 scale-100 pointer-events-none'
+              }`}
+              style={{ transitionProperty: 'opacity, transform' }}
+            />
+          ))}
+
+          <div className="absolute inset-0 bg-gradient-to-t from-[#070002] via-black/40 to-black/20" />
+
+          {/* Top Bar */}
+          <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between">
+            <span className="inline-flex items-center gap-2 bg-black/75 border border-gold/60 text-gold-bright text-xs font-extrabold px-3.5 py-1.5 rounded-full shadow-lg backdrop-blur">
+              <Sparkles className="w-3.5 h-3.5 text-gold-bright" /> PKT Community Showcase • {currentImg + 1} of {slides.length}
+            </span>
+          </div>
+
+          {/* Bottom Info & Indicators */}
+          <div className="absolute bottom-0 inset-x-0 z-10 p-6 md:p-8 bg-gradient-to-t from-[#070002] via-[#070002]/90 to-transparent flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
+            <div>
+              <h3 className="font-display text-xl md:text-3xl font-extrabold text-gold-bright leading-tight">
+                {activeSlide.title}
+              </h3>
+              <p className="text-xs md:text-sm text-ivory-cream/90 mt-1 font-light max-w-xl">
+                {activeSlide.subtitle}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-1.5 shrink-0">
+              {slides.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentImg(idx)}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    idx === currentImg ? 'w-8 bg-gold' : 'w-2.5 bg-white/40 hover:bg-white/70'
+                  }`}
+                  aria-label={`Slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   )
