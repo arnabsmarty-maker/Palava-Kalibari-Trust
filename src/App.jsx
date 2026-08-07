@@ -325,7 +325,7 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
           <img
             src={IMG.pktLogo}
             alt="Palava Kalibari Trust Logo"
-            className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-contain group-hover:scale-105 transition-transform duration-300 rounded-full shrink-0"
+            className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain group-hover:scale-105 transition-transform duration-300 rounded-full shrink-0"
             style={{ mixBlendMode: 'screen' }}
           />
           <span className="leading-tight">
@@ -360,6 +360,30 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
                         <Sparkles className="w-3 h-3 text-gold" />
                       </div>
                       
+                      <a
+                        href="#about"
+                        onClick={() => setEventsDropdownOpen(false)}
+                        className="w-full text-left px-3.5 py-2 rounded-xl text-xs font-bold text-ivory-warm hover:bg-gold hover:text-maroon-deep transition-all flex items-center justify-between group/item my-0.5"
+                      >
+                        <span className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                          Community Collaboration
+                        </span>
+                        <ChevronRight className="w-3.5 h-3.5 opacity-60 group-hover/item:translate-x-1 transition-transform" />
+                      </a>
+
+                      <a
+                        href="#ilish"
+                        onClick={() => setEventsDropdownOpen(false)}
+                        className="w-full text-left px-3.5 py-2 rounded-xl text-xs font-bold text-ivory-warm hover:bg-gold hover:text-maroon-deep transition-all flex items-center justify-between group/item my-0.5"
+                      >
+                        <span className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-sky-400" />
+                          Ilish Parbon Utsav
+                        </span>
+                        <ChevronRight className="w-3.5 h-3.5 opacity-60 group-hover/item:translate-x-1 transition-transform" />
+                      </a>
+
                       <a
                         href="#annadan"
                         onClick={() => setEventsDropdownOpen(false)}
