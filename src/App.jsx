@@ -1922,8 +1922,8 @@ function AboutSection() {
     <section id="about" className="py-24 relative bg-gradient-to-b from-[#0a0003] via-[#160007] to-[#0a0003] text-ivory-warm">
       <div className="max-w-7xl mx-auto px-4 space-y-16">
         
-        {/* ── GET TO KNOW US & OUR VISION ── */}
-        <div className="reveal">
+        {/* ── GET TO KNOW US & OUR VISION (FULL SCREEN / FULL CONTAINER WIDTH) ── */}
+        <div className="reveal space-y-10">
           <SectionTitle
             eyebrow="Get To Know Us"
             title="About Palava Kalibari Trust"
@@ -1931,35 +1931,43 @@ function AboutSection() {
             dark
           />
 
-          <div className="grid lg:grid-cols-12 gap-8 items-stretch">
-            
-            {/* LEFT COLUMN: Our Vision Box */}
-            <div className="lg:col-span-5 rounded-3xl p-6 md:p-8 bg-gradient-to-b from-[#2a000d] via-[#1a0008] to-[#100005] border-2 border-gold/60 shadow-[0_0_30px_rgba(255,215,0,0.25)] flex flex-col justify-between relative overflow-hidden space-y-5">
-              <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-                <Crown className="w-32 h-32 text-gold" />
-              </div>
+          {/* 1. OUR VISION CARD (FULL WIDTH STACK WITH MAA KALI SHRINE PHOTO) */}
+          <div className="w-full rounded-3xl p-6 md:p-10 bg-gradient-to-b from-[#2a000d] via-[#1a0008] to-[#100005] border-2 border-gold/60 shadow-[0_0_40px_rgba(255,215,0,0.3)] relative overflow-hidden space-y-6">
+            <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+              <Crown className="w-48 h-48 text-gold" />
+            </div>
 
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-gold/20 pb-4">
               <div>
-                <span className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold px-3.5 py-1 rounded-full text-xs uppercase tracking-wider mb-3.5 shadow-md">
+                <span className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold px-3.5 py-1 rounded-full text-xs uppercase tracking-wider mb-2 shadow-md">
                   <Crown className="w-3.5 h-3.5" /> Our Vision
                 </span>
-                <h3 className="font-display text-2xl md:text-3xl font-extrabold text-gold-bright mb-3">
+                <h3 className="font-display text-2xl md:text-4xl font-extrabold text-gold-bright">
                   Establishing a Grand Kalibari &amp; Welfare Initiatives
                 </h3>
+              </div>
+              <div className="flex items-center gap-3 text-xs text-gold/80 font-bold hidden sm:flex">
+                <span>✦ Community First</span>
+                <span>✦ Cultural Ethos</span>
+                <span>✦ Social Welfare</span>
+              </div>
+            </div>
 
-                {/* Divine Maa Kali Image Showcase — Fully Aligned Top View (Face & Crown 100% Unclipped) */}
-                <div className="relative rounded-2xl overflow-hidden border-2 border-gold/50 shadow-xl my-4 group bg-black h-72 sm:h-80 md:h-96">
+            <div className="grid lg:grid-cols-12 gap-8 items-center">
+              {/* Left Side: Divine Maa Kali Photo Showcase (Face & Crown 100% Unclipped) */}
+              <div className="lg:col-span-6">
+                <div className="relative rounded-2xl overflow-hidden border-2 border-gold/50 shadow-2xl group bg-black h-80 sm:h-96 md:h-[440px]">
                   <img
                     src="/maa-kali-sanctuary.jpg"
                     alt="Sacred Maa Kali Shrine Vision - Palava Kalibari Trust"
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between z-10">
-                    <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-gold-bright bg-black/80 backdrop-blur border border-gold/50 px-3 py-1 rounded-full shadow">
-                      <Sparkles className="w-3.5 h-3.5 text-gold-bright" /> Sacred Kalibari Vision
+                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between z-10">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-extrabold text-gold-bright bg-black/85 backdrop-blur border border-gold/50 px-3.5 py-1.5 rounded-full shadow">
+                      <Sparkles className="w-4 h-4 text-gold-bright" /> Sacred Kalibari Shrine Vision
                     </span>
-                    <span className="text-[10px] text-ivory-cream/80 bg-maroon-deep/90 border border-gold/30 px-2.5 py-0.5 rounded-md font-semibold">
+                    <span className="text-xs text-ivory-cream/90 bg-maroon-deep/90 border border-gold/40 px-3 py-1 rounded-md font-bold">
                       Maa Kali Shrine
                     </span>
                   </div>
