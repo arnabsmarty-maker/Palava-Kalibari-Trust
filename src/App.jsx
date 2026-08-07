@@ -1110,10 +1110,10 @@ function DurgaSection({ onOpenYearEvents }) {
       <div className="bg-gradient-to-b from-maroon-deep via-[#3a0010] to-[#1a0008]">
         <div className="max-w-5xl mx-auto px-4 pt-10 pb-20">
 
-          {/* Glowing 4-Year Event Selection Bar */}
-          <div className="reveal mb-10 p-4 rounded-2xl bg-black/70 border-2 border-gold/60 shadow-[0_0_25px_rgba(255,215,0,0.5)] max-w-3xl mx-auto text-center">
+          {/* Glowing 4-Year Event Selection Bar — Redirects to Full Screen View */}
+          <div className="reveal mb-10 p-5 rounded-2xl bg-black/70 border-2 border-gold/60 shadow-[0_0_25px_rgba(255,215,0,0.5)] max-w-3xl mx-auto text-center">
             <div className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-3 flex items-center justify-center gap-2">
-              <CalendarDays className="w-4 h-4 text-gold-bright" /> Select Event Year to View Events &amp; Write-ups:
+              <CalendarDays className="w-4 h-4 text-gold-bright" /> Open Full Screen Downward Event View by Year:
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
               {[
@@ -1122,16 +1122,11 @@ function DurgaSection({ onOpenYearEvents }) {
                 { key: '2025-2026', label: '★ 2025–2026' },
                 { key: '2026-2027', label: '🚀 2026–2027' },
               ].map((item) => {
-                const isActive = item.key === selectedYear
                 return (
                   <button
                     key={item.key}
-                    onClick={() => setSelectedYear(item.key)}
-                    className={`py-2.5 px-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all ${
-                      isActive
-                        ? 'bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep shadow-[0_0_18px_rgba(255,215,0,0.85)] scale-105 border-2 border-white/60'
-                        : 'bg-gold/10 border border-gold/30 text-ivory-warm hover:bg-gold hover:text-maroon-deep'
-                    }`}
+                    onClick={() => onOpenYearEvents && onOpenYearEvents(item.key)}
+                    className="py-3 px-2 rounded-xl text-xs sm:text-sm font-extrabold bg-gradient-to-r from-amber-500/20 via-gold/20 to-amber-600/20 border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all shadow-[0_0_15px_rgba(255,215,0,0.6)] animate-pulse"
                   >
                     {item.label}
                   </button>
@@ -3169,134 +3164,159 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
   }, [yearKey])
 
   return (
-    <div className="min-h-screen bg-[#0d0004] text-ivory-warm">
+    <div className="min-h-screen bg-[#0a0003] text-ivory-warm">
       <Header onJoin={onJoin} onSponsor={onSponsor} onOpenYearEvents={onNavigateYear} />
       
-      {/* Main Page Content */}
-      <main className="pt-24 pb-20">
+      {/* ── FULL SPACE PICTURE HERO BANNER ── */}
+      <section className="relative w-full min-h-[55vh] md:min-h-[65vh] flex items-end justify-center overflow-hidden pt-24 pb-12 border-b-2 border-gold/40">
+        {/* Full space picture background */}
+        <img
+          src={data.events[0]?.image || '/durga-idol-pratima.jpg'}
+          alt={data.title}
+          className="absolute inset-0 w-full h-full object-cover object-center filter brightness-75 scale-105 transition-all duration-700"
+        />
         
-        {/* Dedicated Hero Banner */}
-        <section className="relative py-16 overflow-hidden bg-gradient-to-b from-[#24000b] via-maroon-deep to-[#120005] border-b border-gold/30">
-          <div className="absolute inset-0 mandala-bg opacity-15" />
-          <div className="relative max-w-6xl mx-auto px-4">
-            
-            {/* Breadcrumb & Back Button */}
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-              <div className="flex items-center gap-2 text-xs font-semibold text-gold-bright">
-                <button onClick={onGoHome} className="hover:underline flex items-center gap-1 text-ivory-cream/70">
-                  Home
-                </button>
-                <span>/</span>
-                <span className="text-gold/80">Events Archive</span>
-                <span>/</span>
-                <span className="text-gold-bright font-bold">{data.year}</span>
-              </div>
+        {/* Dark gradient overlay for text clarity */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0003] via-[#0a0003]/60 to-black/40" />
 
-              <button
-                onClick={onGoHome}
-                className="inline-flex items-center gap-2 bg-black/50 border border-gold/40 text-gold-bright text-xs font-bold px-4 py-2 rounded-full hover:bg-gold hover:text-maroon-deep transition-all shadow-md"
-              >
-                ← Back to Main Home Page
+        {/* Full-bleed banner content */}
+        <div className="relative z-10 max-w-6xl mx-auto px-4 w-full text-left">
+          
+          {/* Breadcrumb & Navigation */}
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+            <div className="flex items-center gap-2 text-xs font-bold text-gold-bright bg-black/60 backdrop-blur px-4 py-1.5 rounded-full border border-gold/40 shadow-lg">
+              <button onClick={onGoHome} className="hover:underline flex items-center gap-1 text-ivory-cream/80">
+                Home
               </button>
+              <span>/</span>
+              <span className="text-gold/80">Events Archive</span>
+              <span>/</span>
+              <span className="text-gold-bright font-extrabold">{data.year}</span>
             </div>
 
-            {/* Page Header */}
-            <div className="text-left max-w-3xl">
-              <span className="inline-flex items-center gap-2 bg-gold/20 border border-gold/40 text-gold-bright font-extrabold tracking-widest uppercase text-xs px-4 py-1.5 rounded-full mb-3 shadow-[0_0_15px_rgba(255,215,0,0.6)] animate-pulse">
-                <CalendarDays className="w-4 h-4 text-gold-bright" /> Dedicated Event Page — {data.year}
+            <button
+              onClick={onGoHome}
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-gold-bright to-gold-deep text-maroon-deep font-extrabold text-xs px-5 py-2 rounded-full shadow-[0_0_15px_rgba(255,215,0,0.6)] hover:scale-105 transition-all"
+            >
+              ← Back to Main Home Page
+            </button>
+          </div>
+
+          {/* Banner Title & Description */}
+          <div className="max-w-4xl">
+            <span className="inline-flex items-center gap-2 bg-black/60 border border-gold/60 text-gold-bright font-extrabold tracking-widest uppercase text-xs px-4 py-1.5 rounded-full mb-3 backdrop-blur shadow-[0_0_20px_rgba(255,215,0,0.7)] animate-pulse">
+              <CalendarDays className="w-4 h-4 text-gold-bright" /> Full Screen View — {data.year}
+            </span>
+            <h1 className="font-display text-4xl md:text-6xl font-extrabold text-gold-bright leading-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
+              {data.title}
+            </h1>
+            <p className="text-base md:text-xl text-ivory-warm mt-3 font-light leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+              {data.subtitle}
+            </p>
+          </div>
+
+          {/* Glowing 4-Year Page Redirection Switcher */}
+          <div className="mt-8 p-4 rounded-2xl bg-black/80 backdrop-blur border-2 border-gold/60 shadow-[0_0_30px_rgba(255,215,0,0.6)] max-w-4xl">
+            <div className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-3 flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-gold-bright" /> Switch Full Screen Event Year:
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              {[
+                { key: '2023-2024', label: '📜 2023–2024' },
+                { key: '2024-2025', label: '📅 2024–2025' },
+                { key: '2025-2026', label: '★ 2025–2026' },
+                { key: '2026-2027', label: '🚀 2026–2027' },
+              ].map((item) => {
+                const active = item.key === yearKey
+                return (
+                  <button
+                    key={item.key}
+                    onClick={() => onNavigateYear(item.key)}
+                    className={`py-3 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all text-center ${
+                      active
+                        ? 'bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep shadow-[0_0_20px_rgba(255,215,0,0.85)] scale-[1.03] border-2 border-white/60'
+                        : 'bg-gold/10 border border-gold/30 text-ivory-warm hover:bg-gold hover:text-maroon-deep'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── DOWNWARD VERTICAL EVENTS FEED (NO CASCADED CARDS) ── */}
+      <main className="py-16 max-w-6xl mx-auto px-4 space-y-12">
+        <div className="text-center mb-8">
+          <span className="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 text-gold-bright px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
+            <CalendarDays className="w-4 h-4 text-gold" /> Events Timeline ({data.year})
+          </span>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-ivory-warm mt-2">
+            Chronological Downward Events Feed
+          </h2>
+          <div className="mt-3 mx-auto h-0.5 w-24 bg-gradient-to-r from-transparent via-gold to-transparent" />
+        </div>
+
+        {/* Downward Vertical Event Blocks */}
+        {data.events.map((ev, idx) => (
+          <div
+            key={idx}
+            className="group relative flex flex-col lg:flex-row items-stretch rounded-3xl bg-gradient-to-b from-[#20000a] via-[#140006] to-[#0a0003] border-2 border-gold/50 overflow-hidden shadow-2xl hover:border-gold transition-all duration-300"
+          >
+            {/* Left Column: Full Feature Photo Banner */}
+            <div className="lg:w-5/12 relative min-h-[260px] lg:min-h-[320px] overflow-hidden bg-black shrink-0">
+              <img
+                src={ev.image}
+                alt={ev.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-black/30 lg:to-[#140006]" />
+              <span className="absolute top-4 left-4 z-10 text-xs font-extrabold text-gold-bright bg-maroon-deep/90 border border-gold/60 px-3.5 py-1.5 rounded-full shadow-xl">
+                {ev.date}
               </span>
-              <h1 className="font-display text-4xl md:text-5xl font-extrabold text-gold-bright leading-tight">
-                {data.title}
-              </h1>
-              <p className="text-base md:text-lg text-ivory-cream/80 mt-3 font-light">
-                {data.subtitle}
-              </p>
             </div>
 
-            {/* Glowing 4-Year Page Redirection Switcher */}
-            <div className="mt-10 p-4 rounded-2xl bg-black/60 border-2 border-gold/60 shadow-[0_0_25px_rgba(255,215,0,0.5)]">
-              <div className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-3 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-gold-bright" /> Redirect to Other Event Page Years:
+            {/* Right Column: Full Write-up & Event Details */}
+            <div className="lg:w-7/12 p-6 md:p-8 flex flex-col justify-between space-y-4">
+              <div>
+                <span className="inline-block text-[11px] font-bold uppercase tracking-widest text-gold/70 mb-1">
+                  Event Milestone #{idx + 1}
+                </span>
+                <h3 className="font-display font-bold text-2xl md:text-3xl text-gold-bright leading-snug">
+                  {ev.title}
+                </h3>
+                <p className="text-xs md:text-sm text-gold/80 mt-1.5 flex items-center gap-1.5 font-medium">
+                  <MapPin className="w-4 h-4 text-gold shrink-0" /> {ev.venue}
+                </p>
+                
+                {/* Full Write-up Paragraph */}
+                {ev.description && (
+                  <p className="text-sm md:text-base text-ivory-cream/90 font-light leading-relaxed mt-4 pt-4 border-t border-gold/20 italic">
+                    "{ev.description}"
+                  </p>
+                )}
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                {[
-                  { key: '2023-2024', label: '2023–2024' },
-                  { key: '2024-2025', label: '2024–2025' },
-                  { key: '2025-2026', label: '2025–2026 ★' },
-                  { key: '2026-2027', label: '2026–2027 🚀' },
-                ].map((item) => {
-                  const active = item.key === yearKey
-                  return (
-                    <button
-                      key={item.key}
-                      onClick={() => onNavigateYear(item.key)}
-                      className={`py-3 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all text-center ${
-                        active
-                          ? 'bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep shadow-[0_0_20px_rgba(255,215,0,0.85)] scale-[1.03] border-2 border-white/60'
-                          : 'bg-gold/10 border border-gold/30 text-ivory-warm hover:bg-gold hover:text-maroon-deep'
-                      }`}
-                    >
-                      {item.label}
-                    </button>
-                  )
-                })}
+
+              {/* Highlights Bulleted List */}
+              <div className="border-t border-gold/20 pt-4">
+                <h4 className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-2">
+                  Key Highlights &amp; Activities:
+                </h4>
+                <ul className="grid sm:grid-cols-2 gap-2 text-xs text-ivory-cream/85">
+                  {ev.highlights.map((h, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="text-gold shrink-0 mt-0.5">✦</span>
+                      <span className="leading-relaxed">{h}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-
           </div>
-        </section>
-
-        {/* Event Cards Section */}
-        <section className="py-16 max-w-6xl mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-            {data.events.map((ev, idx) => (
-              <div
-                key={idx}
-                className="group flex flex-col rounded-2xl bg-gradient-to-b from-[#23000c] to-[#120005] border-2 border-gold/40 overflow-hidden hover:border-gold hover:scale-[1.02] transition-all duration-300 shadow-xl"
-              >
-                {/* Event Photo */}
-                <div className="relative h-52 w-full overflow-hidden bg-black">
-                  <img
-                    src={ev.image}
-                    alt={ev.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#120005] via-black/20 to-transparent" />
-                  <span className="absolute bottom-3 left-3 text-xs font-bold text-gold-bright bg-black/70 border border-gold/50 px-3 py-1 rounded-full shadow-md">
-                    {ev.date}
-                  </span>
-                </div>
-
-                {/* Event Info */}
-                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                  <div>
-                    <h3 className="font-display font-bold text-xl text-ivory-warm leading-snug group-hover:text-gold-bright transition-colors">
-                      {ev.title}
-                    </h3>
-                    <p className="text-xs text-gold/80 mt-2 flex items-center gap-1.5 font-medium">
-                      <MapPin className="w-3.5 h-3.5 text-gold shrink-0" /> {ev.venue}
-                    </p>
-                    {ev.description && (
-                      <p className="text-xs text-ivory-cream/90 font-light leading-relaxed mt-3 pt-3 border-t border-gold/20 italic">
-                        "{ev.description}"
-                      </p>
-                    )}
-                  </div>
-
-                  <ul className="space-y-2 text-xs text-ivory-cream/85 border-t border-gold/20 pt-4">
-                    {ev.highlights.map((h, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="text-gold shrink-0 mt-0.5">✦</span>
-                        <span className="leading-relaxed">{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
+        ))}
       </main>
 
       <Footer onSponsor={onSponsor} />
