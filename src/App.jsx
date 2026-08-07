@@ -98,6 +98,9 @@ const IMG = {
   sponsorSencoJewellers: '/sponsor-senco-jewellers.png', // Senco Gold & Diamonds logo
   sponsorTezOil: '/sponsor-tez-oil.png', // Tez Mustard Oil logo
   sponsorCroma: '/sponsor-croma.png', // Croma logo
+  sponsorSkylark: '/sponsor-skylark.png', // SkyLark Enterprises logo
+  sponsorKangenWater: '/sponsor-kangen-water.png', // Kangen Water Palava logo
+  sponsorBharatElectricals: '/sponsor-bharat-electricals.png', // Bharat Electrical Works logo
 }
 
 // Renders the real photo if it exists in /public, otherwise a graceful,
@@ -2172,6 +2175,21 @@ function OurSponsorsSection() {
       logo: IMG.sponsorCroma,
       url: 'https://www.croma.com/?srsltid=AfmBOor7vBeU0nFuFrJApJtVsjXJbSx5-kfG3aNutTrpxxWDjszi56a1',
       desc: 'Electronics & Retail Partner',
+    },
+    {
+      name: 'SkyLark Enterprises',
+      logo: IMG.sponsorSkylark,
+      desc: 'Infrastructure & Enterprise Partner',
+    },
+    {
+      name: 'Kangen Water Palava',
+      logo: IMG.sponsorKangenWater,
+      desc: 'Pure Alkaline Hydration Partner',
+    },
+    {
+      name: 'Bharat Electrical Works',
+      logo: IMG.sponsorBharatElectricals,
+      desc: 'Electrical & Engineering Partner',
     },
   ]
 
