@@ -37,6 +37,7 @@ import {
   Smartphone,
   Medal,
   Award,
+  CreditCard,
 } from 'lucide-react'
 import QRCode from 'qrcode'
 import DurgaFace from './DurgaFace.jsx'
@@ -360,6 +361,15 @@ function Header({ onJoin }) {
             </a>
           </div>
 
+          {/* Glowing "Become a Sponsor" Button */}
+          <button
+            onClick={onSponsor}
+            className="relative inline-flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm hover:scale-[1.05] transition-all shadow-[0_0_22px_rgba(255,215,0,0.85)] animate-pulse border border-white/50 whitespace-nowrap"
+          >
+            <Crown className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-maroon-deep stroke-[2.5]" />
+            Become a Sponsor
+          </button>
+
           <button
             onClick={onJoin}
             className="hidden sm:inline-flex items-center gap-1.5 sm:gap-2 bg-maroon border-2 border-gold text-gold-bright font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm hover:bg-gold hover:text-maroon-deep transition-all hover:shadow-gold hover:scale-[1.03] whitespace-nowrap"
@@ -392,9 +402,19 @@ function Header({ onJoin }) {
           <button
             onClick={() => {
               setOpen(false)
+              onSponsor()
+            }}
+            className="mt-3 w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold px-4 py-2.5 rounded-full text-sm shadow-[0_0_20px_rgba(255,215,0,0.7)] animate-pulse"
+          >
+            <Crown className="w-4 h-4 fill-maroon-deep" /> Become a Sponsor
+          </button>
+
+          <button
+            onClick={() => {
+              setOpen(false)
               onJoin()
             }}
-            className="mt-3 w-full inline-flex items-center justify-center gap-2 bg-gold text-maroon-deep font-semibold px-4 py-2.5 rounded-full text-sm"
+            className="mt-2.5 w-full inline-flex items-center justify-center gap-2 bg-gold text-maroon-deep font-semibold px-4 py-2.5 rounded-full text-sm"
           >
             <Star className="w-4 h-4" /> Become a Member
           </button>
@@ -512,6 +532,13 @@ function Hero({ onJoin }) {
           >
             <Play className="w-4 h-4" fill="currentColor" /> Watch Full Reel
           </button>
+          <button
+            onClick={onSponsor}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold px-5 py-2.5 rounded-full shadow-[0_0_25px_rgba(255,215,0,0.85)] animate-pulse hover:scale-[1.04] transition-all text-sm border border-white/40"
+          >
+            <Crown className="w-4 h-4 fill-maroon-deep" /> Become a Sponsor
+          </button>
+
           <button
             onClick={onJoin}
             className="inline-flex items-center gap-2 bg-black/30 border-2 border-gold/70 text-ivory-warm font-semibold px-5 py-2.5 rounded-full hover:bg-gold hover:text-maroon-deep transition-all backdrop-blur text-sm"
@@ -2052,15 +2079,24 @@ function SponsorshipSection() {
 
       <div className="relative max-w-6xl mx-auto px-4">
         {/* Heading */}
-        <div className="reveal text-center mb-14">
+        <div className="reveal text-center mb-10">
           <span className="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 text-gold-bright px-4 py-1.5 rounded-full text-xs tracking-widest uppercase font-semibold mb-4">
             <Star className="w-3.5 h-3.5" /> Brand Partnership
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-ivory-warm">
             Sponsorship Packages
           </h2>
-          <p className="mt-2 text-gold-bright text-lg font-light tracking-wide">for Market-Leading Brands & Corporate Partners</p>
-          <div className="mt-5 mx-auto h-px w-32 bg-gradient-to-r from-transparent via-gold to-transparent" />
+          <p className="mt-2 text-gold-bright text-lg font-light tracking-wide">for Market-Leading Brands &amp; Corporate Partners</p>
+          <div className="mt-5 mx-auto h-px w-32 bg-gradient-to-r from-transparent via-gold to-transparent mb-6" />
+
+          {/* Glowing "Become a Sponsor" Primary CTA Button */}
+          <button
+            onClick={onSponsor}
+            className="inline-flex items-center gap-2.5 bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold px-7 py-3.5 rounded-full shadow-[0_0_30px_rgba(255,215,0,0.9)] animate-pulse hover:scale-[1.06] transition-all text-base border-2 border-white/60"
+          >
+            <Crown className="w-5 h-5 fill-maroon-deep stroke-[2.5]" />
+            Become a Sponsor
+          </button>
         </div>
 
         {/* Cards */}
@@ -2102,11 +2138,18 @@ function SponsorshipSection() {
                   ))}
                 </ul>
 
-                {/* CTA — Enquire via Email to palavakalibaritrust@gmail.com */}
-                <div className={`mt-6 w-full py-3.5 rounded-xl bg-gradient-to-r ${pkg.color} text-center font-bold text-white text-sm tracking-wide shadow-md group-hover:brightness-110 transition-all flex items-center justify-center gap-2 border border-white/20`}>
-                  <Mail className="w-4 h-4" />
-                  Enquire Now
-                </div>
+                {/* CTA — Opens Sponsor Modal with Email, Razorpay & UPI options */}
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    if (onSponsor) onSponsor()
+                  }}
+                  className={`mt-6 w-full py-3.5 rounded-xl bg-gradient-to-r ${pkg.color} text-center font-bold text-white text-sm tracking-wide shadow-md hover:brightness-110 transition-all flex items-center justify-center gap-2 border border-white/20`}
+                >
+                  <Crown className="w-4 h-4" />
+                  Become a Sponsor ({pkg.tier})
+                </button>
               </a>
             )
           })}
@@ -2464,33 +2507,223 @@ function IdolSponsorSection() {
 }
 
 // ══════════════════════════════════════════════════════════════
+// SPONSORSHIP MODAL (Email, Razorpay & UPI Payment)
+// ══════════════════════════════════════════════════════════════
+function SponsorModal({ onClose }) {
+  const [activeTab, setActiveTab] = useState('email') // 'email' | 'razorpay' | 'upi'
+  const [copiedEmail, setCopiedEmail] = useState(false)
+  const [copiedUpi, setCopiedUpi] = useState(false)
+
+  const sponsorSubject = "Official Sponsorship & Partnership Enquiry — Palava Kalibari Trust"
+  const sponsorBody = `Dear Palava Kalibari Trust Team,
+
+I am interested in becoming an Official Sponsor / Brand Partner for Palava Kalibari Trust Durga Puja celebrations.
+
+Company / Brand Name: 
+Contact Person Name: 
+Mobile Number: 
+Email Address: 
+Sponsorship Package Interest (Platinum / Gold / Silver / Custom Patron): 
+
+Please share the formal Sponsorship Deck, MOU, and LED Branding details.
+
+Thank you!`
+
+  const mailtoUrl = `mailto:${ADMIN_EMAIL}?subject=${encodeURIComponent(sponsorSubject)}&body=${encodeURIComponent(sponsorBody)}`
+
+  const handleCopyEmail = () => {
+    navigator.clipboard?.writeText(ADMIN_EMAIL)
+    setCopiedEmail(true)
+    setTimeout(() => setCopiedEmail(false), 2500)
+  }
+
+  const handleCopyUpi = () => {
+    navigator.clipboard?.writeText(UPI_VPA)
+    setCopiedUpi(true)
+    setTimeout(() => setCopiedUpi(false), 2500)
+  }
+
+  return (
+    <Modal onClose={onClose} maxW="max-w-2xl">
+      <div className="p-1 rounded-2xl bg-gradient-to-br from-amber-400 via-gold to-amber-600 shadow-2xl">
+        <div className="rounded-xl overflow-hidden bg-gradient-to-b from-[#1c000a] via-[#120006] to-[#0a0003] p-6 text-ivory-warm">
+          
+          {/* Header */}
+          <div className="text-center mb-6">
+            <span className="inline-flex items-center gap-2 bg-gold/20 border border-gold/40 text-gold-bright font-bold tracking-widest uppercase text-xs px-3.5 py-1 rounded-full mb-2">
+              <Crown className="w-4 h-4 text-gold-bright" /> Brand Partnership &amp; Sponsorship
+            </span>
+            <h2 className="font-display text-2xl md:text-3xl font-extrabold text-gold-bright">
+              Become an Official Sponsor
+            </h2>
+            <p className="text-xs md:text-sm text-ivory-cream/80 mt-1 max-w-md mx-auto">
+              Partner with Palava Kalibari Trust to showcase your brand to thousands of resident families &amp; visitors.
+            </p>
+          </div>
+
+          {/* Action Tabs: Email | Razorpay | UPI */}
+          <div className="grid grid-cols-3 gap-2 p-1.5 rounded-xl bg-black/60 border border-gold/30 mb-6">
+            <button
+              onClick={() => setActiveTab('email')}
+              className={`py-2.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                activeTab === 'email'
+                  ? 'bg-gradient-to-r from-gold-bright to-gold text-maroon-deep shadow-md'
+                  : 'text-ivory-cream/70 hover:text-white'
+              }`}
+            >
+              <Mail className="w-4 h-4 shrink-0" />
+              <span>1. Email Enquiry</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('razorpay')}
+              className={`py-2.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                activeTab === 'razorpay'
+                  ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md'
+                  : 'text-ivory-cream/70 hover:text-white'
+              }`}
+            >
+              <CreditCard className="w-4 h-4 shrink-0" />
+              <span>2. Razorpay</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('upi')}
+              className={`py-2.5 px-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                activeTab === 'upi'
+                  ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-md'
+                  : 'text-ivory-cream/70 hover:text-white'
+              }`}
+            >
+              <Smartphone className="w-4 h-4 shrink-0" />
+              <span>3. UPI &amp; Bank</span>
+            </button>
+          </div>
+
+          {/* Tab 1: EMAIL ENQUIRY */}
+          {activeTab === 'email' && (
+            <div className="space-y-4 animate-fade-up">
+              <div className="p-5 rounded-xl bg-black/50 border border-gold/30 text-center space-y-3">
+                <p className="text-xs text-ivory-cream/90">
+                  Send your sponsorship requirements directly to the Palava Kalibari Trust executive committee:
+                </p>
+                <div className="flex items-center justify-center gap-2 p-2.5 rounded-lg bg-gold/10 border border-gold/30 text-gold-bright font-mono text-sm font-bold">
+                  <span>{ADMIN_EMAIL}</span>
+                  <button
+                    onClick={handleCopyEmail}
+                    className="p-1 rounded hover:bg-gold/20 text-gold-bright transition-colors"
+                    title="Copy Email Address"
+                  >
+                    {copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                  </button>
+                </div>
+
+                <a
+                  href={mailtoUrl}
+                  className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold py-3.5 px-6 rounded-xl shadow-gold text-sm hover:scale-[1.02] transition-all"
+                >
+                  <Mail className="w-4 h-4" /> Open Email Client with Pre-filled Sponsorship Form
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* Tab 2: RAZORPAY PAYMENT */}
+          {activeTab === 'razorpay' && (
+            <div className="space-y-4 text-center animate-fade-up">
+              <div className="p-5 rounded-xl bg-gradient-to-b from-blue-950/60 to-black/60 border border-blue-500/40 space-y-3">
+                <div className="w-12 h-12 rounded-full bg-blue-600/30 border border-blue-400/50 flex items-center justify-center mx-auto text-blue-300">
+                  <CreditCard className="w-6 h-6" />
+                </div>
+                <h4 className="font-display font-bold text-lg text-blue-200">
+                  Secure Online Payment via Razorpay
+                </h4>
+                <p className="text-xs text-ivory-cream/80 max-w-md mx-auto">
+                  Pay sponsorship contributions online instantly via Credit Card, Debit Card, NetBanking, Corporate Cards &amp; Wallets.
+                </p>
+
+                <a
+                  href="https://razorpay.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white font-extrabold py-3.5 px-6 rounded-xl shadow-lg hover:brightness-110 transition-all text-sm border border-white/20"
+                >
+                  <ShieldCheck className="w-4 h-4 text-blue-300" /> Proceed to Razorpay Payment Gateway
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* Tab 3: UPI & BANK TRANSFER */}
+          {activeTab === 'upi' && (
+            <div className="space-y-4 text-center animate-fade-up">
+              <div className="p-4 rounded-xl bg-black/60 border border-gold/30 space-y-3">
+                <p className="text-xs text-gold-bright font-bold">
+                  Official Payee: {UPI_PAYEE}
+                </p>
+
+                {/* Scannable QR Standee */}
+                <div className="w-48 h-48 mx-auto p-2 bg-white rounded-2xl shadow-xl border-2 border-gold flex items-center justify-center">
+                  <img src={UPI_QR_IMAGE} alt="ICICI Bank UPI QR Standee" className="w-full h-full object-contain" />
+                </div>
+
+                <div className="flex items-center justify-center gap-2 p-2 rounded-lg bg-gold/10 border border-gold/30 text-gold-bright font-mono text-xs font-bold">
+                  <span>{UPI_VPA}</span>
+                  <button
+                    onClick={handleCopyUpi}
+                    className="p-1 rounded hover:bg-gold/20 text-gold-bright transition-colors"
+                  >
+                    {copiedUpi ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                  </button>
+                </div>
+
+                <a
+                  href={`upi://pay?pa=${encodeURIComponent(UPI_VPA)}&pn=${encodeURIComponent(UPI_PAYEE)}`}
+                  className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-2.5 px-4 rounded-xl text-xs hover:brightness-110 transition-all"
+                >
+                  <Smartphone className="w-4 h-4" /> Open GPay / PhonePe / Paytm App
+                </a>
+              </div>
+            </div>
+          )}
+
+        </div>
+      </div>
+    </Modal>
+  )
+}
+
+// ══════════════════════════════════════════════════════════════
 // APP
 // ══════════════════════════════════════════════════════════════
 export default function App() {
   useReveal()
   const [booking, setBooking] = useState(null)
+  const [sponsorModal, setSponsorModal] = useState(false)
   const joinRef = useRef(null)
 
   const goJoin = () => joinRef.current && joinRef.current()
+  const openSponsor = () => setSponsorModal(true)
 
   return (
     <div className="min-h-screen">
-      <Header onJoin={goJoin} />
+      <Header onJoin={goJoin} onSponsor={openSponsor} />
       <main>
-        <Hero onJoin={goJoin} />
+        <Hero onJoin={goJoin} onSponsor={openSponsor} />
         <IlishSection onBook={setBooking} />
         <DurgaSection />
         <AnnadanSection />
         <DonationSection />
         <MembershipSection registerJoinRef={joinRef} />
-        <SponsorshipSection />
-        <IdolSponsorSection />
+        <SponsorshipSection onSponsor={openSponsor} />
+        <IdolSponsorSection onSponsor={openSponsor} />
         <AboutSection />
-        <OurSponsorsSection />
+        <OurSponsorsSection onSponsor={openSponsor} />
       </main>
-      <Footer />
+      <Footer onSponsor={openSponsor} />
 
       {booking && <BookingModal platter={booking} onClose={() => setBooking(null)} />}
+      {sponsorModal && <SponsorModal onClose={() => setSponsorModal(false)} />}
     </div>
   )
 }
