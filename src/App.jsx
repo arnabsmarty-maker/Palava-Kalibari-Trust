@@ -1954,12 +1954,12 @@ function AboutSection() {
               </div>
             </div>
 
-            {/* Full-Width Maa Kali Image — No Zoom, No Overlay, Full Image Visible */}
-            <div className="relative w-full bg-black">
+            {/* Full-Width Edge-to-Edge Maa Kali Image (No Black Side Bars) */}
+            <div className="relative w-full overflow-hidden">
               <img
                 src="/maa-kali-sanctuary.jpg"
                 alt="Sacred Maa Kali Shrine Vision - Palava Kalibari Trust"
-                className="w-full max-h-[700px] object-contain mx-auto"
+                className="w-full h-auto block"
               />
               <div className="absolute bottom-4 left-5 right-5 flex items-center justify-between z-10">
                 <span className="inline-flex items-center gap-1.5 text-xs font-extrabold text-gold-bright bg-black/85 backdrop-blur border border-gold/50 px-4 py-2 rounded-full shadow-lg">
