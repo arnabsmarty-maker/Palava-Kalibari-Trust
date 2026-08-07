@@ -1931,14 +1931,14 @@ function AboutSection() {
             dark
           />
 
-          {/* 1. OUR VISION CARD — FULL WIDTH VERTICAL STACK */}
-          <div className="w-full rounded-3xl bg-gradient-to-b from-[#2a000d] via-[#1a0008] to-[#100005] border-2 border-gold/60 shadow-[0_0_40px_rgba(255,215,0,0.3)] relative overflow-hidden">
+          {/* 1. OUR VISION CARD — FULL WIDTH CONTAINER WITH IMAGE LEFT & TEXT RIGHT */}
+          <div className="w-full rounded-3xl p-6 md:p-10 bg-gradient-to-b from-[#2a000d] via-[#1a0008] to-[#100005] border-2 border-gold/60 shadow-[0_0_40px_rgba(255,215,0,0.3)] relative overflow-hidden space-y-6">
             <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
               <Crown className="w-48 h-48 text-gold" />
             </div>
 
             {/* Header Bar */}
-            <div className="px-6 md:px-10 pt-6 md:pt-8 pb-4 flex flex-wrap items-center justify-between gap-4 border-b border-gold/20">
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-gold/20 pb-4">
               <div>
                 <span className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold px-3.5 py-1 rounded-full text-xs uppercase tracking-wider mb-2 shadow-md">
                   <Crown className="w-3.5 h-3.5" /> Our Vision
@@ -1954,46 +1954,53 @@ function AboutSection() {
               </div>
             </div>
 
-            {/* Compact Sized Centered Maa Kali Shrine Image Showcase (30% smaller, full screen layout) */}
-            <div className="relative w-full max-w-md sm:max-w-lg mx-auto rounded-2xl border-2 border-gold/50 shadow-2xl overflow-hidden my-3">
-              <img
-                src="/maa-kali-sanctuary.jpg"
-                alt="Sacred Maa Kali Shrine Vision - Palava Kalibari Trust"
-                className="w-full h-auto block max-h-[380px] object-cover object-top"
-              />
-              <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between z-10">
-                <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-gold-bright bg-black/85 backdrop-blur border border-gold/50 px-3 py-1 rounded-full shadow-lg">
-                  <Sparkles className="w-3.5 h-3.5 text-gold-bright" /> Sacred Kalibari Vision
-                </span>
-                <span className="text-[10px] text-ivory-cream/90 bg-maroon-deep/90 border border-gold/40 px-2.5 py-0.5 rounded-md font-bold shadow">
-                  Maa Kali Shrine
-                </span>
-              </div>
-            </div>
-
-            {/* Full-Width Text & Welfare Below */}
-            <div className="px-6 md:px-10 py-6 md:py-8 space-y-5">
-              <p className="text-sm md:text-base text-ivory-cream/90 font-light leading-relaxed max-w-4xl">
-                We want to be an association which is entrusted with the objective of establishing a grand Kalibari in the vicinity of Palava, and as one of the premiere associations in upholding the values &amp; ethos of Bengali culture and heritage in Palava city &amp; around Dombivli, engaged with other communities in multiple welfare activities for the benefit of society.
-              </p>
-
-              <div className="p-5 rounded-2xl bg-black/70 border-2 border-gold/40 shadow-xl max-w-3xl space-y-2">
-                <div className="text-xs md:text-sm uppercase font-extrabold tracking-widest text-gold-bright flex items-center gap-2">
-                  <Heart className="w-4 h-4 text-rose-500 fill-rose-500 animate-pulse" /> Critical Illness Patient Accommodation Facility:
+            {/* Side-by-Side Grid: Image Left (5 cols) & Text Right (7 cols) */}
+            <div className="grid lg:grid-cols-12 gap-8 items-center">
+              
+              {/* Left Side: Maa Kali Shrine Image Showcase */}
+              <div className="lg:col-span-5 flex justify-center">
+                <div className="relative w-full max-w-md rounded-2xl border-2 border-gold/50 shadow-2xl overflow-hidden bg-black group">
+                  <img
+                    src="/maa-kali-sanctuary.jpg"
+                    alt="Sacred Maa Kali Shrine Vision - Palava Kalibari Trust"
+                    className="w-full h-auto block max-h-[460px] object-contain mx-auto"
+                  />
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between z-10">
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-gold-bright bg-black/85 backdrop-blur border border-gold/50 px-3 py-1 rounded-full shadow-lg">
+                      <Sparkles className="w-3.5 h-3.5 text-gold-bright" /> Sacred Kalibari Vision
+                    </span>
+                    <span className="text-[10px] text-ivory-cream/90 bg-maroon-deep/90 border border-gold/40 px-2.5 py-0.5 rounded-md font-bold shadow">
+                      Maa Kali Shrine
+                    </span>
+                  </div>
                 </div>
-                <p className="text-xs md:text-sm text-ivory-cream/85 leading-relaxed font-light">
-                  Within different welfare activities, we will also create and run a <strong className="text-gold-bright font-semibold">critical illness (cancer, renal, liver &amp; other) patient's subsidised accommodation facility</strong> during treatment in and around Mumbai.
-                </p>
               </div>
 
-              <div className="pt-4 border-t border-gold/20 flex flex-wrap items-center gap-4 text-xs font-semibold text-gold/90">
-                <span className="flex items-center gap-1.5 bg-maroon-deep/80 border border-gold/40 px-3 py-1.5 rounded-full">
-                  <Landmark className="w-3.5 h-3.5 text-gold-bright" /> Temple Sanctuary Project
-                </span>
-                <span className="flex items-center gap-1.5 bg-maroon-deep/80 border border-gold/40 px-3 py-1.5 rounded-full">
-                  <Users className="w-3.5 h-3.5 text-gold-bright" /> Healthcare Accommodation Seba
-                </span>
+              {/* Right Side: Vision Copy & Critical Illness Accommodation Box */}
+              <div className="lg:col-span-7 space-y-5">
+                <p className="text-sm md:text-base text-ivory-cream/90 font-light leading-relaxed">
+                  We want to be an association which is entrusted with the objective of establishing a grand Kalibari in the vicinity of Palava, and as one of the premiere associations in upholding the values &amp; ethos of Bengali culture and heritage in Palava city &amp; around Dombivli, engaged with other communities in multiple welfare activities for the benefit of society.
+                </p>
+
+                <div className="p-5 rounded-2xl bg-black/70 border-2 border-gold/40 shadow-xl space-y-2.5">
+                  <div className="text-xs md:text-sm uppercase font-extrabold tracking-widest text-gold-bright flex items-center gap-2">
+                    <Heart className="w-4 h-4 text-rose-500 fill-rose-500 animate-pulse" /> Critical Illness Patient Accommodation Facility:
+                  </div>
+                  <p className="text-xs md:text-sm text-ivory-cream/85 leading-relaxed font-light">
+                    Within different welfare activities, we will also create and run a <strong className="text-gold-bright font-semibold">critical illness (cancer, renal, liver &amp; other) patient's subsidised accommodation facility</strong> during treatment in and around Mumbai.
+                  </p>
+                </div>
+
+                <div className="pt-2 flex flex-wrap items-center gap-3 text-xs font-semibold text-gold/90">
+                  <span className="flex items-center gap-1.5 bg-maroon-deep/80 border border-gold/40 px-3 py-1.5 rounded-full">
+                    <Landmark className="w-3.5 h-3.5 text-gold-bright" /> Temple Sanctuary Project
+                  </span>
+                  <span className="flex items-center gap-1.5 bg-maroon-deep/80 border border-gold/40 px-3 py-1.5 rounded-full">
+                    <Users className="w-3.5 h-3.5 text-gold-bright" /> Healthcare Accommodation Seba
+                  </span>
+                </div>
               </div>
+
             </div>
           </div>
         </div>
