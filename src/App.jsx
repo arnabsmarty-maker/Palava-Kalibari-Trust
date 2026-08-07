@@ -95,7 +95,7 @@ const IMG = {
   sponsorUtkalaBanga: '/sponsor-utkala-banga.png', // Utkala Banga logo
   sponsorNovoInsurance: '/sponsor-novo-insurance.png', // Novo Insurance logo
   sponsorCanaraBank: '/sponsor-canara-bank.png', // Canara Bank logo
-  sponsorPcJewellers: '/sponsor-pc-jewellers.png', // PC Jeweller logo
+  sponsorSencoJewellers: '/sponsor-senco-jewellers.png', // Senco Gold & Diamonds logo
 }
 
 // Renders the real photo if it exists in /public, otherwise a graceful,
@@ -2154,9 +2154,9 @@ function OurSponsorsSection() {
       desc: 'Banking & Financial Partner',
     },
     {
-      name: 'PC Jeweller',
-      logo: IMG.sponsorPcJewellers,
-      url: 'https://www.pcjeweller.com',
+      name: 'Senco Gold & Diamonds',
+      logo: IMG.sponsorSencoJewellers,
+      url: 'https://sencogoldanddiamonds.com/?srsltid=AfmBOopeUC5YMB8e37u6ux6BB0qiZJOK7EvEtLk53_TRX6hmzJG_Csmh',
       desc: 'Jeweller for Generations',
     },
   ]
