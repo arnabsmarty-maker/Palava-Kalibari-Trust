@@ -325,7 +325,7 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
           <img
             src={IMG.pktLogo}
             alt="Palava Kalibari Trust Logo"
-            className="w-12 h-12 sm:w-14 sm:h-14 object-contain group-hover:scale-105 transition-transform duration-300 rounded-full"
+            className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-contain group-hover:scale-105 transition-transform duration-300 rounded-full shrink-0"
             style={{ mixBlendMode: 'screen' }}
           />
           <span className="leading-tight">
