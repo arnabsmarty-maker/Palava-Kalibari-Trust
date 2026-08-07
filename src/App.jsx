@@ -1954,18 +1954,18 @@ function AboutSection() {
               </div>
             </div>
 
-            {/* Full-Width Edge-to-Edge Maa Kali Image (No Black Side Bars) */}
-            <div className="relative w-full overflow-hidden">
+            {/* 50% Sized Centered Maa Kali Shrine Image Showcase */}
+            <div className="relative w-full max-w-xl md:max-w-2xl mx-auto rounded-2xl border-2 border-gold/50 shadow-2xl overflow-hidden my-4">
               <img
                 src="/maa-kali-sanctuary.jpg"
                 alt="Sacred Maa Kali Shrine Vision - Palava Kalibari Trust"
                 className="w-full h-auto block"
               />
-              <div className="absolute bottom-4 left-5 right-5 flex items-center justify-between z-10">
-                <span className="inline-flex items-center gap-1.5 text-xs font-extrabold text-gold-bright bg-black/85 backdrop-blur border border-gold/50 px-4 py-2 rounded-full shadow-lg">
+              <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between z-10">
+                <span className="inline-flex items-center gap-1.5 text-xs font-extrabold text-gold-bright bg-black/85 backdrop-blur border border-gold/50 px-3.5 py-1.5 rounded-full shadow-lg">
                   <Sparkles className="w-4 h-4 text-gold-bright" /> Sacred Kalibari Shrine Vision
                 </span>
-                <span className="text-xs text-ivory-cream/90 bg-maroon-deep/90 border border-gold/40 px-3.5 py-1.5 rounded-md font-bold shadow">
+                <span className="text-xs text-ivory-cream/90 bg-maroon-deep/90 border border-gold/40 px-3 py-1 rounded-md font-bold shadow">
                   Maa Kali Shrine
                 </span>
               </div>
