@@ -3437,8 +3437,6 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
         </div>
 
       </main>
-
-      <Footer onSponsor={onSponsor} />
     </div>
   )
 }
