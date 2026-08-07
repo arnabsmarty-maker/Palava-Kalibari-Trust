@@ -2665,7 +2665,7 @@ function IdolSponsorSection({ onSponsor }) {
         </>
       ),
       bgImage: IMG.patronSouravGhosh,
-      bgPosition: 'center top',
+      bgPosition: 'center 40%',
       cardImage: IMG.patronSouravGhosh,
       cardLabel: 'Sourav & Adrija Ghosh — Trustee / Entrepreneur',
       pills: [
