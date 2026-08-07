@@ -3111,33 +3111,30 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
           </button>
         </div>
 
-        {/* Glowing 4-Year Page Redirection Switcher */}
-        <div className="p-4 rounded-2xl bg-black/80 backdrop-blur border-2 border-gold/60 shadow-[0_0_25px_rgba(255,215,0,0.5)]">
-          <div className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-2.5 flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-gold-bright" /> Select Event Year:
+        {/* Sleek Top Year Selector with Dropdown */}
+        <div className="p-4 rounded-2xl bg-black/80 backdrop-blur border-2 border-gold/60 shadow-[0_0_25px_rgba(255,215,0,0.5)] flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold px-3.5 py-1.5 rounded-xl text-xs sm:text-sm shadow-md">
+              <CalendarDays className="w-4 h-4" /> Selected Year: {data.year}
+            </span>
+            <span className="text-xs text-ivory-cream/70 hidden sm:inline">
+              Select another year from dropdown:
+            </span>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-            {[
-              { key: '2023-2024', label: '📜 2023–2024' },
-              { key: '2024-2025', label: '📅 2024–2025' },
-              { key: '2025-2026', label: '★ 2025–2026' },
-              { key: '2026-2027', label: '🚀 2026–2027' },
-            ].map((item) => {
-              const active = item.key === yearKey
-              return (
-                <button
-                  key={item.key}
-                  onClick={() => onNavigateYear(item.key)}
-                  className={`py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all text-center ${
-                    active
-                      ? 'bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep shadow-[0_0_20px_rgba(255,215,0,0.85)] scale-[1.03] border-2 border-white/60'
-                      : 'bg-gold/10 border border-gold/30 text-ivory-warm hover:bg-gold hover:text-maroon-deep'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              )
-            })}
+
+          {/* Glowing Dropdown Select Menu */}
+          <div className="relative">
+            <select
+              value={yearKey}
+              onChange={(e) => onNavigateYear(e.target.value)}
+              className="appearance-none bg-gradient-to-r from-[#3a0010] to-[#1f0008] border-2 border-gold/70 text-gold-bright font-extrabold text-xs sm:text-sm px-4 py-2.5 pr-10 rounded-xl cursor-pointer hover:border-gold focus:outline-none shadow-[0_0_18px_rgba(255,215,0,0.6)] transition-all"
+            >
+              <option value="2023-2024" className="bg-maroon-deep text-gold-bright">📜 2023–2024</option>
+              <option value="2024-2025" className="bg-maroon-deep text-gold-bright">📅 2024–2025</option>
+              <option value="2025-2026" className="bg-maroon-deep text-gold-bright">★ 2025–2026</option>
+              <option value="2026-2027" className="bg-maroon-deep text-gold-bright">🚀 2026–2027</option>
+            </select>
+            <ChevronRight className="w-4 h-4 text-gold-bright absolute right-3 top-1/2 -translate-y-1/2 rotate-90 pointer-events-none" />
           </div>
         </div>
 
