@@ -1959,11 +1959,11 @@ function AboutSection() {
               
               {/* Left Side: Maa Kali Shrine Image Showcase */}
               <div className="lg:col-span-5 flex justify-center">
-                <div className="relative w-full max-w-md rounded-2xl border-2 border-gold/50 shadow-2xl overflow-hidden bg-black group">
+                <div className="relative rounded-2xl border-2 border-gold/50 shadow-2xl overflow-hidden group inline-block">
                   <img
                     src="/maa-kali-sanctuary.jpg"
                     alt="Sacred Maa Kali Shrine Vision - Palava Kalibari Trust"
-                    className="w-full h-auto block max-h-[460px] object-contain mx-auto"
+                    className="w-auto h-auto block max-h-[460px] max-w-full object-contain"
                   />
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between z-10">
                     <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-gold-bright bg-black/85 backdrop-blur border border-gold/50 px-3 py-1 rounded-full shadow-lg">
