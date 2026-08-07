@@ -101,6 +101,7 @@ const IMG = {
   sponsorSkylark: '/sponsor-skylark.png', // SkyLark Enterprises logo
   sponsorKangenWater: '/sponsor-kangen-water.png', // Kangen Water Palava logo
   sponsorBharatElectricals: '/sponsor-bharat-electricals.png', // Bharat Electrical Works logo
+  patronSouravGhosh: '/patron-sourav-ghosh.jpg', // Sourav Ghosh (Trustee / Entrepreneur) photo
 }
 
 // Renders the real photo if it exists in /public, otherwise a graceful,
@@ -2289,34 +2290,118 @@ function OurSponsorsSection() {
 }
 
 // ══════════════════════════════════════════════════════════════
-// IDOL SPONSORS
+// IDOL & PATRON SPONSORS (AUTO-CHANGING CAROUSEL)
 // ══════════════════════════════════════════════════════════════
 function IdolSponsorSection() {
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  const patronSlides = [
+    {
+      id: 'anjan-family',
+      badge: 'Official Idol Sponsors',
+      subBadge: 'Palava Kalibari Trust',
+      title: 'Anjan & Divya Dey & Family',
+      description: (
+        <>
+          Palava Kalibari Trust extends its deepest, heartfelt gratitude to{' '}
+          <strong className="text-gold-bright font-semibold">Anjan Dey &amp; Divya Dey and Family</strong> for
+          their immense generosity, devotion, and continuous patronage as the official{' '}
+          <strong className="text-gold-bright font-semibold">Idol Sponsors for both Durga Puja 2025 and Durga Puja 2026</strong>.
+        </>
+      ),
+      bgImage: IMG.durgaIdolPratima,
+      bgPosition: 'center 26%',
+      cardImage: IMG.idolSponsorFamily,
+      cardLabel: 'Anjan & Divya Dey & Family',
+      pills: [
+        { num: '25', text: 'Durga Puja 2025 Idol Sponsor' },
+        { num: '26', text: 'Durga Puja 2026 Idol Sponsor' },
+      ],
+    },
+    {
+      id: 'sourav-ghosh',
+      badge: 'Cover All Weather Support',
+      subBadge: 'Palava Kalibari Trust',
+      title: 'Sourav Ghosh',
+      subtitleTag: 'Trustee / Entrepreneur',
+      description: (
+        <>
+          Palava Kalibari Trust acknowledges and extends heartfelt appreciation to{' '}
+          <strong className="text-gold-bright font-semibold">Sourav Ghosh (Trustee &amp; Entrepreneur)</strong> for providing{' '}
+          <strong className="text-gold-bright font-semibold">Cover All Weather Support</strong> and essential infrastructure, ensuring a safe and seamless celebration.
+        </>
+      ),
+      bgImage: IMG.patronSouravGhosh,
+      bgPosition: 'center top',
+      cardImage: IMG.patronSouravGhosh,
+      cardLabel: 'Sourav Ghosh — Trustee / Entrepreneur',
+      pills: [
+        { num: '★', text: 'Cover All Weather Support' },
+        { num: 'PKT', text: 'Trustee & Entrepreneur' },
+      ],
+    },
+  ]
+
+  useEffect(() => {
+    patronSlides.forEach((slide) => {
+      const img = new Image()
+      img.src = slide.bgImage
+      if (slide.cardImage !== slide.bgImage) {
+        const cardImg = new Image()
+        cardImg.src = slide.cardImage
+      }
+    })
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % patronSlides.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [patronSlides.length])
+
+  const active = patronSlides[currentSlide]
+
   return (
     <section id="idol-sponsors" className="relative min-h-[680px] md:min-h-[780px] overflow-hidden text-ivory-warm bg-black">
-      {/* 1. Full-scale edge-to-edge Durga Maa Pratima photo — object-top ensures Maa Durga's Face & Crown are 100% visible! */}
-      <div className="absolute inset-0 z-0 overflow-hidden flex items-start justify-center bg-black">
-        <img
-          src={IMG.durgaIdolPratima}
-          alt="Sacred Maa Durga Pratima Idol"
-          className="w-full h-full object-cover"
-          style={{ objectPosition: 'center 26%' }}
-        />
+      {/* 1. Full-scale background images (cross-fading) */}
+      <div className="absolute inset-0 z-0 overflow-hidden bg-black">
+        {patronSlides.map((slide, idx) => (
+          <img
+            key={slide.id}
+            src={slide.bgImage}
+            alt={slide.title}
+            loading={idx === 0 ? "eager" : "lazy"}
+            decoding="async"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${
+              idx === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
+            }`}
+            style={{ objectPosition: slide.bgPosition }}
+          />
+        ))}
         {/* Subtle top scrim */}
-        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/70 via-black/30 to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/80 via-black/40 to-transparent pointer-events-none z-10" />
       </div>
 
-      {/* Top Header Badge — subtle top-left pin */}
+      {/* Top Header Badge & Slide Switcher */}
       <div className="relative z-20 max-w-7xl mx-auto w-full px-4 pt-6 flex justify-between items-center">
         <span className="inline-flex items-center gap-2 bg-black/70 border border-gold/50 text-gold-bright font-bold tracking-[0.2em] uppercase text-xs px-4 py-1.5 rounded-full backdrop-blur-md">
-          <Sparkles className="w-4 h-4 text-gold-bright" /> Idol Sponsors
+          <Sparkles className="w-4 h-4 text-gold-bright" /> {active.badge}
         </span>
-        <span className="inline-flex items-center gap-2 text-xs md:text-sm text-gold-bright bg-black/70 px-4 py-1.5 rounded-full backdrop-blur border border-gold/40 font-bold">
-          <Crown className="w-4 h-4 text-gold" /> 2025 &amp; 2026 Patrons
-        </span>
+
+        {/* Slide Indicators / manual switch */}
+        <div className="flex items-center gap-2 bg-black/70 px-3 py-1.5 rounded-full backdrop-blur border border-gold/40">
+          {patronSlides.map((s, idx) => (
+            <button
+              key={s.id}
+              onClick={() => setCurrentSlide(idx)}
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                idx === currentSlide ? 'w-8 bg-gold-bright' : 'w-2.5 bg-white/40 hover:bg-white/70'
+              }`}
+              title={s.title}
+            />
+          ))}
+        </div>
       </div>
 
-      {/* 2. BOTTOM STRIP: Write-ups + Anjan Family Photo (within 40% size) */}
+      {/* 2. BOTTOM STRIP: Dynamic Write-ups + Small Photo Card */}
       <div className="absolute bottom-0 inset-x-0 z-20 bg-gradient-to-t from-[#0d0004] via-[#170007]/95 to-transparent pt-16 pb-8 px-4">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
 
@@ -2324,47 +2409,48 @@ function IdolSponsorSection() {
           <div className="flex-1 min-w-0 space-y-2">
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/20 border border-gold/40 text-gold-bright text-xs font-bold uppercase tracking-wider">
-                <Crown className="w-3.5 h-3.5 text-gold" /> Official Idol Sponsors
+                <Crown className="w-3.5 h-3.5 text-gold" /> {active.badge}
               </span>
-              <span className="text-xs text-ivory-cream/70 font-semibold">• Palava Kalibari Trust</span>
+              <span className="text-xs text-ivory-cream/70 font-semibold">• {active.subBadge}</span>
             </div>
 
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold text-gold-bright drop-shadow-lg">
-              Anjan &amp; Divya Dey &amp; Family
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold text-gold-bright drop-shadow-lg flex items-center justify-center md:justify-start gap-3">
+              {active.title}
+              {active.subtitleTag && (
+                <span className="text-sm font-sans font-medium text-gold/80 bg-black/50 px-3 py-1 rounded-full border border-gold/30">
+                  {active.subtitleTag}
+                </span>
+              )}
             </h2>
 
             <p className="text-xs md:text-base text-ivory-cream/90 line-clamp-3 leading-relaxed max-w-2xl font-light">
-              Palava Kalibari Trust extends its deepest, heartfelt gratitude to <strong className="text-gold-bright font-semibold">Anjan Dey &amp; Divya Dey and Family</strong> for their immense generosity, devotion, and continuous patronage as the official <strong className="text-gold-bright font-semibold">Idol Sponsors for both Durga Puja 2025 and Durga Puja 2026</strong>.
+              {active.description}
             </p>
 
-            <div className="flex items-center justify-center md:justify-start gap-5 pt-2">
-              <div className="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-xl border border-gold/30">
-                <div className="w-7 h-7 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center text-gold-bright font-bold font-display text-xs">
-                  25
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2">
+              {active.pills.map((pill, i) => (
+                <div key={i} className="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-xl border border-gold/30">
+                  <div className="w-7 h-7 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center text-gold-bright font-bold font-display text-xs">
+                    {pill.num}
+                  </div>
+                  <span className="text-xs font-bold text-ivory-warm">{pill.text}</span>
                 </div>
-                <span className="text-xs font-bold text-ivory-warm">Durga Puja 2025 Idol Sponsor</span>
-              </div>
-              <div className="flex items-center gap-2 bg-black/40 px-3 py-1.5 rounded-xl border border-gold/30">
-                <div className="w-7 h-7 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center text-gold-bright font-bold font-display text-xs">
-                  26
-                </div>
-                <span className="text-xs font-bold text-ivory-warm">Durga Puja 2026 Idol Sponsor</span>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Right: Anjan & Family Photo (within 40% size, w-44 h-44 md:w-56 md:h-52) */}
+          {/* Right: Small Photo Card (w-44 h-44 md:w-56 md:h-52) */}
           <div className="shrink-0 relative group">
             <div className="relative p-1.5 rounded-2xl bg-gradient-to-br from-gold-bright via-gold to-gold-deep shadow-2xl border-2 border-amber-300">
               <div className="relative w-44 h-44 md:w-56 md:h-52 rounded-xl overflow-hidden bg-black">
                 <img
-                  src={IMG.idolSponsorFamily}
-                  alt="Anjan & Divya Dey & Family"
+                  src={active.cardImage}
+                  alt={active.cardLabel}
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent p-2 text-center">
                   <span className="text-xs font-bold text-gold-bright flex items-center justify-center gap-1.5">
-                    <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> Anjan &amp; Divya Dey &amp; Family
+                    <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> {active.cardLabel}
                   </span>
                 </div>
               </div>
