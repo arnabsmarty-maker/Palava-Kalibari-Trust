@@ -1932,34 +1932,8 @@ function AboutSection() {
           />
 
           <div className="grid lg:grid-cols-12 gap-8 items-stretch">
-            {/* Story Paragraphs */}
-            <div className="lg:col-span-7 rounded-3xl p-8 bg-black/60 border-2 border-gold/40 shadow-2xl backdrop-blur space-y-5 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center gap-2 text-gold-bright text-xs uppercase font-extrabold tracking-widest mb-3">
-                  <Sparkles className="w-4 h-4 text-gold-bright" /> Our Foundation &amp; Journey
-                </div>
-                <p className="text-sm md:text-base text-ivory-cream/90 font-light leading-relaxed">
-                  <strong className="text-gold-bright font-semibold">Palava Kalibari Trust (PKT)</strong> is the heartfelt vision of a group of spirited Bengalis united by a shared dream — to preserve, celebrate, and pass on the timeless richness of Bengali culture and heritage in its truest form.
-                </p>
-                <p className="text-sm md:text-base text-ivory-cream/85 font-light leading-relaxed mt-4">
-                  In a township like Palava, where many cultural associations thrive, a strong desire emerged for a sacred space that could serve as the spiritual and cultural nucleus for Bengalis — a <strong className="text-gold-bright font-semibold">Kalibari</strong>, the very soul of our traditions. This collective longing brought like-minded residents together, leading to the formation of Palava Kalibari Trust — a community-driven initiative dedicated to upholding our deep-rooted values through festivals, rituals, and cultural celebrations that every Bengali can relate to and take pride in.
-                </p>
-                <p className="text-sm md:text-base text-ivory-cream/85 font-light leading-relaxed mt-4 italic border-l-2 border-gold/50 pl-4 py-1 bg-gold/5 rounded-r-xl">
-                  "Today, PKT is more than just an organization — it's a growing family, committed to upholding our cultural roots through festivals, rituals, and events that every Bengali can connect with. We aim to pass on our legacy with pride, unity, and devotion."
-                </p>
-              </div>
-
-              <div className="pt-4 border-t border-gold/20 flex flex-wrap items-center gap-4 text-xs font-semibold text-gold/90">
-                <span className="flex items-center gap-1.5 bg-maroon-deep/80 border border-gold/40 px-3 py-1.5 rounded-full">
-                  <Landmark className="w-3.5 h-3.5 text-gold-bright" /> Govt Regd Trust: F–8722
-                </span>
-                <span className="flex items-center gap-1.5 bg-maroon-deep/80 border border-gold/40 px-3 py-1.5 rounded-full">
-                  <Users className="w-3.5 h-3.5 text-gold-bright" /> 100% Resident Community-Driven
-                </span>
-              </div>
-            </div>
-
-            {/* Our Vision Box */}
+            
+            {/* LEFT COLUMN: Our Vision Box */}
             <div className="lg:col-span-5 rounded-3xl p-6 md:p-8 bg-gradient-to-b from-[#2a000d] via-[#1a0008] to-[#100005] border-2 border-gold/60 shadow-[0_0_30px_rgba(255,215,0,0.25)] flex flex-col justify-between relative overflow-hidden space-y-5">
               <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
                 <Crown className="w-32 h-32 text-gold" />
@@ -1973,14 +1947,14 @@ function AboutSection() {
                   Establishing a Grand Kalibari &amp; Welfare Initiatives
                 </h3>
 
-                {/* Divine Maa Kali Image Showcase */}
-                <div className="relative rounded-2xl overflow-hidden border-2 border-gold/50 shadow-xl my-4 group h-56 sm:h-64">
+                {/* Divine Maa Kali Image Showcase — Fully Aligned Top View (Face & Crown 100% Unclipped) */}
+                <div className="relative rounded-2xl overflow-hidden border-2 border-gold/50 shadow-xl my-4 group bg-black h-72 sm:h-80 md:h-96">
                   <img
                     src="/maa-kali-sanctuary.jpg"
                     alt="Sacred Maa Kali Shrine Vision - Palava Kalibari Trust"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between z-10">
                     <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-gold-bright bg-black/80 backdrop-blur border border-gold/50 px-3 py-1 rounded-full shadow">
                       <Sparkles className="w-3.5 h-3.5 text-gold-bright" /> Sacred Kalibari Vision
