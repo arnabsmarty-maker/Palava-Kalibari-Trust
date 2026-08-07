@@ -1,0 +1,16 @@
+# Netlify build & deploy configuration for the PKT website (Vite + React).
+# Netlify runs this on every push to the connected branch (main).
+
+[build]
+  command = "npm run build"   # produces the static site in dist/
+  publish = "dist"            # Netlify serves this folder
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Single-page app fallback: send unknown paths to index.html so deep links
+# and refreshes don't 404 (harmless for this hash-navigated site too).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
