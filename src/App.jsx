@@ -3114,7 +3114,7 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
         {/* Glowing 4-Year Page Redirection Switcher */}
         <div className="p-4 rounded-2xl bg-black/80 backdrop-blur border-2 border-gold/60 shadow-[0_0_25px_rgba(255,215,0,0.5)]">
           <div className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-2.5 flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-gold-bright" /> Select Event Year — 70% Photo Showcase &amp; 30% Events View:
+            <Sparkles className="w-4 h-4 text-gold-bright" /> Select Event Year:
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
             {[
@@ -3179,10 +3179,10 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
               <div className="absolute inset-0 bg-gradient-to-t from-[#070002] via-black/40 to-black/30" />
             </div>
 
-            {/* Top Bar inside 70% Canvas */}
+            {/* Top Bar inside Canvas */}
             <div className="relative z-10 p-4 md:p-6 flex items-center justify-between">
               <span className="inline-flex items-center gap-2 bg-black/75 border border-gold/60 text-gold-bright text-xs font-extrabold px-3.5 py-1.5 rounded-full shadow-lg backdrop-blur animate-pulse">
-                <Sparkles className="w-3.5 h-3.5 text-gold-bright" /> Auto-Changing Photo Showcase • {slideIndex + 1} of {slides.length}
+                <Sparkles className="w-3.5 h-3.5 text-gold-bright" /> {data.year} Photo Gallery • {slideIndex + 1} of {slides.length}
               </span>
 
               {/* Pause/Play Button */}
