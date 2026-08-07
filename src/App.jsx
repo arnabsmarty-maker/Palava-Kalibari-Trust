@@ -1072,13 +1072,10 @@ function Field({ label, children }) {
 }
 
 // ══════════════════════════════════════════════════════════════
-// DURGA PUJA NIRGHANTA & EVENT YEAR SECTION
+// DURGA PUJA NIRGHANTA SECTION (MAIN PAGE SCHEDULE)
 // ══════════════════════════════════════════════════════════════
-function DurgaSection({ onOpenYearEvents }) {
-  const [selectedYear, setSelectedYear] = useState('2025-2026')
+function DurgaSection() {
   const [activeNirghanta, setActiveNirghanta] = useState(NIRGHANTA[0].id)
-
-  const currentYearData = YEAR_EVENTS_DATA[selectedYear] || YEAR_EVENTS_DATA['2025-2026']
   const day = NIRGHANTA.find((d) => d.id === activeNirghanta)
 
   return (
@@ -1108,125 +1105,26 @@ function DurgaSection({ onOpenYearEvents }) {
         </div>
       </div>
 
-      {/* ── ZONE 2: Event Year Selection, Write-ups & Schedule Panel ── */}
+      {/* ── ZONE 2: Schedule panel — solid dark background, fully readable ── */}
       <div className="bg-gradient-to-b from-maroon-deep via-[#3a0010] to-[#1a0008]">
         <div className="max-w-5xl mx-auto px-4 pt-10 pb-20">
 
-          {/* Glowing 4-Year Event Selection Bar — Redirects to Full Screen View */}
-          <div className="reveal mb-10 p-5 rounded-2xl bg-black/70 border-2 border-gold/60 shadow-[0_0_25px_rgba(255,215,0,0.5)] max-w-3xl mx-auto text-center">
-            <div className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-3 flex items-center justify-center gap-2">
-              <CalendarDays className="w-4 h-4 text-gold-bright" /> Open Full Screen Downward Event View by Year:
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              {[
-                { key: '2023-2024', label: '📜 2023–2024' },
-                { key: '2024-2025', label: '📅 2024–2025' },
-                { key: '2025-2026', label: '★ 2025–2026' },
-                { key: '2026-2027', label: '🚀 2026–2027' },
-              ].map((item) => {
-                return (
-                  <button
-                    key={item.key}
-                    onClick={() => onOpenYearEvents && onOpenYearEvents(item.key)}
-                    className="py-3 px-2 rounded-xl text-xs sm:text-sm font-extrabold bg-gradient-to-r from-amber-500/20 via-gold/20 to-amber-600/20 border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all shadow-[0_0_15px_rgba(255,215,0,0.6)] animate-pulse"
-                  >
-                    {item.label}
-                  </button>
-                )
-              })}
-            </div>
-          </div>
-
-          {/* Dynamic Year Write-up & Heading */}
+          {/* Section heading */}
           <div className="reveal text-center mb-10">
-            <span className="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 text-gold-bright px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-3">
-              <CalendarDays className="w-3.5 h-3.5" /> Events &amp; Write-ups ({currentYearData.year})
-            </span>
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-ivory-warm leading-tight">
-              {currentYearData.title}
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-ivory-warm leading-tight">
+              Durga Puja 2026
+              <span className="block text-gold-bright text-2xl md:text-3xl mt-1 font-normal tracking-wide">
+                Puja Nirghanta
+              </span>
             </h2>
-            <p className="mt-3 text-ivory-cream/80 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed">
-              {currentYearData.subtitle}
+            <p className="mt-3 text-ivory-cream/65 text-sm tracking-wide">
+              {DURGA_EVENT.dates} &nbsp;•&nbsp; {DURGA_EVENT.location}
             </p>
             <div className="mt-4 mx-auto h-px w-32 bg-gradient-to-r from-transparent via-gold to-transparent" />
           </div>
 
-          {/* Integrated Events Cards Grid for Selected Year */}
-          <div className="reveal grid md:grid-cols-3 gap-6 mb-10">
-            {currentYearData.events.map((ev, idx) => (
-              <div
-                key={idx}
-                className="group flex flex-col rounded-2xl bg-gradient-to-b from-[#25000c] to-[#140006] border-2 border-gold/40 overflow-hidden hover:border-gold hover:scale-[1.02] transition-all duration-300 shadow-xl"
-              >
-                {/* Event Photo */}
-                <div className="relative h-48 w-full overflow-hidden bg-black">
-                  <img
-                    src={ev.image}
-                    alt={ev.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#140006] via-black/20 to-transparent" />
-                  <span className="absolute bottom-2.5 left-3 text-[11px] font-bold text-gold-bright bg-black/70 border border-gold/50 px-2.5 py-0.5 rounded-full">
-                    {ev.date}
-                  </span>
-                </div>
-
-                {/* Event Info */}
-                <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
-                  <div>
-                    <h3 className="font-display font-bold text-base text-ivory-warm leading-snug group-hover:text-gold-bright transition-colors">
-                      {ev.title}
-                    </h3>
-                    <p className="text-[11px] text-gold/80 mt-1 flex items-center gap-1 font-medium">
-                      <MapPin className="w-3 h-3 text-gold shrink-0" /> {ev.venue}
-                    </p>
-                    {ev.description && (
-                      <p className="text-xs text-ivory-cream/85 font-light leading-relaxed mt-2.5 pt-2 border-t border-gold/15 italic">
-                        "{ev.description}"
-                      </p>
-                    )}
-                  </div>
-
-                  <ul className="space-y-1.5 text-xs text-ivory-cream/85 border-t border-gold/20 pt-3">
-                    {ev.highlights.map((h, i) => (
-                      <li key={i} className="flex items-start gap-1.5">
-                        <span className="text-gold shrink-0 mt-0.5">✦</span>
-                        <span className="leading-relaxed">{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Standalone Page Redirect Link CTA */}
-          <div className="reveal text-center mb-14">
-            <button
-              onClick={() => onOpenYearEvents && onOpenYearEvents(selectedYear)}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-gold to-amber-600 text-maroon-deep font-extrabold px-6 py-3 rounded-full shadow-[0_0_20px_rgba(255,215,0,0.8)] hover:scale-105 transition-all text-sm border border-white/50"
-            >
-              <span>Open Dedicated Standalone Page for {currentYearData.year}</span>
-              <ChevronRight className="w-4 h-4 stroke-[3]" />
-            </button>
-          </div>
-
-          {/* ── Durga Puja Nirghanta Schedule Tabs ── */}
-          <div className="reveal border-t border-gold/30 pt-10">
-            <div className="text-center mb-8">
-              <span className="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 text-gold-bright px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
-                <Flame className="w-3.5 h-3.5 text-gold" /> Official Festival Schedule
-              </span>
-              <h3 className="font-display text-3xl font-bold text-ivory-warm mt-2">
-                Durga Puja Nirghanta
-              </h3>
-              <p className="text-xs text-ivory-cream/70 mt-1">
-                {DURGA_EVENT.dates} • {DURGA_EVENT.location}
-              </p>
-            </div>
-
-            {/* Tithi tabs */}
-            <div className="flex flex-wrap justify-center gap-2 mb-8">
+          {/* Tithi tabs */}
+          <div className="reveal flex flex-wrap justify-center gap-2 mb-8">
               {NIRGHANTA.map((d) => {
                 const on = d.id === activeNirghanta
                 return (
@@ -1315,8 +1213,6 @@ function DurgaSection({ onOpenYearEvents }) {
               )}
             </div>
           </div>
-        </div>
-
         </div>
       </div>
     </section>
@@ -3484,7 +3380,7 @@ export default function App() {
       <main>
         <Hero onJoin={goJoin} onSponsor={openSponsor} />
         <IlishSection onBook={setBooking} />
-        <DurgaSection onOpenYearEvents={navigateYearEvents} />
+        <DurgaSection />
         <AnnadanSection />
         <DonationSection />
         <MembershipSection registerJoinRef={joinRef} />
