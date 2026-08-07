@@ -105,7 +105,7 @@ const IMG = {
   sponsorSkylark: '/sponsor-skylark.png', // SkyLark Enterprises logo
   sponsorKangenWater: '/sponsor-kangen-water.png', // Kangen Water Palava logo
   sponsorBharatElectricals: '/sponsor-bharat-electricals.png', // Bharat Electrical Works logo
-  patronSouravGhosh: '/patron-sourav-ghosh.jpg', // Sourav Ghosh (Trustee / Entrepreneur) photo
+  patronSouravGhosh: '/patron-sourav-adrija-ghosh.jpg', // Sourav & Adrija Ghosh photo
 }
 
 // Renders the real photo if it exists in /public, otherwise a graceful,
@@ -2652,14 +2652,36 @@ function IdolSponsorSection({ onSponsor }) {
 
   const patronSlides = [
     {
+      id: 'sourav-ghosh',
+      badge: 'An All weather Friend',
+      subBadge: 'Palava Kalibari Trust',
+      title: 'Sourav & Adrija Ghosh',
+      subtitleTag: 'Trustee / Entrepreneur',
+      description: (
+        <>
+          Palava Kalibari Trust acknowledges and extends heartfelt appreciation to{' '}
+          <strong className="text-gold-bright font-semibold">Sourav &amp; Adrija Ghosh (Trustee &amp; Entrepreneur)</strong> as{' '}
+          <strong className="text-gold-bright font-semibold">An All weather Friend</strong> providing essential infrastructure, ensuring a safe and seamless celebration.
+        </>
+      ),
+      bgImage: IMG.patronSouravGhosh,
+      bgPosition: 'center top',
+      cardImage: IMG.patronSouravGhosh,
+      cardLabel: 'Sourav & Adrija Ghosh — Trustee / Entrepreneur',
+      pills: [
+        { num: '★', text: 'An All weather Friend' },
+        { num: 'PKT', text: 'Trustee & Entrepreneur' },
+      ],
+    },
+    {
       id: 'anjan-family',
       badge: 'Official Idol Sponsors',
       subBadge: 'Palava Kalibari Trust',
-      title: 'Anjan & Divya Dey & Family',
+      title: 'Anjan & Divya Dey',
       description: (
         <>
           Palava Kalibari Trust extends its deepest, heartfelt gratitude to{' '}
-          <strong className="text-gold-bright font-semibold">Anjan Dey &amp; Divya Dey and Family</strong> for
+          <strong className="text-gold-bright font-semibold">Anjan &amp; Divya Dey</strong> for
           their immense generosity, devotion, and continuous patronage as the official{' '}
           <strong className="text-gold-bright font-semibold">Idol Sponsors for both Durga Puja 2025 and Durga Puja 2026</strong>.
         </>
@@ -2667,32 +2689,10 @@ function IdolSponsorSection({ onSponsor }) {
       bgImage: IMG.durgaIdolPratima,
       bgPosition: 'center 26%',
       cardImage: IMG.idolSponsorFamily,
-      cardLabel: 'Anjan & Divya Dey & Family',
+      cardLabel: 'Anjan & Divya Dey',
       pills: [
         { num: '25', text: 'Durga Puja 2025 Idol Sponsor' },
         { num: '26', text: 'Durga Puja 2026 Idol Sponsor' },
-      ],
-    },
-    {
-      id: 'sourav-ghosh',
-      badge: 'Cover All Weather Support',
-      subBadge: 'Palava Kalibari Trust',
-      title: 'Sourav Ghosh',
-      subtitleTag: 'Trustee / Entrepreneur',
-      description: (
-        <>
-          Palava Kalibari Trust acknowledges and extends heartfelt appreciation to{' '}
-          <strong className="text-gold-bright font-semibold">Sourav Ghosh (Trustee &amp; Entrepreneur)</strong> for providing{' '}
-          <strong className="text-gold-bright font-semibold">Cover All Weather Support</strong> and essential infrastructure, ensuring a safe and seamless celebration.
-        </>
-      ),
-      bgImage: IMG.patronSouravGhosh,
-      bgPosition: 'center top',
-      cardImage: IMG.patronSouravGhosh,
-      cardLabel: 'Sourav Ghosh — Trustee / Entrepreneur',
-      pills: [
-        { num: '★', text: 'Cover All Weather Support' },
-        { num: 'PKT', text: 'Trustee & Entrepreneur' },
       ],
     },
   ]
@@ -3206,10 +3206,10 @@ const YEAR_EVENTS_DATA = {
         date: 'October 16 – 20, 2026',
         venue: 'Gate No. 2, Lodha Palava Phase 2',
         image: '/durga-idol-pratima.jpg',
-        description: 'The pinnacle 5-day cultural extravaganza celebrating Durga Puja 2026 with sponsored Maa Durga Pratima idol, Cover All Weather Support by Sourav Ghosh, 1,000+ daily Annadan Seba, and mega stage performances.',
+        description: 'The pinnacle 5-day cultural extravaganza celebrating Durga Puja 2026 with sponsored Maa Durga Pratima idol, An All weather Friend support by Sourav & Adrija Ghosh, 1,000+ daily Annadan Seba, and mega stage performances.',
         highlights: [
           '10,000+ expected visitors across 5 festive days',
-          'Cover All Weather Support by Sourav Ghosh & Sponsored Durga Idol',
+          'An All weather Friend support by Sourav & Adrija Ghosh & Sponsored Durga Idol',
           'Platinum, Gold & Silver brand partnerships & 1,000+ daily Annadan Seba',
         ],
       },
