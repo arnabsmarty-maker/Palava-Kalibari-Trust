@@ -1894,6 +1894,17 @@ function AboutSection() {
     { name: 'Indranil Mukherjee', title: 'Trustee', image: '/trustee-indranil.jpg' },
   ]
 
+  const managingCommittee = [
+    { name: 'Rajat Sain', title: 'Managing Committee', image: '/mc-rajat.jpg' },
+    { name: 'Debashish Bhattacharjee', title: 'Managing Committee', image: '/mc-debashish.jpg' },
+    { name: 'Saikat Basak', title: 'Managing Committee', image: '/mc-saikat.jpg' },
+    { name: 'Sinchita Mukherjee', title: 'Managing Committee', image: '/mc-sinchita.jpg' },
+    { name: 'Arnab Mukherjee', title: 'Managing Committee', image: '/mc-arnab.jpg' },
+    { name: 'Abhijit Banerjee', title: 'Managing Committee', image: '/mc-abhijit.jpg' },
+    { name: 'Soumyajit Chowdhury', title: 'Managing Committee', image: '/mc-soumyajit.jpg' },
+    { name: 'Anup Duari', title: 'Managing Committee', image: '/mc-anup.jpg' },
+  ]
+
   useEffect(() => {
     slides.forEach((s) => {
       const img = new Image()
@@ -2015,6 +2026,45 @@ function AboutSection() {
                   </h4>
                   <span className="inline-block mt-1 text-[11px] font-semibold text-ivory-cream/70 bg-gold/10 border border-gold/30 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
                     {t.title}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── OUR MANAGING COMMITTEE SHOWCASE ── */}
+        <div className="reveal space-y-8 pt-6 border-t border-gold/20">
+          <div className="text-center max-w-3xl mx-auto">
+            <span className="inline-flex items-center gap-2 text-gold-deep font-semibold tracking-[0.25em] uppercase text-xs">
+              <Users className="w-4 h-4" /> Operational Leadership &amp; Execution
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-gold-bright mt-2">
+              Our Managing Committee
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mt-4" />
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3.5 md:gap-5">
+            {managingCommittee.map((mc, idx) => (
+              <div
+                key={idx}
+                className="group rounded-2xl bg-black/70 border-2 border-gold/40 hover:border-gold p-3 text-center transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(255,215,0,0.4)] flex flex-col items-center justify-between"
+              >
+                <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-xl overflow-hidden border-2 border-gold/50 shadow-md mb-2.5 group-hover:border-gold transition-colors relative bg-maroon-deep">
+                  <img
+                    src={mc.image}
+                    alt={mc.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <div>
+                  <h4 className="font-display font-bold text-xs sm:text-sm text-gold-bright leading-tight group-hover:text-amber-300 transition-colors">
+                    {mc.name}
+                  </h4>
+                  <span className="inline-block mt-1 text-[10px] font-semibold text-ivory-cream/70 bg-gold/10 border border-gold/30 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                    {mc.title}
                   </span>
                 </div>
               </div>
