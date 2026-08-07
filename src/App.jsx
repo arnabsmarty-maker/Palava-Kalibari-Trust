@@ -1954,18 +1954,18 @@ function AboutSection() {
               </div>
             </div>
 
-            {/* 50% Sized Centered Maa Kali Shrine Image Showcase */}
-            <div className="relative w-full max-w-xl md:max-w-2xl mx-auto rounded-2xl border-2 border-gold/50 shadow-2xl overflow-hidden my-4">
+            {/* Compact Sized Centered Maa Kali Shrine Image Showcase (30% smaller, full screen layout) */}
+            <div className="relative w-full max-w-md sm:max-w-lg mx-auto rounded-2xl border-2 border-gold/50 shadow-2xl overflow-hidden my-3">
               <img
                 src="/maa-kali-sanctuary.jpg"
                 alt="Sacred Maa Kali Shrine Vision - Palava Kalibari Trust"
-                className="w-full h-auto block"
+                className="w-full h-auto block max-h-[380px] object-cover object-top"
               />
-              <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between z-10">
-                <span className="inline-flex items-center gap-1.5 text-xs font-extrabold text-gold-bright bg-black/85 backdrop-blur border border-gold/50 px-3.5 py-1.5 rounded-full shadow-lg">
-                  <Sparkles className="w-4 h-4 text-gold-bright" /> Sacred Kalibari Shrine Vision
+              <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between z-10">
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-gold-bright bg-black/85 backdrop-blur border border-gold/50 px-3 py-1 rounded-full shadow-lg">
+                  <Sparkles className="w-3.5 h-3.5 text-gold-bright" /> Sacred Kalibari Vision
                 </span>
-                <span className="text-xs text-ivory-cream/90 bg-maroon-deep/90 border border-gold/40 px-3 py-1 rounded-md font-bold shadow">
+                <span className="text-[10px] text-ivory-cream/90 bg-maroon-deep/90 border border-gold/40 px-2.5 py-0.5 rounded-md font-bold shadow">
                   Maa Kali Shrine
                 </span>
               </div>
