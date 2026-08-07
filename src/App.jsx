@@ -322,12 +322,25 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
       <div className="max-w-7xl mx-auto px-3 sm:px-4 flex items-center justify-between gap-2 sm:gap-4">
         {/* Logo & Brand Title */}
         <a href="#home" className="flex items-center gap-2 group shrink-0">
-          <img
-            src={IMG.pktLogo}
-            alt="Palava Kalibari Trust Logo"
-            className="w-12 h-12 sm:w-14 sm:h-14 object-contain group-hover:scale-105 transition-transform duration-300"
+          <div
+            className="relative w-12 h-12 sm:w-14 sm:h-14 group-hover:scale-105 transition-transform duration-300 rounded-full overflow-hidden"
             style={{ mixBlendMode: 'screen' }}
-          />
+          >
+            {/* Outer Rotating Ring */}
+            <img
+              src={IMG.pktLogo}
+              alt=""
+              className="absolute inset-0 w-full h-full object-contain animate-[spin_12s_linear_infinite]"
+            />
+            {/* Inner Static Face & Text */}
+            <div className="absolute inset-0 flex items-center justify-center" style={{ clipPath: 'circle(39% at 50% 50%)' }}>
+              <img
+                src={IMG.pktLogo}
+                alt="Palava Kalibari Trust Logo"
+                className="w-full h-full object-contain"
+              />
+            </div>
+          </div>
           <span className="leading-tight">
             <span className="block font-display text-gold-bright font-bold text-sm sm:text-base lg:text-lg tracking-wide whitespace-nowrap">
               Palava Kalibari Trust
