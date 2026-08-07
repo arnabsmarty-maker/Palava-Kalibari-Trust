@@ -1183,6 +1183,11 @@ function DurgaSection({ onOpenYearEvents }) {
                     <p className="text-[11px] text-gold/80 mt-1 flex items-center gap-1 font-medium">
                       <MapPin className="w-3 h-3 text-gold shrink-0" /> {ev.venue}
                     </p>
+                    {ev.description && (
+                      <p className="text-xs text-ivory-cream/85 font-light leading-relaxed mt-2.5 pt-2 border-t border-gold/15 italic">
+                        "{ev.description}"
+                      </p>
+                    )}
                   </div>
 
                   <ul className="space-y-1.5 text-xs text-ivory-cream/85 border-t border-gold/20 pt-3">
@@ -2950,39 +2955,19 @@ Thank you!`
 const YEAR_EVENTS_DATA = {
   '2023-2024': {
     year: '2023–2024',
-    title: 'Inaugural Events & Foundation Year (2023–2024)',
-    subtitle: 'The foundational journey of Palava Kalibari Trust & community formation',
+    title: 'Events & Celebrations (2023–2024)',
+    subtitle: 'Celebrating faith, culture, and our inaugural gatherings in Palava',
     events: [
       {
-        title: 'Palava Kalibari Trust Foundation & Community Meetup',
-        date: 'November 2023',
-        venue: 'Palava Phase 2 Community Center',
-        image: '/about-trust-reg.jpg',
-        highlights: [
-          'First formal assembly of resident Bengali families in Palava',
-          'Initiation of official Public Trust registration under Govt. of Maharashtra (Reg: F-8722)',
-          'Establishment of founding Trustee Committee',
-        ],
-      },
-      {
-        title: 'Inaugural Saraswati Puja 2024',
-        date: 'February 14, 2024',
-        venue: 'Palava Phase 2 Club House Ground',
+        title: 'Saraswati Pujo 2023–2024',
+        date: 'February 2024',
+        venue: 'Palava Kalibari Grounds',
         image: '/about-saraswati-puja.jpg',
+        description: 'As the gentle strains of devotion filled the air, Saraswati Pujo celebrated the goddess of wisdom, learning, and art. Dressed in hues of spring and adorned with flowers, PKT members came together to seek her blessings for knowledge and inspiration. The festival wove together faith, culture, and joy, creating cherished moments that honored both heritage and the pursuit of enlightenment.',
         highlights: [
-          'Inaugural Saraswati Puja pushpanjali & bhog prasad',
-          'Kids Sit & Draw competition & Hathe Khori ceremony',
-          'Cultural music & Rabindra Sangeet performances',
-        ],
-      },
-      {
-        title: 'Poila Boishakh 1431 (Bengali New Year 2024)',
-        date: 'April 14, 2024',
-        venue: 'Palava Community Pavilion',
-        image: '/about-organizers-duo.jpg',
-        highlights: [
-          'Noboborsho community feast & traditional sweet distribution',
-          'Prabhat Pheri & cultural evening by resident artists',
+          'Pushpanjali & Haate Khori for children seeking Maa Saraswati blessings',
+          'Vibrant spring attire, traditional decorations & prasad distribution',
+          'Cultural music, rabindra sangeet & community togetherness',
         ],
       },
     ],
@@ -2990,37 +2975,72 @@ const YEAR_EVENTS_DATA = {
   '2024-2025': {
     year: '2024–2025',
     title: 'Events & Celebrations (2024–2025)',
-    subtitle: 'Reliving our inaugural grand Durga Puja celebrations and cultural milestones',
+    subtitle: 'A vibrant year of festivals, culinary heritage, Durga Pujo & community picnic',
     events: [
       {
-        title: 'Durga Utsav 2024 Pandal Celebration',
-        date: 'October 8 – 12, 2024',
+        title: 'Poila Boishakh 2024–2025',
+        date: 'April 2024',
+        venue: 'Palava Community Pavilion',
+        image: '/about-organizers-duo.jpg',
+        description: 'With hearts adorned in festive cheer and the promise of new beginnings, Poila Boishakh arrived like a vibrant song of spring. The air blossomed with laughter, melodies, and warm wishes as families and communities came together to celebrate Bengal’s rich heritage. The festival filled every heart with joy, hope, and the spirit of togetherness.',
+        highlights: [
+          'Welcoming the Bengali New Year with traditional attire & music',
+          'Cultural evening, Noboborsho feast & community meet-and-greet',
+        ],
+      },
+      {
+        title: 'Ilish Utsav 2024–2025',
+        date: 'August 2024',
+        venue: 'Palava Kalibari Hall',
+        image: '/annadan-plate.jpg',
+        description: 'At Ilish Utsav, the silver queen of Bengal took center stage, delighting hearts and palates alike. The aroma of traditional delicacies, laughter, and shared memories filled the air, celebrating a timeless bond with Bengal’s culinary heritage. A festival of flavors, tradition, and togetherness, it was pure joy served on a plate.',
+        highlights: [
+          'Celebration of Bengal’s culinary silver queen',
+          'Traditional Hilsa preparations served fresh to resident families',
+        ],
+      },
+      {
+        title: 'Durga Pujo 2024–2025',
+        date: 'October 2024',
         venue: 'Gate No. 2, Lodha Palava Phase 2',
         image: '/about-durgotsav-2024-women.jpg',
+        description: 'As the dhak beats echoed and vibrant pandal lit up the autumn sky, Durga Pujo brought together devotion, culture, and celebration. Filled with adda, laughter, and cherished traditions, it was a joyous tribute to Bengal’s spirit.',
         highlights: [
-          'Inaugural grand Durga Puja under Palava Kalibari Trust (Reg: F-8722)',
-          'Over 3,000 residents participated across 5 festive days',
-          'Daily Bhog Prasad distribution & Dhunuchi Naach evening',
+          'Grand Pandal illumination, sacred pushpanjali & dhak beats',
+          'Daily Bhog Prasad, adda sessions & evening cultural stage',
         ],
       },
       {
-        title: 'Kojagari Lakshmi Puja & Shyama Puja 2024',
-        date: 'October 16 & October 31, 2024',
-        venue: 'Palava Kalibari Pandal Ground',
+        title: 'Kali Pujo 2024–2025',
+        date: 'November 2024',
+        venue: 'Palava Kalibari Grounds',
         image: '/about-trust-reg.jpg',
+        description: 'Beneath a sky glowing with lamps and hope, the first Kali Pujo of PKT unfolded in sacred splendor. Amid chants, devotion, and festive gatherings, hearts united to seek Maa Kali’s divine blessings.',
         highlights: [
-          'Sacred Lakshmi Puja pushpanjali & alpana competition',
-          'Diwali Shyama Puja midnight rituals & traditional bhog',
+          'First official Kali Pujo of PKT in sacred splendor',
+          'Diwali illumination, midnight mantras & community offerings',
         ],
       },
       {
-        title: 'Saraswati Puja 2025 & Youth Talent Awards',
-        date: 'February 2, 2025',
+        title: 'Annual Picnic 2024–2025',
+        date: 'December 2024',
+        venue: 'Palava Outing Grounds',
+        image: '/about-women-team.jpg',
+        description: 'The Annual Picnic brought everyone together for a day of joy, laughter, and camaraderie. Amid games, conversations, and shared experiences, it created cherished memories and strengthened the bonds that make our community special.',
+        highlights: [
+          'Day of fun, games, delicious food & outdoor activities',
+          'Strengthening resident community bonds and friendships',
+        ],
+      },
+      {
+        title: 'Saraswati Pujo 2024–2025',
+        date: 'February 2025',
         venue: 'Palava Kalibari Auditorium',
         image: '/about-saraswati-puja.jpg',
+        description: 'With joyful hearts and festive cheer, Saraswati Pujo was celebrated with prayers, vibrant cultural performances, and music. Communities came together to seek blessings for wisdom and inspiration while honoring Bengal’s rich traditions. The celebration beautifully blended faith, culture, and joy, creating cherished memories for all.',
         highlights: [
-          'Vasant Panchami pushpanjali & kids hathe khori ceremony',
-          'Fostering youth excellence & stage performances',
+          'Vasant Panchami pushpanjali, youth music & dance gala',
+          'Celebrating wisdom, art & Bengal’s rich cultural heritage',
         ],
       },
     ],
@@ -3028,36 +3048,72 @@ const YEAR_EVENTS_DATA = {
   '2025-2026': {
     year: '2025–2026',
     title: 'Events & Celebrations (2025–2026)',
-    subtitle: 'Current active year featuring Ilish Utsav, Durga Puja 2025 & monsoon festivities',
+    subtitle: 'Current active year featuring Ilish Utsav, 800+ Annadan Durga Pujo & Kali Pujo',
     events: [
       {
-        title: 'Ilish Utsav 2025 (Monsoon Hilsa Feast)',
-        date: 'August 15 – 17, 2025',
+        title: 'Poila Baishakh 2025–2026',
+        date: 'April 2025',
+        venue: 'Palava Kalibari Grounds',
+        image: '/about-organizers-duo.jpg',
+        description: 'With hearts blooming in festive cheer, Poila Boishakh arrived like a joyful melody of spring. Laughter, music, and warm wishes filled the air as loved ones came together, celebrating Bengal’s rich heritage with hope, happiness, and the promise of new beginnings.',
+        highlights: [
+          'Noboborsho spring melodies, traditional attire & feast',
+        ],
+      },
+      {
+        title: 'Ilish Utsav 2025–2026',
+        date: 'August 2025',
         venue: 'Grand Pandal Hall, Lodha Palava Phase 2',
         image: '/annadan-plate.jpg',
+        description: 'At Ilish Utsav, the iconic flavours of Hilsa came alive in a delightful celebration of taste and tradition. From the golden crispness of Ilish Bhaja and the mustard-rich Sorshe Ilish to aromatic Ilish Paturi and delicate Bhapa Ilish, every preparation celebrated Bengal’s timeless culinary heritage. A joyful feast where flavours, memories, and togetherness came beautifully alive.',
         highlights: [
-          'Authentic Padma & Rupnarayan Ilish platters served fresh',
-          'Shorishe Ilish, Ilish Bhapa & Ilish Paturi delicacies',
+          'Golden Ilish Bhaja, mustard Sorshe Ilish, Ilish Paturi & Bhapa Ilish',
+          'Authentic Hilsa feast celebrating culinary heritage',
         ],
       },
       {
-        title: 'Durga Puja 2025 (Maha Shashti to Dashami)',
-        date: 'September 28 – October 2, 2025',
+        title: 'Durga Pujo 2025–2026',
+        date: 'September – October 2025',
         venue: 'Gate No. 2, Lodha Palava Phase 2',
         image: '/durga-idol-pratima.jpg',
+        description: 'Durga Pujo came alive with festive splendour, devotion, and joyful togetherness. From annadaan catering to 800+ people, vibrant cultural programs, Dhunochi Naach, dance and musical performances to an enchanting magic show, every moment added colour and cheer to the celebration, beautifully capturing the spirit of Bengal.',
         highlights: [
-          'Sacred Maa Durga Idol Pratima sponsored by Anjan & Divya Dey & Family',
-          'Live LED screen broadcasting & daily Annadan Seba (800+ fed daily)',
-          'Grand Sindoor Khela & Vijaya Dashami cultural night',
+          'Annadan Seba catering to 800+ resident visitors daily',
+          'Sponsored Maa Durga Pratima (Anjan & Divya Dey)',
+          'Dhunochi Naach, magic show & live musical performances',
         ],
       },
       {
-        title: 'Kali Puja & Diwali Utsav 2025',
-        date: 'October 20, 2025',
+        title: 'Kali Pujo 2025–2026',
+        date: 'October 2025',
         venue: 'Palava Kalibari Grounds',
         image: '/about-men-team.jpg',
+        description: 'Kali Pujo unfolded in an aura of devotion and festive radiance, with red hibiscus flowers, soulful mantra chanting, and glowing rows of oil lamps illuminating the celebrations. From the sacred offering of bhog to the heartfelt Bisarjan, every moment beautifully reflected faith, tradition, and togetherness.',
         highlights: [
-          'Shyama Puja illumination & community feast',
+          'Red hibiscus offerings, oil lamp illumination & mantra chanting',
+          'Sacred bhog distribution and heartfelt Bisarjan ceremony',
+        ],
+      },
+      {
+        title: 'Annual Picnic 2025–2026',
+        date: 'December 2025',
+        venue: 'Palava Resort & Swimming Pool Grounds',
+        image: '/about-collage-happiness.jpg',
+        description: 'The Annual Picnic was a delightful day of laughter, relaxation, and togetherness at a wonderful venue. With delicious food, exciting activities and games, refreshing moments by the swimming pool, and the cheerful company of friends and family, it was a perfect blend of fun and fond memories.',
+        highlights: [
+          'Fun resort outing with swimming pool games & activities',
+          'Delicious community food & cherished memories with family',
+        ],
+      },
+      {
+        title: 'Saraswati Pujo 2025–2026',
+        date: 'February 2026',
+        venue: 'Palava Kalibari Auditorium',
+        image: '/about-saraswati-puja.jpg',
+        description: 'Saraswati Pujo, celebrated on the auspicious occasion of Vasant Panchami, filled the day with devotion and the vibrant hues of yellow. From Haate Khori, placing books before the Goddess, bhog, and cultural performances to heartfelt wishes for the community’s board exam students, the celebration beautifully honoured knowledge, learning, and new beginnings.',
+        highlights: [
+          'Vasant Panchami yellow theme, Haate Khori & placing books at deity feet',
+          'Special blessings & wishes for board exam students & kids',
         ],
       },
     ],
@@ -3065,36 +3121,40 @@ const YEAR_EVENTS_DATA = {
   '2026-2027': {
     year: '2026–2027',
     title: 'Events & Celebrations (2026–2027)',
-    subtitle: 'Upcoming flagship festival line-up & Durga Puja 2026 mega celebrations',
+    subtitle: 'Upcoming flagship festival line-up, Poila Boishakh, Rabindra Nazrul Jayanti & Durga Pujo 2026',
     events: [
       {
-        title: 'Poila Boishakh 1433 (Bengali New Year 2026)',
-        date: 'April 15, 2026',
+        title: 'Poila Boishakh 2026–2027',
+        date: 'April 2026',
         venue: 'Palava Kalibari Cultural Hall',
         image: '/about-organizers-duo.jpg',
+        description: 'Poila Boishakh welcomed the Bengali New Year with festive cheer, authentic Bengali cuisine, and joyful get-togethers in traditional attire. The celebrations came alive with Bengali folk music and soulful poetry recitations, beautifully capturing the warmth, culture, and spirit of Bengal.',
         highlights: [
-          'Prabhat Pheri, Noboborsho bhog & cultural music gala',
+          'Authentic Bengali cuisine, traditional attire & Noboborsho meetup',
+          'Bengali folk music & soulful poetry recitations',
         ],
       },
       {
-        title: 'Durga Puja 2026 Mega Festival',
-        date: 'October 16 – 20, 2026',
-        venue: 'Main Pandal Grounds, Gate No. 2, Lodha Palava Phase 2',
-        image: '/durga-idol-pratima.jpg',
-        highlights: [
-          'Pinnacle 5-day cultural extravaganza with 10,000+ expected visitors',
-          'Sponsored Maa Durga Pratima idol & Cover All Weather Support by Sourav Ghosh',
-          'Platinum, Gold & Silver corporate brand partnerships',
-          '1,000+ daily Annadan Seba distribution',
-        ],
-      },
-      {
-        title: 'Saraswati Puja 2027',
-        date: 'February 11, 2027',
+        title: 'Rabindra Nazrul Jayanti 2026–2027',
+        date: 'May 2026',
         venue: 'Palava Kalibari Auditorium',
-        image: '/about-saraswati-puja.jpg',
+        image: '/about-dancers.jpg',
+        description: 'Rabindra Nazrul Jayanti was a vibrant cultural celebration honouring the birth anniversaries of Bengal’s literary and musical icons, Gurudev Rabindranath Tagore and Rebel Poet Kazi Nazrul Islam. Soulful musical performances, graceful dances, delicious food, and warm meet-and-greets brought everyone together in a joyful tribute to their timeless legacy.',
         highlights: [
-          '4th Annual Youth Excellence Awards & Sit & Draw contest',
+          'Tribute to Gurudev Rabindranath Tagore & Kazi Nazrul Islam',
+          'Classical dances, musical recitals & community food meet',
+        ],
+      },
+      {
+        title: 'Durga Pujo 2026–2027',
+        date: 'October 16 – 20, 2026',
+        venue: 'Gate No. 2, Lodha Palava Phase 2',
+        image: '/durga-idol-pratima.jpg',
+        description: 'The pinnacle 5-day cultural extravaganza celebrating Durga Puja 2026 with sponsored Maa Durga Pratima idol, Cover All Weather Support by Sourav Ghosh, 1,000+ daily Annadan Seba, and mega stage performances.',
+        highlights: [
+          '10,000+ expected visitors across 5 festive days',
+          'Cover All Weather Support by Sourav Ghosh & Sponsored Durga Idol',
+          'Platinum, Gold & Silver brand partnerships & 1,000+ daily Annadan Seba',
         ],
       },
     ],
@@ -3216,6 +3276,11 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
                     <p className="text-xs text-gold/80 mt-2 flex items-center gap-1.5 font-medium">
                       <MapPin className="w-3.5 h-3.5 text-gold shrink-0" /> {ev.venue}
                     </p>
+                    {ev.description && (
+                      <p className="text-xs text-ivory-cream/90 font-light leading-relaxed mt-3 pt-3 border-t border-gold/20 italic">
+                        "{ev.description}"
+                      </p>
+                    )}
                   </div>
 
                   <ul className="space-y-2 text-xs text-ivory-cream/85 border-t border-gold/20 pt-4">
