@@ -3035,19 +3035,63 @@ Thank you!`
 const YEAR_EVENTS_DATA = {
   '2023-2024': {
     year: '2023–2024',
-    title: 'Events & Celebrations (2023–2024)',
-    subtitle: 'Celebrating faith, culture, and our inaugural gatherings in Palava',
+    title: 'Saraswati Pujo & Inaugural Events (2023–2024)',
+    subtitle: 'Celebrating faith, wisdom, and our inaugural Saraswati Pujo in Palava',
     events: [
       {
-        title: 'Saraswati Pujo 2023–2024',
+        title: 'Sacred Maa Saraswati Pratima',
         date: 'February 2024',
         venue: 'Palava Kalibari Grounds',
-        image: '/about-saraswati-puja.jpg',
-        description: 'As the gentle strains of devotion filled the air, Saraswati Pujo celebrated the goddess of wisdom, learning, and art. Dressed in hues of spring and adorned with flowers, PKT members came together to seek her blessings for knowledge and inspiration. The festival wove together faith, culture, and joy, creating cherished moments that honored both heritage and the pursuit of enlightenment.',
+        image: '/saraswati-2024-idol.jpg',
+        description: 'Maa Saraswati Pratima lovingly decorated with yellow marigold garlands, sacred scriptures, and traditional hand-drawn artwork for the inaugural Saraswati Pujo 2023–2024.',
         highlights: [
-          'Pushpanjali & Haate Khori for children seeking Maa Saraswati blessings',
-          'Vibrant spring attire, traditional decorations & prasad distribution',
-          'Cultural music, rabindra sangeet & community togetherness',
+          'Sacred Maa Saraswati Pratima & traditional alpona backdrop',
+          'Yellow marigold garlands, sacred Veena & book offerings',
+          'Inaugural Saraswati Pujo celebration of PKT',
+        ],
+      },
+      {
+        title: 'Youth & Children’s Garland Seba',
+        date: 'February 2024',
+        venue: 'Palava Kalibari Grounds',
+        image: '/saraswati-2024-girls.jpg',
+        description: 'Young resident children of Palava enthusiastically preparing fresh marigold garlands and sacred offerings for Maa Saraswati.',
+        highlights: [
+          'Active youth & children participation in puja preparations',
+          'Handcrafted marigold garlands & devotional service',
+        ],
+      },
+      {
+        title: 'Women’s Bhog & Prasad Preparation',
+        date: 'February 2024',
+        venue: 'Palava Kalibari Grounds',
+        image: '/saraswati-2024-prasad-prep.jpg',
+        description: 'Devoted women members of Palava Kalibari Trust carefully preparing fresh fruits, sweets, and bhog prasad offerings for Goddess Saraswati.',
+        highlights: [
+          'Devotional women members preparing sacred bhog & fruit platters',
+          'Community prasad distribution to all resident families',
+        ],
+      },
+      {
+        title: 'Sacred Rituals & Community Devotion',
+        date: 'February 2024',
+        venue: 'Palava Kalibari Grounds',
+        image: '/saraswati-2024-puja-gathering.jpg',
+        description: 'Priest leading sacred Saraswati Puja rituals surrounded by resident families in traditional yellow festive attire seeking divine blessings for wisdom and art.',
+        highlights: [
+          'Sacred Vedic mantras, haate khori & pushpanjali',
+          'Traditional Basanti yellow attire & community devotion',
+        ],
+      },
+      {
+        title: 'PKT Women Organisers & Devotees Gathering',
+        date: 'February 2024',
+        venue: 'Palava Kalibari Grounds',
+        image: '/saraswati-2024-women-group.jpg',
+        description: 'Vibrant group photo of Palava Kalibari Trust women organizers and members celebrating the joy and success of Saraswati Pujo 2023–2024.',
+        highlights: [
+          'Festive warmth, smiles & community togetherness',
+          'PKT women members in traditional yellow & orange sarees',
         ],
       },
     ],
