@@ -1957,6 +1957,9 @@ function AboutSection() {
     { name: 'Abhijit Banerjee', title: 'Managing Committee', image: '/mc-abhijit.jpg' },
     { name: 'Soumyajit Chowdhury', title: 'Managing Committee', image: '/mc-soumyajit.jpg' },
     { name: 'Anup Duari', title: 'Managing Committee', image: '/mc-anup.jpg' },
+    { name: 'Pritam Roy', title: 'Managing Committee', image: '/mc-pritam.jpg' },
+    { name: 'Subhaasish Bhattacharya', title: 'Managing Committee', image: '/mc-subhaasish.jpg' },
+    { name: 'Sukanto Pal', title: 'Managing Committee', image: '/mc-sukanto.png' },
   ]
 
   useEffect(() => {
