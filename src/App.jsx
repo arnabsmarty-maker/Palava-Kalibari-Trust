@@ -2122,7 +2122,7 @@ function AboutSection() {
         </div>
 
         {/* ── PKT COMMUNITY PHOTO SHOWCASE CAROUSEL ── */}
-        <div className="reveal rounded-3xl overflow-hidden border-2 border-gold/50 shadow-[0_0_35px_rgba(255,215,0,0.25)] relative h-[380px] md:h-[480px]">
+        <div className="reveal rounded-3xl overflow-hidden border-2 border-gold/50 shadow-[0_0_35px_rgba(255,215,0,0.25)] relative h-[520px] sm:h-[620px] md:h-[720px] lg:h-[760px]">
           {slides.map((slide, idx) => (
             <img
               key={idx}
@@ -2132,7 +2132,7 @@ function AboutSection() {
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-out ${
                 idx === currentImg ? 'opacity-100 scale-105' : 'opacity-0 scale-100 pointer-events-none'
               }`}
-              style={{ transitionProperty: 'opacity, transform' }}
+              style={{ transitionProperty: 'opacity, transform', objectPosition: slide.objectPosition || 'center top' }}
             />
           ))}
 
