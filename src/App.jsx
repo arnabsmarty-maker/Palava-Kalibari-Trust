@@ -3117,7 +3117,7 @@ const YEAR_EVENTS_DATA = {
   '2024-2025': {
     year: '2024–2025',
     title: 'Events & Celebrations (2024–2025)',
-    subtitle: 'A vibrant year of 5 flagship events: Poila Boishakh, Ilish Utsav, Durga Pujo, Kali Pujo & Annual Picnic',
+    subtitle: 'A vibrant year of 6 flagship events: Poila Boishakh, Ilish Utsav, Durga Pujo, Kali Pujo, Annual Picnic & Saraswati Pujo',
     events: [
       {
         title: 'Poila Boishakh 2024–2025',
@@ -3314,6 +3314,44 @@ const YEAR_EVENTS_DATA = {
             objectPosition: 'center',
             title: 'Annual Picnic 2024–25 • Delicious Picnic Thali',
             description: 'A mouthwatering picnic thali with rice, dal, sabzi, rolls, gulab jamun, and salad — the perfect outdoor feast.',
+          },
+        ],
+      },
+      {
+        title: 'Saraswati Pujo 2024–2025',
+        date: 'February 2, 2025',
+        venue: 'Palava Kalibari Grounds',
+        image: '/saraswati-2024-group.jpg',
+        description: 'Celebrating wisdom, knowledge, and arts on Vasant Panchami, Saraswati Pujo brought together the PKT community for sacred pushpanjali, cultural performances, and traditional community dining.',
+        highlights: [
+          'Vasant Panchami Pushpanjali & worship of Goddess Saraswati',
+          'Haate Khori for children, talent showcase & certificate distribution',
+          'Traditional community bhog distribution and group celebration',
+        ],
+        gallery: [
+          {
+            image: '/saraswati-2024-preps.jpg',
+            objectPosition: 'center 40%',
+            title: 'Saraswati Pujo 2024–25 • Sacred Puja Offerings',
+            description: 'Devotees organizing fruits, flowers, and sweets as offerings to Goddess Saraswati during the morning puja rituals.',
+          },
+          {
+            image: '/saraswati-2024-children.jpg',
+            objectPosition: 'center 40%',
+            title: 'Saraswati Pujo 2024–25 • Youth Excellence Awards',
+            description: 'Children proudly holding their certificates of participation and performance on the Saraswati Pujo cultural stage.',
+          },
+          {
+            image: '/saraswati-2024-group.jpg',
+            objectPosition: 'center 40%',
+            title: 'Saraswati Pujo 2024–25 • Community Group Photo',
+            description: 'Palava Kalibari Trust members and families gathered on stage for a beautiful community group photo.',
+          },
+          {
+            image: '/saraswati-2024-bhog.jpg',
+            objectPosition: 'center 40%',
+            title: 'Saraswati Pujo 2024–25 • Community Bhog Prasad Seba',
+            description: 'Residents enjoying the traditional sit-down khichuri bhog prasad prepared with love and devotion.',
           },
         ],
       },
