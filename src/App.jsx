@@ -1630,7 +1630,7 @@ function AnnadanSection() {
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${
               idx === currentImg ? 'opacity-100 z-10' : 'opacity-0 z-0'
             }`}
-            style={{ objectPosition: slide.objectPosition || 'center top' }}
+            style={{ objectPosition: slide.objectPosition || 'center' }}
           />
         ))}
 
