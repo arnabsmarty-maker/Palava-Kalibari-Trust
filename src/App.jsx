@@ -3314,62 +3314,174 @@ const YEAR_EVENTS_DATA = {
   },
 }
 
+// ── Individual Event Card with optional gallery slideshow ──
+function EventCard({ event, eventNumber }) {
+  const hasGallery = event.gallery && event.gallery.length > 0
+  const [galleryIdx, setGalleryIdx] = useState(0)
+  const [playing, setPlaying] = useState(true)
+
+  // Auto-slideshow for gallery events
+  useEffect(() => {
+    if (!hasGallery || !playing) return
+    const timer = setInterval(() => {
+      setGalleryIdx((prev) => (prev + 1) % event.gallery.length)
+    }, 4000)
+    return () => clearInterval(timer)
+  }, [hasGallery, playing, event.gallery?.length])
+
+  const currentGalleryItem = hasGallery ? event.gallery[galleryIdx] : null
+
+  return (
+    <div className="w-full rounded-3xl border-2 border-gold/50 overflow-hidden shadow-[0_0_30px_rgba(255,215,0,0.2)] hover:shadow-[0_0_45px_rgba(255,215,0,0.35)] transition-shadow duration-500">
+
+      {/* ── Image Section ── */}
+      <div className="relative w-full h-[400px] sm:h-[480px] md:h-[560px] bg-black overflow-hidden">
+        {hasGallery ? (
+          <>
+            {event.gallery.map((g, i) => (
+              <img
+                key={i}
+                src={g.image}
+                alt={g.title || event.title}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                  i === galleryIdx ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                }`}
+                style={{ objectPosition: g.objectPosition || event.objectPosition || 'center' }}
+              />
+            ))}
+
+            {/* Gallery counter badge */}
+            <div className="absolute top-4 left-4 z-10">
+              <span className="inline-flex items-center gap-2 bg-black/75 border border-gold/60 text-gold-bright text-xs font-extrabold px-4 py-1.5 rounded-full shadow-lg backdrop-blur">
+                <Sparkles className="w-3.5 h-3.5" /> Photo {galleryIdx + 1} of {event.gallery.length}
+              </span>
+            </div>
+
+            {/* Play/Pause */}
+            <button
+              onClick={() => setPlaying(!playing)}
+              className="absolute top-4 right-4 z-10 bg-black/75 hover:bg-gold hover:text-maroon-deep text-gold-bright border border-gold/50 p-2 rounded-full transition-all backdrop-blur shadow-lg"
+            >
+              {playing ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+            </button>
+
+            {/* Gallery navigation arrows */}
+            <button
+              onClick={() => setGalleryIdx((prev) => (prev - 1 + event.gallery.length) % event.gallery.length)}
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/60 border border-gold/40 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all backdrop-blur shadow-md"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => setGalleryIdx((prev) => (prev + 1) % event.gallery.length)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/60 border border-gold/40 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all backdrop-blur shadow-md"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+
+            {/* Gallery dots */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5">
+              {event.gallery.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setGalleryIdx(i)}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    i === galleryIdx ? 'w-8 bg-gold shadow-[0_0_8px_rgba(255,215,0,0.8)]' : 'w-2.5 bg-white/30 hover:bg-white/60'
+                  }`}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          <img
+            src={event.image}
+            alt={event.title}
+            className="w-full h-full object-cover"
+            style={{ objectPosition: event.objectPosition || 'center' }}
+          />
+        )}
+
+        {/* Vignette overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30 pointer-events-none" />
+
+        {/* Event number badge */}
+        <div className="absolute bottom-4 left-4 z-10">
+          <span className="inline-flex items-center gap-1.5 bg-gradient-to-r from-gold-bright to-gold-deep text-maroon-deep font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">
+            Event #{eventNumber}
+          </span>
+        </div>
+      </div>
+
+      {/* ── Details Section ── */}
+      <div className="p-6 md:p-8 bg-gradient-to-b from-[#20000a] via-[#140006] to-[#0a0003] space-y-5">
+
+        {/* Date & Title */}
+        <div className="pb-3 border-b border-gold/20">
+          <span className="text-xs font-extrabold text-gold-bright bg-maroon-deep border border-gold/50 px-3 py-1 rounded-full uppercase tracking-wider">
+            {event.date}
+          </span>
+          <h2 className="font-display text-2xl md:text-3xl font-extrabold text-gold-bright mt-3 leading-snug">
+            {event.title}
+          </h2>
+          <p className="text-xs md:text-sm text-gold/80 flex items-center gap-1.5 font-medium mt-1.5">
+            <MapPin className="w-4 h-4 text-gold shrink-0" /> {event.venue}
+          </p>
+        </div>
+
+        {/* Gallery sub-caption (changes with gallery slide) */}
+        {hasGallery && currentGalleryItem && (
+          <div className="p-4 rounded-2xl bg-gold/5 border border-gold/25">
+            <h4 className="text-xs uppercase font-extrabold tracking-widest text-gold mb-1">
+              Currently Viewing:
+            </h4>
+            <p className="text-sm text-gold-bright font-bold">{currentGalleryItem.title}</p>
+            <p className="text-xs text-ivory-cream/80 mt-1 italic leading-relaxed">"{currentGalleryItem.description}"</p>
+          </div>
+        )}
+
+        {/* Event Description */}
+        <div className="p-4 md:p-5 rounded-2xl bg-black/50 border border-gold/30">
+          <h4 className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-1.5">
+            Event Story &amp; Write-Up:
+          </h4>
+          <p className="text-sm md:text-base text-ivory-cream/90 font-light leading-relaxed italic">
+            "{event.description}"
+          </p>
+        </div>
+
+        {/* Highlights */}
+        {event.highlights && event.highlights.length > 0 && (
+          <div>
+            <h4 className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-2">
+              Key Highlights &amp; Activities:
+            </h4>
+            <ul className="grid sm:grid-cols-2 gap-2.5 text-xs text-ivory-cream/85">
+              {event.highlights.map((h, i) => (
+                <li key={i} className="flex items-start gap-2 p-2.5 rounded-xl bg-gold/5 border border-gold/20">
+                  <span className="text-gold shrink-0 mt-0.5">✦</span>
+                  <span className="leading-relaxed">{h}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }) {
   const data = YEAR_EVENTS_DATA[yearKey] || YEAR_EVENTS_DATA['2025-2026']
-  const [slideIndex, setSlideIndex] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(true)
-
-  // Extract all photos from events (handling event galleries seamlessly)
-  const slides = []
-  data.events.forEach((ev, idx) => {
-    if (ev.gallery && ev.gallery.length > 0) {
-      ev.gallery.forEach((g) => {
-        slides.push({
-          image: g.image || ev.image,
-          title: g.title || ev.title,
-          date: ev.date,
-          venue: ev.venue,
-          eventIndex: idx,
-          description: g.description || ev.description,
-          highlights: ev.highlights,
-          objectPosition: g.objectPosition || ev.objectPosition,
-        })
-      })
-    } else {
-      slides.push({
-        image: ev.image,
-        title: ev.title,
-        date: ev.date,
-        venue: ev.venue,
-        eventIndex: idx,
-        description: ev.description,
-        highlights: ev.highlights,
-        objectPosition: ev.objectPosition,
-      })
-    }
-  })
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
-    setSlideIndex(0)
   }, [yearKey])
-
-  // Auto-changing slideshow timer (every 4 seconds)
-  useEffect(() => {
-    if (!isPlaying || slides.length === 0) return
-    const interval = setInterval(() => {
-      setSlideIndex((prev) => (prev + 1) % slides.length)
-    }, 4000)
-    return () => clearInterval(interval)
-  }, [isPlaying, slides.length])
-
-  const currentSlide = slides[slideIndex] || slides[0]
 
   return (
     <div className="min-h-screen bg-[#070002] text-ivory-warm">
       <Header onJoin={onJoin} onSponsor={onSponsor} onOpenYearEvents={onNavigateYear} />
 
-      <main className="pt-24 pb-20 max-w-6xl mx-auto px-4 space-y-6">
+      <main className="pt-24 pb-20 max-w-6xl mx-auto px-4 space-y-8">
         
         {/* Top Header & Breadcrumb */}
         <div className="flex flex-wrap items-center justify-between gap-4 pt-4">
@@ -3432,127 +3544,12 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
         </div>
 
         {/* ══════════════════════════════════════════════════════════════
-            SINGLE FULL-SCREEN STACK: 80% PICTURE STAGE & 20% WRITE-UPS
+            SEPARATE EVENT CARDS – Each event gets its own box
            ══════════════════════════════════════════════════════════════ */}
-        <div className="w-full flex flex-col rounded-3xl border-2 border-gold/60 overflow-hidden shadow-[0_0_40px_rgba(255,215,0,0.35)]">
-
-          {/* ── TOP ~80%: Full Width Auto-Changing Picture Stage ── */}
-          <div className="relative w-full h-[450px] sm:h-[550px] md:h-[650px] bg-black overflow-hidden">
-            {slides.map((s, idx) => (
-              <img
-                key={idx}
-                src={s.image}
-                alt={s.title}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-                  idx === slideIndex ? 'opacity-100 scale-105' : 'opacity-0 scale-100 pointer-events-none'
-                }`}
-                style={{
-                  transitionProperty: 'opacity, transform',
-                  objectPosition: s.objectPosition || 'center',
-                }}
-              />
-            ))}
-            
-            {/* Vignette Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
-
-            {/* Top Bar over Picture */}
-            <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between">
-              <span className="inline-flex items-center gap-2 bg-black/75 border border-gold/60 text-gold-bright text-xs font-extrabold px-4 py-1.5 rounded-full shadow-lg backdrop-blur animate-pulse">
-                <Sparkles className="w-3.5 h-3.5 text-gold-bright" /> Photo {slideIndex + 1} of {slides.length} • Auto-Changing
-              </span>
-
-              {/* Pause/Play Button */}
-              <button
-                onClick={() => setIsPlaying(!isPlaying)}
-                className="bg-black/75 hover:bg-gold hover:text-maroon-deep text-gold-bright border border-gold/50 p-2.5 rounded-full transition-all text-xs font-bold flex items-center gap-1 backdrop-blur shadow-lg"
-                title={isPlaying ? 'Pause Auto Slideshow' : 'Play Auto Slideshow'}
-              >
-                {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-              </button>
-            </div>
-          </div>
-
-          {/* ── BOTTOM ~20%: Single Event Write-Up & Details Panel ── */}
-          <div className="p-6 md:p-8 bg-gradient-to-b from-[#20000a] via-[#140006] to-[#0a0003] space-y-6">
-            
-            {/* Header Info */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-gold/20">
-              <div>
-                <span className="text-xs font-extrabold text-gold-bright bg-maroon-deep border border-gold/50 px-3 py-1 rounded-full uppercase tracking-wider">
-                  {currentSlide.date}
-                </span>
-                <h2 className="font-display text-2xl md:text-4xl font-extrabold text-gold-bright mt-2 leading-snug">
-                  {currentSlide.title}
-                </h2>
-                <p className="text-xs md:text-sm text-gold/80 flex items-center gap-1.5 font-medium mt-1">
-                  <MapPin className="w-4 h-4 text-gold shrink-0" /> {currentSlide.venue}
-                </p>
-              </div>
-
-              {/* Arrow Navigation & Slide Dots */}
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => setSlideIndex((prev) => (prev - 1 + slides.length) % slides.length)}
-                  className="p-2.5 rounded-full bg-black/70 border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all shadow-md"
-                  title="Previous Event Photo"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-
-                <div className="flex items-center gap-1.5">
-                  {slides.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setSlideIndex(i)}
-                      className={`h-2.5 rounded-full transition-all duration-300 ${
-                        i === slideIndex ? 'w-8 bg-gold' : 'w-2.5 bg-white/30 hover:bg-white/60'
-                      }`}
-                    />
-                  ))}
-                </div>
-
-                <button
-                  onClick={() => setSlideIndex((prev) => (prev + 1) % slides.length)}
-                  className="p-2.5 rounded-full bg-black/70 border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all shadow-md"
-                  title="Next Event Photo"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-
-            {/* Single Write-Up Text Description */}
-            {currentSlide.description && (
-              <div className="p-4 md:p-5 rounded-2xl bg-black/50 border border-gold/30">
-                <h4 className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-1.5">
-                  Event Story &amp; Write-Up:
-                </h4>
-                <p className="text-sm md:text-base text-ivory-cream/90 font-light leading-relaxed italic">
-                  "{currentSlide.description}"
-                </p>
-              </div>
-            )}
-
-            {/* Key Highlights List */}
-            {currentSlide.highlights && currentSlide.highlights.length > 0 && (
-              <div className="pt-2">
-                <h4 className="text-xs uppercase font-extrabold tracking-widest text-gold-bright mb-2">
-                  Key Highlights &amp; Activities:
-                </h4>
-                <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs text-ivory-cream/85">
-                  {currentSlide.highlights.map((h, i) => (
-                    <li key={i} className="flex items-start gap-2 p-2 rounded-xl bg-gold/5 border border-gold/20">
-                      <span className="text-gold shrink-0 mt-0.5">✦</span>
-                      <span className="leading-relaxed">{h}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-          </div>
-
+        <div className="space-y-10">
+          {data.events.map((event, idx) => (
+            <EventCard key={idx} event={event} eventNumber={idx + 1} />
+          ))}
         </div>
 
       </main>
