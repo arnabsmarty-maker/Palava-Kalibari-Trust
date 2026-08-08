@@ -3689,11 +3689,19 @@ const YEAR_EVENTS_DATA = {
         title: 'Rabindra Nazrul Jayanti 2026–2027',
         date: 'May 2026',
         venue: 'Palava Kalibari Auditorium',
-        image: '/about-dancers.jpg',
+        image: '/rabindra-nazrul-2026-rn1.jpg',
         description: 'Rabindra Nazrul Jayanti was a vibrant cultural celebration honouring the birth anniversaries of Bengal’s literary and musical icons, Gurudev Rabindranath Tagore and Rebel Poet Kazi Nazrul Islam. Soulful musical performances, graceful dances, delicious food, and warm meet-and-greets brought everyone together in a joyful tribute to their timeless legacy.',
         highlights: [
           'Tribute to Gurudev Rabindranath Tagore & Kazi Nazrul Islam',
           'Classical dances, musical recitals & community food meet',
+        ],
+        gallery: [
+          {
+            image: '/rabindra-nazrul-2026-rn1.jpg',
+            objectPosition: 'center 40%',
+            title: 'Rabindra Nazrul Jayanti 2026–27 • Community Performers & Organisers',
+            description: 'Palava Kalibari Trust members and cultural participants gathered on stage holding participation certificates.',
+          },
         ],
       },
       {
