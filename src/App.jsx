@@ -1589,6 +1589,7 @@ function AnnadanSection() {
       title: 'Daily Children & Resident Service',
       subtitle: 'Over 800 individuals fed daily across all four days of Durga Puja',
       icon: Utensils,
+      objectPosition: 'center top',
     },
     {
       src: IMG.annadan3,
@@ -1629,6 +1630,7 @@ function AnnadanSection() {
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${
               idx === currentImg ? 'opacity-100 z-10' : 'opacity-0 z-0'
             }`}
+            style={{ objectPosition: slide.objectPosition || 'center top' }}
           />
         ))}
 
