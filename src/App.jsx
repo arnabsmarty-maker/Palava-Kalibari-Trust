@@ -1768,6 +1768,23 @@ function AnnadanSection() {
 // ══════════════════════════════════════════════════════════════
 function DonationSection() {
   const [copied, setCopied] = useState(false)
+
+  const row1 = [
+    'Ravi Sinha', 'Abhinandan Majumdar', 'Asish Sharma', 'Dhruv Tiwari',
+    'Harpreet Kaur', 'Kanchan Lobo', 'Manjeet Singh saini', 'Prafull Singh',
+    'Priyanka Khushal', 'Pushpa Navale', 'Sandip Dhar', 'Sarita',
+    'Sheetal Shinde', 'Shreya Singh', 'Sonal', 'Sukanto Pal',
+    'Sunita Chatlani', 'Susnata Sircar', 'Vidhya Ashish Vyas', 'Vinita Nadkarni'
+  ]
+
+  const row2 = [
+    'Sandeep Dhar', 'Akanksha Moharir Yadnik', 'Deepak Kumar Das', 'Dilipkumar Shah',
+    'Hetal Shah', 'Kiran Shah', 'Nayonika Ganguly', 'Prajakta Pednekar',
+    'Pritam / Payal Roy', 'Ravi Ranjan Sinha', 'Santosh Pandey', 'Sharmila',
+    'Shree Amit Shukla & Shree niket Singh (HSS)', 'Sinchita Mukherjee', 'Sonal & Antara', 'Sukanya Shelar',
+    'Susmita Roy', 'Vandana Pandey', 'Vikas Kukreja'
+  ]
+
   return (
     <section
       id="donate"
@@ -1775,6 +1792,43 @@ function DonationSection() {
     >
       <div className="absolute inset-0 mandala-bg opacity-10" />
       <div className="absolute top-10 left-10 w-72 h-72 bg-maroon/40 blur-3xl rounded-full" />
+
+      {/* Scrolling Donors Marquee */}
+      <div className="w-full border-y border-gold/15 bg-black/40 backdrop-blur-md py-4 mb-16 overflow-hidden relative z-10">
+        <div className="max-w-7xl mx-auto px-4 mb-2 flex items-center justify-between">
+          <span className="text-[10px] uppercase tracking-[0.25em] font-extrabold text-gold-bright flex items-center gap-1.5">
+            <Heart className="w-3 h-3 text-rose-500 fill-rose-500 animate-pulse" /> Annadan Seba Donors 2025–26
+          </span>
+          <span className="text-[9px] text-ivory-cream/50 uppercase tracking-wider font-semibold">
+            ✦ Scroll Left to Right
+          </span>
+        </div>
+        <div className="flex flex-col gap-2.5">
+          {/* Row 1 */}
+          <div className="overflow-hidden w-full flex select-none">
+            <div className="animate-marquee-ltr flex items-center whitespace-nowrap">
+              {[...row1, ...row1].map((name, idx) => (
+                <div key={idx} className="flex items-center mx-6 text-xs font-semibold tracking-wide text-ivory-warm">
+                  <span>{name}</span>
+                  <span className="ml-12 text-gold/30">✦</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Row 2 */}
+          <div className="overflow-hidden w-full flex select-none">
+            <div className="animate-marquee-ltr-slow flex items-center whitespace-nowrap">
+              {[...row2, ...row2].map((name, idx) => (
+                <div key={idx} className="flex items-center mx-6 text-xs font-semibold tracking-wide text-gold-bright/90">
+                  <span>{name}</span>
+                  <span className="ml-12 text-gold/30">✦</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="relative max-w-7xl mx-auto px-4">
         <div className="reveal mb-12">
           <h2 className="font-display text-4xl md:text-5xl font-bold text-ivory-warm">

@@ -120,3 +120,26 @@ body {
   will-change: auto;
   image-rendering: -webkit-optimize-contrast;
 }
+
+/* Seamless Left-to-Right Marquee */
+.animate-marquee-ltr {
+  display: flex;
+  width: max-content;
+  animation: marquee-ltr 40s linear infinite;
+}
+
+@keyframes marquee-ltr {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-marquee-ltr-slow {
+  display: flex;
+  width: max-content;
+  animation: marquee-ltr 50s linear infinite;
+}
+
