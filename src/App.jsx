@@ -3265,13 +3265,45 @@ const YEAR_EVENTS_DATA = {
       },
       {
         title: 'Annual Picnic 2024–2025',
-        date: 'December 2024',
-        venue: 'Palava Outing Grounds',
-        image: '/about-women-team.jpg',
+        date: 'January 2025',
+        venue: 'Swaraj Resorts',
+        image: '/picnic-2024-bus-banner.jpg',
         description: 'The Annual Picnic brought everyone together for a day of joy, laughter, and camaraderie. Amid games, conversations, and shared experiences, it created cherished memories and strengthened community bonds.',
         highlights: [
           'Day of fun, games, delicious food & outdoor activities',
           'Strengthening resident community bonds and friendships',
+        ],
+        gallery: [
+          {
+            image: '/picnic-2024-bus-banner.jpg',
+            objectPosition: 'center 40%',
+            title: 'Annual Picnic 2024–25 • PKT Picnic Bus',
+            description: 'The PKT Annual Picnic bus ready to roll with the festive banner — 12th January 2025 at Swaraj Resorts.',
+          },
+          {
+            image: '/picnic-2024-bus-selfie.jpg',
+            objectPosition: 'center 40%',
+            title: 'Annual Picnic 2024–25 • Bus Ride Fun',
+            description: 'Excited families and members enjoying the bus ride to Swaraj Resorts, Konkan Division, filled with laughter and anticipation.',
+          },
+          {
+            image: '/picnic-2024-group-photo.jpg',
+            objectPosition: 'center 45%',
+            title: 'Annual Picnic 2024–25 • Resort Group Photo',
+            description: 'The entire PKT community gathered at Swaraj Resorts for a grand group photo — families, kids, and friends together.',
+          },
+          {
+            image: '/picnic-2024-games.jpg',
+            objectPosition: 'center 40%',
+            title: 'Annual Picnic 2024–25 • Fun Games & Activities',
+            description: 'Women volunteers organizing fun outdoor games and activities, bringing smiles and laughter to the picnic.',
+          },
+          {
+            image: '/picnic-2024-food-plate.jpg',
+            objectPosition: 'center',
+            title: 'Annual Picnic 2024–25 • Delicious Picnic Thali',
+            description: 'A mouthwatering picnic thali with rice, dal, sabzi, rolls, gulab jamun, and salad — the perfect outdoor feast.',
+          },
         ],
       },
     ],
