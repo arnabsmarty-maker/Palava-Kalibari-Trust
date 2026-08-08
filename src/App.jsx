@@ -1960,6 +1960,9 @@ function AboutSection() {
     { name: 'Pritam Roy', title: 'Managing Committee', image: '/mc-pritam.jpg' },
     { name: 'Subhaasish Bhattacharya', title: 'Managing Committee', image: '/mc-subhaasish.jpg' },
     { name: 'Sukanto Pal', title: 'Managing Committee', image: '/mc-sukanto.png' },
+    { name: 'Devarpan Sengupta', title: 'Managing Committee', image: '/mc-devarpan.png' },
+    { name: 'Sounita Biswas', title: 'Managing Committee', image: '/mc-sounita.jpg' },
+    { name: 'Tridib Mukherjee', title: 'Managing Committee', image: '/mc-tridib.png' },
   ]
 
   useEffect(() => {
