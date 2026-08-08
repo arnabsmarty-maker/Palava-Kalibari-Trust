@@ -2070,7 +2070,7 @@ function AboutSection() {
           <SectionTitle
             eyebrow="Get To Know Us"
             title="About Palava Kalibari Trust"
-            subtitle="Preserving, celebrating, and passing on the timeless richness of Bengali culture and heritage in its truest form."
+            subtitle="A vibrant family of 95+ members united by a shared vision — building a Kali Bari for all, by the community, for the community."
             dark
           />
 
@@ -2087,11 +2087,11 @@ function AboutSection() {
                   <Crown className="w-3.5 h-3.5" /> Our Vision
                 </span>
                 <h3 className="font-display text-2xl md:text-4xl font-extrabold text-gold-bright">
-                  Establishing a Grand Kalibari &amp; Welfare Initiatives
+                  Building a Kali Bari for All &amp; Community Welfare
                 </h3>
               </div>
               <div className="hidden sm:flex items-center gap-3 text-xs text-gold/80 font-bold">
-                <span>✦ Community First</span>
+                <span>✦ 95+ Growing Members</span>
                 <span>✦ Cultural Ethos</span>
                 <span>✦ Social Welfare</span>
               </div>
@@ -2122,25 +2122,39 @@ function AboutSection() {
               {/* Right Side: Vision Copy & Critical Illness Accommodation Box */}
               <div className="lg:col-span-7 space-y-5">
                 <p className="text-sm md:text-base text-ivory-cream/90 font-light leading-relaxed">
-                  We want to be an association which is entrusted with the objective of establishing a grand Kalibari in the vicinity of Palava, and as one of the premiere associations in upholding the values &amp; ethos of Bengali culture and heritage in Palava city &amp; around Dombivli, engaged with other communities in multiple welfare activities for the benefit of society.
+                  The absence of a Kali Bari in and around Palava brought together like-minded people with a shared dream and a unified vision: <strong className="text-gold-bright font-semibold">to build a Kali Bari for all</strong>.
                 </p>
 
-                <div className="p-5 rounded-2xl bg-black/70 border-2 border-gold/40 shadow-xl space-y-2.5">
+                <p className="text-sm md:text-base text-ivory-cream/90 font-light leading-relaxed">
+                  What started as an idea has now grown into a vibrant and growing family of <strong className="text-gold-bright font-semibold">95+ members</strong>, united by our love for Maa Kali, our culture, traditions, and the spirit of community. We believe this dream belongs to everyone. We look forward to welcoming more individuals, families, and organizations to join us, contribute their ideas and support, and become part of this journey.
+                </p>
+
+                <p className="text-sm md:text-base text-gold-bright font-semibold leading-relaxed italic border-l-2 border-gold pl-4 py-1.5 bg-black/40 rounded-r-lg">
+                  Together, let us turn our shared vision into a reality — a Kali Bari for all, built by the community, for the community.
+                </p>
+
+                <div className="pt-2 flex flex-wrap items-center gap-3">
+                  <a
+                    href="#membership"
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-gold-bright via-gold to-gold-deep text-maroon-deep font-extrabold px-6 py-2.5 rounded-full text-xs uppercase tracking-widest shadow-gold hover:scale-105 transition-all"
+                  >
+                    <Users className="w-4 h-4" /> JOIN US
+                  </a>
+                  <span className="flex items-center gap-1.5 bg-maroon-deep/80 border border-gold/40 px-3.5 py-2 rounded-full text-xs font-semibold text-gold/90">
+                    <Landmark className="w-3.5 h-3.5 text-gold-bright" /> Temple Sanctuary Project
+                  </span>
+                  <span className="flex items-center gap-1.5 bg-maroon-deep/80 border border-gold/40 px-3.5 py-2 rounded-full text-xs font-semibold text-gold/90">
+                    <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400" /> 95+ Active Family Members
+                  </span>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-black/70 border border-gold/30 shadow-xl space-y-2">
                   <div className="text-xs md:text-sm uppercase font-extrabold tracking-widest text-gold-bright flex items-center gap-2">
                     <Heart className="w-4 h-4 text-rose-500 fill-rose-500 animate-pulse" /> Critical Illness Patient Accommodation Facility:
                   </div>
                   <p className="text-xs md:text-sm text-ivory-cream/85 leading-relaxed font-light">
                     Within different welfare activities, we will also create and run a <strong className="text-gold-bright font-semibold">critical illness (cancer, renal, liver &amp; other) patient's subsidised accommodation facility</strong> during treatment in and around Mumbai.
                   </p>
-                </div>
-
-                <div className="pt-2 flex flex-wrap items-center gap-3 text-xs font-semibold text-gold/90">
-                  <span className="flex items-center gap-1.5 bg-maroon-deep/80 border border-gold/40 px-3 py-1.5 rounded-full">
-                    <Landmark className="w-3.5 h-3.5 text-gold-bright" /> Temple Sanctuary Project
-                  </span>
-                  <span className="flex items-center gap-1.5 bg-maroon-deep/80 border border-gold/40 px-3 py-1.5 rounded-full">
-                    <Users className="w-3.5 h-3.5 text-gold-bright" /> Healthcare Accommodation Seba
-                  </span>
                 </div>
               </div>
 

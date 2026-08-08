@@ -16,7 +16,7 @@ export const TRUST = {
     { name: 'Sinchita', phone: '99673 61693' },
   ],
   whoWeAre:
-    'A community-led, non-profit platform built by residents of Palava. Our mission is to preserve Bengali culture, create meaningful public engagement, and stage large-format festive experiences with strong local credibility. We bring families, professionals, youth, cultural participants, and neighborhood stakeholders together.',
+    'The absence of a Kali Bari in and around Palava brought together like-minded people with a shared dream and a unified vision: to build a Kali Bari for all. What started as an idea has now grown into a vibrant and growing family of 95+ members, united by our love for Maa Kali, our culture, traditions, and the spirit of community. We believe this dream belongs to everyone. We look forward to welcoming more individuals, families, and organizations to join us, contribute their ideas and support, and become part of this journey. Together, let us turn our shared vision into a reality — a Kali Bari for all, built by the community, for the community.',
 }
 
 export const ILISH_PLATTERS = [
