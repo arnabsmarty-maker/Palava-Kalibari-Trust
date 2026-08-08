@@ -3043,6 +3043,7 @@ const YEAR_EVENTS_DATA = {
         date: 'February 2024',
         venue: 'Palava Kalibari Grounds',
         image: '/saraswati-2024-idol.jpg',
+        objectPosition: 'center bottom',
         description: 'Maa Saraswati Pratima lovingly decorated with yellow marigold garlands, sacred scriptures, and traditional hand-drawn artwork for the inaugural Saraswati Pujo 2023–2024.',
         highlights: [
           'Sacred Maa Saraswati Pratima & traditional alpona backdrop',
@@ -3055,6 +3056,7 @@ const YEAR_EVENTS_DATA = {
         date: 'February 2024',
         venue: 'Palava Kalibari Grounds',
         image: '/saraswati-2024-girls.jpg',
+        objectPosition: 'center bottom',
         description: 'Young resident children of Palava enthusiastically preparing fresh marigold garlands and sacred offerings for Maa Saraswati.',
         highlights: [
           'Active youth & children participation in puja preparations',
@@ -3066,6 +3068,7 @@ const YEAR_EVENTS_DATA = {
         date: 'February 2024',
         venue: 'Palava Kalibari Grounds',
         image: '/saraswati-2024-prasad-prep.jpg',
+        objectPosition: 'center bottom',
         description: 'Devoted women members of Palava Kalibari Trust carefully preparing fresh fruits, sweets, and bhog prasad offerings for Goddess Saraswati.',
         highlights: [
           'Devotional women members preparing sacred bhog & fruit platters',
@@ -3299,6 +3302,7 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
     eventIndex: idx,
     description: ev.description,
     highlights: ev.highlights,
+    objectPosition: ev.objectPosition,
   }))
 
   useEffect(() => {
@@ -3389,27 +3393,20 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
         <div className="w-full flex flex-col rounded-3xl border-2 border-gold/60 overflow-hidden shadow-[0_0_40px_rgba(255,215,0,0.35)]">
 
           {/* ── TOP ~80%: Full Width Auto-Changing Picture Stage ── */}
-          <div className="relative w-full h-[450px] sm:h-[550px] md:h-[650px] bg-black overflow-hidden flex items-center justify-center">
+          <div className="relative w-full h-[450px] sm:h-[550px] md:h-[650px] bg-black overflow-hidden">
             {slides.map((s, idx) => (
-              <div
+              <img
                 key={idx}
-                className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-                  idx === slideIndex ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                src={s.image}
+                alt={s.title}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                  idx === slideIndex ? 'opacity-100 scale-105' : 'opacity-0 scale-100 pointer-events-none'
                 }`}
-              >
-                {/* Ambient Blurred Backdrop for rich visual depth */}
-                <img
-                  src={s.image}
-                  alt=""
-                  className="absolute inset-0 w-full h-full object-cover blur-xl opacity-40 scale-110"
-                />
-                {/* Main Image: 100% Full-Frame Uncropped (Idol face & full subject fully visible) */}
-                <img
-                  src={s.image}
-                  alt={s.title}
-                  className="relative z-10 w-full h-full object-contain mx-auto drop-shadow-2xl"
-                />
-              </div>
+                style={{
+                  transitionProperty: 'opacity, transform',
+                  objectPosition: s.objectPosition || 'center',
+                }}
+              />
             ))}
             
             {/* Vignette Gradient Overlay */}
