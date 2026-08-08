@@ -212,23 +212,30 @@ function UpiQR({ amount = 0, size = 200 }) {
 }
 
 // ── Reveal-on-scroll helper ──────────────────────────────────
-function useReveal() {
+function useReveal(routeHash) {
   useEffect(() => {
-    const els = document.querySelectorAll('.reveal')
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add('is-visible')
-            io.unobserve(e.target)
-          }
-        })
-      },
-      { threshold: 0.12 }
-    )
-    els.forEach((el) => io.observe(el))
-    return () => io.disconnect()
-  }, [])
+    let io
+    const timer = setTimeout(() => {
+      const els = document.querySelectorAll('.reveal')
+      io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible')
+              io.unobserve(e.target)
+            }
+          })
+        },
+        { threshold: 0.12 }
+      )
+      els.forEach((el) => io.observe(el))
+    }, 100)
+
+    return () => {
+      clearTimeout(timer)
+      if (io) io.disconnect()
+    }
+  }, [routeHash])
 }
 
 // ── Small ornamental heading ─────────────────────────────────
@@ -3737,11 +3744,12 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
 // APP
 // ══════════════════════════════════════════════════════════════
 export default function App() {
-  useReveal()
   const [booking, setBooking] = useState(null)
   const [sponsorModal, setSponsorModal] = useState(false)
   const [routeHash, setRouteHash] = useState(window.location.hash || '#home')
   const joinRef = useRef(null)
+
+  useReveal(routeHash)
 
   useEffect(() => {
     const onHashChange = () => {
