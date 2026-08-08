@@ -315,8 +315,8 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
     <header
       className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${
         scrolled
-          ? 'bg-maroon-deep/95 backdrop-blur shadow-lg shadow-maroon-deep/30 py-2'
-          : 'bg-maroon-deep/80 backdrop-blur-sm py-2.5'
+          ? 'bg-maroon-deep/95 backdrop-blur shadow-lg shadow-maroon-deep/30 py-0.5'
+          : 'bg-maroon-deep/80 backdrop-blur-sm py-1'
       }`}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-4 flex items-center justify-between gap-2 sm:gap-4">
@@ -325,7 +325,7 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
           <img
             src={IMG.pktLogo}
             alt="Palava Kalibari Trust Logo"
-            className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain group-hover:scale-105 transition-transform duration-300 rounded-full shrink-0"
+            className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-contain group-hover:scale-105 transition-transform duration-300 rounded-full shrink-0 -my-2 sm:-my-3"
             style={{ mixBlendMode: 'screen' }}
           />
           <span className="leading-tight">
