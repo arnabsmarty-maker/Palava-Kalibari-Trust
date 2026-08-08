@@ -3807,9 +3807,7 @@ function EventCard({ event, eventNumber }) {
                 key={i}
                 src={g.image}
                 alt={g.title || event.title}
-                className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-                  event.imageFit === 'contain' ? 'object-contain' : 'object-cover'
-                } ${
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
                   i === galleryIdx ? 'opacity-100' : 'opacity-0 pointer-events-none'
                 }`}
                 style={{ objectPosition: g.objectPosition || event.objectPosition || 'center' }}
@@ -3862,9 +3860,7 @@ function EventCard({ event, eventNumber }) {
           <img
             src={event.image}
             alt={event.title}
-            className={`w-full h-full ${
-              event.imageFit === 'contain' ? 'object-contain' : 'object-cover'
-            }`}
+            className="w-full h-full object-cover"
             style={{ objectPosition: event.objectPosition || 'center' }}
           />
         )}
