@@ -3757,12 +3757,6 @@ const YEAR_EVENTS_DATA = {
             description: 'Palava Kalibari Trust organizer Rajat Sain and medical team presenting donor certificates.',
           },
           {
-            image: '/blood-camp-2026-bc3.jpg',
-            objectPosition: 'center',
-            title: 'Donor Form Verification',
-            description: 'Volunteers helping donors complete their medical registrations and checks.',
-          },
-          {
             image: '/blood-camp-2026-bc4.jpg',
             objectPosition: 'center 40%',
             title: 'Palava Kalibari Trust & Tata Medical Team',
