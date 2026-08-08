@@ -329,10 +329,10 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
             style={{ mixBlendMode: 'screen' }}
           />
           <span className="leading-tight">
-            <span className="block font-display text-gold-bright font-extrabold text-sm sm:text-base lg:text-xl tracking-wider uppercase whitespace-nowrap drop-shadow-[0_0_15px_rgba(255,215,0,0.85)]">
+            <span className="block font-display font-extrabold text-sm sm:text-base lg:text-xl tracking-wider uppercase whitespace-nowrap text-shimmer-glow">
               Palava Kalibari Trust
             </span>
-            <span className="block text-[9px] sm:text-[11px] font-bold text-gold/90 tracking-[0.25em] uppercase whitespace-nowrap drop-shadow-[0_0_8px_rgba(212,175,55,0.6)]">
+            <span className="block text-[9px] sm:text-[11px] font-bold tracking-[0.25em] uppercase whitespace-nowrap text-shimmer-glow" style={{ animationDelay: '0.4s' }}>
               Spiritual &amp; Cultural Hub
             </span>
           </span>

@@ -54,6 +54,28 @@ body {
   100% { background-position: 200% 0; }
 }
 
+/* Brilliant Left-to-Right Gold Shimmering Light Wave */
+.text-shimmer-glow {
+  background: linear-gradient(
+    90deg,
+    #E8C766 0%,
+    #FFEDAC 25%,
+    #FFFFFF 50%,
+    #FFEDAC 75%,
+    #E8C766 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerGlow 3s linear infinite;
+  filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.85));
+}
+@keyframes shimmerGlow {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 11px; }
 ::-webkit-scrollbar-track { background: #F5EFE0; }
