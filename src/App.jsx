@@ -3123,11 +3123,37 @@ const YEAR_EVENTS_DATA = {
         title: 'Ilish Utsav 2024–2025',
         date: 'August 2024',
         venue: 'Palava Kalibari Hall',
-        image: '/annadan-plate.jpg',
+        image: '/ilish-2024-sorshe-ilish.jpg',
         description: 'At Ilish Utsav, the silver queen of Bengal took center stage, delighting hearts and palates alike. The aroma of traditional delicacies, laughter, and shared memories filled the air, celebrating a timeless bond with Bengal’s culinary heritage.',
         highlights: [
           'Celebration of Bengal’s culinary silver queen',
           'Traditional Hilsa preparations served fresh to resident families',
+        ],
+        gallery: [
+          {
+            image: '/ilish-2024-sorshe-ilish.jpg',
+            objectPosition: 'center 40%',
+            title: 'Ilish Utsav 2024–25 • Sorshe Ilish in Grand Handi',
+            description: 'A giant handi brimming with golden Sorshe Ilish — aromatic mustard-rich Hilsa curry served fresh at PKT Ilish Utsav 2024.',
+          },
+          {
+            image: '/ilish-2024-buffet.jpg',
+            objectPosition: 'center 40%',
+            title: 'Ilish Utsav 2024–25 • Community Buffet Feast',
+            description: 'Resident families lining up at the festive buffet to savor authentic Hilsa preparations and traditional Bengali delicacies.',
+          },
+          {
+            image: '/ilish-2024-women-team.jpg',
+            objectPosition: 'center 35%',
+            title: 'Ilish Utsav 2024–25 • Women Volunteer Team',
+            description: 'The dedicated women volunteers of PKT who organized and served the Ilish Utsav feast, standing together with pride and joy.',
+          },
+          {
+            image: '/ilish-2024-group-photo.jpg',
+            objectPosition: 'center 40%',
+            title: 'Ilish Utsav 2024–25 • Community Group Photo',
+            description: 'Families and members of Palava Kalibari Trust gathered for a memorable group photo after the grand Ilish Utsav celebration.',
+          },
         ],
       },
       {
