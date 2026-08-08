@@ -3434,11 +3434,31 @@ const YEAR_EVENTS_DATA = {
         title: 'Annual Picnic 2025–2026',
         date: 'December 2025',
         venue: 'Palava Resort & Swimming Pool Grounds',
-        image: '/about-collage-happiness.jpg',
+        image: '/picnic-2025-group.jpg',
         description: 'The Annual Picnic was a delightful day of laughter, relaxation, and togetherness at a wonderful venue. With delicious food, exciting activities and games, refreshing moments by the swimming pool, and the cheerful company of friends and family, it was a perfect blend of fun and fond memories.',
         highlights: [
           'Fun resort outing with swimming pool games & activities',
           'Delicious community food & cherished memories with family',
+        ],
+        gallery: [
+          {
+            image: '/picnic-2025-group.jpg',
+            objectPosition: 'center 40%',
+            title: 'Annual Picnic 2025–26 \u2022 Community Group Photo',
+            description: 'The entire PKT community gathered for a memorable group photo in front of the resort cottage.',
+          },
+          {
+            image: '/picnic-2025-bus.jpg',
+            objectPosition: 'center 40%',
+            title: 'Annual Picnic 2025–26 \u2022 Picnic Bus Journey',
+            description: 'PKT women organizers and members posing happily in front of the Benz picnic tour bus.',
+          },
+          {
+            image: '/picnic-2025-food.jpg',
+            objectPosition: 'center',
+            title: 'Annual Picnic 2025–26 \u2022 Traditional Feast Thali',
+            description: 'Devouring a delicious, authentic Bengali feast served fresh on the resort lawns.',
+          },
         ],
       },
       {
