@@ -1900,6 +1900,7 @@ function AboutSection() {
       src: IMG.aboutDurgotsav2024Women,
       title: 'Durga Utsav 2024 Celebrations',
       subtitle: 'Palava Kalibari Trust members at the grand Durgotsav 2024 Pandal Entry',
+      objectPosition: 'center bottom',
     },
     {
       src: IMG.aboutWomenTeam,
@@ -1910,6 +1911,7 @@ function AboutSection() {
       src: IMG.aboutMenTeam,
       title: 'PKT Resident Executive Team',
       subtitle: 'Dedicated community members organising large-format festive experiences in Palava',
+      objectPosition: 'center 55%',
     },
     {
       src: IMG.aboutSaraswatiPuja,
@@ -2132,7 +2134,7 @@ function AboutSection() {
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-out ${
                 idx === currentImg ? 'opacity-100 scale-105' : 'opacity-0 scale-100 pointer-events-none'
               }`}
-              style={{ transitionProperty: 'opacity, transform', objectPosition: slide.objectPosition || 'center top' }}
+              style={{ transitionProperty: 'opacity, transform', objectPosition: slide.objectPosition || 'center' }}
             />
           ))}
 
