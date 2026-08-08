@@ -3523,11 +3523,37 @@ const YEAR_EVENTS_DATA = {
         title: 'Ilish Utsav 2025–2026',
         date: 'August 2025',
         venue: 'Grand Pandal Hall, Lodha Palava Phase 2',
-        image: '/annadan-plate.jpg',
+        image: '/ilish-2025-iu1.webp',
         description: 'At Ilish Utsav, the iconic flavours of Hilsa came alive in a delightful celebration of taste and tradition. From the golden crispness of Ilish Bhaja and the mustard-rich Sorshe Ilish to aromatic Ilish Paturi and delicate Bhapa Ilish, every preparation celebrated Bengal’s timeless culinary heritage. A joyful feast where flavours, memories, and togetherness came beautifully alive.',
         highlights: [
           'Golden Ilish Bhaja, mustard Sorshe Ilish, Ilish Paturi & Bhapa Ilish',
           'Authentic Hilsa feast celebrating culinary heritage',
+        ],
+        gallery: [
+          {
+            image: '/ilish-2025-iu1.webp',
+            objectPosition: 'center',
+            title: 'Ilish Utsav 2025–26 • The Silver Queen Feast',
+            description: 'Devoted residents and families gathered together to relish the traditional flavors of fresh Hilsa.',
+          },
+          {
+            image: '/ilish-2025-iu2.jpg',
+            objectPosition: 'center 40%',
+            title: 'Ilish Utsav 2025–26 • Authentic Bhog Prasad Prep',
+            description: 'Volunteers and community members carefully packing and serving fresh Ilish preparations.',
+          },
+          {
+            image: '/ilish-2025-iu3.webp',
+            objectPosition: 'center',
+            title: 'Ilish Utsav 2025–26 • Feast and Fellowship',
+            description: 'Families sitting in rows inside the Grand Pandal Hall, sharing stories and laughter over a hearty meal.',
+          },
+          {
+            image: '/ilish-2025-iu4.jpg',
+            objectPosition: 'center 45%',
+            title: 'Ilish Utsav 2025–26 • Women Community Dining',
+            description: 'Women organizers and residents dining together, celebrating the successful conduct of the Ilish Utsav.',
+          },
         ],
       },
       {
