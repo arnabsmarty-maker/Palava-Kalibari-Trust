@@ -3505,11 +3505,37 @@ const YEAR_EVENTS_DATA = {
         title: 'Saraswati Pujo 2025–2026',
         date: 'February 2026',
         venue: 'Palava Kalibari Auditorium',
-        image: '/about-saraswati-puja.jpg',
+        image: '/saraswati-2026-sp1.jpg',
         description: 'Saraswati Pujo, celebrated on the auspicious occasion of Vasant Panchami, filled the day with devotion and the vibrant hues of yellow. From Haate Khori, placing books before the Goddess, bhog, and cultural performances to heartfelt wishes for the community’s board exam students, the celebration beautifully honoured knowledge, learning, and new beginnings.',
         highlights: [
           'Vasant Panchami yellow theme, Haate Khori & placing books at deity feet',
           'Special blessings & wishes for board exam students & kids',
+        ],
+        gallery: [
+          {
+            image: '/saraswati-2026-sp1.jpg',
+            objectPosition: 'center 35%',
+            title: 'Saraswati Pujo 2025–26 \u2022 Holy Puja & Darshan',
+            description: 'Devotees gather around the beautifully decorated deity of Goddess Saraswati adorned with flowers and a yellow backdrop.',
+          },
+          {
+            image: '/saraswati-2026-sp2.jpg',
+            objectPosition: 'center 40%',
+            title: 'Saraswati Pujo 2025–26 \u2022 Devotees offering Prayers',
+            description: 'Community members, young and old, offering pushpanjali prayers with folded hands.',
+          },
+          {
+            image: '/saraswati-2026-sp3.jpg',
+            objectPosition: 'center 40%',
+            title: 'Saraswati Pujo 2025–26 \u2022 Haate Khori Ceremony',
+            description: 'A young child undergoing the traditional Haate Khori ceremony (writing first alphabets on a slate) guided by the priest.',
+          },
+          {
+            image: '/saraswati-2026-sp4.jpg',
+            objectPosition: 'center 35%',
+            title: 'Saraswati Pujo 2025–26 \u2022 Academic Recognition',
+            description: 'Palava Kalibari Trust organizers presenting student recognition notebooks on stage to board exam aspirants.',
+          },
         ],
       },
     ],
