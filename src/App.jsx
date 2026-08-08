@@ -3678,11 +3678,31 @@ const YEAR_EVENTS_DATA = {
         title: 'Poila Boishakh 2026–2027',
         date: 'April 2026',
         venue: 'Palava Kalibari Cultural Hall',
-        image: '/about-organizers-duo.jpg',
+        image: '/poila-2026-pb1.jpg',
         description: 'Poila Boishakh welcomed the Bengali New Year with festive cheer, authentic Bengali cuisine, and joyful get-togethers in traditional attire. The celebrations came alive with Bengali folk music and soulful poetry recitations, beautifully capturing the warmth, culture, and spirit of Bengal.',
         highlights: [
           'Authentic Bengali cuisine, traditional attire & Noboborsho meetup',
           'Bengali folk music & soulful poetry recitations',
+        ],
+        gallery: [
+          {
+            image: '/poila-2026-pb1.jpg',
+            objectPosition: 'center 40%',
+            title: 'Poila Boishakh 2026–27 • Women Community Gathering',
+            description: 'Palava Kalibari Trust women members posing in traditional red, orange, and floral sarees.',
+          },
+          {
+            image: '/poila-2026-pb2.jpg',
+            objectPosition: 'center 40%',
+            title: 'Poila Boishakh 2026–27 • Youth Performers & Anchors',
+            description: 'Young community members standing together, leading the Noboborsho celebrations.',
+          },
+          {
+            image: '/poila-2026-pb3.jpg',
+            objectPosition: 'center 40%',
+            title: 'Poila Boishakh 2026–27 • Trust Executive Meeting',
+            description: 'Executive committee and trustees gathered together for a warm meet-and-greet session.',
+          },
         ],
       },
       {
