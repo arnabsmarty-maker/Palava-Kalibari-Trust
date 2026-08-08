@@ -3102,7 +3102,7 @@ const YEAR_EVENTS_DATA = {
   '2024-2025': {
     year: '2024–2025',
     title: 'Events & Celebrations (2024–2025)',
-    subtitle: 'A vibrant year of 6 flagship events: Poila Boishakh, Ilish Utsav, Durga Pujo, Kali Pujo, Annual Picnic & Saraswati Pujo',
+    subtitle: 'A vibrant year of 7 flagship events: Poila Boishakh, Ilish Utsav, Durga Pujo, Laxmi Pujo, Kali Pujo, Annual Picnic & Saraswati Pujo',
     events: [
       {
         title: 'Poila Boishakh 2024–2025',
@@ -3219,6 +3219,38 @@ const YEAR_EVENTS_DATA = {
             objectPosition: 'center 45%',
             title: 'Durga Pujo 2024–2025 • Community Bhog Prasad Seba',
             description: 'Devoted women and youth volunteers of Palava Kalibari Trust serving hot, authentic Maha Bhog Prasad to resident families and elderly devotees seated together in traditional harmony.',
+          },
+        ],
+      },
+      {
+        title: 'Laxmi Pujo 2024–2025',
+        date: 'October 2024',
+        venue: 'Palava Kalibari Grounds',
+        image: '/laxmi-2024-lp2.jpg',
+        description: 'Celebrating the Goddess of Wealth, Fortune, and Prosperity, Laxmi Pujo was observed with devotion, beautiful alpona drawings, sacred offering of fruits and sweets, and warm community gatherings.',
+        highlights: [
+          'Kojagari Laxmi Puja rituals & sacred havan ceremonies',
+          'Traditional alpona decorations & devotional offerings',
+          'Active community participation & women organizers meetup',
+        ],
+        gallery: [
+          {
+            image: '/laxmi-2024-lp2.jpg',
+            objectPosition: 'center 20%',
+            title: 'Laxmi Pujo 2024–25 • Sacred Laxmi Idol & Havan',
+            description: 'Devotees performing the Kojagari Laxmi Puja rituals and offering prayers in front of the sacred havan fire.',
+          },
+          {
+            image: '/laxmi-2024-lp3.jpg',
+            objectPosition: 'center 20%',
+            title: 'Laxmi Pujo 2024–25 • Kojagari Puja Rituals',
+            description: 'Solemn rituals being performed in front of Goddess Laxmi by the priest and organizers on the auspicious Kojagari Purnima.',
+          },
+          {
+            image: '/laxmi-2024-lp1.jpg',
+            objectPosition: 'center 40%',
+            title: 'Laxmi Pujo 2024–25 • Devotees & Organizers Meetup',
+            description: 'Vibrant gathering of PKT women organizers and devotees dressed in traditional attire, celebrating Laxmi Puja night.',
           },
         ],
       },
