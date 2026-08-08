@@ -1788,7 +1788,7 @@ function DonationSection() {
   return (
     <section
       id="donate"
-      className="relative py-24 overflow-hidden bg-gradient-to-br from-maroon-deep to-black text-ivory-warm"
+      className="relative pt-0 pb-24 overflow-hidden bg-gradient-to-br from-maroon-deep to-black text-ivory-warm"
     >
       <div className="absolute inset-0 mandala-bg opacity-10" />
       <div className="absolute top-10 left-10 w-72 h-72 bg-maroon/40 blur-3xl rounded-full" />
