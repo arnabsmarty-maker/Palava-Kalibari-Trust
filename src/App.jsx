@@ -40,6 +40,7 @@ import {
   Medal,
   Award,
   CreditCard,
+  FileText,
 } from 'lucide-react'
 import QRCode from 'qrcode'
 import DurgaFace from './DurgaFace.jsx'
@@ -1566,6 +1567,7 @@ function RegisterFormModal({ onClose }) {
 // ══════════════════════════════════════════════════════════════
 function AnnadanSection() {
   const [currentImg, setCurrentImg] = useState(0)
+  const [showDonors, setShowDonors] = useState(false)
 
   const slides = [
     {
@@ -1683,7 +1685,7 @@ function AnnadanSection() {
 
           {/* Right: CTA & Carousel Controls */}
           <div className="flex flex-col items-center md:items-end gap-2 shrink-0">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap justify-center">
               {RAZORPAY_PAYMENT_URL ? (
                 <a
                   href={RAZORPAY_PAYMENT_URL}
@@ -1701,6 +1703,12 @@ function AnnadanSection() {
                   <Smartphone className="w-3.5 h-3.5" /> Donate via UPI
                 </a>
               )}
+              <button
+                onClick={() => setShowDonors(true)}
+                className="inline-flex items-center gap-1.5 border border-gold/40 bg-maroon-deep/60 text-gold-bright font-bold px-3 py-2 rounded-lg text-xs hover:bg-maroon-deep/90 transition-all"
+              >
+                <FileText className="w-3.5 h-3.5" /> Donors List
+              </button>
               <a
                 href="#donate"
                 className="inline-flex items-center gap-1 border border-gold/40 bg-black/40 text-gold-bright font-bold px-3 py-2 rounded-lg text-xs hover:bg-gold/20 transition-all"
@@ -1730,6 +1738,27 @@ function AnnadanSection() {
 
         </div>
       </div>
+
+      {showDonors && (
+        <Modal onClose={() => setShowDonors(false)} maxW="max-w-2xl">
+          <div className="relative bg-[#1c0008] border-2 border-gold/50 rounded-2xl overflow-hidden shadow-2xl p-2 animate-fade-up">
+            <button
+              onClick={() => setShowDonors(false)}
+              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/60 border border-gold/30 text-gold-bright hover:bg-gold/20 transition-colors"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="max-h-[85vh] overflow-y-auto rounded-xl">
+              <img
+                src="/annadan-donors-2025.jpg"
+                alt="Palava Kalibari Trust Annadan Donor List 2025-26"
+                className="w-full h-auto object-contain"
+              />
+            </div>
+          </div>
+        </Modal>
+      )}
     </section>
   )
 }
