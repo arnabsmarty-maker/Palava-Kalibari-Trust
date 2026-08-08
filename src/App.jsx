@@ -2131,47 +2131,51 @@ function AboutSection() {
         </div>
 
         {/* ── PKT COMMUNITY PHOTO SHOWCASE CAROUSEL ── */}
-        <div className="reveal rounded-3xl overflow-hidden border-2 border-gold/50 shadow-[0_0_35px_rgba(255,215,0,0.25)] relative h-[520px] sm:h-[620px] md:h-[720px] lg:h-[760px]">
-          {slides.map((slide, idx) => (
-            <img
-              key={idx}
-              src={slide.src}
-              alt={slide.title}
-              loading={idx === 0 ? "eager" : "lazy"}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-out ${
-                idx === currentImg ? 'opacity-100 scale-105' : 'opacity-0 scale-100 pointer-events-none'
-              }`}
-              style={{ transitionProperty: 'opacity, transform', objectPosition: slide.objectPosition || 'center' }}
-            />
-          ))}
+        <div className="reveal w-full flex flex-col rounded-3xl border-2 border-gold/50 overflow-hidden shadow-[0_0_35px_rgba(255,215,0,0.25)]">
+          {/* Top Image Stage (full screen rectangle) */}
+          <div className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[650px] bg-black overflow-hidden">
+            {slides.map((slide, idx) => (
+              <img
+                key={idx}
+                src={slide.src}
+                alt={slide.title}
+                loading={idx === 0 ? "eager" : "lazy"}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-out ${
+                  idx === currentImg ? 'opacity-100 scale-105' : 'opacity-0 scale-100 pointer-events-none'
+                }`}
+                style={{ transitionProperty: 'opacity, transform', objectPosition: slide.objectPosition || 'center' }}
+              />
+            ))}
 
-          <div className="absolute inset-0 bg-gradient-to-t from-[#070002] via-black/40 to-black/20" />
+            {/* Subtle Vignette border only, keeping faces fully bright and visible */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/20 pointer-events-none" />
 
-          {/* Top Bar */}
-          <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between">
-            <span className="inline-flex items-center gap-2 bg-black/75 border border-gold/60 text-gold-bright text-xs font-extrabold px-3.5 py-1.5 rounded-full shadow-lg backdrop-blur">
-              <Sparkles className="w-3.5 h-3.5 text-gold-bright" /> PKT Community Showcase • {currentImg + 1} of {slides.length}
-            </span>
+            {/* Top Counter Bar */}
+            <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between">
+              <span className="inline-flex items-center gap-2 bg-black/75 border border-gold/60 text-gold-bright text-xs font-extrabold px-3.5 py-1.5 rounded-full shadow-lg backdrop-blur">
+                <Sparkles className="w-3.5 h-3.5 text-gold-bright" /> PKT Community Showcase • Photo {currentImg + 1} of {slides.length}
+              </span>
+            </div>
           </div>
 
-          {/* Bottom Info & Indicators */}
-          <div className="absolute bottom-0 inset-x-0 z-10 p-6 md:p-8 bg-gradient-to-t from-[#070002] via-[#070002]/90 to-transparent flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
-            <div>
-              <h3 className="font-display text-xl md:text-3xl font-extrabold text-gold-bright leading-tight">
+          {/* Bottom Info Panel (separate write-ups card) */}
+          <div className="p-6 md:p-8 bg-gradient-to-b from-[#20000a] via-[#140006] to-[#0a0003] border-t border-gold/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <h3 className="font-display text-xl md:text-2xl font-extrabold text-gold-bright leading-tight">
                 {activeSlide.title}
               </h3>
-              <p className="text-xs md:text-sm text-ivory-cream/90 mt-1 font-light max-w-xl">
+              <p className="text-xs md:text-sm text-ivory-cream/80 font-light max-w-2xl leading-relaxed">
                 {activeSlide.subtitle}
               </p>
             </div>
 
-            <div className="flex items-center gap-1.5 shrink-0">
+            <div className="flex items-center gap-1.5 shrink-0 self-center md:self-auto">
               {slides.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setCurrentImg(idx)}
                   className={`h-2.5 rounded-full transition-all duration-300 ${
-                    idx === currentImg ? 'w-8 bg-gold' : 'w-2.5 bg-white/40 hover:bg-white/70'
+                    idx === currentImg ? 'w-8 bg-gold shadow-[0_0_8px_rgba(255,215,0,0.8)]' : 'w-2.5 bg-white/30 hover:bg-white/60'
                   }`}
                   aria-label={`Slide ${idx + 1}`}
                 />
