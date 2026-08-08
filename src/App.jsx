@@ -1900,7 +1900,7 @@ function AboutSection() {
       src: IMG.aboutDurgotsav2024Women,
       title: 'Durga Utsav 2024 Celebrations',
       subtitle: 'Palava Kalibari Trust members at the grand Durgotsav 2024 Pandal Entry',
-      objectPosition: 'center bottom',
+      objectPosition: 'center 40%',
     },
     {
       src: IMG.aboutWomenTeam,
