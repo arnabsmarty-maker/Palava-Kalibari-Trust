@@ -3694,7 +3694,7 @@ const YEAR_EVENTS_DATA = {
           },
           {
             image: '/poila-2026-pb2.jpg',
-            objectPosition: 'center 45%',
+            objectPosition: 'center 25%',
             title: 'Poila Boishakh 2026–27 • Youth Performers & Anchors',
             description: 'Young community members standing together, leading the Noboborsho celebrations.',
           },
