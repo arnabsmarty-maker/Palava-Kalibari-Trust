@@ -3106,14 +3106,14 @@ const YEAR_EVENTS_DATA = {
   '2024-2025': {
     year: '2024–2025',
     title: 'Events & Celebrations (2024–2025)',
-    subtitle: 'A vibrant year of festivals, culinary heritage, Durga Pujo & community picnic',
+    subtitle: 'A vibrant year of 5 flagship events: Poila Boishakh, Ilish Utsav, Durga Pujo, Kali Pujo & Annual Picnic',
     events: [
       {
         title: 'Poila Boishakh 2024–2025',
         date: 'April 2024',
         venue: 'Palava Community Pavilion',
         image: '/about-organizers-duo.jpg',
-        description: 'With hearts adorned in festive cheer and the promise of new beginnings, Poila Boishakh arrived like a vibrant song of spring. The air blossomed with laughter, melodies, and warm wishes as families and communities came together to celebrate Bengal’s rich heritage. The festival filled every heart with joy, hope, and the spirit of togetherness.',
+        description: 'With hearts adorned in festive cheer and the promise of new beginnings, Poila Boishakh arrived like a vibrant song of spring. The air blossomed with laughter, melodies, and warm wishes as families and communities came together to celebrate Bengal’s rich heritage.',
         highlights: [
           'Welcoming the Bengali New Year with traditional attire & music',
           'Cultural evening, Noboborsho feast & community meet-and-greet',
@@ -3124,75 +3124,54 @@ const YEAR_EVENTS_DATA = {
         date: 'August 2024',
         venue: 'Palava Kalibari Hall',
         image: '/annadan-plate.jpg',
-        description: 'At Ilish Utsav, the silver queen of Bengal took center stage, delighting hearts and palates alike. The aroma of traditional delicacies, laughter, and shared memories filled the air, celebrating a timeless bond with Bengal’s culinary heritage. A festival of flavors, tradition, and togetherness, it was pure joy served on a plate.',
+        description: 'At Ilish Utsav, the silver queen of Bengal took center stage, delighting hearts and palates alike. The aroma of traditional delicacies, laughter, and shared memories filled the air, celebrating a timeless bond with Bengal’s culinary heritage.',
         highlights: [
           'Celebration of Bengal’s culinary silver queen',
           'Traditional Hilsa preparations served fresh to resident families',
         ],
       },
       {
-        title: 'Sacred Ekchala Maa Durga Pratima (Durgotsav 2024)',
+        title: 'Durga Pujo 2024–2025',
         date: 'October 2024',
         venue: 'Gate No. 2, Lodha Palava Phase 2',
         image: '/durga-2024-idol.jpg',
         objectPosition: 'center 40%',
-        description: 'Maa Durga Pratima lovingly consecrated with Ekchala Sholar Saaj, golden drapes, and traditional weapons, radiating divine peace and grace throughout Durgotsav 2024 at Palava.',
+        description: 'As the dhak beats echoed and vibrant pandal lit up the autumn sky, Durga Pujo 2024–2025 brought together devotion, culture, and celebration across 5 sacred festive highlights.',
         highlights: [
-          'Traditional Ekchala Pratima & Sholar Saaj backdrop',
-          'Sacred weapons, Mahishasura Mardini form & divine grace',
-          'Palava Kalibari Trust Durgotsav 2024 flagship Pratima',
+          'Sacred Ekchala Pratima & Purohit Pushpanjali Aarti',
+          'Vibrant Dhunuchi Naach, Bhog Prasad Seba & Kids Stage',
         ],
-      },
-      {
-        title: 'Grand Community Bhog Prasad Seba',
-        date: 'October 2024',
-        venue: 'Gate No. 2, Lodha Palava Phase 2',
-        image: '/durga-2024-bhog-seba.jpg',
-        objectPosition: 'center 45%',
-        description: 'Devoted women and youth volunteers of Palava Kalibari Trust serving hot, authentic Maha Bhog Prasad to resident families and elderly devotees seated together in traditional harmony.',
-        highlights: [
-          'Sacred Maha Bhog Prasad distribution to hundreds daily',
-          'Warm volunteer service & resident hospitality',
-          'Community dining under festive pandal setup',
-        ],
-      },
-      {
-        title: 'Children’s Cultural Stage & Costume Gala',
-        date: 'October 2024',
-        venue: 'Gate No. 2, Lodha Palava Phase 2',
-        image: '/durga-2024-cultural.jpg',
-        objectPosition: 'center 45%',
-        description: 'Vibrant cultural stage performances where young children dressed as Maa Kali, Lord Shiva, Saraswati, and Spider-Man captivated the audience under grand sponsor spotlights.',
-        highlights: [
-          'Mythological fancy dress & kids stage performance',
-          'Youth encouragement & family applause',
-          'Grand stage illumination & sponsor highlights',
-        ],
-      },
-      {
-        title: 'Vibrant Dhunuchi Naach & Devotional Seba',
-        date: 'October 2024',
-        venue: 'Gate No. 2, Lodha Palava Phase 2',
-        image: '/durga-2024-dhunuchi-naach.jpg',
-        objectPosition: 'center 40%',
-        description: 'Women and youth resident devotees performing traditional Dhunuchi Naach to the rhythmic beats of dhak, dressed in red-and-white Lal-Paar sarees before the divine Pratima.',
-        highlights: [
-          'Traditional Dhunuchi Naach & Lal-Paar saree attire',
-          'Rhythmic Dhak beats & evening Aarti frenzy',
-          'Unity, devotion, and joy in front of Maa Durga',
-        ],
-      },
-      {
-        title: 'Sacred Vedic Pushpanjali & Purohit Aarti',
-        date: 'October 2024',
-        venue: 'Gate No. 2, Lodha Palava Phase 2',
-        image: '/durga-2024-pujo-aarti.jpg',
-        objectPosition: 'center 40%',
-        description: 'Head priest leading solemn Vedic Aarti and pushpanjali rituals, offering sacred flowers, lamps, and incense to Goddess Durga surrounded by resident families.',
-        highlights: [
-          'Sacred Vedic mantras, Aarti & Pushpanjali',
-          'Devotional lamp offering & priest rituals',
-          'Solemn spiritual atmosphere at PKT Durgotsav 2024',
+        gallery: [
+          {
+            image: '/durga-2024-idol.jpg',
+            objectPosition: 'center 40%',
+            title: 'Durga Pujo 2024–2025 • Sacred Ekchala Pratima',
+            description: 'Maa Durga Pratima lovingly consecrated with Ekchala Sholar Saaj, golden drapes, and traditional weapons, radiating divine peace and grace throughout Durgotsav 2024 at Palava.',
+          },
+          {
+            image: '/durga-2024-pujo-aarti.jpg',
+            objectPosition: 'center 40%',
+            title: 'Durga Pujo 2024–2025 • Sacred Purohit Aarti & Pushpanjali',
+            description: 'Head priest leading solemn Vedic Aarti and pushpanjali rituals, offering sacred flowers, lamps, and incense to Goddess Durga surrounded by resident families.',
+          },
+          {
+            image: '/durga-2024-cultural.jpg',
+            objectPosition: 'center 45%',
+            title: 'Durga Pujo 2024–2025 • Kids Costume & Stage Gala',
+            description: 'Vibrant cultural stage performances where young children dressed as Maa Kali, Lord Shiva, Saraswati, and Spider-Man captivated the audience under grand sponsor spotlights.',
+          },
+          {
+            image: '/durga-2024-dhunuchi-naach.jpg',
+            objectPosition: 'center 40%',
+            title: 'Durga Pujo 2024–2025 • Dhunuchi Naach & Devotion',
+            description: 'Women and youth resident devotees performing traditional Dhunuchi Naach to the rhythmic beats of dhak, dressed in red-and-white Lal-Paar sarees before the divine Pratima.',
+          },
+          {
+            image: '/durga-2024-bhog-seba.jpg',
+            objectPosition: 'center 45%',
+            title: 'Durga Pujo 2024–2025 • Community Bhog Prasad Seba',
+            description: 'Devoted women and youth volunteers of Palava Kalibari Trust serving hot, authentic Maha Bhog Prasad to resident families and elderly devotees seated together in traditional harmony.',
+          },
         ],
       },
       {
@@ -3211,21 +3190,10 @@ const YEAR_EVENTS_DATA = {
         date: 'December 2024',
         venue: 'Palava Outing Grounds',
         image: '/about-women-team.jpg',
-        description: 'The Annual Picnic brought everyone together for a day of joy, laughter, and camaraderie. Amid games, conversations, and shared experiences, it created cherished memories and strengthened the bonds that make our community special.',
+        description: 'The Annual Picnic brought everyone together for a day of joy, laughter, and camaraderie. Amid games, conversations, and shared experiences, it created cherished memories and strengthened community bonds.',
         highlights: [
           'Day of fun, games, delicious food & outdoor activities',
           'Strengthening resident community bonds and friendships',
-        ],
-      },
-      {
-        title: 'Saraswati Pujo 2024–2025',
-        date: 'February 2025',
-        venue: 'Palava Kalibari Auditorium',
-        image: '/about-saraswati-puja.jpg',
-        description: 'With joyful hearts and festive cheer, Saraswati Pujo was celebrated with prayers, vibrant cultural performances, and music. Communities came together to seek blessings for wisdom and inspiration while honoring Bengal’s rich traditions. The celebration beautifully blended faith, culture, and joy, creating cherished memories for all.',
-        highlights: [
-          'Vasant Panchami pushpanjali, youth music & dance gala',
-          'Celebrating wisdom, art & Bengal’s rich cultural heritage',
         ],
       },
     ],
@@ -3351,17 +3319,35 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
   const [slideIndex, setSlideIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(true)
 
-  // Extract all photos from events
-  const slides = data.events.map((ev, idx) => ({
-    image: ev.image,
-    title: ev.title,
-    date: ev.date,
-    venue: ev.venue,
-    eventIndex: idx,
-    description: ev.description,
-    highlights: ev.highlights,
-    objectPosition: ev.objectPosition,
-  }))
+  // Extract all photos from events (handling event galleries seamlessly)
+  const slides = []
+  data.events.forEach((ev, idx) => {
+    if (ev.gallery && ev.gallery.length > 0) {
+      ev.gallery.forEach((g) => {
+        slides.push({
+          image: g.image || ev.image,
+          title: g.title || ev.title,
+          date: ev.date,
+          venue: ev.venue,
+          eventIndex: idx,
+          description: g.description || ev.description,
+          highlights: ev.highlights,
+          objectPosition: g.objectPosition || ev.objectPosition,
+        })
+      })
+    } else {
+      slides.push({
+        image: ev.image,
+        title: ev.title,
+        date: ev.date,
+        venue: ev.venue,
+        eventIndex: idx,
+        description: ev.description,
+        highlights: ev.highlights,
+        objectPosition: ev.objectPosition,
+      })
+    }
+  })
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
