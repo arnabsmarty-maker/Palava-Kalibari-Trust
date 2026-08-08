@@ -3389,17 +3389,27 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
         <div className="w-full flex flex-col rounded-3xl border-2 border-gold/60 overflow-hidden shadow-[0_0_40px_rgba(255,215,0,0.35)]">
 
           {/* ── TOP ~80%: Full Width Auto-Changing Picture Stage ── */}
-          <div className="relative w-full h-[450px] sm:h-[550px] md:h-[650px] bg-black overflow-hidden">
+          <div className="relative w-full h-[450px] sm:h-[550px] md:h-[650px] bg-black overflow-hidden flex items-center justify-center">
             {slides.map((s, idx) => (
-              <img
+              <div
                 key={idx}
-                src={s.image}
-                alt={s.title}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-                  idx === slideIndex ? 'opacity-100 scale-105' : 'opacity-0 scale-100 pointer-events-none'
+                className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+                  idx === slideIndex ? 'opacity-100' : 'opacity-0 pointer-events-none'
                 }`}
-                style={{ transitionProperty: 'opacity, transform' }}
-              />
+              >
+                {/* Ambient Blurred Backdrop for rich visual depth */}
+                <img
+                  src={s.image}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover blur-xl opacity-40 scale-110"
+                />
+                {/* Main Image: 100% Full-Frame Uncropped (Idol face & full subject fully visible) */}
+                <img
+                  src={s.image}
+                  alt={s.title}
+                  className="relative z-10 w-full h-full object-contain mx-auto drop-shadow-2xl"
+                />
+              </div>
             ))}
             
             {/* Vignette Gradient Overlay */}
