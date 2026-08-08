@@ -87,6 +87,7 @@ const IMG = {
   durgaFace: '/durga-face-real.png', // Authentic Durga face emblem
   pktLogo: '/pkt-logo.gif', // Official animated circular PKT logo from palavakalibaritrust.in
   aboutHappiness: '/about-collage-happiness.jpg', // "Ma Durga Brings Happiness For All"
+  aboutHappinessCollage: '/about-durga-happiness-collage.jpg', // New Ma Durga Brings Happiness For All collage
   aboutTrustReg: '/about-trust-reg.jpg', // Durga Utsav 2024 pandal photo
   aboutMenTeam: '/about-men-team.jpg', // PKT male members team
   aboutDancers: '/about-dancers.jpg', // Traditional Bengali stage dancers
@@ -1896,6 +1897,12 @@ function AboutSection() {
   const [currentImg, setCurrentImg] = useState(0)
 
   const slides = [
+    {
+      src: IMG.aboutHappinessCollage,
+      title: 'Ma Durga Brings Happiness For All',
+      subtitle: 'Vibrant celebrations, cultural performances, and community harmony at Palava Kalibari',
+      objectPosition: 'center',
+    },
     {
       src: IMG.aboutDurgotsav2024Women,
       title: 'Durga Utsav 2024 Celebrations',
