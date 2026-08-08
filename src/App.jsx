@@ -3112,11 +3112,37 @@ const YEAR_EVENTS_DATA = {
         title: 'Poila Boishakh 2024–2025',
         date: 'April 2024',
         venue: 'Palava Community Pavilion',
-        image: '/about-organizers-duo.jpg',
+        image: '/pb-2024-banner.jpg',
         description: 'With hearts adorned in festive cheer and the promise of new beginnings, Poila Boishakh arrived like a vibrant song of spring. The air blossomed with laughter, melodies, and warm wishes as families and communities came together to celebrate Bengal’s rich heritage.',
         highlights: [
           'Welcoming the Bengali New Year with traditional attire & music',
           'Cultural evening, Noboborsho feast & community meet-and-greet',
+        ],
+        gallery: [
+          {
+            image: '/pb-2024-banner.jpg',
+            objectPosition: 'center',
+            title: 'Poila Boishakh 2024–25 • Shubho Noboborsho Banner',
+            description: 'The beautifully designed PKT Shubho Noboborsho 1431 banner with brass lamp, welcoming the Bengali New Year in style.',
+          },
+          {
+            image: '/pb-2024-singer.jpg',
+            objectPosition: 'center 40%',
+            title: 'Poila Boishakh 2024–25 • Musical Evening Performance',
+            description: 'A soulful musical performance on the flower-adorned stage, filling the evening with melodies of Bengali culture and celebration.',
+          },
+          {
+            image: '/pb-2024-group-photo.jpg',
+            objectPosition: 'center 40%',
+            title: 'Poila Boishakh 2024–25 • Community Group Photo',
+            description: 'Families, women, and children dressed in traditional Bengali attire gathered together for a memorable Noboborsho group photo on stage.',
+          },
+          {
+            image: '/pb-2024-men-team.jpg',
+            objectPosition: 'center 40%',
+            title: 'Poila Boishakh 2024–25 • Men Organizers Team',
+            description: 'The men organizers and trustees of PKT standing together under fairy lights after a successful Poila Boishakh celebration.',
+          },
         ],
       },
       {
