@@ -3178,11 +3178,37 @@ const YEAR_EVENTS_DATA = {
         title: 'Kali Pujo 2024–2025',
         date: 'November 2024',
         venue: 'Palava Kalibari Grounds',
-        image: '/about-trust-reg.jpg',
+        image: '/kali-2024-pratima.jpg',
         description: 'Beneath a sky glowing with lamps and hope, the first Kali Pujo of PKT unfolded in sacred splendor. Amid chants, devotion, and festive gatherings, hearts united to seek Maa Kali’s divine blessings.',
         highlights: [
           'First official Kali Pujo of PKT in sacred splendor',
           'Diwali illumination, midnight mantras & community offerings',
+        ],
+        gallery: [
+          {
+            image: '/kali-2024-diya-lighting.jpg',
+            objectPosition: 'center 35%',
+            title: 'Kali Pujo 2024–25 • Sacred Diya Lighting',
+            description: 'Women devotees lighting rows of earthen diyas on banana leaves, filling the Kali Pujo pandal with a warm golden glow of devotion and hope.',
+          },
+          {
+            image: '/kali-2024-pratima.jpg',
+            objectPosition: 'center 30%',
+            title: 'Kali Pujo 2024–25 • Maa Kali Pratima',
+            description: 'The magnificent Maa Kali Pratima adorned with golden ornaments, garlands, and sacred weapons, radiating divine power at PKT Kali Pujo 2024.',
+          },
+          {
+            image: '/kali-2024-night-gathering.jpg',
+            objectPosition: 'center 40%',
+            title: 'Kali Pujo 2024–25 • Community Night Gathering',
+            description: 'Residents and organizers gathered under festive pandal lights on Kali Pujo night, celebrating community togetherness and shared devotion.',
+          },
+          {
+            image: '/kali-2024-puja-ritual.jpg',
+            objectPosition: 'center 40%',
+            title: 'Kali Pujo 2024–25 • Sacred Puja Ritual',
+            description: 'Devotees and purohit performing sacred Kali Pujo rituals with deep devotion and traditional mantras at Palava Kalibari Trust.',
+          },
         ],
       },
       {
