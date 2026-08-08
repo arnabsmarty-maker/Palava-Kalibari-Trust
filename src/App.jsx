@@ -3423,11 +3423,31 @@ const YEAR_EVENTS_DATA = {
         title: 'Kali Pujo 2025–2026',
         date: 'October 2025',
         venue: 'Palava Kalibari Grounds',
-        image: '/about-men-team.jpg',
+        image: '/kali-2025-kp1.jpg',
         description: 'Kali Pujo unfolded in an aura of devotion and festive radiance, with red hibiscus flowers, soulful mantra chanting, and glowing rows of oil lamps illuminating the celebrations. From the sacred offering of bhog to the heartfelt Bisarjan, every moment beautifully reflected faith, tradition, and togetherness.',
         highlights: [
           'Red hibiscus offerings, oil lamp illumination & mantra chanting',
           'Sacred bhog distribution and heartfelt Bisarjan ceremony',
+        ],
+        gallery: [
+          {
+            image: '/kali-2025-kp1.jpg',
+            objectPosition: 'center 40%',
+            title: 'Kali Pujo 2025–26 \u2022 Maa Kali Pratima & Priest Puja',
+            description: 'The priest reading scriptures in front of the beautifully adorned deity of Goddess Kali.',
+          },
+          {
+            image: '/kali-2025-kp2.jpg',
+            objectPosition: 'center 40%',
+            title: 'Kali Pujo 2025–26 \u2022 Pushpanjali and Prayers',
+            description: 'Devotees and resident families gathering with folded hands to offer prayers to Goddess Kali.',
+          },
+          {
+            image: '/kali-2025-kp3.jpg',
+            objectPosition: 'center 40%',
+            title: 'Kali Pujo 2025–26 \u2022 Illuminated Clay Diyas',
+            description: 'Beautiful clay diyas lighting up the pandal with a warm, festive glow.',
+          },
         ],
       },
       {
