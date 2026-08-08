@@ -3672,7 +3672,7 @@ const YEAR_EVENTS_DATA = {
   '2026-2027': {
     year: '2026–2027',
     title: 'Events & Celebrations (2026–2027)',
-    subtitle: 'Upcoming flagship festival line-up, Poila Boishakh, Rabindra Nazrul Jayanti & Durga Pujo 2026',
+    subtitle: 'Upcoming line-up featuring Poila Boishakh, Rabindra Nazrul Jayanti & Blood Donation Camp',
     events: [
       {
         title: 'Poila Boishakh 2026–2027',
@@ -3705,15 +3705,47 @@ const YEAR_EVENTS_DATA = {
         ],
       },
       {
-        title: 'Durga Pujo 2026–2027',
-        date: 'October 16 – 20, 2026',
-        venue: 'Gate No. 2, Lodha Palava Phase 2',
-        image: '/durga-idol-pratima.jpg',
-        description: 'The pinnacle 5-day cultural extravaganza celebrating Durga Puja 2026 with sponsored Maa Durga Pratima idol, An All weather Friend support by Saurabh & Adrija Ghosh, 1,000+ daily Annadan Seba, and mega stage performances.',
+        title: 'Blood Donation Camp',
+        date: '28th February 2026',
+        venue: 'Serenity Community Hall, Palava Phase 2',
+        image: '/blood-camp-2026-bc1.jpg',
+        description: 'Organised by Palava Kalibari Trust in association with TATA Cancer Research Hospital (Tata Memorial Centre), the Blood Donation Camp was a vital community welfare initiative. Residents came forward in large numbers to donate blood, reflecting our shared values of compassion, solidarity, and social service.',
         highlights: [
-          '10,000+ expected visitors across 5 festive days',
-          'An All weather Friend support by Saurabh & Adrija Ghosh & Sponsored Durga Idol',
-          'Platinum, Gold & Silver brand partnerships & 1,000+ daily Annadan Seba',
+          'Organised in association with TATA Cancer Research Hospital',
+          'Active resident participation with high blood unit collection',
+          'Certificate of appreciation and health check for all donors',
+        ],
+        gallery: [
+          {
+            image: '/blood-camp-2026-bc1.jpg',
+            objectPosition: 'center',
+            title: 'Blood Donor Camp Banner',
+            description: 'Official banner of the Blood Donor Camp held on 28th February 2026 at Serenity Community Hall.',
+          },
+          {
+            image: '/blood-camp-2026-bc5.jpg',
+            objectPosition: 'center',
+            title: 'Resident Donor in Action',
+            description: 'A dedicated Palava resident donating blood, assisted by Tata Memorial Centre medical staff.',
+          },
+          {
+            image: '/blood-camp-2026-bc2.jpg',
+            objectPosition: 'center 40%',
+            title: 'Donor Appreciation Certificate',
+            description: 'Palava Kalibari Trust organizer Rajat Sain and medical team presenting donor certificates.',
+          },
+          {
+            image: '/blood-camp-2026-bc3.jpg',
+            objectPosition: 'center',
+            title: 'Donor Form Verification',
+            description: 'Volunteers helping donors complete their medical registrations and checks.',
+          },
+          {
+            image: '/blood-camp-2026-bc4.jpg',
+            objectPosition: 'center 40%',
+            title: 'Palava Kalibari Trust & Tata Medical Team',
+            description: 'PKT members, volunteers, and Tata Memorial Centre doctors holding the official appreciation certificate.',
+          },
         ],
       },
     ],
