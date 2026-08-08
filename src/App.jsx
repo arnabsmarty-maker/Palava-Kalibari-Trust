@@ -1949,8 +1949,8 @@ function AboutSection() {
   ]
 
   const managingCommittee = [
-    { name: 'Rajat Sain', title: 'Managing Committee', image: '/mc-rajat.jpg' },
-    { name: 'Debashish Bhattacharjee', title: 'Managing Committee', image: '/mc-debashish.jpg' },
+    { name: 'Rajat Sain', title: 'President', image: '/mc-rajat.jpg' },
+    { name: 'Debashish Bhattacharjee', title: 'Secretary', image: '/mc-debashish.jpg' },
     { name: 'Saikat Basak', title: 'Managing Committee', image: '/mc-saikat.jpg' },
     { name: 'Sinchita Mukherjee', title: 'Managing Committee', image: '/mc-sinchita.jpg' },
     { name: 'Arnab Mukherjee', title: 'Managing Committee', image: '/mc-arnab.jpg' },
