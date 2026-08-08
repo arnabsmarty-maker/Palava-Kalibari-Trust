@@ -3390,10 +3390,30 @@ const YEAR_EVENTS_DATA = {
         title: 'Poila Baishakh 2025–2026',
         date: 'April 2025',
         venue: 'Palava Kalibari Grounds',
-        image: '/about-organizers-duo.jpg',
+        image: '/poila-2025-pb1.jpg',
         description: 'With hearts blooming in festive cheer, Poila Boishakh arrived like a joyful melody of spring. Laughter, music, and warm wishes filled the air as loved ones came together, celebrating Bengal’s rich heritage with hope, happiness, and the promise of new beginnings.',
         highlights: [
           'Noboborsho spring melodies, traditional attire & feast',
+        ],
+        gallery: [
+          {
+            image: '/poila-2025-pb1.jpg',
+            objectPosition: 'center 40%',
+            title: 'Poila Baishakh 2025–26 \u2022 Community Performance & Recognition',
+            description: 'Palava Kalibari Trust members posing on stage with certificates of appreciation during the Noboborsho celebrations.',
+          },
+          {
+            image: '/poila-2025-pb2.jpg',
+            objectPosition: 'center 40%',
+            title: 'Poila Baishakh 2025–26 \u2022 Youth Anchors & Performers',
+            description: 'Young community members acting as anchors and performers, steering the cultural evening with confidence.',
+          },
+          {
+            image: '/poila-2025-pb3.jpg',
+            objectPosition: 'center 40%',
+            title: 'Poila Baishakh 2025–26 \u2022 Traditional Dance Performance',
+            description: 'Children performing a graceful classical dance routine on stage in traditional attire.',
+          },
         ],
       },
       {
