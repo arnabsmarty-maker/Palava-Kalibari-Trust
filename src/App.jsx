@@ -3056,7 +3056,7 @@ const YEAR_EVENTS_DATA = {
         date: 'February 2024',
         venue: 'Palava Kalibari Grounds',
         image: '/saraswati-2024-girls.jpg',
-        objectPosition: 'center bottom',
+        objectPosition: 'center 40%',
         description: 'Young resident children of Palava enthusiastically preparing fresh marigold garlands and sacred offerings for Maa Saraswati.',
         highlights: [
           'Active youth & children participation in puja preparations',
@@ -3068,7 +3068,7 @@ const YEAR_EVENTS_DATA = {
         date: 'February 2024',
         venue: 'Palava Kalibari Grounds',
         image: '/saraswati-2024-prasad-prep.jpg',
-        objectPosition: 'center bottom',
+        objectPosition: 'center 35%',
         description: 'Devoted women members of Palava Kalibari Trust carefully preparing fresh fruits, sweets, and bhog prasad offerings for Goddess Saraswati.',
         highlights: [
           'Devotional women members preparing sacred bhog & fruit platters',
