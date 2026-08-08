@@ -3679,6 +3679,7 @@ const YEAR_EVENTS_DATA = {
         date: 'April 2026',
         venue: 'Palava Kalibari Cultural Hall',
         image: '/poila-2026-pb1.jpg',
+        imageFit: 'contain',
         description: 'Poila Boishakh welcomed the Bengali New Year with festive cheer, authentic Bengali cuisine, and joyful get-togethers in traditional attire. The celebrations came alive with Bengali folk music and soulful poetry recitations, beautifully capturing the warmth, culture, and spirit of Bengal.',
         highlights: [
           'Authentic Bengali cuisine, traditional attire & Noboborsho meetup',
@@ -3729,6 +3730,7 @@ const YEAR_EVENTS_DATA = {
         date: '28th February 2026',
         venue: 'Serenity Community Hall, Palava Phase 2',
         image: '/blood-camp-2026-bc1.jpg',
+        imageFit: 'contain',
         description: 'Organised by Palava Kalibari Trust in association with TATA Cancer Research Hospital (Tata Memorial Centre), the Blood Donation Camp was a vital community welfare initiative. Residents came forward in large numbers to donate blood, reflecting our shared values of compassion, solidarity, and social service.',
         highlights: [
           'Organised in association with TATA Cancer Research Hospital',
@@ -3801,7 +3803,9 @@ function EventCard({ event, eventNumber }) {
                 key={i}
                 src={g.image}
                 alt={g.title || event.title}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+                  event.imageFit === 'contain' ? 'object-contain' : 'object-cover'
+                } ${
                   i === galleryIdx ? 'opacity-100' : 'opacity-0 pointer-events-none'
                 }`}
                 style={{ objectPosition: g.objectPosition || event.objectPosition || 'center' }}
@@ -3854,7 +3858,9 @@ function EventCard({ event, eventNumber }) {
           <img
             src={event.image}
             alt={event.title}
-            className="w-full h-full object-cover"
+            className={`w-full h-full ${
+              event.imageFit === 'contain' ? 'object-contain' : 'object-cover'
+            }`}
             style={{ objectPosition: event.objectPosition || 'center' }}
           />
         )}
