@@ -3795,7 +3795,11 @@ function EventCard({ event, eventNumber }) {
     <div className="w-full rounded-3xl border-2 border-gold/50 overflow-hidden shadow-[0_0_30px_rgba(255,215,0,0.2)] hover:shadow-[0_0_45px_rgba(255,215,0,0.35)] transition-shadow duration-500">
 
       {/* ── Image Section ── */}
-      <div className="relative w-full h-[400px] sm:h-[480px] md:h-[560px] bg-black overflow-hidden">
+      <div className={`relative w-full bg-black overflow-hidden ${
+        event.imageFit === 'contain'
+          ? 'aspect-[3/2] sm:aspect-[16/10] md:aspect-[16/9]'
+          : 'h-[400px] sm:h-[480px] md:h-[560px]'
+      }`}>
         {hasGallery ? (
           <>
             {event.gallery.map((g, i) => (
