@@ -206,6 +206,19 @@ const ILISH_2026_MEDIA = [
 ]
 
 // ── Dedicated Media Renderers for Event Gallery ────
+function WideLandscapeViewer({ media, isEager }) {
+  return (
+    <div className="relative w-full h-full overflow-hidden bg-[#111]">
+      <img
+        src={media.src}
+        alt={media.alt}
+        loading={isEager ? 'eager' : 'lazy'}
+        className="w-full h-full object-cover object-center"
+      />
+    </div>
+  )
+}
+
 function PortraitPhotoViewer({ media, isEager }) {
   return (
     <div className="relative w-full h-full overflow-hidden flex items-center justify-center bg-[#111]">
@@ -225,16 +238,49 @@ function PortraitPhotoViewer({ media, isEager }) {
   )
 }
 
-function LandscapePhotoViewer({ media, isEager }) {
+function StandardPhotoViewer({ media, isEager }) {
   return (
-    <div className="relative w-full h-full overflow-hidden">
+    <div className="relative w-full h-full overflow-hidden flex items-center justify-center bg-[#111]">
+      <img
+        src={media.src}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-40 scale-110 pointer-events-none"
+      />
       <img
         src={media.src}
         alt={media.alt}
         loading={isEager ? 'eager' : 'lazy'}
-        className="w-full h-full object-cover object-center"
-        style={{ objectPosition: media.objectPosition || 'center 15%' }}
+        className="relative z-10 max-w-full max-h-full object-contain object-center drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
       />
+    </div>
+  )
+}
+
+function AdaptivePhotoRenderer({ media, isEager }) {
+  const [aspectRatio, setAspectRatio] = useState(
+    media.aspectRatio || (media.orientation === 'portrait' ? 0.75 : 1.333)
+  )
+
+  return (
+    <div className="w-full h-full relative">
+      <img
+        src={media.src}
+        alt=""
+        className="hidden"
+        onLoad={(e) => {
+          if (e.target.naturalWidth && e.target.naturalHeight) {
+            setAspectRatio(e.target.naturalWidth / e.target.naturalHeight)
+          }
+        }}
+      />
+      {aspectRatio > 1.35 ? (
+        <WideLandscapeViewer media={media} isEager={isEager} />
+      ) : aspectRatio < 0.9 ? (
+        <PortraitPhotoViewer media={media} isEager={isEager} />
+      ) : (
+        <StandardPhotoViewer media={media} isEager={isEager} />
+      )}
     </div>
   )
 }
@@ -333,10 +379,8 @@ function IlishRecap2026Section() {
                       setPlaying(true)
                     }}
                   />
-                ) : m.orientation === 'portrait' || m.fit === 'contain' ? (
-                  <PortraitPhotoViewer media={m} isEager={idx === 0} />
                 ) : (
-                  <LandscapePhotoViewer media={m} isEager={idx === 0} />
+                  <AdaptivePhotoRenderer media={m} isEager={idx === 0} />
                 )}
               </div>
             ))}
