@@ -144,14 +144,16 @@ function AutoImage({ src, alt, className = '', icon: Icon = ImageIcon, style = {
 
 // ── Recently concluded: Ilish Utsav 2026 (full-screen recap) ──
 const ILISH_2026_PHOTOS = [
-  { src: '/ilish-2026-1.jpg', alt: 'Members and families celebrating Ilish Utsav 2026' },
-  { src: '/ilish-2026-2.jpg', alt: 'Youth of Palava Kalibari Trust at Ilish Utsav 2026' },
-  { src: '/ilish-2026-3.jpg', alt: 'PKT members together at Ilish Utsav 2026' },
-  { src: '/ilish-2026-4.jpg', alt: 'Joyful moments at Ilish Utsav 2026' },
-  { src: '/ilish-2026-5.jpg', alt: 'Community lunch by Utkala Banga at Ilish Utsav 2026' },
+  { src: '/ilish-2026-1.jpg', alt: 'Members and families celebrating Ilish Utsav 2026', title: 'A Great Time Together', objectPosition: 'center 10%' },
+  { src: '/ilish-2026-2.jpg', alt: 'Youth of Palava Kalibari Trust at Ilish Utsav 2026', title: 'Youth Performers & Members', objectPosition: 'center 15%' },
+  { src: '/ilish-2026-3.jpg', alt: 'PKT members together at Ilish Utsav 2026', title: 'Community Gathering', objectPosition: 'center 15%' },
+  { src: '/ilish-2026-4.jpg', alt: 'Joyful moments at Ilish Utsav 2026', title: 'Joyful Moments & Smiles', objectPosition: 'center 10%' },
+  { src: '/ilish-2026-5.jpg', alt: 'Community lunch by Utkala Banga at Ilish Utsav 2026', title: 'Utkala Banga Feast', objectPosition: 'center 20%' },
 ]
 
 function IlishRecap2026Section() {
+  const [lightboxIdx, setLightboxIdx] = useState(null)
+
   return (
     <section
       id="ilish-2026"
@@ -178,21 +180,27 @@ function IlishRecap2026Section() {
 
         {/* Full-width featured photo */}
         <div className="reveal w-full">
-          <div className="group relative overflow-hidden rounded-2xl md:rounded-3xl border-2 border-gold/40 shadow-2xl bg-white">
+          <div
+            onClick={() => setLightboxIdx(0)}
+            className="group relative overflow-hidden rounded-2xl md:rounded-3xl border-2 border-gold/40 shadow-2xl bg-white cursor-pointer"
+          >
             <AutoImage
               src={ILISH_2026_PHOTOS[0].src}
               alt={ILISH_2026_PHOTOS[0].alt}
               icon={Users}
               className="w-full h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[85vh] transition-transform duration-[1200ms] group-hover:scale-105"
-              style={{ objectPosition: 'center 10%' }}
+              style={{ objectPosition: ILISH_2026_PHOTOS[0].objectPosition }}
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-maroon-deep/80 via-maroon-deep/10 to-transparent" />
             <div className="absolute bottom-5 left-6 md:bottom-9 md:left-10 right-6">
               <span className="inline-flex items-center gap-2 bg-gold text-maroon-deep text-xs md:text-sm font-bold px-3.5 py-1.5 rounded-full mb-3 shadow-md">
                 <Users className="w-4 h-4" /> 60+ Members &amp; Families
               </span>
-              <h3 className="font-display text-2xl md:text-5xl font-bold text-ivory-warm drop-shadow-[0_2px_12px_rgba(0,0,0,0.75)]">
-                A Great Time Together
+              <h3 className="font-display text-2xl md:text-5xl font-bold text-ivory-warm drop-shadow-[0_2px_12px_rgba(0,0,0,0.75)] flex items-center gap-3">
+                <span>{ILISH_2026_PHOTOS[0].title}</span>
+                <span className="text-xs font-normal text-gold-bright bg-black/40 border border-gold/40 px-2.5 py-1 rounded-full backdrop-blur opacity-0 group-hover:opacity-100 transition-opacity">
+                  Click for Fullscreen ↗
+                </span>
               </h3>
             </div>
           </div>
@@ -249,20 +257,30 @@ function IlishRecap2026Section() {
           </div>
         </div>
 
-        {/* Photo grid */}
-        <div className="reveal grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+        {/* Photo grid - 4 images rendered with proper height and objectPosition */}
+        <div className="reveal grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
           {ILISH_2026_PHOTOS.slice(1).map((p, i) => (
             <div
               key={i}
-              className="group relative overflow-hidden rounded-2xl border-2 border-gold/30 shadow-lg"
+              onClick={() => setLightboxIdx(i + 1)}
+              className="group relative overflow-hidden rounded-2xl border-2 border-gold/40 bg-white shadow-xl cursor-pointer hover:border-gold transition-all duration-300 hover:scale-[1.02]"
             >
               <AutoImage
                 src={p.src}
                 alt={p.alt}
                 icon={Users}
-                className="w-full h-52 md:h-64 transition-transform duration-500 group-hover:scale-110"
+                className="w-full h-72 sm:h-80 md:h-[360px] lg:h-[380px] transition-transform duration-500 group-hover:scale-105"
+                style={{ objectPosition: p.objectPosition || 'center 15%' }}
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-maroon-deep/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+              <div className="absolute bottom-3 left-4 right-4 text-left">
+                <span className="text-xs font-bold text-gold-bright drop-shadow-md block">
+                  {p.title}
+                </span>
+                <span className="text-[11px] text-ivory-cream/80 truncate block mt-0.5">
+                  Click to view full ↗
+                </span>
+              </div>
             </div>
           ))}
         </div>
@@ -295,6 +313,83 @@ function IlishRecap2026Section() {
           </p>
         </div>
       </div>
+
+      {/* Lightbox Modal for Full-screen Photo View */}
+      {lightboxIdx !== null && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col justify-between p-4 sm:p-6 animate-fade-in"
+          onClick={() => setLightboxIdx(null)}
+        >
+          {/* Header Bar */}
+          <div
+            className="w-full max-w-6xl mx-auto flex items-center justify-between py-2 text-ivory-warm z-10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3">
+              <span className="bg-gold/20 border border-gold/40 text-gold-bright text-xs font-bold px-3 py-1 rounded-full">
+                Photo {lightboxIdx + 1} of {ILISH_2026_PHOTOS.length}
+              </span>
+              <h4 className="font-display font-bold text-sm sm:text-base text-gold-bright truncate max-w-md">
+                {ILISH_2026_PHOTOS[lightboxIdx].title}
+              </h4>
+            </div>
+
+            <button
+              onClick={() => setLightboxIdx(null)}
+              className="p-2 rounded-full bg-white/10 hover:bg-gold hover:text-maroon-deep text-ivory-warm transition-all"
+              aria-label="Close photo"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Main Fullscreen Image Area */}
+          <div
+            className="relative flex-1 flex items-center justify-center my-2 max-w-6xl mx-auto w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Prev Arrow */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setLightboxIdx((prev) => (prev === 0 ? ILISH_2026_PHOTOS.length - 1 : prev - 1))
+              }}
+              className="absolute left-2 sm:left-4 z-20 p-3 rounded-full bg-black/60 border border-gold/40 hover:bg-gold hover:text-maroon-deep text-gold-bright transition-all shadow-2xl"
+              aria-label="Previous photo"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            <img
+              src={ILISH_2026_PHOTOS[lightboxIdx].src}
+              alt={ILISH_2026_PHOTOS[lightboxIdx].alt}
+              className="max-h-[78vh] max-w-[92vw] object-contain rounded-2xl border-2 border-gold/40 shadow-2xl"
+            />
+
+            {/* Next Arrow */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setLightboxIdx((prev) => (prev === ILISH_2026_PHOTOS.length - 1 ? 0 : prev + 1))
+              }}
+              className="absolute right-2 sm:right-4 z-20 p-3 rounded-full bg-black/60 border border-gold/40 hover:bg-gold hover:text-maroon-deep text-gold-bright transition-all shadow-2xl"
+              aria-label="Next photo"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Bottom Caption Bar */}
+          <div
+            className="w-full max-w-4xl mx-auto text-center py-2 z-10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p className="text-xs sm:text-sm text-ivory-cream/80 bg-black/50 border border-gold/30 px-4 py-2 rounded-full inline-block backdrop-blur">
+              {ILISH_2026_PHOTOS[lightboxIdx].alt}
+            </p>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
