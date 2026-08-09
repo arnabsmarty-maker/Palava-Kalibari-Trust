@@ -143,12 +143,60 @@ function AutoImage({ src, alt, className = '', icon: Icon = ImageIcon, style = {
 }
 
 // ── Recently concluded: Ilish Utsav 2026 (full-screen recap) ──
-const ILISH_2026_PHOTOS = [
-  { src: '/ilish-2026-1.jpg', alt: 'Members and families celebrating Ilish Utsav 2026', title: 'A Great Time Together', objectPosition: 'center 10%' },
-  { src: '/ilish-2026-2.jpg', alt: 'Youth of Palava Kalibari Trust at Ilish Utsav 2026', title: 'Youth Performers & Members', objectPosition: 'center 15%' },
-  { src: '/ilish-2026-3.jpg', alt: 'PKT members together at Ilish Utsav 2026', title: 'Community Gathering', objectPosition: 'center 15%' },
-  { src: '/ilish-2026-4.jpg', alt: 'Joyful moments at Ilish Utsav 2026', title: 'Joyful Moments & Smiles', objectPosition: 'center 10%' },
-  { src: '/ilish-2026-5.jpg', alt: 'Community lunch by Utkala Banga at Ilish Utsav 2026', title: 'Utkala Banga Feast', objectPosition: 'center 20%' },
+const ILISH_2026_MEDIA = [
+  {
+    type: 'image',
+    src: '/ilish-2026-1.jpg',
+    alt: 'Members and families celebrating Ilish Utsav 2026',
+    title: 'A Great Time Together',
+    subtitle: 'More than 60 members and families joined for Ilish Utsav 2026 & Website Launch',
+    badge: '60+ Members & Families',
+    objectPosition: 'center 10%',
+  },
+  {
+    type: 'video',
+    src: '/ilish-2026-recap.mp4',
+    alt: '15-second Event Recap Video',
+    title: 'Ilish Utsav 2026 — Highlight Reel',
+    subtitle: 'Highlights of delicious food, hospitality & community celebrations',
+    badge: '15s Video Recap',
+  },
+  {
+    type: 'image',
+    src: '/ilish-2026-2.jpg',
+    alt: 'Youth of Palava Kalibari Trust at Ilish Utsav 2026',
+    title: 'Youth Performers & Members',
+    subtitle: 'Young members leading the Noboborsho & Ilish Utsav celebrations',
+    badge: 'Youth & Performers',
+    objectPosition: 'center 15%',
+  },
+  {
+    type: 'image',
+    src: '/ilish-2026-3.jpg',
+    alt: 'PKT members together at Ilish Utsav 2026',
+    title: 'Community Gathering',
+    subtitle: 'Celebrating Bengal’s culinary heritage together in Dombivli',
+    badge: 'PKT Members',
+    objectPosition: 'center 15%',
+  },
+  {
+    type: 'image',
+    src: '/ilish-2026-4.jpg',
+    alt: 'Joyful moments at Ilish Utsav 2026',
+    title: 'Joyful Moments & Smiles',
+    subtitle: 'Warm smiles and unforgettable memories at Ilish Utsav 2026',
+    badge: 'Celebrations',
+    objectPosition: 'center 10%',
+  },
+  {
+    type: 'image',
+    src: '/ilish-2026-5.jpg',
+    alt: 'Community lunch by Utkala Banga at Ilish Utsav 2026',
+    title: 'Lunch by Utkala Banga',
+    subtitle: 'Heartfelt thanks to Utkala Banga team for serving wonderful lunch',
+    badge: 'Utkala Banga Feast',
+    objectPosition: 'center 20%',
+  },
 ]
 
 function IlishRecap2026Section() {
@@ -156,16 +204,16 @@ function IlishRecap2026Section() {
   const [playing, setPlaying] = useState(true)
   const [lightboxIdx, setLightboxIdx] = useState(null)
 
-  // Auto-slideshow
+  const currentMedia = ILISH_2026_MEDIA[activeIdx]
+
+  // Auto-slideshow (only when current media is an image and playing is true)
   useEffect(() => {
-    if (!playing) return
+    if (!playing || currentMedia.type === 'video') return
     const timer = setInterval(() => {
-      setActiveIdx((prev) => (prev + 1) % ILISH_2026_PHOTOS.length)
+      setActiveIdx((prev) => (prev + 1) % ILISH_2026_MEDIA.length)
     }, 4500)
     return () => clearInterval(timer)
-  }, [playing])
-
-  const currentPhoto = ILISH_2026_PHOTOS[activeIdx]
+  }, [playing, currentMedia.type])
 
   return (
     <section
@@ -191,48 +239,67 @@ function IlishRecap2026Section() {
           </div>
         </div>
 
-        {/* ── FULL-SCREEN FEATURED SHOWCASE STAGE (ALL 5 PHOTOS) ── */}
+        {/* ── FULL-SCREEN SHOWCASE STAGE (IMAGES + VIDEO RECAP) ── */}
         <div className="reveal w-full">
-          <div className="group relative overflow-hidden rounded-3xl border-2 border-gold/50 shadow-[0_0_40px_rgba(255,215,0,0.25)] bg-black">
+          <div className="group relative overflow-hidden rounded-3xl border-2 border-gold/50 shadow-[0_0_45px_rgba(255,215,0,0.3)] bg-black">
             {/* Stage Container */}
             <div
-              className="relative w-full h-[480px] sm:h-[580px] md:h-[680px] lg:h-[750px] cursor-pointer overflow-hidden"
+              className="relative w-full h-[520px] sm:h-[620px] md:h-[720px] lg:h-[820px] cursor-pointer overflow-hidden"
               onClick={() => setLightboxIdx(activeIdx)}
             >
-              {ILISH_2026_PHOTOS.map((p, idx) => (
-                <img
+              {ILISH_2026_MEDIA.map((m, idx) => (
+                <div
                   key={idx}
-                  src={p.src}
-                  alt={p.alt}
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-                    idx === activeIdx ? 'opacity-100 scale-100' : 'opacity-0 pointer-events-none scale-105'
+                  className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+                    idx === activeIdx ? 'opacity-100 scale-100 z-10' : 'opacity-0 pointer-events-none scale-105 z-0'
                   }`}
-                  style={{ objectPosition: p.objectPosition || 'center 15%' }}
-                />
+                >
+                  {m.type === 'video' ? (
+                    <video
+                      src={m.src}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      controls
+                      className="w-full h-full object-cover"
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                  ) : (
+                    <img
+                      src={m.src}
+                      alt={m.alt}
+                      className="w-full h-full object-cover"
+                      style={{ objectPosition: m.objectPosition || 'center 15%' }}
+                    />
+                  )}
+                </div>
               ))}
 
               {/* Top Gradient Vignette */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/80 via-black/30 to-transparent z-10" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/80 via-black/30 to-transparent z-20" />
 
               {/* Bottom Gradient Vignette */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/95 via-black/45 to-transparent z-20" />
 
-              {/* Top Left Badge: Photo Counter */}
-              <div className="absolute top-5 left-6 z-20">
+              {/* Top Left Badge: Counter */}
+              <div className="absolute top-5 left-6 z-30">
                 <span className="inline-flex items-center gap-2 bg-black/75 border border-gold/60 text-gold-bright text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full shadow-xl backdrop-blur">
-                  <Sparkles className="w-4 h-4 text-gold-bright" /> Photo {activeIdx + 1} of {ILISH_2026_PHOTOS.length}
+                  <Sparkles className="w-4 h-4 text-gold-bright" /> {currentMedia.type === 'video' ? 'Video Reel' : `Photo ${activeIdx + 1} of ${ILISH_2026_MEDIA.length}`}
                 </span>
               </div>
 
               {/* Top Right Controls: Play/Pause + Fullscreen */}
-              <div className="absolute top-5 right-6 z-20 flex items-center gap-2.5" onClick={(e) => e.stopPropagation()}>
-                <button
-                  onClick={() => setPlaying(!playing)}
-                  className="bg-black/75 hover:bg-gold hover:text-maroon-deep text-gold-bright border border-gold/50 p-2.5 rounded-full transition-all backdrop-blur shadow-xl"
-                  title={playing ? 'Pause Slideshow' : 'Play Slideshow'}
-                >
-                  {playing ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                </button>
+              <div className="absolute top-5 right-6 z-30 flex items-center gap-2.5" onClick={(e) => e.stopPropagation()}>
+                {currentMedia.type === 'image' && (
+                  <button
+                    onClick={() => setPlaying(!playing)}
+                    className="bg-black/75 hover:bg-gold hover:text-maroon-deep text-gold-bright border border-gold/50 p-2.5 rounded-full transition-all backdrop-blur shadow-xl"
+                    title={playing ? 'Pause Slideshow' : 'Play Slideshow'}
+                  >
+                    {playing ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                  </button>
+                )}
                 <button
                   onClick={() => setLightboxIdx(activeIdx)}
                   className="bg-black/75 hover:bg-gold hover:text-maroon-deep text-gold-bright border border-gold/50 px-3.5 py-1.5 rounded-full transition-all backdrop-blur shadow-xl text-xs font-bold flex items-center gap-1.5"
@@ -246,10 +313,10 @@ function IlishRecap2026Section() {
               <button
                 onClick={(e) => {
                   e.stopPropagation()
-                  setActiveIdx((prev) => (prev === 0 ? ILISH_2026_PHOTOS.length - 1 : prev - 1))
+                  setActiveIdx((prev) => (prev === 0 ? ILISH_2026_MEDIA.length - 1 : prev - 1))
                 }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/70 border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all backdrop-blur shadow-2xl"
-                aria-label="Previous photo"
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-black/70 border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all backdrop-blur shadow-2xl"
+                aria-label="Previous media"
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
@@ -257,31 +324,32 @@ function IlishRecap2026Section() {
               <button
                 onClick={(e) => {
                   e.stopPropagation()
-                  setActiveIdx((prev) => (prev + 1) % ILISH_2026_PHOTOS.length)
+                  setActiveIdx((prev) => (prev + 1) % ILISH_2026_MEDIA.length)
                 }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/70 border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all backdrop-blur shadow-2xl"
-                aria-label="Next photo"
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-black/70 border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all backdrop-blur shadow-2xl"
+                aria-label="Next media"
               >
                 <ChevronRight className="w-6 h-6" />
               </button>
 
-              {/* Bottom Stage Overlay: Active Photo Info */}
-              <div className="absolute bottom-6 left-6 md:bottom-8 md:left-10 right-6 z-20">
+              {/* Bottom Stage Overlay: Active Media Info */}
+              <div className="absolute bottom-6 left-6 md:bottom-8 md:left-10 right-6 z-30 pointer-events-none">
                 <span className="inline-flex items-center gap-2 bg-gold text-maroon-deep text-xs md:text-sm font-bold px-3.5 py-1.5 rounded-full mb-2 shadow-md">
-                  <Users className="w-4 h-4" /> {currentPhoto.badge || 'Ilish Utsav 2026'}
+                  {currentMedia.type === 'video' ? <Play className="w-4 h-4" fill="currentColor" /> : <Users className="w-4 h-4" />}
+                  {currentMedia.badge || 'Ilish Utsav 2026'}
                 </span>
                 <h3 className="font-display text-2xl md:text-4xl lg:text-5xl font-bold text-ivory-warm drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
-                  {currentPhoto.title}
+                  {currentMedia.title}
                 </h3>
                 <p className="text-sm md:text-base text-ivory-cream/85 drop-shadow-md max-w-2xl mt-1 hidden sm:block">
-                  {currentPhoto.subtitle || currentPhoto.alt}
+                  {currentMedia.subtitle || currentMedia.alt}
                 </p>
               </div>
             </div>
 
             {/* ── THUMBNAIL SELECTOR STRIP BELOW STAGE ── */}
             <div className="bg-[#120006] p-3 sm:p-4 border-t border-gold/30 flex items-center justify-center gap-2 sm:gap-3 overflow-x-auto">
-              {ILISH_2026_PHOTOS.map((p, idx) => (
+              {ILISH_2026_MEDIA.map((m, idx) => (
                 <button
                   key={idx}
                   onClick={() => setActiveIdx(idx)}
@@ -291,12 +359,21 @@ function IlishRecap2026Section() {
                       : 'border-white/20 opacity-60 hover:opacity-100 hover:border-gold/60'
                   } w-20 sm:w-28 md:w-32 h-14 sm:h-16 md:h-20`}
                 >
-                  <img
-                    src={p.src}
-                    alt={p.title}
-                    className="w-full h-full object-cover"
-                    style={{ objectPosition: p.objectPosition || 'center 15%' }}
-                  />
+                  {m.type === 'video' ? (
+                    <div className="w-full h-full bg-slate-900 grid place-items-center relative">
+                      <Play className="w-6 h-6 text-gold-bright z-10" fill="currentColor" />
+                      <span className="absolute bottom-1 right-1 text-[9px] font-bold text-gold-bright bg-black/80 px-1 rounded">
+                        VIDEO
+                      </span>
+                    </div>
+                  ) : (
+                    <img
+                      src={m.src}
+                      alt={m.title}
+                      className="w-full h-full object-cover"
+                      style={{ objectPosition: m.objectPosition || 'center 15%' }}
+                    />
+                  )}
                   <div className={`absolute inset-0 transition-opacity ${idx === activeIdx ? 'bg-transparent' : 'bg-black/30'}`} />
                 </button>
               ))}
@@ -304,36 +381,59 @@ function IlishRecap2026Section() {
           </div>
         </div>
 
-        {/* Video recap */}
-        <div className="reveal mt-14 w-full">
-          <div className="text-center mb-5">
-            <h3 className="font-display text-2xl md:text-3xl font-bold text-maroon inline-flex items-center gap-2">
-              <Play className="w-6 h-6 text-gold-deep" fill="currentColor" /> Event Recap
+        {/* Event write-up + highlights */}
+        <div className="reveal mt-8 grid lg:grid-cols-3 gap-6 items-stretch">
+          <div className="lg:col-span-2 bg-white/80 backdrop-blur border border-gold/30 rounded-2xl p-6 md:p-8 shadow-lg">
+            <h3 className="font-display text-2xl md:text-3xl font-bold text-maroon mb-4">
+              A Day to Remember
             </h3>
-            <p className="text-charcoal/60 text-sm mt-1">A 15-second highlight reel</p>
+            <p className="text-charcoal/85 leading-relaxed text-base md:text-lg">
+              More than <strong>60 members</strong> joined us for Ilish Utsav 2026 —
+              the very day we proudly <strong>launched our new website!</strong> It
+              was a wonderful time spent with members and their families, filled with
+              delicious food, laughter, and togetherness.
+            </p>
+            <p className="text-charcoal/85 leading-relaxed text-base md:text-lg mt-4">
+              Our heartfelt gratitude to every member who joined and made the day so
+              special. A special thank you to <strong>Utkala Banga</strong> for the
+              wonderful lunch, and to their dedicated support staff for their warm
+              hospitality. 🙏
+            </p>
           </div>
-          <div className="relative w-full p-1.5 rounded-3xl bg-gradient-to-r from-gold-bright via-gold to-gold-deep shadow-gold-lg overflow-hidden">
-            <video
-              src="/ilish-2026-recap.mp4"
-              className="w-full h-[480px] sm:h-[580px] md:h-[680px] lg:h-[750px] rounded-2xl bg-black object-cover"
-              controls
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-            />
-            <span className="absolute top-4 right-4 inline-flex items-center gap-1.5 bg-maroon-deep/80 border border-gold/40 text-gold-bright text-xs font-semibold px-3.5 py-1.5 rounded-full backdrop-blur z-10 shadow-lg">
-              <Clock className="w-3.5 h-3.5" /> 15s Recap
-            </span>
+
+          <div className="bg-gradient-to-br from-maroon to-maroon-deep rounded-2xl p-6 md:p-8 shadow-lg text-ivory-warm flex flex-col justify-center gap-5">
+            <div className="flex items-center gap-3">
+              <span className="grid place-items-center w-12 h-12 rounded-full bg-gold text-maroon-deep shrink-0">
+                <Users className="w-6 h-6" />
+              </span>
+              <div>
+                <div className="font-display text-3xl font-bold text-gold-bright leading-none">60+</div>
+                <div className="text-sm text-ivory-cream/80 mt-1">Members &amp; family joined</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="grid place-items-center w-12 h-12 rounded-full bg-gold text-maroon-deep shrink-0">
+                <Sparkles className="w-6 h-6" />
+              </span>
+              <div>
+                <div className="font-display text-lg font-bold text-gold-bright leading-tight">Website Launch</div>
+                <div className="text-sm text-ivory-cream/80">Unveiled on the day</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="grid place-items-center w-12 h-12 rounded-full bg-gold text-maroon-deep shrink-0">
+                <UtensilsCrossed className="w-6 h-6" />
+              </span>
+              <div>
+                <div className="font-display text-lg font-bold text-gold-bright leading-tight">Lunch by Utkala Banga</div>
+                <div className="text-sm text-ivory-cream/80">With gratitude to their team</div>
+              </div>
+            </div>
           </div>
-          <p className="text-center italic text-charcoal/65 mt-5 text-sm md:text-base">
-            Our recently concluded event — Ilish Utsav 2026, Palava Kalibari Trust.
-          </p>
         </div>
       </div>
 
-      {/* Lightbox Modal for Full-screen Photo View */}
+      {/* Lightbox Modal for Full-screen Photo/Video View */}
       {lightboxIdx !== null && (
         <div
           className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col justify-between p-4 sm:p-6 animate-fade-in"
@@ -346,23 +446,23 @@ function IlishRecap2026Section() {
           >
             <div className="flex items-center gap-3">
               <span className="bg-gold/20 border border-gold/40 text-gold-bright text-xs font-bold px-3 py-1 rounded-full">
-                Photo {lightboxIdx + 1} of {ILISH_2026_PHOTOS.length}
+                {ILISH_2026_MEDIA[lightboxIdx].type === 'video' ? 'Video' : `Photo ${lightboxIdx + 1} of ${ILISH_2026_MEDIA.length}`}
               </span>
               <h4 className="font-display font-bold text-sm sm:text-base text-gold-bright truncate max-w-md">
-                {ILISH_2026_PHOTOS[lightboxIdx].title}
+                {ILISH_2026_MEDIA[lightboxIdx].title}
               </h4>
             </div>
 
             <button
               onClick={() => setLightboxIdx(null)}
               className="p-2 rounded-full bg-white/10 hover:bg-gold hover:text-maroon-deep text-ivory-warm transition-all"
-              aria-label="Close photo"
+              aria-label="Close lightbox"
             >
               <X className="w-6 h-6" />
             </button>
           </div>
 
-          {/* Main Fullscreen Image Area */}
+          {/* Main Fullscreen Media Area */}
           <div
             className="relative flex-1 flex items-center justify-center my-2 max-w-6xl mx-auto w-full"
             onClick={(e) => e.stopPropagation()}
@@ -371,28 +471,37 @@ function IlishRecap2026Section() {
             <button
               onClick={(e) => {
                 e.stopPropagation()
-                setLightboxIdx((prev) => (prev === 0 ? ILISH_2026_PHOTOS.length - 1 : prev - 1))
+                setLightboxIdx((prev) => (prev === 0 ? ILISH_2026_MEDIA.length - 1 : prev - 1))
               }}
               className="absolute left-2 sm:left-4 z-20 p-3 rounded-full bg-black/60 border border-gold/40 hover:bg-gold hover:text-maroon-deep text-gold-bright transition-all shadow-2xl"
-              aria-label="Previous photo"
+              aria-label="Previous media"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
 
-            <img
-              src={ILISH_2026_PHOTOS[lightboxIdx].src}
-              alt={ILISH_2026_PHOTOS[lightboxIdx].alt}
-              className="max-h-[78vh] max-w-[92vw] object-contain rounded-2xl border-2 border-gold/40 shadow-2xl"
-            />
+            {ILISH_2026_MEDIA[lightboxIdx].type === 'video' ? (
+              <video
+                src={ILISH_2026_MEDIA[lightboxIdx].src}
+                controls
+                autoPlay
+                className="max-h-[78vh] max-w-[92vw] object-contain rounded-2xl border-2 border-gold/40 shadow-2xl bg-black"
+              />
+            ) : (
+              <img
+                src={ILISH_2026_MEDIA[lightboxIdx].src}
+                alt={ILISH_2026_MEDIA[lightboxIdx].alt}
+                className="max-h-[78vh] max-w-[92vw] object-contain rounded-2xl border-2 border-gold/40 shadow-2xl"
+              />
+            )}
 
             {/* Next Arrow */}
             <button
               onClick={(e) => {
                 e.stopPropagation()
-                setLightboxIdx((prev) => (prev === ILISH_2026_PHOTOS.length - 1 ? 0 : prev + 1))
+                setLightboxIdx((prev) => (prev === ILISH_2026_MEDIA.length - 1 ? 0 : prev + 1))
               }}
               className="absolute right-2 sm:right-4 z-20 p-3 rounded-full bg-black/60 border border-gold/40 hover:bg-gold hover:text-maroon-deep text-gold-bright transition-all shadow-2xl"
-              aria-label="Next photo"
+              aria-label="Next media"
             >
               <ChevronRight className="w-6 h-6" />
             </button>
@@ -404,7 +513,7 @@ function IlishRecap2026Section() {
             onClick={(e) => e.stopPropagation()}
           >
             <p className="text-xs sm:text-sm text-ivory-cream/80 bg-black/50 border border-gold/30 px-4 py-2 rounded-full inline-block backdrop-blur">
-              {ILISH_2026_PHOTOS[lightboxIdx].alt}
+              {ILISH_2026_MEDIA[lightboxIdx].alt}
             </p>
           </div>
         </div>
