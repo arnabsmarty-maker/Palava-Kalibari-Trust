@@ -2041,7 +2041,7 @@ function AboutSection() {
     { name: 'Soumyajit Chowdhury', title: 'Managing Committee', image: '/mc-soumyajit.jpg' },
     { name: 'Anup Duari', title: 'Managing Committee', image: '/mc-anup.jpg' },
     { name: 'Pritam Roy', title: 'Managing Committee', image: '/mc-pritam.jpg' },
-    { name: 'Subhaasish Bhattacharya', title: 'Managing Committee', image: '/mc-subhaasish.jpg' },
+    { name: 'Subhaasish Bhattacharya', title: 'Managing Committee', image: '/mc-subhaasish.jpg', objectPosition: 'center 15%' },
     { name: 'Sukanto Pal', title: 'Managing Committee', image: '/mc-sukanto.png' },
     { name: 'Devarpan Sengupta', title: 'Managing Committee', image: '/mc-devarpan.png' },
     { name: 'Sounita Biswas', title: 'Managing Committee', image: '/mc-sounita.jpg' },
@@ -2224,6 +2224,7 @@ function AboutSection() {
                     src={mc.image}
                     alt={mc.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    style={{ objectPosition: mc.objectPosition || 'center top' }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
