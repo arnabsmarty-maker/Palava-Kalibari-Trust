@@ -239,63 +239,57 @@ function IlishRecap2026Section() {
           </div>
         </div>
 
-        {/* ── FULL-SCREEN SHOWCASE STAGE (IMAGES + VIDEO RECAP) ── */}
-        <div className="reveal w-full">
-          <div className="group relative overflow-hidden rounded-3xl border-2 border-gold/50 shadow-[0_0_45px_rgba(255,215,0,0.3)] bg-black">
-            {/* Stage Container */}
-            <div
-              className="relative w-full h-[540px] sm:h-[640px] md:h-[740px] lg:h-[840px] cursor-pointer overflow-hidden"
-              onClick={() => setLightboxIdx(activeIdx)}
-            >
-              {ILISH_2026_MEDIA.map((m, idx) => (
-                <div
-                  key={idx}
-                  className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-                    idx === activeIdx ? 'opacity-100 scale-100 z-10' : 'opacity-0 pointer-events-none scale-105 z-0'
-                  }`}
-                >
-                  {m.type === 'video' ? (
-                    <video
-                      src={m.src}
-                      autoPlay
-                      muted
-                      loop={false}
-                      playsInline
-                      controls
-                      onEnded={() => setActiveIdx((prev) => (prev + 1) % ILISH_2026_MEDIA.length)}
-                      className="w-full h-full object-cover"
-                      onClick={(e) => e.stopPropagation()}
-                    />
-                  ) : (
-                    <img
-                      src={m.src}
-                      alt={m.alt}
-                      className="w-full h-full object-cover"
-                      style={{ objectPosition: m.objectPosition || 'center 15%' }}
-                    />
-                  )}
-                </div>
-              ))}
-
-              {/* Top Gradient Vignette */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/80 via-black/30 to-transparent z-20" />
-
-              {/* Bottom Gradient Vignette */}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/95 via-black/45 to-transparent z-20" />
-
-              {/* Top Left Badge: Counter */}
-              <div className="absolute top-5 left-6 z-30">
-                <span className="inline-flex items-center gap-2 bg-black/75 border border-gold/60 text-gold-bright text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full shadow-xl backdrop-blur">
-                  <Sparkles className="w-4 h-4 text-gold-bright" /> {currentMedia.type === 'video' ? 'Video Reel' : `Photo ${activeIdx + 1} of ${ILISH_2026_MEDIA.length}`}
-                </span>
+        {/* ── PKT SHOWCASE CAROUSEL (MATCHING COMMUNITY SHOWCASE STAGE) ── */}
+        <div className="reveal w-full flex flex-col rounded-3xl border-2 border-gold/50 overflow-hidden shadow-[0_0_35px_rgba(255,215,0,0.25)]">
+          {/* Top Image/Video Stage (full screen rectangle) */}
+          <div
+            className="relative w-full h-[420px] sm:h-[520px] md:h-[620px] lg:h-[680px] bg-black overflow-hidden cursor-pointer"
+            onClick={() => setLightboxIdx(activeIdx)}
+          >
+            {ILISH_2026_MEDIA.map((m, idx) => (
+              <div
+                key={idx}
+                className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+                  idx === activeIdx ? 'opacity-100 scale-105 z-10' : 'opacity-0 pointer-events-none scale-100 z-0'
+                }`}
+              >
+                {m.type === 'video' ? (
+                  <video
+                    src={m.src}
+                    autoPlay
+                    muted
+                    loop={false}
+                    playsInline
+                    controls
+                    onEnded={() => setActiveIdx((prev) => (prev + 1) % ILISH_2026_MEDIA.length)}
+                    className="w-full h-full object-cover"
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                ) : (
+                  <img
+                    src={m.src}
+                    alt={m.alt}
+                    className="w-full h-full object-cover"
+                    style={{ objectPosition: m.objectPosition || 'center 15%' }}
+                  />
+                )}
               </div>
+            ))}
 
-              {/* Top Right Controls: Play/Pause + Fullscreen */}
-              <div className="absolute top-5 right-6 z-30 flex items-center gap-2.5" onClick={(e) => e.stopPropagation()}>
+            {/* Subtle Vignette border only, keeping faces fully bright and visible */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/20 pointer-events-none z-20" />
+
+            {/* Top Counter Bar */}
+            <div className="absolute top-4 left-4 right-4 z-30 flex items-center justify-between pointer-events-none">
+              <span className="inline-flex items-center gap-2 bg-black/75 border border-gold/60 text-gold-bright text-xs font-extrabold px-3.5 py-1.5 rounded-full shadow-lg backdrop-blur">
+                <Sparkles className="w-3.5 h-3.5 text-gold-bright" /> Ilish Utsav 2026 • {currentMedia.type === 'video' ? 'Video Reel' : `Photo ${activeIdx + 1} of ${ILISH_2026_MEDIA.length}`}
+              </span>
+
+              <div className="flex items-center gap-2 pointer-events-auto" onClick={(e) => e.stopPropagation()}>
                 {currentMedia.type === 'image' && (
                   <button
                     onClick={() => setPlaying(!playing)}
-                    className="bg-black/75 hover:bg-gold hover:text-maroon-deep text-gold-bright border border-gold/50 p-2.5 rounded-full transition-all backdrop-blur shadow-xl"
+                    className="bg-black/75 hover:bg-gold hover:text-maroon-deep text-gold-bright border border-gold/50 p-2 rounded-full transition-all backdrop-blur shadow-xl"
                     title={playing ? 'Pause Slideshow' : 'Play Slideshow'}
                   >
                     {playing ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
@@ -303,80 +297,60 @@ function IlishRecap2026Section() {
                 )}
                 <button
                   onClick={() => setLightboxIdx(activeIdx)}
-                  className="bg-black/75 hover:bg-gold hover:text-maroon-deep text-gold-bright border border-gold/50 px-3.5 py-1.5 rounded-full transition-all backdrop-blur shadow-xl text-xs font-bold flex items-center gap-1.5"
+                  className="bg-black/75 hover:bg-gold hover:text-maroon-deep text-gold-bright border border-gold/50 px-3 py-1 rounded-full transition-all backdrop-blur shadow-xl text-xs font-bold flex items-center gap-1.5"
                 >
                   <span>Fullscreen</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </button>
               </div>
-
-              {/* Stage Navigation Arrows */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setActiveIdx((prev) => (prev === 0 ? ILISH_2026_MEDIA.length - 1 : prev - 1))
-                }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-black/70 border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all backdrop-blur shadow-2xl"
-                aria-label="Previous media"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setActiveIdx((prev) => (prev + 1) % ILISH_2026_MEDIA.length)
-                }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-black/70 border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all backdrop-blur shadow-2xl"
-                aria-label="Next media"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
-
-              {/* Bottom Stage Overlay: Active Media Info */}
-              <div className="absolute bottom-6 left-6 md:bottom-8 md:left-10 right-6 z-30 pointer-events-none">
-                <span className="inline-flex items-center gap-2 bg-gold text-maroon-deep text-xs md:text-sm font-bold px-3.5 py-1.5 rounded-full mb-2 shadow-md">
-                  {currentMedia.type === 'video' ? <Play className="w-4 h-4" fill="currentColor" /> : <Users className="w-4 h-4" />}
-                  {currentMedia.badge || 'Ilish Utsav 2026'}
-                </span>
-                <h3 className="font-display text-2xl md:text-4xl lg:text-5xl font-bold text-ivory-warm drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
-                  {currentMedia.title}
-                </h3>
-                <p className="text-sm md:text-base text-ivory-cream/85 drop-shadow-md max-w-2xl mt-1 hidden sm:block">
-                  {currentMedia.subtitle || currentMedia.alt}
-                </p>
-              </div>
             </div>
 
-            {/* ── THUMBNAIL SELECTOR STRIP BELOW STAGE ── */}
-            <div className="bg-[#120006] p-3 sm:p-4 border-t border-gold/30 flex items-center justify-center gap-2 sm:gap-3 overflow-x-auto">
-              {ILISH_2026_MEDIA.map((m, idx) => (
+            {/* Stage Navigation Arrows */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setActiveIdx((prev) => (prev === 0 ? ILISH_2026_MEDIA.length - 1 : prev - 1))
+              }}
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-30 p-2.5 rounded-full bg-black/60 border border-gold/40 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all backdrop-blur shadow-md"
+              aria-label="Previous media"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setActiveIdx((prev) => (prev + 1) % ILISH_2026_MEDIA.length)
+              }}
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-30 p-2.5 rounded-full bg-black/60 border border-gold/40 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all backdrop-blur shadow-md"
+              aria-label="Next media"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Bottom Info Panel (separate write-ups card below the stage) */}
+          <div className="p-6 md:p-8 bg-gradient-to-b from-[#20000a] via-[#140006] to-[#0a0003] border-t border-gold/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <span className="inline-flex items-center gap-1.5 text-gold-bright text-xs font-semibold uppercase tracking-wider bg-gold/10 border border-gold/30 px-2.5 py-0.5 rounded-full mb-1">
+                {currentMedia.badge || 'Ilish Utsav 2026'}
+              </span>
+              <h3 className="font-display text-xl md:text-2xl font-extrabold text-gold-bright leading-tight">
+                {currentMedia.title}
+              </h3>
+              <p className="text-xs md:text-sm text-ivory-cream/80 font-light max-w-2xl leading-relaxed">
+                {currentMedia.subtitle || currentMedia.alt}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-1.5 shrink-0 self-center md:self-auto">
+              {ILISH_2026_MEDIA.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setActiveIdx(idx)}
-                  className={`relative shrink-0 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
-                    idx === activeIdx
-                      ? 'border-gold scale-105 shadow-[0_0_15px_rgba(255,215,0,0.6)] ring-2 ring-gold/50'
-                      : 'border-white/20 opacity-60 hover:opacity-100 hover:border-gold/60'
-                  } w-20 sm:w-28 md:w-32 h-14 sm:h-16 md:h-20`}
-                >
-                  {m.type === 'video' ? (
-                    <div className="w-full h-full bg-slate-900 grid place-items-center relative">
-                      <Play className="w-6 h-6 text-gold-bright z-10" fill="currentColor" />
-                      <span className="absolute bottom-1 right-1 text-[9px] font-bold text-gold-bright bg-black/80 px-1 rounded">
-                        VIDEO
-                      </span>
-                    </div>
-                  ) : (
-                    <img
-                      src={m.src}
-                      alt={m.title}
-                      className="w-full h-full object-cover"
-                      style={{ objectPosition: m.objectPosition || 'center 15%' }}
-                    />
-                  )}
-                  <div className={`absolute inset-0 transition-opacity ${idx === activeIdx ? 'bg-transparent' : 'bg-black/30'}`} />
-                </button>
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    idx === activeIdx ? 'w-8 bg-gold' : 'w-2.5 bg-gold/30 hover:bg-gold/60'
+                  }`}
+                />
               ))}
             </div>
           </div>
