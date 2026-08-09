@@ -206,7 +206,7 @@ const ILISH_2026_MEDIA = [
 ]
 
 // ── Dedicated Media Renderers for Event Gallery ────
-function WideLandscapeViewer({ media, isEager }) {
+function UltraWidePhotoViewer({ media, isEager }) {
   return (
     <div className="relative w-full h-full overflow-hidden bg-[#111]">
       <img
@@ -214,6 +214,20 @@ function WideLandscapeViewer({ media, isEager }) {
         alt={media.alt}
         loading={isEager ? 'eager' : 'lazy'}
         className="w-full h-full object-cover object-center"
+      />
+    </div>
+  )
+}
+
+function LandscapePhotoViewer({ media, isEager }) {
+  return (
+    <div className="relative w-full h-full overflow-hidden bg-[#111]">
+      <img
+        src={media.src}
+        alt={media.alt}
+        loading={isEager ? 'eager' : 'lazy'}
+        className="w-full h-full object-cover"
+        style={{ objectPosition: media.objectPosition || 'center 15%' }}
       />
     </div>
   )
@@ -227,25 +241,6 @@ function PortraitPhotoViewer({ media, isEager }) {
         alt=""
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-35 scale-110 pointer-events-none"
-      />
-      <img
-        src={media.src}
-        alt={media.alt}
-        loading={isEager ? 'eager' : 'lazy'}
-        className="relative z-10 max-w-full max-h-full object-contain object-center drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
-      />
-    </div>
-  )
-}
-
-function StandardPhotoViewer({ media, isEager }) {
-  return (
-    <div className="relative w-full h-full overflow-hidden flex items-center justify-center bg-[#111]">
-      <img
-        src={media.src}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-40 scale-110 pointer-events-none"
       />
       <img
         src={media.src}
@@ -274,12 +269,12 @@ function AdaptivePhotoRenderer({ media, isEager }) {
           }
         }}
       />
-      {aspectRatio > 1.35 ? (
-        <WideLandscapeViewer media={media} isEager={isEager} />
+      {aspectRatio > 1.6 ? (
+        <UltraWidePhotoViewer media={media} isEager={isEager} />
       ) : aspectRatio < 0.9 ? (
         <PortraitPhotoViewer media={media} isEager={isEager} />
       ) : (
-        <StandardPhotoViewer media={media} isEager={isEager} />
+        <LandscapePhotoViewer media={media} isEager={isEager} />
       )}
     </div>
   )
