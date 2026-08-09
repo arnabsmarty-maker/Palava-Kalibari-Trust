@@ -154,20 +154,12 @@ const ILISH_2026_MEDIA = [
     objectPosition: 'center 10%',
   },
   {
-    type: 'video',
-    src: '/ilish-2026-recap.mp4',
-    alt: '15-second Event Recap Video',
-    title: 'Ilish Utsav 2026 — Highlight Reel',
-    subtitle: 'Highlights of delicious food, hospitality & community celebrations',
-    badge: '15s Video Recap',
-  },
-  {
     type: 'image',
     src: '/ilish-2026-2.jpg',
-    alt: 'Youth of Palava Kalibari Trust at Ilish Utsav 2026',
-    title: 'Youth Performers & Members',
-    subtitle: 'Young members leading the Noboborsho & Ilish Utsav celebrations',
-    badge: 'Youth & Performers',
+    alt: 'The grown ups of Palava Kalibari Trust at Ilish Utsav 2026',
+    title: 'The Grown Ups',
+    subtitle: 'Grown ups and senior community members at Ilish Utsav 2026',
+    badge: 'The Grown Ups',
     objectPosition: 'center 15%',
   },
   {
@@ -196,6 +188,14 @@ const ILISH_2026_MEDIA = [
     subtitle: 'Heartfelt thanks to Utkala Banga team for serving wonderful lunch',
     badge: 'Utkala Banga Feast',
     objectPosition: 'center 20%',
+  },
+  {
+    type: 'video',
+    src: '/ilish-2026-recap.mp4',
+    alt: '15-second Event Recap Video',
+    title: 'Ilish Utsav 2026 — Highlight Reel',
+    subtitle: 'Highlights of delicious food, hospitality & community celebrations',
+    badge: '15s Video Recap',
   },
 ]
 
@@ -244,7 +244,7 @@ function IlishRecap2026Section() {
           <div className="group relative overflow-hidden rounded-3xl border-2 border-gold/50 shadow-[0_0_45px_rgba(255,215,0,0.3)] bg-black">
             {/* Stage Container */}
             <div
-              className="relative w-full h-[520px] sm:h-[620px] md:h-[720px] lg:h-[820px] cursor-pointer overflow-hidden"
+              className="relative w-full h-[540px] sm:h-[640px] md:h-[740px] lg:h-[840px] cursor-pointer overflow-hidden"
               onClick={() => setLightboxIdx(activeIdx)}
             >
               {ILISH_2026_MEDIA.map((m, idx) => (
@@ -259,9 +259,10 @@ function IlishRecap2026Section() {
                       src={m.src}
                       autoPlay
                       muted
-                      loop
+                      loop={false}
                       playsInline
                       controls
+                      onEnded={() => setActiveIdx((prev) => (prev + 1) % ILISH_2026_MEDIA.length)}
                       className="w-full h-full object-cover"
                       onClick={(e) => e.stopPropagation()}
                     />
@@ -4084,6 +4085,49 @@ const YEAR_EVENTS_DATA = {
     title: 'Events & Celebrations (2026–2027)',
     subtitle: 'Upcoming line-up featuring Poila Boishakh, Rabindra Nazrul Jayanti & Blood Donation Camp',
     events: [
+      {
+        title: 'Ilish Utsav 2026–2027',
+        date: 'August 2026',
+        venue: 'Utkala Banga, Dombivli East',
+        image: '/ilish-2026-1.jpg',
+        description: 'More than 60 members and families gathered for Ilish Utsav 2026 — the memorable day we unveiled our official website! Filled with delicious Hilsa delicacies, laughter, and togetherness, it was a grand celebration of Bengal’s culinary heritage.',
+        highlights: [
+          '60+ members and families gathered for Ilish Utsav 2026',
+          'Official Website Launch & grand community lunch by Utkala Banga',
+        ],
+        gallery: [
+          {
+            image: '/ilish-2026-1.jpg',
+            objectPosition: 'center 10%',
+            title: 'Ilish Utsav 2026–27 • A Great Time Together',
+            description: 'Palava Kalibari Trust members and families gathered together for Ilish Utsav 2026.',
+          },
+          {
+            image: '/ilish-2026-2.jpg',
+            objectPosition: 'center 15%',
+            title: 'Ilish Utsav 2026–27 • The Grown Ups',
+            description: 'Senior community members and organizers standing together in traditional festive attire.',
+          },
+          {
+            image: '/ilish-2026-3.jpg',
+            objectPosition: 'center 15%',
+            title: 'Ilish Utsav 2026–27 • Community Gathering',
+            description: 'Members enjoying the vibrant atmosphere and Bengali culinary heritage.',
+          },
+          {
+            image: '/ilish-2026-4.jpg',
+            objectPosition: 'center 10%',
+            title: 'Ilish Utsav 2026–27 • Joyful Moments',
+            description: 'Warm smiles and shared memories during the Ilish Utsav celebrations.',
+          },
+          {
+            image: '/ilish-2026-5.jpg',
+            objectPosition: 'center 20%',
+            title: 'Ilish Utsav 2026–27 • Utkala Banga Feast',
+            description: 'Authentic mustard-rich Sorshe Ilish, Ilish Bhaja, and delicacies served at the feast.',
+          },
+        ],
+      },
       {
         title: 'Poila Boishakh 2026–2027',
         date: 'April 2026',
