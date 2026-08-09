@@ -8,7 +8,7 @@ export const TRUST = {
   short: 'PKT',
   registration: 'F – 8722 Under Maharashtra Govt. Trust Act 1950',
   address:
-    'Inside Gate No. 2, Lodha Palava Phase 2, Dombivli E, Mumbai 421204',
+    '1204, Casa Urbano R, Downtown, Palava Phase 2',
   emails: ['info@palavakalibaritrust.in', 'contact@palavakalibaritrust.com'],
   contacts: [
     { name: 'Rajat', phone: '97691 45597' },
