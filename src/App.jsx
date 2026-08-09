@@ -381,17 +381,6 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
                         <ChevronRight className="w-3.5 h-3.5 opacity-60 group-hover/item:translate-x-1 transition-transform" />
                       </a>
 
-                      <a
-                        href="#ilish"
-                        onClick={() => setEventsDropdownOpen(false)}
-                        className="w-full text-left px-3.5 py-2 rounded-xl text-xs font-bold text-ivory-warm hover:bg-gold hover:text-maroon-deep transition-all flex items-center justify-between group/item my-0.5"
-                      >
-                        <span className="flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-sky-400" />
-                          Ilish Parbon Utsav
-                        </span>
-                        <ChevronRight className="w-3.5 h-3.5 opacity-60 group-hover/item:translate-x-1 transition-transform" />
-                      </a>
 
                       <a
                         href="#annadan"
@@ -726,7 +715,7 @@ function Hero({ onJoin, onSponsor }) {
           </button>
         </div>
         <a
-          href="#ilish"
+          href="#durga"
           className="flex flex-col items-center text-gold-bright/90 hover:text-gold-bright drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]"
           aria-label="Scroll down"
         >
@@ -4114,7 +4103,6 @@ export default function App() {
       <Header onJoin={goJoin} onSponsor={openSponsor} onOpenYearEvents={navigateYearEvents} />
       <main>
         <Hero onJoin={goJoin} onSponsor={openSponsor} />
-        <IlishSection onBook={setBooking} />
         <DurgaSection />
         <AnnadanSection />
         <DonationSection />
