@@ -2785,30 +2785,31 @@ function OurSponsorsSection({ onSponsor }) {
         {/* ── PAST SPONSORS ── */}
         <div className="reveal mt-8">
           <div className="flex items-center gap-3 mb-4">
-            <span className="inline-flex items-center gap-1.5 bg-white/5 border border-white/20 text-ivory-cream/60 font-bold tracking-widest uppercase text-[11px] px-3.5 py-1 rounded-full">
-              <Clock className="w-3.5 h-3.5" /> Past Sponsors
+            <span className="inline-flex items-center gap-1.5 bg-gold/10 border border-gold/30 text-gold-bright font-bold tracking-widest uppercase text-[11px] px-3.5 py-1 rounded-full">
+              <Clock className="w-3.5 h-3.5 text-gold-bright" /> Past Sponsors
             </span>
-            <div className="flex-1 h-px bg-white/10" />
+            <div className="flex-1 h-px bg-gold/20" />
           </div>
-          <p className="text-ivory-cream/45 text-xs mb-4 italic">We sincerely thank our past sponsors for their generous support.</p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <p className="text-ivory-cream/80 text-xs sm:text-sm mb-4">We proudly acknowledge and thank our past sponsors for their generous support and partnership.</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
             {pastSponsors.map((item, idx) => (
               <a
                 key={idx}
                 href={item.url || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group rounded-xl bg-white/5 border border-white/10 p-3 flex flex-col items-center justify-center text-center hover:bg-white/10 hover:border-white/25 transition-all duration-300 h-20"
+                className="group rounded-xl bg-white p-3 flex flex-col items-center justify-center text-center shadow-md border border-slate-200 hover:border-gold hover:scale-[1.03] transition-all duration-300 h-24 cursor-pointer"
               >
-                <div className="h-9 w-full flex items-center justify-center p-1">
+                <div className="h-11 sm:h-12 w-full flex items-center justify-center p-1">
                   <img
                     src={item.logo}
                     alt={item.name}
-                    className="max-h-full max-w-full object-contain opacity-45 grayscale group-hover:opacity-70 group-hover:grayscale-0 transition-all duration-300"
+                    className="max-h-full max-w-full object-contain filter group-hover:brightness-105 transition-all opacity-95 group-hover:opacity-100"
                   />
                 </div>
-                <div className="mt-1 flex items-center justify-center gap-0.5 text-[10px] font-medium text-ivory-cream/45 group-hover:text-ivory-cream/75">
+                <div className="mt-1.5 flex items-center justify-center gap-1 text-xs font-bold text-slate-800 group-hover:text-maroon">
                   <span>{item.name}</span>
+                  {item.url && <ExternalLink className="w-3 h-3 opacity-60 group-hover:opacity-100" />}
                 </div>
               </a>
             ))}
