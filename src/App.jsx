@@ -112,12 +112,13 @@ const IMG = {
 
 // Renders the real photo if it exists in /public, otherwise a graceful,
 // on-brand placeholder that names the file to add.
-function AutoImage({ src, alt, className = '', icon: Icon = ImageIcon }) {
+function AutoImage({ src, alt, className = '', icon: Icon = ImageIcon, style = {} }) {
   const [err, setErr] = useState(false)
   if (err || !src) {
     return (
       <div
         className={`grid place-items-center bg-gradient-to-br from-maroon via-maroon-deep to-black text-center px-4 ${className}`}
+        style={style}
       >
         <div>
           <Icon className="w-10 h-10 text-gold/70 mx-auto" />
@@ -136,7 +137,165 @@ function AutoImage({ src, alt, className = '', icon: Icon = ImageIcon }) {
       loading="lazy"
       onError={() => setErr(true)}
       className={`object-cover ${className}`}
+      style={style}
     />
+  )
+}
+
+// ── Recently concluded: Ilish Utsav 2026 (full-screen recap) ──
+const ILISH_2026_PHOTOS = [
+  { src: '/ilish-2026-1.jpg', alt: 'Members and families celebrating Ilish Utsav 2026' },
+  { src: '/ilish-2026-2.jpg', alt: 'Youth of Palava Kalibari Trust at Ilish Utsav 2026' },
+  { src: '/ilish-2026-3.jpg', alt: 'PKT members together at Ilish Utsav 2026' },
+  { src: '/ilish-2026-4.jpg', alt: 'Joyful moments at Ilish Utsav 2026' },
+  { src: '/ilish-2026-5.jpg', alt: 'Community lunch by Utkala Banga at Ilish Utsav 2026' },
+]
+
+function IlishRecap2026Section() {
+  return (
+    <section
+      id="ilish-2026"
+      className="relative min-h-screen py-20 md:py-24 overflow-hidden bg-gradient-to-b from-ivory via-ivory-cream to-ivory"
+    >
+      <div className="absolute -top-24 right-0 w-[32rem] h-[32rem] bg-gold/10 blur-3xl rounded-full" />
+      <div className="absolute -bottom-32 -left-24 w-[32rem] h-[32rem] bg-maroon/5 blur-3xl rounded-full" />
+
+      <div className="relative max-w-7xl mx-auto px-4">
+        {/* Heading */}
+        <div className="reveal text-center max-w-3xl mx-auto mb-10">
+          <span className="inline-flex items-center gap-2 text-gold-deep font-semibold tracking-[0.25em] uppercase text-xs">
+            <Sparkles className="w-4 h-4" /> Recently Concluded Event
+          </span>
+          <h2 className="font-display text-4xl md:text-6xl font-bold text-maroon mt-3">
+            Ilish Utsav 2026
+          </h2>
+          <div className="flex items-center justify-center gap-3 my-5" aria-hidden>
+            <span className="h-px w-16 bg-gradient-to-r from-transparent to-gold" />
+            <UtensilsCrossed className="w-5 h-5 text-gold" />
+            <span className="h-px w-16 bg-gradient-to-l from-transparent to-gold" />
+          </div>
+        </div>
+
+        {/* Full-width featured photo */}
+        <div className="reveal w-full">
+          <div className="group relative overflow-hidden rounded-2xl md:rounded-3xl border-2 border-gold/40 shadow-2xl bg-white">
+            <AutoImage
+              src={ILISH_2026_PHOTOS[0].src}
+              alt={ILISH_2026_PHOTOS[0].alt}
+              icon={Users}
+              className="w-full h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[85vh] transition-transform duration-[1200ms] group-hover:scale-105"
+              style={{ objectPosition: 'center 10%' }}
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-maroon-deep/80 via-maroon-deep/10 to-transparent" />
+            <div className="absolute bottom-5 left-6 md:bottom-9 md:left-10 right-6">
+              <span className="inline-flex items-center gap-2 bg-gold text-maroon-deep text-xs md:text-sm font-bold px-3.5 py-1.5 rounded-full mb-3 shadow-md">
+                <Users className="w-4 h-4" /> 60+ Members &amp; Families
+              </span>
+              <h3 className="font-display text-2xl md:text-5xl font-bold text-ivory-warm drop-shadow-[0_2px_12px_rgba(0,0,0,0.75)]">
+                A Great Time Together
+              </h3>
+            </div>
+          </div>
+        </div>
+
+        {/* Event write-up + highlights */}
+        <div className="reveal mt-8 grid lg:grid-cols-3 gap-6 items-stretch">
+          <div className="lg:col-span-2 bg-white/75 backdrop-blur border border-gold/30 rounded-2xl p-6 md:p-8 shadow-lg">
+            <h3 className="font-display text-2xl md:text-3xl font-bold text-maroon mb-4">
+              A Day to Remember
+            </h3>
+            <p className="text-charcoal/85 leading-relaxed text-base md:text-lg">
+              More than <strong>60 members</strong> joined us for Ilish Utsav 2026 —
+              the very day we proudly <strong>launched our new website!</strong> It
+              was a wonderful time spent with members and their families, filled with
+              delicious food, laughter, and togetherness.
+            </p>
+            <p className="text-charcoal/85 leading-relaxed text-base md:text-lg mt-4">
+              Our heartfelt gratitude to every member who joined and made the day so
+              special. A special thank you to <strong>Utkala Banga</strong> for the
+              wonderful lunch, and to their dedicated support staff for their warm
+              hospitality. 🙏
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-maroon to-maroon-deep rounded-2xl p-6 md:p-8 shadow-lg text-ivory-warm flex flex-col justify-center gap-5">
+            <div className="flex items-center gap-3">
+              <span className="grid place-items-center w-12 h-12 rounded-full bg-gold text-maroon-deep shrink-0">
+                <Users className="w-6 h-6" />
+              </span>
+              <div>
+                <div className="font-display text-3xl font-bold text-gold-bright leading-none">60+</div>
+                <div className="text-sm text-ivory-cream/80 mt-1">Members &amp; family joined</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="grid place-items-center w-12 h-12 rounded-full bg-gold text-maroon-deep shrink-0">
+                <Sparkles className="w-6 h-6" />
+              </span>
+              <div>
+                <div className="font-display text-lg font-bold text-gold-bright leading-tight">Website Launch</div>
+                <div className="text-sm text-ivory-cream/80">Unveiled on the day</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="grid place-items-center w-12 h-12 rounded-full bg-gold text-maroon-deep shrink-0">
+                <UtensilsCrossed className="w-6 h-6" />
+              </span>
+              <div>
+                <div className="font-display text-lg font-bold text-gold-bright leading-tight">Lunch by Utkala Banga</div>
+                <div className="text-sm text-ivory-cream/80">With gratitude to their team</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Photo grid */}
+        <div className="reveal grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+          {ILISH_2026_PHOTOS.slice(1).map((p, i) => (
+            <div
+              key={i}
+              className="group relative overflow-hidden rounded-2xl border-2 border-gold/30 shadow-lg"
+            >
+              <AutoImage
+                src={p.src}
+                alt={p.alt}
+                icon={Users}
+                className="w-full h-52 md:h-64 transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-maroon-deep/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            </div>
+          ))}
+        </div>
+
+        {/* Video recap */}
+        <div className="reveal mt-14">
+          <div className="text-center mb-5">
+            <h3 className="font-display text-2xl md:text-3xl font-bold text-maroon inline-flex items-center gap-2">
+              <Play className="w-6 h-6 text-gold-deep" fill="currentColor" /> Event Recap
+            </h3>
+            <p className="text-charcoal/60 text-sm mt-1">A 15-second highlight reel</p>
+          </div>
+          <div className="relative max-w-5xl mx-auto p-1.5 rounded-2xl bg-gradient-to-r from-gold-bright via-gold to-gold-deep shadow-gold-lg">
+            <video
+              src="/ilish-2026-recap.mp4"
+              className="w-full rounded-xl bg-black aspect-video object-cover"
+              controls
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+            />
+            <span className="absolute top-4 right-4 inline-flex items-center gap-1.5 bg-maroon-deep/80 border border-gold/40 text-gold-bright text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur">
+              <Clock className="w-3.5 h-3.5" /> 15s Recap
+            </span>
+          </div>
+          <p className="text-center italic text-charcoal/65 mt-5 text-sm md:text-base">
+            Our recently concluded event — Ilish Utsav 2026, Palava Kalibari Trust.
+          </p>
+        </div>
+      </div>
+    </section>
   )
 }
 
@@ -4104,6 +4263,7 @@ export default function App() {
       <Header onJoin={goJoin} onSponsor={openSponsor} onOpenYearEvents={navigateYearEvents} />
       <main>
         <Hero onJoin={goJoin} onSponsor={openSponsor} />
+        <IlishRecap2026Section />
         <DurgaSection />
         <AnnadanSection />
         <DonationSection />
