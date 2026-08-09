@@ -205,6 +205,62 @@ const ILISH_2026_MEDIA = [
   },
 ]
 
+// ── Dedicated Media Renderers for Event Gallery ────
+function PortraitPhotoViewer({ media, isEager }) {
+  return (
+    <div className="relative w-full h-full overflow-hidden flex items-center justify-center bg-[#111]">
+      <img
+        src={media.src}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-35 scale-110 pointer-events-none"
+      />
+      <img
+        src={media.src}
+        alt={media.alt}
+        loading={isEager ? 'eager' : 'lazy'}
+        className="relative z-10 max-w-full max-h-full object-contain object-center drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
+      />
+    </div>
+  )
+}
+
+function LandscapePhotoViewer({ media, isEager }) {
+  return (
+    <div className="relative w-full h-full overflow-hidden">
+      <img
+        src={media.src}
+        alt={media.alt}
+        loading={isEager ? 'eager' : 'lazy'}
+        className="w-full h-full object-cover object-center"
+        style={{ objectPosition: media.objectPosition || 'center 15%' }}
+      />
+    </div>
+  )
+}
+
+function VideoViewer({ media, isActive, onEnded }) {
+  if (!isActive) {
+    return (
+      <div className="w-full h-full bg-black grid place-items-center">
+        <Play className="w-14 h-14 text-gold/80" />
+      </div>
+    )
+  }
+  return (
+    <video
+      src={media.src}
+      autoPlay
+      muted
+      playsInline
+      controls
+      onEnded={onEnded}
+      className="w-full h-full object-cover relative z-10"
+      onClick={(e) => e.stopPropagation()}
+    />
+  )
+}
+
 function IlishRecap2026Section() {
   const [activeIdx, setActiveIdx] = useState(0)
   const [playing, setPlaying] = useState(true)
@@ -256,9 +312,9 @@ function IlishRecap2026Section() {
       {/* ── FULL-WIDTH EDGE-TO-EDGE CINEMATIC GALLERY (100VW) ── */}
       <div className="reveal w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] max-w-none px-0">
         <div className="group relative overflow-hidden rounded-none border-y-2 border-gold/50 shadow-[0_0_45px_rgba(255,215,0,0.3)] bg-[#1a1a1a]">
-          {/* 16:9 Aspect Ratio / 75vh-85vh Height Stage Container */}
+          {/* 16:9 Aspect Ratio / 55vh-80vh Height Stage Container */}
           <div
-            className="relative w-full h-[50vh] sm:h-[65vh] md:h-[75vh] lg:h-[85vh] min-h-[400px] max-h-[900px] cursor-pointer overflow-hidden bg-[#1a1a1a]"
+            className="relative w-full h-[55vh] sm:h-[70vh] md:h-[80vh] min-h-[420px] max-h-[920px] cursor-pointer overflow-hidden bg-[#111]"
             onClick={() => setLightboxIdx(activeIdx)}
           >
             {orderedMedia.map((m, idx) => (
@@ -269,37 +325,18 @@ function IlishRecap2026Section() {
                 }`}
               >
                 {m.type === 'video' ? (
-                  idx === activeIdx ? (
-                    <video
-                      src={m.src}
-                      autoPlay
-                      muted
-                      playsInline
-                      controls
-                      onEnded={() => {
-                        setActiveIdx(0)
-                        setPlaying(true)
-                      }}
-                      className="w-full h-full object-contain relative z-10 bg-black"
-                      onClick={(e) => e.stopPropagation()}
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-black grid place-items-center">
-                      <Play className="w-12 h-12 text-gold" />
-                    </div>
-                  )
-                ) : (
-                  <img
-                    src={m.src}
-                    alt={m.alt}
-                    loading={idx === 0 ? 'eager' : 'lazy'}
-                    className={`w-full h-full ${
-                      m.fit === 'contain' || m.orientation === 'portrait'
-                        ? 'object-contain bg-[#1a1a1a]'
-                        : 'object-cover'
-                    }`}
-                    style={{ objectPosition: m.objectPosition || 'center 15%' }}
+                  <VideoViewer
+                    media={m}
+                    isActive={idx === activeIdx}
+                    onEnded={() => {
+                      setActiveIdx(0)
+                      setPlaying(true)
+                    }}
                   />
+                ) : m.orientation === 'portrait' || m.fit === 'contain' ? (
+                  <PortraitPhotoViewer media={m} isEager={idx === 0} />
+                ) : (
+                  <LandscapePhotoViewer media={m} isEager={idx === 0} />
                 )}
               </div>
             ))}
@@ -487,13 +524,21 @@ function IlishRecap2026Section() {
                 src={orderedMedia[lightboxIdx].src}
                 controls
                 autoPlay
-                className="max-h-[78vh] max-w-[92vw] object-contain rounded-2xl border-2 border-gold/40 shadow-2xl bg-black"
+                className="max-h-[85vh] max-w-[95vw] w-full h-full object-cover rounded-2xl border-2 border-gold/40 shadow-2xl bg-black"
               />
+            ) : orderedMedia[lightboxIdx]?.orientation === 'portrait' ? (
+              <div className="relative flex items-center justify-center max-h-[85vh] max-w-[95vw] overflow-hidden rounded-2xl bg-[#111] border-2 border-gold/40">
+                <img
+                  src={orderedMedia[lightboxIdx].src}
+                  alt={orderedMedia[lightboxIdx].alt}
+                  className="max-h-[85vh] max-w-[95vw] object-contain object-center"
+                />
+              </div>
             ) : (
               <img
                 src={orderedMedia[lightboxIdx]?.src}
                 alt={orderedMedia[lightboxIdx]?.alt}
-                className="max-h-[78vh] max-w-[92vw] object-contain rounded-2xl border-2 border-gold/40 shadow-2xl"
+                className="max-h-[85vh] max-w-[95vw] w-full h-full object-cover rounded-2xl border-2 border-gold/40 shadow-2xl"
               />
             )}
 
