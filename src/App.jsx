@@ -305,17 +305,17 @@ function IlishRecap2026Section() {
         </div>
 
         {/* Video recap */}
-        <div className="reveal mt-14">
+        <div className="reveal mt-14 w-full">
           <div className="text-center mb-5">
             <h3 className="font-display text-2xl md:text-3xl font-bold text-maroon inline-flex items-center gap-2">
               <Play className="w-6 h-6 text-gold-deep" fill="currentColor" /> Event Recap
             </h3>
             <p className="text-charcoal/60 text-sm mt-1">A 15-second highlight reel</p>
           </div>
-          <div className="relative max-w-5xl mx-auto p-1.5 rounded-2xl bg-gradient-to-r from-gold-bright via-gold to-gold-deep shadow-gold-lg">
+          <div className="relative w-full p-1.5 rounded-3xl bg-gradient-to-r from-gold-bright via-gold to-gold-deep shadow-gold-lg overflow-hidden">
             <video
               src="/ilish-2026-recap.mp4"
-              className="w-full rounded-xl bg-black aspect-video object-cover"
+              className="w-full h-[480px] sm:h-[580px] md:h-[680px] lg:h-[750px] rounded-2xl bg-black object-cover"
               controls
               autoPlay
               muted
@@ -323,7 +323,7 @@ function IlishRecap2026Section() {
               playsInline
               preload="metadata"
             />
-            <span className="absolute top-4 right-4 inline-flex items-center gap-1.5 bg-maroon-deep/80 border border-gold/40 text-gold-bright text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur">
+            <span className="absolute top-4 right-4 inline-flex items-center gap-1.5 bg-maroon-deep/80 border border-gold/40 text-gold-bright text-xs font-semibold px-3.5 py-1.5 rounded-full backdrop-blur z-10 shadow-lg">
               <Clock className="w-3.5 h-3.5" /> 15s Recap
             </span>
           </div>
