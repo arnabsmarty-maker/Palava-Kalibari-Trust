@@ -172,18 +172,7 @@ const ILISH_2026_MEDIA = [
     subtitle: 'Celebrating Bengal’s culinary heritage together in Dombivli',
     badge: 'PKT Members',
     orientation: 'landscape',
-    objectPosition: 'center 25%',
-  },
-  {
-    type: 'image',
-    src: '/ilish-2026-4.jpg',
-    alt: 'Joyful moments at Ilish Utsav 2026',
-    title: 'Joyful Moments & Smiles',
-    subtitle: 'Warm smiles and unforgettable memories at Ilish Utsav 2026',
-    badge: 'Celebrations',
-    orientation: 'portrait',
-    fit: 'contain',
-    objectPosition: 'center',
+    objectPosition: 'center top',
   },
   {
     type: 'image',
@@ -4198,15 +4187,9 @@ const YEAR_EVENTS_DATA = {
           },
           {
             image: '/ilish-2026-3.jpg',
-            objectPosition: 'center 15%',
+            objectPosition: 'center top',
             title: 'Ilish Utsav 2026–27 • Community Gathering',
             description: 'Members enjoying the vibrant atmosphere and Bengali culinary heritage.',
-          },
-          {
-            image: '/ilish-2026-4.jpg',
-            objectPosition: 'center 10%',
-            title: 'Ilish Utsav 2026–27 • Joyful Moments',
-            description: 'Warm smiles and shared memories during the Ilish Utsav celebrations.',
           },
           {
             image: '/ilish-2026-5.jpg',
