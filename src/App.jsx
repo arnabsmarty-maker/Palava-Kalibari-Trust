@@ -206,6 +206,8 @@ const ILISH_2026_MEDIA = [
 ]
 
 // ── Dedicated Media Renderers for Event Gallery ────
+// Fit the whole photo (no cropping) over a blurred fill of itself, so heads
+// and feet are never chopped — used for every photo, any orientation.
 function UltraWidePhotoViewer({ media, isEager }) {
   return (
     <div className="relative w-full h-full overflow-hidden bg-[#111]">
@@ -240,13 +242,13 @@ function PortraitPhotoViewer({ media, isEager }) {
         src={media.src}
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-35 scale-110 pointer-events-none"
+        className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-30 scale-110 pointer-events-none"
       />
       <img
         src={media.src}
         alt={media.alt}
         loading={isEager ? 'eager' : 'lazy'}
-        className="relative z-10 max-w-full max-h-full object-contain object-center drop-shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
+        className="relative z-10 max-h-full max-w-[80%] sm:max-w-[75%] object-contain object-center drop-shadow-[0_10px_35px_rgba(0,0,0,0.85)]"
       />
     </div>
   )
