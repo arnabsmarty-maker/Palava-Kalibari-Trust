@@ -152,7 +152,20 @@ const ILISH_2026_PHOTOS = [
 ]
 
 function IlishRecap2026Section() {
+  const [activeIdx, setActiveIdx] = useState(0)
+  const [playing, setPlaying] = useState(true)
   const [lightboxIdx, setLightboxIdx] = useState(null)
+
+  // Auto-slideshow
+  useEffect(() => {
+    if (!playing) return
+    const timer = setInterval(() => {
+      setActiveIdx((prev) => (prev + 1) % ILISH_2026_PHOTOS.length)
+    }, 4500)
+    return () => clearInterval(timer)
+  }, [playing])
+
+  const currentPhoto = ILISH_2026_PHOTOS[activeIdx]
 
   return (
     <section
@@ -178,111 +191,117 @@ function IlishRecap2026Section() {
           </div>
         </div>
 
-        {/* Full-width featured photo */}
+        {/* ── FULL-SCREEN FEATURED SHOWCASE STAGE (ALL 5 PHOTOS) ── */}
         <div className="reveal w-full">
-          <div
-            onClick={() => setLightboxIdx(0)}
-            className="group relative overflow-hidden rounded-2xl md:rounded-3xl border-2 border-gold/40 shadow-2xl bg-white cursor-pointer"
-          >
-            <AutoImage
-              src={ILISH_2026_PHOTOS[0].src}
-              alt={ILISH_2026_PHOTOS[0].alt}
-              icon={Users}
-              className="w-full h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[85vh] transition-transform duration-[1200ms] group-hover:scale-105"
-              style={{ objectPosition: ILISH_2026_PHOTOS[0].objectPosition }}
-            />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-maroon-deep/80 via-maroon-deep/10 to-transparent" />
-            <div className="absolute bottom-5 left-6 md:bottom-9 md:left-10 right-6">
-              <span className="inline-flex items-center gap-2 bg-gold text-maroon-deep text-xs md:text-sm font-bold px-3.5 py-1.5 rounded-full mb-3 shadow-md">
-                <Users className="w-4 h-4" /> 60+ Members &amp; Families
-              </span>
-              <h3 className="font-display text-2xl md:text-5xl font-bold text-ivory-warm drop-shadow-[0_2px_12px_rgba(0,0,0,0.75)] flex items-center gap-3">
-                <span>{ILISH_2026_PHOTOS[0].title}</span>
-                <span className="text-xs font-normal text-gold-bright bg-black/40 border border-gold/40 px-2.5 py-1 rounded-full backdrop-blur opacity-0 group-hover:opacity-100 transition-opacity">
-                  Click for Fullscreen ↗
-                </span>
-              </h3>
-            </div>
-          </div>
-        </div>
-
-        {/* Event write-up + highlights */}
-        <div className="reveal mt-8 grid lg:grid-cols-3 gap-6 items-stretch">
-          <div className="lg:col-span-2 bg-white/75 backdrop-blur border border-gold/30 rounded-2xl p-6 md:p-8 shadow-lg">
-            <h3 className="font-display text-2xl md:text-3xl font-bold text-maroon mb-4">
-              A Day to Remember
-            </h3>
-            <p className="text-charcoal/85 leading-relaxed text-base md:text-lg">
-              More than <strong>60 members</strong> joined us for Ilish Utsav 2026 —
-              the very day we proudly <strong>launched our new website!</strong> It
-              was a wonderful time spent with members and their families, filled with
-              delicious food, laughter, and togetherness.
-            </p>
-            <p className="text-charcoal/85 leading-relaxed text-base md:text-lg mt-4">
-              Our heartfelt gratitude to every member who joined and made the day so
-              special. A special thank you to <strong>Utkala Banga</strong> for the
-              wonderful lunch, and to their dedicated support staff for their warm
-              hospitality. 🙏
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-maroon to-maroon-deep rounded-2xl p-6 md:p-8 shadow-lg text-ivory-warm flex flex-col justify-center gap-5">
-            <div className="flex items-center gap-3">
-              <span className="grid place-items-center w-12 h-12 rounded-full bg-gold text-maroon-deep shrink-0">
-                <Users className="w-6 h-6" />
-              </span>
-              <div>
-                <div className="font-display text-3xl font-bold text-gold-bright leading-none">60+</div>
-                <div className="text-sm text-ivory-cream/80 mt-1">Members &amp; family joined</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="grid place-items-center w-12 h-12 rounded-full bg-gold text-maroon-deep shrink-0">
-                <Sparkles className="w-6 h-6" />
-              </span>
-              <div>
-                <div className="font-display text-lg font-bold text-gold-bright leading-tight">Website Launch</div>
-                <div className="text-sm text-ivory-cream/80">Unveiled on the day</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="grid place-items-center w-12 h-12 rounded-full bg-gold text-maroon-deep shrink-0">
-                <UtensilsCrossed className="w-6 h-6" />
-              </span>
-              <div>
-                <div className="font-display text-lg font-bold text-gold-bright leading-tight">Lunch by Utkala Banga</div>
-                <div className="text-sm text-ivory-cream/80">With gratitude to their team</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Photo grid - 4 images rendered with proper height and objectPosition */}
-        <div className="reveal grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
-          {ILISH_2026_PHOTOS.slice(1).map((p, i) => (
+          <div className="group relative overflow-hidden rounded-3xl border-2 border-gold/50 shadow-[0_0_40px_rgba(255,215,0,0.25)] bg-black">
+            {/* Stage Container */}
             <div
-              key={i}
-              onClick={() => setLightboxIdx(i + 1)}
-              className="group relative overflow-hidden rounded-2xl border-2 border-gold/40 bg-white shadow-xl cursor-pointer hover:border-gold transition-all duration-300 hover:scale-[1.02]"
+              className="relative w-full h-[480px] sm:h-[580px] md:h-[680px] lg:h-[750px] cursor-pointer overflow-hidden"
+              onClick={() => setLightboxIdx(activeIdx)}
             >
-              <AutoImage
-                src={p.src}
-                alt={p.alt}
-                icon={Users}
-                className="w-full h-72 sm:h-80 md:h-[360px] lg:h-[380px] transition-transform duration-500 group-hover:scale-105"
-                style={{ objectPosition: p.objectPosition || 'center 15%' }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-              <div className="absolute bottom-3 left-4 right-4 text-left">
-                <span className="text-xs font-bold text-gold-bright drop-shadow-md block">
-                  {p.title}
-                </span>
-                <span className="text-[11px] text-ivory-cream/80 truncate block mt-0.5">
-                  Click to view full ↗
+              {ILISH_2026_PHOTOS.map((p, idx) => (
+                <img
+                  key={idx}
+                  src={p.src}
+                  alt={p.alt}
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                    idx === activeIdx ? 'opacity-100 scale-100' : 'opacity-0 pointer-events-none scale-105'
+                  }`}
+                  style={{ objectPosition: p.objectPosition || 'center 15%' }}
+                />
+              ))}
+
+              {/* Top Gradient Vignette */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/80 via-black/30 to-transparent z-10" />
+
+              {/* Bottom Gradient Vignette */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
+
+              {/* Top Left Badge: Photo Counter */}
+              <div className="absolute top-5 left-6 z-20">
+                <span className="inline-flex items-center gap-2 bg-black/75 border border-gold/60 text-gold-bright text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full shadow-xl backdrop-blur">
+                  <Sparkles className="w-4 h-4 text-gold-bright" /> Photo {activeIdx + 1} of {ILISH_2026_PHOTOS.length}
                 </span>
               </div>
+
+              {/* Top Right Controls: Play/Pause + Fullscreen */}
+              <div className="absolute top-5 right-6 z-20 flex items-center gap-2.5" onClick={(e) => e.stopPropagation()}>
+                <button
+                  onClick={() => setPlaying(!playing)}
+                  className="bg-black/75 hover:bg-gold hover:text-maroon-deep text-gold-bright border border-gold/50 p-2.5 rounded-full transition-all backdrop-blur shadow-xl"
+                  title={playing ? 'Pause Slideshow' : 'Play Slideshow'}
+                >
+                  {playing ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                </button>
+                <button
+                  onClick={() => setLightboxIdx(activeIdx)}
+                  className="bg-black/75 hover:bg-gold hover:text-maroon-deep text-gold-bright border border-gold/50 px-3.5 py-1.5 rounded-full transition-all backdrop-blur shadow-xl text-xs font-bold flex items-center gap-1.5"
+                >
+                  <span>Fullscreen</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+              {/* Stage Navigation Arrows */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setActiveIdx((prev) => (prev === 0 ? ILISH_2026_PHOTOS.length - 1 : prev - 1))
+                }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/70 border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all backdrop-blur shadow-2xl"
+                aria-label="Previous photo"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setActiveIdx((prev) => (prev + 1) % ILISH_2026_PHOTOS.length)
+                }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/70 border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-all backdrop-blur shadow-2xl"
+                aria-label="Next photo"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+
+              {/* Bottom Stage Overlay: Active Photo Info */}
+              <div className="absolute bottom-6 left-6 md:bottom-8 md:left-10 right-6 z-20">
+                <span className="inline-flex items-center gap-2 bg-gold text-maroon-deep text-xs md:text-sm font-bold px-3.5 py-1.5 rounded-full mb-2 shadow-md">
+                  <Users className="w-4 h-4" /> {currentPhoto.badge || 'Ilish Utsav 2026'}
+                </span>
+                <h3 className="font-display text-2xl md:text-4xl lg:text-5xl font-bold text-ivory-warm drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
+                  {currentPhoto.title}
+                </h3>
+                <p className="text-sm md:text-base text-ivory-cream/85 drop-shadow-md max-w-2xl mt-1 hidden sm:block">
+                  {currentPhoto.subtitle || currentPhoto.alt}
+                </p>
+              </div>
             </div>
-          ))}
+
+            {/* ── THUMBNAIL SELECTOR STRIP BELOW STAGE ── */}
+            <div className="bg-[#120006] p-3 sm:p-4 border-t border-gold/30 flex items-center justify-center gap-2 sm:gap-3 overflow-x-auto">
+              {ILISH_2026_PHOTOS.map((p, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveIdx(idx)}
+                  className={`relative shrink-0 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
+                    idx === activeIdx
+                      ? 'border-gold scale-105 shadow-[0_0_15px_rgba(255,215,0,0.6)] ring-2 ring-gold/50'
+                      : 'border-white/20 opacity-60 hover:opacity-100 hover:border-gold/60'
+                  } w-20 sm:w-28 md:w-32 h-14 sm:h-16 md:h-20`}
+                >
+                  <img
+                    src={p.src}
+                    alt={p.title}
+                    className="w-full h-full object-cover"
+                    style={{ objectPosition: p.objectPosition || 'center 15%' }}
+                  />
+                  <div className={`absolute inset-0 transition-opacity ${idx === activeIdx ? 'bg-transparent' : 'bg-black/30'}`} />
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Video recap */}
