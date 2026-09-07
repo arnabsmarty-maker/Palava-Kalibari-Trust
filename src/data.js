@@ -93,7 +93,7 @@ export const ILISH_EVENT = {
 export const DURGA_EVENT = {
   title: 'Durga Puja 2026',
   dates: '16th – 21st October 2026',
-  location: 'Inside Gate No. 2, Lodha Palava Phase 2',
+  location: 'Eviva Ground, beside Gurudwara, Lodha Palava Phase 2',
 }
 
 export const NIRGHANTA = [

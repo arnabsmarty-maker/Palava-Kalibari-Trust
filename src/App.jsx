@@ -2842,7 +2842,7 @@ function Footer() {
 
           {/* Map mockup — click to open Google Maps */}
           <a
-            href="https://www.google.com/maps?q=19.172499086849395,73.10843808563546"
+            href="https://www.google.com/maps?q=19.160653,73.116143"
             target="_blank"
             rel="noopener noreferrer"
             className="reveal block rounded-2xl border border-gold/30 bg-white/5 p-2 overflow-hidden group cursor-pointer hover:border-gold/60 transition-colors"
@@ -2876,7 +2876,7 @@ function Footer() {
                   <MapPin className="relative w-9 h-9 text-gold-bright drop-shadow" fill="#800020" />
                 </div>
                 <div className="mt-1 bg-maroon-deep/90 border border-gold/40 rounded-lg px-3 py-1.5 text-xs text-gold-bright whitespace-nowrap">
-                  PKT • Inside Gate No. 2, Phase 2
+                  PKT • Eviva Ground, beside Gurudwara, Phase 2
                 </div>
               </div>
 
