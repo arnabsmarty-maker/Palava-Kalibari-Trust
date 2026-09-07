@@ -63,6 +63,7 @@ const NAV = [
   { label: 'Home', href: '#home' },
   { label: 'Events', href: '#durga' },
   { label: 'Durga Puja 2026', href: '#durga' },
+  { label: 'Invitation', href: '#invitation' },
   { label: 'Donate', href: '#donate' },
   { label: 'Sponsorship', href: '#sponsorship' },
   { label: 'About Us', href: '#about' },
@@ -123,9 +124,15 @@ function AutoImage({ src, alt, className = '', icon: Icon = ImageIcon, style = {
         <div>
           <Icon className="w-10 h-10 text-gold/70 mx-auto" />
           <p className="mt-2 text-gold-bright/90 text-sm font-medium">{alt}</p>
-          <p className="mt-1 text-ivory-cream/50 text-[11px]">
-            Add photo → <code>public{src}</code>
-          </p>
+          {import.meta.env && import.meta.env.DEV ? (
+            <p className="mt-1 text-ivory-cream/50 text-[11px]">
+              Add photo → <code>public{src}</code>
+            </p>
+          ) : (
+            <p className="mt-1 text-ivory-cream/60 text-[11px] italic">
+              Coming soon
+            </p>
+          )}
         </div>
       </div>
     )
@@ -290,6 +297,99 @@ function VideoViewer({ media, isActive, onEnded }) {
       className="w-full h-full object-cover relative z-10"
       onClick={(e) => e.stopPropagation()}
     />
+  )
+}
+
+// ── Durga Puja 2026 Invitation posters (3 side-by-side, tap to enlarge) ──
+const INVITATION_POSTERS = [
+  { src: '/invite-nirghanta.jpg', label: 'Puja Nirghanta', sub: 'Ritual schedule • 16–21 Oct 2026' },
+  { src: '/invite-durga-2026.jpg', label: 'Grand Invitation', sub: 'Celebrating our 3rd year' },
+  { src: '/invite-anandomela.jpg', label: 'Anando Mela', sub: 'Food • Shopping • Fun • 15 Oct' },
+]
+
+function InvitationSection() {
+  const [zoom, setZoom] = useState(null)
+  useEffect(() => {
+    const onKey = (e) => e.key === 'Escape' && setZoom(null)
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [])
+  return (
+    <section
+      id="invitation"
+      className="relative py-16 md:py-20 overflow-hidden bg-gradient-to-b from-ivory-cream to-ivory"
+    >
+      <div className="absolute -top-24 right-0 w-96 h-96 bg-gold/10 blur-3xl rounded-full" />
+      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-maroon/5 blur-3xl rounded-full" />
+
+      <div className="relative max-w-7xl mx-auto px-4">
+        <div className="reveal text-center max-w-3xl mx-auto mb-10">
+          <span className="inline-flex items-center gap-2 text-gold-deep font-semibold tracking-[0.25em] uppercase text-xs">
+            <Sparkles className="w-4 h-4" /> You're Invited
+          </span>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-maroon mt-3">
+            Durga Puja 2026 — Invitation
+          </h2>
+          <div className="flex items-center justify-center gap-3 my-5" aria-hidden>
+            <span className="h-px w-16 bg-gradient-to-r from-transparent to-gold" />
+            <Crown className="w-5 h-5 text-gold" />
+            <span className="h-px w-16 bg-gradient-to-l from-transparent to-gold" />
+          </div>
+          <p className="text-charcoal/70 text-base md:text-lg">
+            সবাই আমন্ত্রিত — all devotees, members &amp; families are cordially
+            invited. Tap any poster to view it full-size.
+          </p>
+        </div>
+
+        <div className="reveal grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {INVITATION_POSTERS.map((p, i) => (
+            <button
+              key={i}
+              onClick={() => setZoom(p)}
+              className="group relative rounded-2xl overflow-hidden border-2 border-gold/40 shadow-xl hover:border-gold hover:shadow-[0_0_35px_rgba(255,215,0,0.35)] transition-all bg-[#1a1a1a] text-left"
+            >
+              <AutoImage
+                src={p.src}
+                alt={`${p.label} — Durga Puja 2026`}
+                icon={CalendarDays}
+                className="w-full aspect-[3/4] group-hover:scale-[1.03] transition-transform duration-500"
+              />
+              <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-maroon-deep/90 via-maroon-deep/30 to-transparent">
+                <div className="font-display font-bold text-gold-bright text-lg leading-tight">
+                  {p.label}
+                </div>
+                <div className="text-ivory-cream/80 text-xs mt-0.5">{p.sub}</div>
+              </div>
+              <span className="absolute top-3 right-3 inline-flex items-center gap-1 bg-gold/90 text-maroon-deep text-[11px] font-bold px-2.5 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                <Sparkles className="w-3 h-3" /> Tap to enlarge
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Full-screen poster viewer */}
+      {zoom && (
+        <div
+          className="fixed inset-0 z-[60] bg-black/90 backdrop-blur flex items-center justify-center p-4"
+          onClick={() => setZoom(null)}
+        >
+          <button
+            onClick={() => setZoom(null)}
+            className="absolute top-4 right-4 grid place-items-center w-11 h-11 rounded-full border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-colors"
+            aria-label="Close"
+          >
+            <X className="w-6 h-6" />
+          </button>
+          <img
+            src={zoom.src}
+            alt={zoom.label}
+            className="max-w-full max-h-[92vh] object-contain rounded-xl shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+    </section>
   )
 }
 
@@ -2490,7 +2590,7 @@ function AboutSection() {
     { name: 'Soumyajit Chowdhury', title: 'Managing Committee', image: '/mc-soumyajit.jpg' },
     { name: 'Anup Duari', title: 'Managing Committee', image: '/mc-anup.jpg' },
     { name: 'Pritam Roy', title: 'Managing Committee', image: '/mc-pritam.jpg' },
-    { name: 'Subhaasish Bhattacharya', title: 'Managing Committee', image: '/mc-subhaasish.jpg', objectPosition: 'center 15%' },
+    { name: 'Subhashish Bhattacharya', title: 'Managing Committee', image: '/mc-subhaasish.jpg', objectPosition: 'center 15%' },
     { name: 'Sukanto Pal', title: 'Managing Committee', image: '/mc-sukanto.png' },
     { name: 'Devarpan Sengupta', title: 'Managing Committee', image: '/mc-devarpan.png' },
     { name: 'Sounita Biswas', title: 'Managing Committee', image: '/mc-sounita.jpg' },
@@ -4601,6 +4701,7 @@ export default function App() {
       <Header onJoin={goJoin} onSponsor={openSponsor} onOpenYearEvents={navigateYearEvents} />
       <main>
         <Hero onJoin={goJoin} onSponsor={openSponsor} />
+        <InvitationSection />
         <IlishRecap2026Section />
         <DurgaSection />
         <AnnadanSection />
