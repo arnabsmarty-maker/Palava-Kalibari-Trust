@@ -2942,7 +2942,7 @@ function Footer() {
 
           {/* Map mockup — click to open Google Maps */}
           <a
-            href="https://www.google.com/maps?q=19.160653,73.116143"
+            href="https://www.google.com/maps?q=19.1618237,73.1159700"
             target="_blank"
             rel="noopener noreferrer"
             className="reveal block rounded-2xl border border-gold/30 bg-white/5 p-2 overflow-hidden group cursor-pointer hover:border-gold/60 transition-colors"
