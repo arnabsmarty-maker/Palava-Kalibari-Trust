@@ -302,9 +302,9 @@ function VideoViewer({ media, isActive, onEnded }) {
 
 // ── Durga Puja 2026 Invitation posters (3 side-by-side, tap to enlarge) ──
 const INVITATION_POSTERS = [
-  { src: '/invite-nirghanta.jpg', label: 'Puja Nirghanta', sub: 'Ritual schedule • 16–21 Oct 2026' },
-  { src: '/invite-durga-2026.jpg', label: 'Grand Invitation', sub: 'Celebrating our 3rd year' },
-  { src: '/invite-anandomela.jpg', label: 'Anando Mela', sub: 'Food • Shopping • Fun • 15 Oct' },
+  { src: '/invite-nirghanta.jpg?v=2', label: 'Puja Nirghanta', sub: 'Ritual schedule • 16–21 Oct 2026' },
+  { src: '/invite-durga-2026.jpg?v=2', label: 'Grand Invitation', sub: 'Celebrating our 3rd year' },
+  { src: '/invite-anandomela.jpg?v=2', label: 'Anando Mela', sub: 'Food • Shopping • Fun • 15 Oct' },
 ]
 
 function InvitationSection() {
