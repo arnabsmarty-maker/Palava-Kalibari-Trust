@@ -303,7 +303,7 @@ function VideoViewer({ media, isActive, onEnded }) {
 // ── Durga Puja 2026 Invitation posters (3 side-by-side, tap to enlarge) ──
 const INVITATION_POSTERS = [
   { src: '/invite-nirghanta.jpg?v=2', label: 'Puja Nirghanta', sub: 'Ritual schedule • 16–21 Oct 2026' },
-  { src: '/invite-durga-2026.jpg?v=2', label: 'Grand Invitation', sub: 'Celebrating our 3rd year' },
+  { src: '/invite-durga-2026.jpg?v=3', label: 'Grand Invitation', sub: 'Celebrating our 3rd year' },
   { src: '/invite-anandomela.jpg?v=2', label: 'Anando Mela', sub: 'Food • Shopping • Fun • 15 Oct' },
 ]
 
@@ -322,7 +322,7 @@ function InvitationSection() {
       <div className="absolute -top-24 right-0 w-96 h-96 bg-gold/10 blur-3xl rounded-full" />
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-maroon/5 blur-3xl rounded-full" />
 
-      <div className="relative max-w-7xl mx-auto px-4">
+      <div className="relative max-w-[1600px] mx-auto px-4 md:px-8">
         <div className="reveal text-center max-w-3xl mx-auto mb-10">
           <span className="inline-flex items-center gap-2 text-gold-deep font-semibold tracking-[0.25em] uppercase text-xs">
             <Sparkles className="w-4 h-4" /> You're Invited
@@ -341,7 +341,7 @@ function InvitationSection() {
           </p>
         </div>
 
-        <div className="reveal grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="reveal grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {INVITATION_POSTERS.map((p, i) => (
             <button
               key={i}
@@ -352,7 +352,7 @@ function InvitationSection() {
                 src={p.src}
                 alt={`${p.label} — Durga Puja 2026`}
                 icon={CalendarDays}
-                className="w-full aspect-[3/4] group-hover:scale-[1.03] transition-transform duration-500"
+                className="w-full aspect-[2/3] object-cover group-hover:scale-[1.03] transition-transform duration-500"
               />
               <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-maroon-deep/90 via-maroon-deep/30 to-transparent">
                 <div className="font-display font-bold text-gold-bright text-lg leading-tight">
