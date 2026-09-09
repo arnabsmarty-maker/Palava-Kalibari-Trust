@@ -476,7 +476,7 @@ function StallBookingSection() {
 
 // Kalaanjali dance-competition registration Google Form
 const KALAANJALI_FORM_URL =
-  'https://docs.google.com/forms/d/e/1FAIpQLScppslCBX0rcLeFT-mifBf0O4G6PS2pq4reo-C1el3hF9xC98lQ/viewform'
+  'https://docs.google.com/forms/d/e/1FAIpQLScppslCBX0rcLeFTmifBf0O4G6PS2pq4reoC1el3hF9xC98lQ/viewform'
 
 function CulturalEventsSection() {
   const [zoom, setZoom] = useState(false)
