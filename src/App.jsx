@@ -4706,6 +4706,13 @@ function YearEventsPage({ yearKey, onNavigateYear, onGoHome, onJoin, onSponsor }
           </p>
         </div>
 
+        {/* Recently-concluded Ilish Utsav 2026 recap — shown in the 2026–2027 Events page */}
+        {yearKey === '2026-2027' && (
+          <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+            <IlishRecap2026Section />
+          </div>
+        )}
+
         {/* ══════════════════════════════════════════════════════════════
             SEPARATE EVENT CARDS – Each event gets its own box
            ══════════════════════════════════════════════════════════════ */}
@@ -4783,7 +4790,6 @@ export default function App() {
         <Hero onJoin={goJoin} onSponsor={openSponsor} />
         <InvitationSection />
         <StallBookingSection />
-        <IlishRecap2026Section />
         <DurgaSection />
         <AnnadanSection />
         <DonationSection />
