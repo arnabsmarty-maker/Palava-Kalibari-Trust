@@ -65,6 +65,7 @@ const NAV = [
   { label: 'Durga Puja 2026', href: '#durga' },
   { label: 'Invitation', href: '#invitation' },
   { label: 'Stall Booking', href: '#stall-booking' },
+  { label: 'Cultural Events', href: '#cultural-events' },
   { label: 'Donate', href: '#donate' },
   { label: 'Sponsorship', href: '#sponsorship' },
   { label: 'About Us', href: '#about' },
@@ -76,7 +77,7 @@ const inr = (n) => '₹' + n.toLocaleString('en-IN')
 // Real festive footage, served from /public.
 const VIDEO_SRC = '/pkt-durga-puja.mp4'
 const TIMELAPSE_RATE = 3 // full-player default
-const SLOMO_RATE = 0.5 // cinematic hero "display" — half-speed slow motion
+const SLOMO_RATE = 1 // hero display video — normal playback speed
 
 // Photo assets served from /public. Drop a file at the given path and it shows
 // automatically; until then a labeled placeholder appears in its place.
@@ -470,6 +471,122 @@ function StallBookingSection() {
       maxW="max-w-5xl"
       cols="md:grid-cols-2"
     />
+  )
+}
+
+// Kalaanjali dance-competition registration Google Form
+const KALAANJALI_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLScppslCBX0rcLeFT-mifBf0O4G6PS2pq4reo-C1el3hF9xC98lQ/viewform'
+
+function CulturalEventsSection() {
+  const [zoom, setZoom] = useState(false)
+  useEffect(() => {
+    const onKey = (e) => e.key === 'Escape' && setZoom(false)
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [])
+  return (
+    <section
+      id="cultural-events"
+      className="relative py-16 md:py-20 overflow-hidden bg-gradient-to-b from-ivory to-ivory-cream"
+    >
+      <div className="absolute -top-24 right-0 w-96 h-96 bg-gold/10 blur-3xl rounded-full" />
+      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-maroon/5 blur-3xl rounded-full" />
+
+      {/* Space kept on the sides */}
+      <div className="relative max-w-5xl mx-auto px-6 md:px-10">
+        <div className="reveal text-center max-w-3xl mx-auto mb-8">
+          <span className="inline-flex items-center gap-2 text-gold-deep font-semibold tracking-[0.25em] uppercase text-xs">
+            <Sparkles className="w-4 h-4" /> Durga Puja 2026
+          </span>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-maroon mt-3">
+            Cultural Events 2026
+          </h2>
+          <div className="flex items-center justify-center gap-3 my-5" aria-hidden>
+            <span className="h-px w-16 bg-gradient-to-r from-transparent to-gold" />
+            <Crown className="w-5 h-5 text-gold" />
+            <span className="h-px w-16 bg-gradient-to-l from-transparent to-gold" />
+          </div>
+          <p className="text-charcoal/80 text-base md:text-lg">
+            Many surprises await — and the first one is revealed! ✨ Join us on{' '}
+            <strong className="text-maroon">17th October</strong> for our grand
+            dance program, <strong className="text-maroon">Kalaanjali</strong>.
+          </p>
+        </div>
+
+        {/* Flyer */}
+        <div className="reveal max-w-md mx-auto">
+          <button
+            onClick={() => setZoom(true)}
+            className="group relative block w-full rounded-2xl overflow-hidden border-2 border-gold/40 shadow-xl hover:border-gold hover:shadow-[0_0_35px_rgba(255,215,0,0.35)] transition-all bg-[#1a1a1a]"
+          >
+            <AutoImage
+              src="/kalaanjali.jpg"
+              alt="Kalaanjali — Dance Competition, 17 October 2026"
+              icon={Sparkles}
+              className="w-full aspect-[3/4] object-cover group-hover:scale-[1.03] transition-transform duration-500"
+            />
+            <span className="absolute top-3 right-3 inline-flex items-center gap-1 bg-gold/90 text-maroon-deep text-[11px] font-bold px-2.5 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+              <Sparkles className="w-3 h-3" /> Tap to enlarge
+            </span>
+          </button>
+        </div>
+
+        {/* Registration form + logo — after the flyer */}
+        <div className="reveal mt-10 max-w-lg mx-auto rounded-2xl border-2 border-gold/40 bg-white shadow-xl p-6 md:p-8 text-center">
+          <img
+            src={IMG.pktLogo}
+            alt="Palava Kalibari Trust"
+            className="w-16 h-16 mx-auto rounded-full object-contain"
+          />
+          <h3 className="font-display text-2xl font-bold text-maroon mt-3">
+            Register for Kalaanjali
+          </h3>
+          <p className="text-charcoal/70 text-sm mt-1">
+            Dance Competition • 17th October, 7 PM • Eviva Ground, Palava Phase 2
+            • <span className="font-semibold text-gold-deep">Entry Free for All</span>
+          </p>
+          <a
+            href={KALAANJALI_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-2 bg-gradient-to-r from-gold-bright to-gold-deep text-maroon-deep font-bold px-7 py-3 rounded-full hover:shadow-gold-lg hover:scale-[1.03] transition-all"
+          >
+            <FileText className="w-5 h-5" /> Register Now
+          </a>
+          <p className="text-charcoal/50 text-xs mt-3">
+            Categories: Age 9–18 (₹7000 / ₹3000) &amp; Age 18+ (₹4000 / ₹1000)
+          </p>
+        </div>
+
+        {/* Stay tuned */}
+        <p className="reveal mt-10 text-center text-maroon font-display text-lg md:text-xl italic">
+          More events will be revealed shortly — stay tuned! 🔔
+        </p>
+      </div>
+
+      {/* Flyer lightbox */}
+      {zoom && (
+        <div
+          className="fixed inset-0 z-[60] bg-black/90 backdrop-blur flex items-center justify-center p-4"
+          onClick={() => setZoom(false)}
+        >
+          <button
+            onClick={() => setZoom(false)}
+            className="absolute top-4 right-4 grid place-items-center w-11 h-11 rounded-full border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-colors"
+            aria-label="Close"
+          >
+            <X className="w-6 h-6" />
+          </button>
+          <img
+            src="/kalaanjali.jpg"
+            alt="Kalaanjali flyer"
+            className="max-w-full max-h-[92vh] object-contain rounded-xl shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+    </section>
   )
 }
 
@@ -974,8 +1091,7 @@ function Header({ onJoin, onSponsor, onOpenYearEvents }) {
           <img
             src={IMG.pktLogo}
             alt="Palava Kalibari Trust Logo"
-            className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-contain group-hover:scale-105 transition-transform duration-300 rounded-full shrink-0 -my-2 sm:-my-3"
-            style={{ mixBlendMode: 'screen' }}
+            className="w-12 h-12 sm:w-14 sm:h-14 object-contain group-hover:scale-105 transition-transform duration-300 rounded-full shrink-0"
           />
           <span className="leading-tight">
             <span className="block font-display font-extrabold text-sm sm:text-base lg:text-xl tracking-wider uppercase whitespace-nowrap text-shimmer-glow">
@@ -1364,11 +1480,6 @@ function Hero({ onJoin, onSponsor }) {
           </span>
         </a>
       </div>
-
-      {/* Slow-motion badge */}
-      <span className="absolute z-10 top-24 right-6 inline-flex items-center gap-1.5 bg-black/40 border border-gold/40 text-gold-bright text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur">
-        <Clock className="w-3.5 h-3.5" /> {SLOMO_RATE}× Slow-motion
-      </span>
 
       {video && <VideoModal onClose={() => setVideo(false)} />}
     </section>
@@ -4790,6 +4901,7 @@ export default function App() {
         <Hero onJoin={goJoin} onSponsor={openSponsor} />
         <InvitationSection />
         <StallBookingSection />
+        <CulturalEventsSection />
         <DurgaSection />
         <AnnadanSection />
         <DonationSection />
