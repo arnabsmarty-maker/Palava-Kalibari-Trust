@@ -555,7 +555,8 @@ function CulturalEventsSection() {
             <FileText className="w-5 h-5" /> Register Now
           </a>
           <p className="text-charcoal/50 text-xs mt-3">
-            Categories: Age 9–18 (₹7000 / ₹3000) &amp; Age 18+ (₹4000 / ₹1000)
+            Categories: Age 9–18 — 1st ₹4000 / 2nd ₹1000 &nbsp;•&nbsp; Age 18+ —
+            1st ₹7000 / 2nd ₹3000
           </p>
         </div>
 
