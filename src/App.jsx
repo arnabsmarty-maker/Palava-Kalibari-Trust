@@ -53,9 +53,7 @@ import {
   MEMBERSHIP_PLANS,
   MEMBER_PERKS,
   ANNADAN,
-  FEATURED_CONTRIBUTIONS,
-  DONATION_COLUMNS,
-  DONATION_ROWS,
+  DONATION_CATEGORIES,
   DONATION_NOTE,
 } from './data.js'
 
@@ -2646,71 +2644,43 @@ function DonationSection() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-10 items-start">
-          {/* Featured contributions */}
-          <div className="reveal">
-            <h3 className="text-gold tracking-[0.25em] uppercase text-sm font-semibold mb-5">
-              Featured Contributions
-            </h3>
-            <div className="space-y-4">
-              {FEATURED_CONTRIBUTIONS.map((c) => (
-                <div
-                  key={c.name}
-                  className="flex items-center gap-4 rounded-2xl border border-gold/40 bg-gradient-to-r from-maroon/40 to-maroon-deep/40 p-5 hover:border-gold hover:shadow-gold transition-all"
-                >
-                  <span className="grid place-items-center w-14 h-14 rounded-full bg-gradient-to-br from-gold-bright to-gold-deep text-maroon-deep shrink-0">
-                    <Gift className="w-7 h-7" />
-                  </span>
-                  <span className="font-semibold text-ivory-warm text-lg">{c.name}</span>
-                  <span className="ml-auto font-display text-2xl font-bold text-gold-bright">
-                    {inr(c.amount)}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Puja-wise item donation table */}
-          <div className="reveal">
-            <h3 className="text-gold tracking-[0.25em] uppercase text-sm font-semibold mb-5">
-              Puja-wise Item Donation (₹)
-            </h3>
-            <div className="rounded-2xl border border-gold/40 overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="bg-maroon/60 text-gold-bright">
-                      <th className="text-left font-semibold px-4 py-3">Puja</th>
-                      {DONATION_COLUMNS.map((col) => (
-                        <th key={col} className="font-semibold px-3 py-3 text-center whitespace-nowrap">
-                          {col}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {DONATION_ROWS.map((r, i) => (
-                      <tr
-                        key={r.puja}
-                        className={`border-t border-gold/15 ${
-                          i % 2 ? 'bg-black/30' : 'bg-maroon-deep/30'
-                        } hover:bg-maroon/40 transition-colors`}
-                      >
-                        <td className="px-4 py-3 font-semibold text-ivory-warm whitespace-nowrap">
-                          {r.puja}
-                        </td>
-                        {r.values.map((v, j) => (
-                          <td key={j} className="px-3 py-3 text-center text-ivory-cream/85">
-                            {v.toLocaleString('en-IN')}
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+        <div className="reveal grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {DONATION_CATEGORIES.map((cat) => (
+            <div
+              key={cat.title}
+              className={`rounded-2xl border overflow-hidden shadow-lg transition-all hover:shadow-gold ${
+                cat.featured
+                  ? 'border-gold bg-gradient-to-br from-maroon to-maroon-deep sm:col-span-2 lg:col-span-1'
+                  : 'border-gold/30 bg-black/30'
+              }`}
+            >
+              <div
+                className={`px-4 py-3 flex items-center gap-2.5 ${
+                  cat.featured ? 'bg-gold/15' : 'bg-maroon/40'
+                }`}
+              >
+                <span className="grid place-items-center w-8 h-8 rounded-full bg-gradient-to-br from-gold-bright to-gold-deep text-maroon-deep shrink-0">
+                  <Gift className="w-4 h-4" />
+                </span>
+                <h3 className="font-display text-lg font-bold text-gold-bright">
+                  {cat.title}
+                </h3>
               </div>
+              <ul className="divide-y divide-gold/10">
+                {cat.items.map((it) => (
+                  <li
+                    key={it.name}
+                    className="flex items-center justify-between gap-3 px-4 py-2.5 text-sm hover:bg-maroon/20 transition-colors"
+                  >
+                    <span className="text-ivory-cream/90">{it.name}</span>
+                    <span className="font-bold text-gold-bright whitespace-nowrap">
+                      {inr(it.amount)}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
+          ))}
         </div>
 
         <p className="reveal mt-10 text-center italic text-ivory-cream/60">

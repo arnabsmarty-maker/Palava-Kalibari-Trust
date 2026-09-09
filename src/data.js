@@ -236,26 +236,107 @@ export const ANNADAN = {
 }
 
 // ── Individual Donation Options ──────────────────────────────
-export const FEATURED_CONTRIBUTIONS = [
-  { name: 'Durga Protima / Idol', amount: 100000 },
-  { name: 'Dhaki', amount: 20000 },
-  { name: 'Thakur Moshai', amount: 10000 },
-]
-
-export const DONATION_COLUMNS = [
-  'Puja Samagri',
-  'Fruits',
-  'Mishti',
-  'Flowers',
-  'Maha Bhog',
-]
-
-export const DONATION_ROWS = [
-  { puja: 'Shashthi', values: [10001, 7001, 6001, 7001, 20001] },
-  { puja: 'Saptami', values: [9001, 8001, 7001, 7001, 20001] },
-  { puja: 'Ashtami', values: [10001, 9001, 7001, 8001, 25001] },
-  { puja: 'Nabami', values: [9001, 8001, 7001, 7001, 20001] },
-  { puja: 'Sandhi Puja', values: [15001, 12001, 7001, 6001, 9510] },
+export const DONATION_CATEGORIES = [
+  {
+    title: 'Durga Idol',
+    featured: true,
+    items: [
+      { name: 'Durga Idol', amount: 120000 },
+      { name: 'Dhaki', amount: 30000 },
+      { name: 'Thakur Moshai', amount: 50000 },
+    ],
+  },
+  {
+    title: 'Maha Shoshthi',
+    items: [
+      { name: 'Shoshthi Pujo', amount: 10001 },
+      { name: 'Saree', amount: 7001 },
+      { name: 'Pujo Samagree', amount: 8001 },
+      { name: 'Fruits', amount: 8001 },
+      { name: 'Mishti', amount: 7001 },
+      { name: 'Flower', amount: 7001 },
+    ],
+  },
+  {
+    title: 'Maha Soptomi',
+    items: [
+      { name: 'Soptomi Pujo', amount: 15001 },
+      { name: 'Saree', amount: 11001 },
+      { name: 'Pujo Samagree', amount: 9001 },
+      { name: 'Fruits', amount: 8001 },
+      { name: 'Mishti', amount: 7001 },
+      { name: 'Flower', amount: 8001 },
+      { name: 'Public Bhog', amount: 15001 },
+    ],
+  },
+  {
+    title: 'Maha Ashtomi',
+    items: [
+      { name: 'Ashtomi Pujo', amount: 20001 },
+      { name: 'Saree', amount: 15001 },
+      { name: 'Pujo Samagree', amount: 12001 },
+      { name: 'Fruits', amount: 9001 },
+      { name: 'Mishti', amount: 7001 },
+      { name: 'Flower', amount: 8001 },
+      { name: 'Public Bhog', amount: 20001 },
+    ],
+  },
+  {
+    title: 'Sondhi Pujo',
+    items: [
+      { name: 'Pujo', amount: 25001 },
+      { name: 'Lotus', amount: 12001 },
+      { name: 'Prodip & Pujo Samagree', amount: 7001 },
+      { name: 'Belpata & Flowers', amount: 9001 },
+      { name: 'Mishti', amount: 8001 },
+      { name: 'Mayer Bhog', amount: 20001 },
+    ],
+  },
+  {
+    title: 'Maha Nabomi',
+    items: [
+      { name: 'Nabomi Pujo', amount: 20001 },
+      { name: 'Saree', amount: 15001 },
+      { name: 'Pujo Samagree', amount: 12001 },
+      { name: 'Fruits', amount: 9001 },
+      { name: 'Mishti', amount: 7001 },
+      { name: 'Flower', amount: 8001 },
+      { name: 'Public Bhog', amount: 20001 },
+    ],
+  },
+  {
+    title: 'Dashomi',
+    items: [
+      { name: 'Dashomi Pujo', amount: 12001 },
+      { name: 'Mishti', amount: 7001 },
+    ],
+  },
+  {
+    title: 'Lokhi Pujo',
+    items: [
+      { name: 'Lokhi Idol', amount: 20001 },
+      { name: 'Pujo', amount: 15001 },
+      { name: 'Saree', amount: 7001 },
+      { name: 'Pujo Samagree', amount: 7001 },
+      { name: 'Fruits', amount: 9001 },
+      { name: 'Mishti', amount: 8001 },
+      { name: 'Flower', amount: 7001 },
+      { name: 'Public Bhog', amount: 12001 },
+    ],
+  },
+  {
+    title: 'Kali Pujo',
+    items: [
+      { name: 'Kali Idol', amount: 30000 },
+      { name: 'Pujo', amount: 15001 },
+      { name: 'Saree', amount: 7001 },
+      { name: 'Prodip', amount: 7001 },
+      { name: 'Pujo Samagree', amount: 7001 },
+      { name: 'Fruits & Mishti', amount: 9001 },
+      { name: 'Flower', amount: 7001 },
+      { name: 'Public Bhog', amount: 12001 },
+    ],
+  },
 ]
 
 export const DONATION_NOTE =
