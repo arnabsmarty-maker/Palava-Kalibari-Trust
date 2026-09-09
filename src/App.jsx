@@ -305,6 +305,7 @@ function VideoViewer({ media, isActive, onEnded }) {
 const INVITATION_POSTERS = [
   { src: '/invite-nirghanta.jpg?v=4', label: 'Puja Nirghanta', sub: 'Ritual schedule • 16–21 Oct 2026' },
   { src: '/invite-durga-2026.jpg?v=4', label: 'Grand Invitation', sub: 'Celebrating our 3rd year' },
+  { type: 'video', src: '/invitation-reel.mp4', label: 'Festival Reel', sub: 'A glimpse of the celebration' },
 ]
 const STALL_POSTERS = [
   { src: '/stall-booking.jpg?v=1', label: 'Stall Bookings Open', sub: 'Food & Non-Food stalls • 17–21 Oct 2026' },
@@ -353,29 +354,58 @@ function PosterGallery({
         </div>
 
         <div className={`reveal grid grid-cols-1 ${cols} gap-6 md:gap-8`}>
-          {posters.map((p, i) => (
-            <button
-              key={i}
-              onClick={() => setZoom(p)}
-              className="group relative rounded-2xl overflow-hidden border-2 border-gold/40 shadow-xl hover:border-gold hover:shadow-[0_0_35px_rgba(255,215,0,0.35)] transition-all bg-[#1a1a1a] text-left"
-            >
-              <AutoImage
-                src={p.src}
-                alt={p.label}
-                icon={CalendarDays}
-                className="w-full aspect-[2/3] object-cover group-hover:scale-[1.03] transition-transform duration-500"
-              />
-              <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-maroon-deep/90 via-maroon-deep/30 to-transparent">
-                <div className="font-display font-bold text-gold-bright text-lg leading-tight">
-                  {p.label}
+          {posters.map((p, i) =>
+            p.type === 'video' ? (
+              <div
+                key={i}
+                className="group relative rounded-2xl overflow-hidden border-2 border-gold/40 shadow-xl hover:border-gold hover:shadow-[0_0_35px_rgba(255,215,0,0.35)] transition-all bg-black aspect-[2/3]"
+              >
+                <video
+                  src={p.src}
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                />
+                <div className="pointer-events-none absolute top-0 inset-x-0 p-4 bg-gradient-to-b from-maroon-deep/85 via-maroon-deep/20 to-transparent">
+                  <div className="font-display font-bold text-gold-bright text-lg leading-tight">
+                    {p.label}
+                  </div>
+                  <div className="text-ivory-cream/80 text-xs mt-0.5">{p.sub}</div>
                 </div>
-                <div className="text-ivory-cream/80 text-xs mt-0.5">{p.sub}</div>
+                <button
+                  onClick={() => setZoom(p)}
+                  className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 bg-gold/90 text-maroon-deep text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-gold transition-colors shadow"
+                >
+                  <Play className="w-3.5 h-3.5" fill="currentColor" /> Watch with sound
+                </button>
               </div>
-              <span className="absolute top-3 right-3 inline-flex items-center gap-1 bg-gold/90 text-maroon-deep text-[11px] font-bold px-2.5 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                <Sparkles className="w-3 h-3" /> Tap to enlarge
-              </span>
-            </button>
-          ))}
+            ) : (
+              <button
+                key={i}
+                onClick={() => setZoom(p)}
+                className="group relative rounded-2xl overflow-hidden border-2 border-gold/40 shadow-xl hover:border-gold hover:shadow-[0_0_35px_rgba(255,215,0,0.35)] transition-all bg-[#1a1a1a] text-left"
+              >
+                <AutoImage
+                  src={p.src}
+                  alt={p.label}
+                  icon={CalendarDays}
+                  className="w-full aspect-[2/3] object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                />
+                <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-maroon-deep/90 via-maroon-deep/30 to-transparent">
+                  <div className="font-display font-bold text-gold-bright text-lg leading-tight">
+                    {p.label}
+                  </div>
+                  <div className="text-ivory-cream/80 text-xs mt-0.5">{p.sub}</div>
+                </div>
+                <span className="absolute top-3 right-3 inline-flex items-center gap-1 bg-gold/90 text-maroon-deep text-[11px] font-bold px-2.5 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Sparkles className="w-3 h-3" /> Tap to enlarge
+                </span>
+              </button>
+            )
+          )}
         </div>
       </div>
 
@@ -391,12 +421,24 @@ function PosterGallery({
           >
             <X className="w-6 h-6" />
           </button>
-          <img
-            src={zoom.src}
-            alt={zoom.label}
-            className="max-w-full max-h-[92vh] object-contain rounded-xl shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          />
+          {zoom.type === 'video' ? (
+            <video
+              src={zoom.src}
+              className="max-w-full max-h-[92vh] rounded-xl shadow-2xl bg-black"
+              controls
+              autoPlay
+              loop
+              playsInline
+              onClick={(e) => e.stopPropagation()}
+            />
+          ) : (
+            <img
+              src={zoom.src}
+              alt={zoom.label}
+              className="max-w-full max-h-[92vh] object-contain rounded-xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          )}
         </div>
       )}
     </section>
@@ -411,8 +453,8 @@ function InvitationSection() {
       title="Durga Puja 2026 — Invitation"
       subtitle="সবাই আমন্ত্রিত — all devotees, members & families are cordially invited. Tap any poster to view it full-size."
       posters={INVITATION_POSTERS}
-      maxW="max-w-5xl"
-      cols="md:grid-cols-2"
+      maxW="max-w-[1500px]"
+      cols="md:grid-cols-3"
     />
   )
 }
