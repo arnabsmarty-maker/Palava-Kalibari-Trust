@@ -521,7 +521,7 @@ function CulturalEventsSection() {
             className="group relative block w-full rounded-2xl overflow-hidden border-2 border-gold/40 shadow-xl hover:border-gold hover:shadow-[0_0_35px_rgba(255,215,0,0.35)] transition-all bg-[#1a1a1a]"
           >
             <AutoImage
-              src="/kalaanjali.jpg"
+              src="/kalaanjali.jpg?v=1"
               alt="Kalaanjali — Dance Competition, 17 October 2026"
               icon={Sparkles}
               className="w-full aspect-[3/4] object-cover group-hover:scale-[1.03] transition-transform duration-500"
@@ -580,7 +580,7 @@ function CulturalEventsSection() {
             <X className="w-6 h-6" />
           </button>
           <img
-            src="/kalaanjali.jpg"
+            src="/kalaanjali.jpg?v=1"
             alt="Kalaanjali flyer"
             className="max-w-full max-h-[92vh] object-contain rounded-xl shadow-2xl"
             onClick={(e) => e.stopPropagation()}
