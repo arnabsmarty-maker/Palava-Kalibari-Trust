@@ -304,7 +304,7 @@ function VideoViewer({ media, isActive, onEnded }) {
 const INVITATION_POSTERS = [
   { src: '/invite-nirghanta.jpg?v=4', label: 'Puja Nirghanta', sub: 'Ritual schedule • 16–21 Oct 2026' },
   { src: '/invite-durga-2026.jpg?v=4', label: 'Grand Invitation', sub: 'Celebrating our 3rd year' },
-  { src: '/invite-anandomela.jpg?v=4', label: 'Anando Mela', sub: 'Food • Shopping • Fun • 15 Oct' },
+  { src: '/invite-anandomela.jpg?v=5', label: 'Anando Mela', sub: 'Food • Shopping • Fun • 15 Oct' },
 ]
 
 function InvitationSection() {
