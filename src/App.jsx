@@ -64,6 +64,7 @@ const NAV = [
   { label: 'Events', href: '#durga' },
   { label: 'Durga Puja 2026', href: '#durga' },
   { label: 'Invitation', href: '#invitation' },
+  { label: 'Stall Booking', href: '#stall-booking' },
   { label: 'Donate', href: '#donate' },
   { label: 'Sponsorship', href: '#sponsorship' },
   { label: 'About Us', href: '#about' },
@@ -300,14 +301,25 @@ function VideoViewer({ media, isActive, onEnded }) {
   )
 }
 
-// ── Durga Puja 2026 Invitation posters (3 side-by-side, tap to enlarge) ──
+// ── Reusable poster gallery (tap to enlarge) ──
 const INVITATION_POSTERS = [
   { src: '/invite-nirghanta.jpg?v=4', label: 'Puja Nirghanta', sub: 'Ritual schedule • 16–21 Oct 2026' },
   { src: '/invite-durga-2026.jpg?v=4', label: 'Grand Invitation', sub: 'Celebrating our 3rd year' },
-  { src: '/invite-anandomela.jpg?v=5', label: 'Anando Mela', sub: 'Food • Shopping • Fun • 15 Oct' },
+]
+const STALL_POSTERS = [
+  { src: '/stall-booking.jpg?v=1', label: 'Stall Bookings Open', sub: 'Food & Non-Food stalls • 17–21 Oct 2026' },
+  { src: '/invite-anandomela.jpg?v=5', label: 'Anando Mela', sub: 'Food • Shopping • Fun • Maha Shashti, 16 Oct' },
 ]
 
-function InvitationSection() {
+function PosterGallery({
+  id,
+  eyebrow,
+  title,
+  subtitle,
+  posters,
+  maxW = 'max-w-[1600px]',
+  cols = 'md:grid-cols-3',
+}) {
   const [zoom, setZoom] = useState(null)
   useEffect(() => {
     const onKey = (e) => e.key === 'Escape' && setZoom(null)
@@ -316,33 +328,32 @@ function InvitationSection() {
   }, [])
   return (
     <section
-      id="invitation"
+      id={id}
       className="relative py-16 md:py-20 overflow-hidden bg-gradient-to-b from-ivory-cream to-ivory"
     >
       <div className="absolute -top-24 right-0 w-96 h-96 bg-gold/10 blur-3xl rounded-full" />
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-maroon/5 blur-3xl rounded-full" />
 
-      <div className="relative max-w-[1600px] mx-auto px-4 md:px-8">
+      <div className={`relative ${maxW} mx-auto px-4 md:px-8`}>
         <div className="reveal text-center max-w-3xl mx-auto mb-10">
           <span className="inline-flex items-center gap-2 text-gold-deep font-semibold tracking-[0.25em] uppercase text-xs">
-            <Sparkles className="w-4 h-4" /> You're Invited
+            <Sparkles className="w-4 h-4" /> {eyebrow}
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-maroon mt-3">
-            Durga Puja 2026 — Invitation
+            {title}
           </h2>
           <div className="flex items-center justify-center gap-3 my-5" aria-hidden>
             <span className="h-px w-16 bg-gradient-to-r from-transparent to-gold" />
             <Crown className="w-5 h-5 text-gold" />
             <span className="h-px w-16 bg-gradient-to-l from-transparent to-gold" />
           </div>
-          <p className="text-charcoal/70 text-base md:text-lg">
-            সবাই আমন্ত্রিত — all devotees, members &amp; families are cordially
-            invited. Tap any poster to view it full-size.
-          </p>
+          {subtitle && (
+            <p className="text-charcoal/70 text-base md:text-lg">{subtitle}</p>
+          )}
         </div>
 
-        <div className="reveal grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {INVITATION_POSTERS.map((p, i) => (
+        <div className={`reveal grid grid-cols-1 ${cols} gap-6 md:gap-8`}>
+          {posters.map((p, i) => (
             <button
               key={i}
               onClick={() => setZoom(p)}
@@ -350,7 +361,7 @@ function InvitationSection() {
             >
               <AutoImage
                 src={p.src}
-                alt={`${p.label} — Durga Puja 2026`}
+                alt={p.label}
                 icon={CalendarDays}
                 className="w-full aspect-[2/3] object-cover group-hover:scale-[1.03] transition-transform duration-500"
               />
@@ -368,7 +379,6 @@ function InvitationSection() {
         </div>
       </div>
 
-      {/* Full-screen poster viewer */}
       {zoom && (
         <div
           className="fixed inset-0 z-[60] bg-black/90 backdrop-blur flex items-center justify-center p-4"
@@ -390,6 +400,34 @@ function InvitationSection() {
         </div>
       )}
     </section>
+  )
+}
+
+function InvitationSection() {
+  return (
+    <PosterGallery
+      id="invitation"
+      eyebrow="You're Invited"
+      title="Durga Puja 2026 — Invitation"
+      subtitle="সবাই আমন্ত্রিত — all devotees, members & families are cordially invited. Tap any poster to view it full-size."
+      posters={INVITATION_POSTERS}
+      maxW="max-w-5xl"
+      cols="md:grid-cols-2"
+    />
+  )
+}
+
+function StallBookingSection() {
+  return (
+    <PosterGallery
+      id="stall-booking"
+      eyebrow="Bring Your Brand"
+      title="Contact for Stall Booking"
+      subtitle="Book your Anando Mela table or a Durga Puja Utsav 2026 stall. Tap a poster for full pricing & contact numbers."
+      posters={STALL_POSTERS}
+      maxW="max-w-5xl"
+      cols="md:grid-cols-2"
+    />
   )
 }
 
@@ -4702,6 +4740,7 @@ export default function App() {
       <main>
         <Hero onJoin={goJoin} onSponsor={openSponsor} />
         <InvitationSection />
+        <StallBookingSection />
         <IlishRecap2026Section />
         <DurgaSection />
         <AnnadanSection />
