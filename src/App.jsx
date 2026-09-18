@@ -475,11 +475,34 @@ function StallBookingSection() {
 // Kalaanjali dance-competition registration Google Form
 const KALAANJALI_FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLScppslCBX0rcLeFTmifBf0O4G6PS2pq4reoC1el3hF9xC98lQ/viewform'
+const RANGAREKHA_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSch2gq620i1m4GpQY02s3vXmxCB-nzwP8PCAbaY166_07WRpA/viewform'
+
+const CULTURAL_EVENTS = [
+  {
+    name: 'Kalaanjali',
+    tag: 'Dance Competition',
+    flyer: '/kalaanjali.jpg?v=2',
+    form: KALAANJALI_FORM_URL,
+    details:
+      '17th October, 7 PM • Eviva Ground, Palava Phase 2 • Entry Free for All',
+    extra: 'Age 9–18: 1st ₹4000 / 2nd ₹1000 • Age 18+: 1st ₹7000 / 2nd ₹3000',
+  },
+  {
+    name: 'Rangarekha',
+    tag: 'Art Competition',
+    flyer: '/rangarekha.jpg?v=1',
+    form: RANGAREKHA_FORM_URL,
+    details:
+      '17th October, 10 AM • Eviva Ground, Inside Palava Phase 2 • Entry Free',
+    extra: 'Multiple age categories • Exciting prizes • Showcase your talent',
+  },
+]
 
 function CulturalEventsSection() {
-  const [zoom, setZoom] = useState(false)
+  const [zoom, setZoom] = useState(null)
   useEffect(() => {
-    const onKey = (e) => e.key === 'Escape' && setZoom(false)
+    const onKey = (e) => e.key === 'Escape' && setZoom(null)
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
   }, [])
@@ -506,56 +529,59 @@ function CulturalEventsSection() {
             <span className="h-px w-16 bg-gradient-to-l from-transparent to-gold" />
           </div>
           <p className="text-charcoal/80 text-base md:text-lg">
-            Many surprises await — and the first one is revealed! ✨ Join us on{' '}
-            <strong className="text-maroon">17th October</strong> for our grand
-            dance program, <strong className="text-maroon">Kalaanjali</strong>.
+            More surprises are unfolding! ✨ Join us on{' '}
+            <strong className="text-maroon">17th October</strong> for{' '}
+            <strong className="text-maroon">Kalaanjali</strong> (dance) and{' '}
+            <strong className="text-maroon">Rangarekha</strong> (art) — tap a
+            poster and register below.
           </p>
         </div>
 
-        {/* Flyer */}
-        <div className="reveal max-w-md mx-auto">
-          <button
-            onClick={() => setZoom(true)}
-            className="group relative block w-full rounded-2xl overflow-hidden border-2 border-gold/40 shadow-xl hover:border-gold hover:shadow-[0_0_35px_rgba(255,215,0,0.35)] transition-all bg-[#1a1a1a]"
-          >
-            <AutoImage
-              src="/kalaanjali.jpg?v=2"
-              alt="Kalaanjali — Dance Competition, 17 October 2026"
-              icon={Sparkles}
-              className="w-full aspect-[3/4] object-cover group-hover:scale-[1.03] transition-transform duration-500"
-            />
-            <span className="absolute top-3 right-3 inline-flex items-center gap-1 bg-gold/90 text-maroon-deep text-[11px] font-bold px-2.5 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-              <Sparkles className="w-3 h-3" /> Tap to enlarge
-            </span>
-          </button>
-        </div>
+        {/* Two events side by side */}
+        <div className="grid md:grid-cols-2 gap-8 md:gap-10 items-start">
+          {CULTURAL_EVENTS.map((ev) => (
+            <div key={ev.name} className="reveal flex flex-col">
+              {/* Flyer */}
+              <button
+                onClick={() => setZoom(ev.flyer)}
+                className="group relative block w-full rounded-2xl overflow-hidden border-2 border-gold/40 shadow-xl hover:border-gold hover:shadow-[0_0_35px_rgba(255,215,0,0.35)] transition-all bg-[#1a1a1a]"
+              >
+                <AutoImage
+                  src={ev.flyer}
+                  alt={`${ev.name} — ${ev.tag}, 17 October 2026`}
+                  icon={Sparkles}
+                  className="w-full aspect-[3/4] object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                />
+                <span className="absolute top-3 right-3 inline-flex items-center gap-1 bg-gold/90 text-maroon-deep text-[11px] font-bold px-2.5 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Sparkles className="w-3 h-3" /> Tap to enlarge
+                </span>
+              </button>
 
-        {/* Registration form + logo — after the flyer */}
-        <div className="reveal mt-10 max-w-lg mx-auto rounded-2xl border-2 border-gold/40 bg-white shadow-xl p-6 md:p-8 text-center">
-          <img
-            src={IMG.pktLogo}
-            alt="Palava Kalibari Trust"
-            className="w-16 h-16 mx-auto rounded-full object-contain"
-          />
-          <h3 className="font-display text-2xl font-bold text-maroon mt-3">
-            Register for Kalaanjali
-          </h3>
-          <p className="text-charcoal/70 text-sm mt-1">
-            Dance Competition • 17th October, 7 PM • Eviva Ground, Palava Phase 2
-            • <span className="font-semibold text-gold-deep">Entry Free for All</span>
-          </p>
-          <a
-            href={KALAANJALI_FORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-2 bg-gradient-to-r from-gold-bright to-gold-deep text-maroon-deep font-bold px-7 py-3 rounded-full hover:shadow-gold-lg hover:scale-[1.03] transition-all"
-          >
-            <FileText className="w-5 h-5" /> Register Now
-          </a>
-          <p className="text-charcoal/50 text-xs mt-3">
-            Categories: Age 9–18 — 1st ₹4000 / 2nd ₹1000 &nbsp;•&nbsp; Age 18+ —
-            1st ₹7000 / 2nd ₹3000
-          </p>
+              {/* Registration card */}
+              <div className="mt-6 rounded-2xl border-2 border-gold/40 bg-white shadow-xl p-6 text-center flex-1 flex flex-col">
+                <img
+                  src={IMG.pktLogo}
+                  alt="Palava Kalibari Trust"
+                  className="w-14 h-14 mx-auto rounded-full object-contain"
+                />
+                <h3 className="font-display text-xl font-bold text-maroon mt-2">
+                  Register for {ev.name}
+                </h3>
+                <p className="text-charcoal/70 text-sm mt-1">
+                  {ev.tag} • {ev.details}
+                </p>
+                <a
+                  href={ev.form}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-gold-bright to-gold-deep text-maroon-deep font-bold px-6 py-3 rounded-full hover:shadow-gold-lg hover:scale-[1.03] transition-all"
+                >
+                  <FileText className="w-5 h-5" /> Register Now
+                </a>
+                <p className="text-charcoal/50 text-xs mt-3">{ev.extra}</p>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Stay tuned */}
@@ -568,18 +594,18 @@ function CulturalEventsSection() {
       {zoom && (
         <div
           className="fixed inset-0 z-[60] bg-black/90 backdrop-blur flex items-center justify-center p-4"
-          onClick={() => setZoom(false)}
+          onClick={() => setZoom(null)}
         >
           <button
-            onClick={() => setZoom(false)}
+            onClick={() => setZoom(null)}
             className="absolute top-4 right-4 grid place-items-center w-11 h-11 rounded-full border border-gold/50 text-gold-bright hover:bg-gold hover:text-maroon-deep transition-colors"
             aria-label="Close"
           >
             <X className="w-6 h-6" />
           </button>
           <img
-            src="/kalaanjali.jpg?v=2"
-            alt="Kalaanjali flyer"
+            src={zoom}
+            alt="Event flyer"
             className="max-w-full max-h-[92vh] object-contain rounded-xl shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           />
