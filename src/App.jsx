@@ -303,7 +303,7 @@ function VideoViewer({ media, isActive, onEnded }) {
 // ── Reusable poster gallery (tap to enlarge) ──
 const INVITATION_POSTERS = [
   { src: '/invite-nirghanta.jpg?v=6', label: 'Puja Nirghanta', sub: 'Ritual schedule • 16–21 Oct 2026' },
-  { src: '/invite-durga-2026.jpg?v=6', label: 'Grand Invitation', sub: 'Celebrating our 3rd year' },
+  { src: '/invite-durga-2026.jpg?v=7', label: 'Grand Invitation', sub: 'Celebrating our 3rd year' },
   { type: 'video', src: '/invitation-reel.mp4', label: 'Festival Reel', sub: 'A glimpse of the celebration' },
 ]
 const STALL_POSTERS = [
