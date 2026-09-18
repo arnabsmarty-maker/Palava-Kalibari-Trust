@@ -2507,6 +2507,19 @@ function AnnadanSection() {
 // ══════════════════════════════════════════════════════════════
 function DonationSection() {
   const [copied, setCopied] = useState(false)
+  const [copiedKey, setCopiedKey] = useState('')
+  const copyField = (key, val) => {
+    navigator.clipboard?.writeText(val)
+    setCopiedKey(key)
+    setTimeout(() => setCopiedKey(''), 1500)
+  }
+  const BANK = {
+    'Account Name': 'PALAVA KALIBARI TRUST',
+    'Account Number': '404505001949',
+    'Bank Name': 'ICICI Bank',
+    IFSC: 'ICIC0004045',
+    Branch: 'Lakeshore Greens, Khoni Palava',
+  }
 
   const row1 = [
     'Ravi Sinha', 'Abhinandan Majumdar', 'Asish Sharma', 'Dhruv Tiwari',
@@ -2634,6 +2647,62 @@ function DonationSection() {
                   >
                     <Smartphone className="w-4 h-4" /> Open App
                   </a>
+                </div>
+              </div>
+
+              {/* Bank account details (selectable) */}
+              <div className="p-4 rounded-xl border border-gold/30 bg-black/40">
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <div className="text-xs text-gold/70 uppercase tracking-wider font-semibold">
+                    Bank Account Details
+                  </div>
+                  <button
+                    onClick={() =>
+                      copyField(
+                        'all',
+                        Object.entries(BANK)
+                          .map(([k, v]) => `${k}: ${v}`)
+                          .join('\n')
+                      )
+                    }
+                    className="inline-flex items-center gap-1.5 bg-gold/20 hover:bg-gold text-gold-bright hover:text-maroon-deep border border-gold/40 font-bold px-2.5 py-1 rounded-lg text-[11px] transition-colors"
+                  >
+                    {copiedKey === 'all' ? (
+                      <><Check className="w-3.5 h-3.5" /> Copied!</>
+                    ) : (
+                      <><Copy className="w-3.5 h-3.5" /> Copy all</>
+                    )}
+                  </button>
+                </div>
+                <div className="divide-y divide-gold/10">
+                  {Object.entries(BANK).map(([label, value]) => (
+                    <div
+                      key={label}
+                      className="flex items-center justify-between gap-3 py-1.5"
+                    >
+                      <span className="text-[11px] text-ivory-cream/60 uppercase tracking-wide shrink-0">
+                        {label}
+                      </span>
+                      <span className="flex items-center gap-2 min-w-0">
+                        <span className="font-mono text-xs md:text-sm text-gold-bright font-bold select-all text-right truncate">
+                          {value}
+                        </span>
+                        {(label === 'Account Number' || label === 'IFSC') && (
+                          <button
+                            onClick={() => copyField(label, value)}
+                            className="shrink-0 text-gold/70 hover:text-gold-bright transition-colors"
+                            aria-label={`Copy ${label}`}
+                          >
+                            {copiedKey === label ? (
+                              <Check className="w-4 h-4 text-green-400" />
+                            ) : (
+                              <Copy className="w-4 h-4" />
+                            )}
+                          </button>
+                        )}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
