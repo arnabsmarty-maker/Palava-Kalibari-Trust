@@ -22,3 +22,6 @@ public/invite-*.png
 public/Stall*.png
 public/VIDEO-*.mp4
 public/kala*.png
+
+# Personal documents — never publish (autodeploy.sh commits everything)
+/*.pdf

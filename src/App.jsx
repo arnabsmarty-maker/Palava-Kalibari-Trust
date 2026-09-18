@@ -477,6 +477,9 @@ const KALAANJALI_FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLScppslCBX0rcLeFTmifBf0O4G6PS2pq4reoC1el3hF9xC98lQ/viewform'
 const RANGAREKHA_FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSch2gq620i1m4GpQY02s3vXmxCB-nzwP8PCAbaY166_07WRpA/viewform'
+// Kumari Puja nomination Google Form
+const KUMARI_PUJA_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSfY_Lf3TJUCtydps-T4FhZBMhdNePJj1J5ZkHg3PHMKSVjRDQ/viewform'
 
 const CULTURAL_EVENTS = [
   {
@@ -484,6 +487,7 @@ const CULTURAL_EVENTS = [
     tag: 'Dance Competition',
     flyer: '/kalaanjali.jpg?v=2',
     form: KALAANJALI_FORM_URL,
+    date: '17 October 2026',
     details:
       '17th October, 7 PM • Eviva Ground, Palava Phase 2 • Entry Free for All',
     extra: 'Age 9–18: 1st ₹4000 / 2nd ₹1000 • Age 18+: 1st ₹7000 / 2nd ₹3000',
@@ -493,9 +497,22 @@ const CULTURAL_EVENTS = [
     tag: 'Art Competition',
     flyer: '/rangarekha.jpg?v=1',
     form: RANGAREKHA_FORM_URL,
+    date: '17 October 2026',
     details:
       '17th October, 10 AM • Eviva Ground, Inside Palava Phase 2 • Entry Free',
     extra: 'Multiple age categories • Exciting prizes • Showcase your talent',
+  },
+  {
+    name: 'Kumari Puja',
+    tag: 'Sacred Ritual',
+    flyer: '/kumari-puja.jpg?v=1',
+    form: KUMARI_PUJA_FORM_URL,
+    date: '20 October 2026',
+    cta: 'Nominate Now',
+    details:
+      '20th October, Tuesday • Palava Kalibari Trust • Nominate your little girl (age below 12)',
+    extra:
+      'Selection process is strictly restricted to members and a lottery system',
   },
 ]
 
@@ -515,7 +532,7 @@ function CulturalEventsSection() {
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-maroon/5 blur-3xl rounded-full" />
 
       {/* Space kept on the sides */}
-      <div className="relative max-w-5xl mx-auto px-6 md:px-10">
+      <div className="relative max-w-6xl mx-auto px-6 md:px-10">
         <div className="reveal text-center max-w-3xl mx-auto mb-8">
           <span className="inline-flex items-center gap-2 text-gold-deep font-semibold tracking-[0.25em] uppercase text-xs">
             <Sparkles className="w-4 h-4" /> Durga Puja 2026
@@ -532,13 +549,15 @@ function CulturalEventsSection() {
             More surprises are unfolding! ✨ Join us on{' '}
             <strong className="text-maroon">17th October</strong> for{' '}
             <strong className="text-maroon">Kalaanjali</strong> (dance) and{' '}
-            <strong className="text-maroon">Rangarekha</strong> (art) — tap a
-            poster and register below.
+            <strong className="text-maroon">Rangarekha</strong> (art), and on{' '}
+            <strong className="text-maroon">20th October</strong> for{' '}
+            <strong className="text-maroon">Kumari Puja</strong> — tap a poster
+            and register below.
           </p>
         </div>
 
-        {/* Two events side by side */}
-        <div className="grid md:grid-cols-2 gap-8 md:gap-10 items-start">
+        {/* Events side by side */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 items-start">
           {CULTURAL_EVENTS.map((ev) => (
             <div key={ev.name} className="reveal flex flex-col">
               {/* Flyer */}
@@ -548,9 +567,10 @@ function CulturalEventsSection() {
               >
                 <AutoImage
                   src={ev.flyer}
-                  alt={`${ev.name} — ${ev.tag}, 17 October 2026`}
+                  alt={`${ev.name} — ${ev.tag}, ${ev.date}`}
                   icon={Sparkles}
-                  className="w-full aspect-[3/4] object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                  className="w-full aspect-[2/3] group-hover:scale-[1.03] transition-transform duration-500"
+                  style={{ objectFit: 'contain' }}
                 />
                 <span className="absolute top-3 right-3 inline-flex items-center gap-1 bg-gold/90 text-maroon-deep text-[11px] font-bold px-2.5 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
                   <Sparkles className="w-3 h-3" /> Tap to enlarge
@@ -565,7 +585,7 @@ function CulturalEventsSection() {
                   className="w-14 h-14 mx-auto rounded-full object-contain"
                 />
                 <h3 className="font-display text-xl font-bold text-maroon mt-2">
-                  Register for {ev.name}
+                  {ev.cta ? ev.name : `Register for ${ev.name}`}
                 </h3>
                 <p className="text-charcoal/70 text-sm mt-1">
                   {ev.tag} • {ev.details}
@@ -576,7 +596,7 @@ function CulturalEventsSection() {
                   rel="noopener noreferrer"
                   className="mt-4 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-gold-bright to-gold-deep text-maroon-deep font-bold px-6 py-3 rounded-full hover:shadow-gold-lg hover:scale-[1.03] transition-all"
                 >
-                  <FileText className="w-5 h-5" /> Register Now
+                  <FileText className="w-5 h-5" /> {ev.cta || 'Register Now'}
                 </a>
                 <p className="text-charcoal/50 text-xs mt-3">{ev.extra}</p>
               </div>
