@@ -41,6 +41,8 @@ import {
   Award,
   CreditCard,
   FileText,
+  Volume2,
+  VolumeX,
 } from 'lucide-react'
 import QRCode from 'qrcode'
 import DurgaFace from './DurgaFace.jsx'
@@ -2350,72 +2352,64 @@ function RegisterFormModal({ onClose }) {
 // ══════════════════════════════════════════════════════════════
 // ANNADAN — The Heart of the Festival
 // ══════════════════════════════════════════════════════════════
-// Annadan reel: hover (mouse) or tap (touch) to play with its song.
+// Annadan reel: autoplays muted while on screen; hover (mouse) or tap turns the song on.
 function AnnadanReel() {
   const ref = useRef(null)
-  const [playing, setPlaying] = useState(false)
-  const [soundBlocked, setSoundBlocked] = useState(false)
+  const [soundOn, setSoundOn] = useState(false)
 
-  const playWithSound = () => {
+  useEffect(() => {
     const v = ref.current
     if (!v) return
-    v.muted = false
-    v.play()
-      .then(() => {
-        setPlaying(true)
-        setSoundBlocked(false)
-      })
-      .catch(() => {
-        // Browser blocked audio before any click — play silently, ask for a tap.
-        v.muted = true
-        v.play().then(() => setPlaying(true)).catch(() => {})
-        setSoundBlocked(true)
-      })
-  }
-  const stop = () => {
-    const v = ref.current
-    if (!v) return
-    v.pause()
     v.muted = true
-    setPlaying(false)
-  }
-  const toggle = () => {
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) v.play().catch(() => {})
+        else {
+          v.pause()
+          v.muted = true
+          setSoundOn(false)
+        }
+      },
+      { threshold: 0.25 }
+    )
+    io.observe(v)
+    return () => io.disconnect()
+  }, [])
+
+  const setSound = (on) => {
     const v = ref.current
-    if (playing && v && !v.muted) stop()
-    else playWithSound()
+    if (!v) return
+    v.muted = !on
+    v.play()
+      .then(() => setSoundOn(on))
+      .catch(() => {
+        // Browser refused audio before a user click — stay muted.
+        v.muted = true
+        setSoundOn(false)
+      })
   }
 
   return (
     <div
-      className="group relative rounded-2xl overflow-hidden border-2 border-gold/70 shadow-[0_0_30px_rgba(212,175,55,0.4)] bg-black aspect-[9/16] cursor-pointer"
-      onPointerEnter={(e) => e.pointerType === 'mouse' && playWithSound()}
-      onPointerLeave={(e) => e.pointerType === 'mouse' && stop()}
-      onClick={toggle}
+      className="relative h-full rounded-2xl overflow-hidden border-2 border-gold/70 shadow-[0_0_30px_rgba(212,175,55,0.35)] bg-black cursor-pointer"
+      onPointerEnter={(e) => e.pointerType === 'mouse' && setSound(true)}
+      onPointerLeave={(e) => e.pointerType === 'mouse' && setSound(false)}
+      onClick={() => setSound(!soundOn)}
       role="button"
-      aria-label="Play Annadan reel with sound"
+      aria-label={soundOn ? 'Mute Annadan reel' : 'Play Annadan reel with sound'}
     >
       <video
         ref={ref}
         src="/annadan-reel.mp4"
         poster="/annadan-reel-poster.jpg"
-        className="w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover"
         loop
         muted
         playsInline
         preload="metadata"
       />
-      {!playing && (
-        <div className="absolute inset-0 grid place-items-center bg-black/25 pointer-events-none">
-          <span className="grid place-items-center w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gold/90 text-maroon-deep shadow-gold group-hover:scale-110 transition-transform">
-            <Play className="w-5 h-5 sm:w-7 sm:h-7 translate-x-0.5" fill="currentColor" />
-          </span>
-        </div>
-      )}
-      <span className="hidden sm:inline-flex absolute top-2 left-2 items-center gap-1 bg-black/60 border border-gold/40 text-gold-bright text-[10px] font-bold px-2 py-0.5 rounded-full backdrop-blur pointer-events-none">
-        <HandHeart className="w-3 h-3" /> Annadan Reel
-      </span>
-      <span className="absolute bottom-1.5 inset-x-1.5 text-center text-[9px] sm:text-[10px] font-semibold text-gold-bright bg-black/60 rounded-full px-2 py-0.5 backdrop-blur pointer-events-none">
-        {soundBlocked ? 'Tap for sound 🔊' : playing ? '🔊 Playing' : 'Hover / tap for sound'}
+      <span className="absolute bottom-2 right-2 grid place-items-center w-7 h-7 rounded-full bg-black/60 border border-gold/40 text-gold-bright backdrop-blur pointer-events-none">
+        {soundOn ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
       </span>
     </div>
   )
@@ -2482,109 +2476,44 @@ function AnnadanSection() {
   return (
     <section
       id="annadan"
-      className="relative min-h-[760px] md:min-h-[700px] overflow-hidden text-ivory-warm"
+      className="relative overflow-hidden text-ivory-warm bg-gradient-to-b from-[#1c0008] via-[#140006] to-[#100005] py-10 md:py-14"
     >
-      {/* Full-scale background image carousel */}
-      <div className="absolute inset-0 z-0 overflow-hidden bg-black">
-        {slides.map((slide, idx) => (
-          <img
-            key={idx}
-            src={slide.src}
-            alt={slide.title}
-            loading={idx === 0 ? "eager" : "lazy"}
-            decoding="async"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${
-              idx === currentImg ? 'opacity-100 z-10' : 'opacity-0 z-0'
-            }`}
-            style={{ objectPosition: slide.objectPosition || 'center' }}
-          />
-        ))}
-
-        {/* Minimal top scrim — keeps 90% of photo 100% clear */}
-        <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/60 to-transparent pointer-events-none z-10" />
-      </div>
-
-      {/* Top Header Badge — subtle top-left pin */}
-      <div className="relative z-20 max-w-7xl mx-auto w-full px-4 pt-6 flex justify-between items-center">
-        <span className="inline-flex items-center gap-2 bg-black/60 border border-gold/40 text-gold-bright font-bold tracking-[0.2em] uppercase text-[11px] px-3.5 py-1 rounded-full backdrop-blur-md">
-          <HandHeart className="w-3.5 h-3.5 text-gold-bright" /> {ANNADAN.eyebrow}
-        </span>
-        <span className="hidden md:inline-flex items-center gap-2 text-xs text-ivory-cream/80 bg-black/50 px-3 py-1 rounded-full backdrop-blur border border-white/10">
-          <Sparkles className="w-3.5 h-3.5 text-gold" /> {slides.length} Photos Showcase
-        </span>
-      </div>
-
-      {/* Annadan reel — hover (desktop) / tap (mobile) to play with the song */}
-      <div className="relative z-30 max-w-7xl mx-auto w-full px-4 pt-4 flex justify-end">
-        <div className="w-32 sm:w-44 md:w-52">
-          <AnnadanReel />
+      <div className="max-w-6xl mx-auto px-4">
+        {/* Header badges */}
+        <div className="flex justify-between items-center">
+          <span className="inline-flex items-center gap-2 bg-black/60 border border-gold/40 text-gold-bright font-bold tracking-[0.2em] uppercase text-[11px] px-3.5 py-1 rounded-full">
+            <HandHeart className="w-3.5 h-3.5 text-gold-bright" /> {ANNADAN.eyebrow}
+          </span>
+          <span className="hidden md:inline-flex items-center gap-2 text-xs text-ivory-cream/80 bg-black/50 px-3 py-1 rounded-full border border-white/10">
+            <Sparkles className="w-3.5 h-3.5 text-gold" /> Reel + {slides.length} Photos
+          </span>
         </div>
-      </div>
 
-      {/* BOTTOM 10% WRITEUPS & CONTROLS STRIP */}
-      <div className="absolute bottom-0 inset-x-0 z-20 bg-gradient-to-t from-[#100005] via-[#180007]/90 to-transparent pt-12 pb-6 px-4">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+        {/* Reel (left) + photo carousel (right), same height */}
+        <div className="mt-5 grid grid-cols-2 md:grid-cols-[320px_minmax(0,1fr)] gap-3 md:gap-5 aspect-[9/8] md:aspect-auto md:h-[569px]">
+          <AnnadanReel />
 
-          {/* Left: Compact Title & Copy */}
-          <div className="max-w-xl">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-gold-bright flex items-center justify-center md:justify-start gap-2">
-              {ANNADAN.title}
-              <Heart className="w-5 h-5 text-rose-500 fill-rose-500 animate-pulse" />
-            </h2>
-            <p className="text-xs md:text-sm text-ivory-cream/90 mt-1 line-clamp-2 leading-relaxed">
-              {ANNADAN.body}
-            </p>
-          </div>
-
-          {/* Center: Compact Stats Pills */}
-          <div className="flex items-center gap-2 shrink-0 flex-wrap justify-center">
-            {ANNADAN.stats.map((s, i) => (
-              <div key={i} className="px-3 py-1.5 rounded-xl border border-gold/30 bg-black/60 backdrop-blur text-center">
-                <div className="font-display text-base font-extrabold text-gold-bright">{s.value}</div>
-                <div className="text-[9px] font-semibold text-ivory-cream/70 uppercase tracking-wider">{s.label}</div>
-              </div>
+          <div className="relative rounded-2xl overflow-hidden border-2 border-gold/40 bg-black">
+            {slides.map((slide, idx) => (
+              <img
+                key={idx}
+                src={slide.src}
+                alt={slide.title}
+                loading={idx === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out ${
+                  idx === currentImg ? 'opacity-100' : 'opacity-0'
+                }`}
+                style={{ objectPosition: slide.objectPosition || 'center' }}
+              />
             ))}
-          </div>
-
-          {/* Right: CTA & Carousel Controls */}
-          <div className="flex flex-col items-center md:items-end gap-2 shrink-0">
-            <div className="flex items-center gap-2 flex-wrap justify-center">
-              {RAZORPAY_PAYMENT_URL ? (
-                <a
-                  href={RAZORPAY_PAYMENT_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 bg-gradient-to-r from-gold-bright to-gold-deep text-maroon-deep font-bold px-4 py-2 rounded-lg text-xs shadow-gold hover:scale-105 transition-all"
-                >
-                  <HandHeart className="w-3.5 h-3.5" /> Donate to Annadan
-                </a>
-              ) : (
-                <a
-                  href={upiUri(0)}
-                  className="inline-flex items-center gap-1.5 bg-gradient-to-r from-gold-bright to-gold-deep text-maroon-deep font-bold px-4 py-2 rounded-lg text-xs shadow-gold hover:scale-105 transition-all"
-                >
-                  <Smartphone className="w-3.5 h-3.5" /> Donate via UPI
-                </a>
-              )}
-              <button
-                onClick={() => setShowDonors(true)}
-                className="inline-flex items-center gap-1.5 border border-gold/40 bg-maroon-deep/60 text-gold-bright font-bold px-3 py-2 rounded-lg text-xs hover:bg-maroon-deep/90 transition-all"
-              >
-                <FileText className="w-3.5 h-3.5" /> Donors List
-              </button>
-              <a
-                href="#donate"
-                className="inline-flex items-center gap-1 border border-gold/40 bg-black/40 text-gold-bright font-bold px-3 py-2 rounded-lg text-xs hover:bg-gold/20 transition-all"
-              >
-                <Landmark className="w-3.5 h-3.5" /> Options
-              </a>
-            </div>
-
-            {/* Slide Indicators & Caption */}
-            <div className="flex items-center gap-2 text-[11px] text-ivory-cream/80 bg-black/50 px-3 py-1 rounded-full border border-white/10">
-              <activeSlide.icon className="w-3 h-3 text-gold" />
-              <span className="font-bold text-gold-bright">{activeSlide.title}</span>
-              <div className="flex items-center gap-1 ml-1">
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent pt-10 pb-2.5 px-2.5 md:px-4 md:pb-4">
+              <div className="flex items-center gap-1.5 text-gold-bright font-bold text-[11px] md:text-sm leading-tight">
+                <activeSlide.icon className="w-3.5 h-3.5 text-gold shrink-0" />
+                <span>{activeSlide.title}</span>
+              </div>
+              <p className="hidden md:block text-xs text-ivory-cream/85 mt-1">{activeSlide.subtitle}</p>
+              <div className="flex items-center gap-1 mt-2">
                 {slides.map((_, idx) => (
                   <button
                     key={idx}
@@ -2598,7 +2527,60 @@ function AnnadanSection() {
               </div>
             </div>
           </div>
+        </div>
 
+        {/* Title, stats & CTAs */}
+        <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+          <div className="max-w-xl">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-gold-bright flex items-center justify-center md:justify-start gap-2">
+              {ANNADAN.title}
+              <Heart className="w-5 h-5 text-rose-500 fill-rose-500 animate-pulse" />
+            </h2>
+            <p className="text-xs md:text-sm text-ivory-cream/90 mt-1 leading-relaxed">
+              {ANNADAN.body}
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0 flex-wrap justify-center">
+            {ANNADAN.stats.map((s, i) => (
+              <div key={i} className="px-3 py-1.5 rounded-xl border border-gold/30 bg-black/60 text-center">
+                <div className="font-display text-base font-extrabold text-gold-bright">{s.value}</div>
+                <div className="text-[9px] font-semibold text-ivory-cream/70 uppercase tracking-wider">{s.label}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2 flex-wrap justify-center shrink-0">
+            {RAZORPAY_PAYMENT_URL ? (
+              <a
+                href={RAZORPAY_PAYMENT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 bg-gradient-to-r from-gold-bright to-gold-deep text-maroon-deep font-bold px-4 py-2 rounded-lg text-xs shadow-gold hover:scale-105 transition-all"
+              >
+                <HandHeart className="w-3.5 h-3.5" /> Donate to Annadan
+              </a>
+            ) : (
+              <a
+                href={upiUri(0)}
+                className="inline-flex items-center gap-1.5 bg-gradient-to-r from-gold-bright to-gold-deep text-maroon-deep font-bold px-4 py-2 rounded-lg text-xs shadow-gold hover:scale-105 transition-all"
+              >
+                <Smartphone className="w-3.5 h-3.5" /> Donate via UPI
+              </a>
+            )}
+            <button
+              onClick={() => setShowDonors(true)}
+              className="inline-flex items-center gap-1.5 border border-gold/40 bg-maroon-deep/60 text-gold-bright font-bold px-3 py-2 rounded-lg text-xs hover:bg-maroon-deep/90 transition-all"
+            >
+              <FileText className="w-3.5 h-3.5" /> Donors List
+            </button>
+            <a
+              href="#donate"
+              className="inline-flex items-center gap-1 border border-gold/40 bg-black/40 text-gold-bright font-bold px-3 py-2 rounded-lg text-xs hover:bg-gold/20 transition-all"
+            >
+              <Landmark className="w-3.5 h-3.5" /> Options
+            </a>
+          </div>
         </div>
       </div>
 
