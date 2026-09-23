@@ -2489,8 +2489,10 @@ function AnnadanSection() {
           </span>
         </div>
 
-        {/* Reel (left) + photo carousel (right), same height */}
-        <div className="mt-5 grid grid-cols-2 md:grid-cols-[320px_minmax(0,1fr)] gap-3 md:gap-5 aspect-[9/8] md:aspect-auto md:h-[569px]">
+      </div>
+
+      {/* Reel (left) + photo carousel (right) — full-bleed, same height */}
+      <div className="mt-5 px-2 md:px-3 grid grid-cols-2 md:grid-cols-[calc(min(88vh,56vw)*9/16)_minmax(0,1fr)] gap-2 md:gap-3 aspect-[9/8] md:aspect-auto md:h-[min(88vh,56vw)]">
           <AnnadanReel />
 
           <div className="relative rounded-2xl overflow-hidden border-2 border-gold/40 bg-black">
@@ -2527,8 +2529,9 @@ function AnnadanSection() {
               </div>
             </div>
           </div>
-        </div>
+      </div>
 
+      <div className="max-w-6xl mx-auto px-4">
         {/* Title, stats & CTAs */}
         <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
           <div className="max-w-xl">
