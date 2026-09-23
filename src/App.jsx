@@ -2350,6 +2350,77 @@ function RegisterFormModal({ onClose }) {
 // ══════════════════════════════════════════════════════════════
 // ANNADAN — The Heart of the Festival
 // ══════════════════════════════════════════════════════════════
+// Annadan reel: hover (mouse) or tap (touch) to play with its song.
+function AnnadanReel() {
+  const ref = useRef(null)
+  const [playing, setPlaying] = useState(false)
+  const [soundBlocked, setSoundBlocked] = useState(false)
+
+  const playWithSound = () => {
+    const v = ref.current
+    if (!v) return
+    v.muted = false
+    v.play()
+      .then(() => {
+        setPlaying(true)
+        setSoundBlocked(false)
+      })
+      .catch(() => {
+        // Browser blocked audio before any click — play silently, ask for a tap.
+        v.muted = true
+        v.play().then(() => setPlaying(true)).catch(() => {})
+        setSoundBlocked(true)
+      })
+  }
+  const stop = () => {
+    const v = ref.current
+    if (!v) return
+    v.pause()
+    v.muted = true
+    setPlaying(false)
+  }
+  const toggle = () => {
+    const v = ref.current
+    if (playing && v && !v.muted) stop()
+    else playWithSound()
+  }
+
+  return (
+    <div
+      className="group relative rounded-2xl overflow-hidden border-2 border-gold/70 shadow-[0_0_30px_rgba(212,175,55,0.4)] bg-black aspect-[9/16] cursor-pointer"
+      onPointerEnter={(e) => e.pointerType === 'mouse' && playWithSound()}
+      onPointerLeave={(e) => e.pointerType === 'mouse' && stop()}
+      onClick={toggle}
+      role="button"
+      aria-label="Play Annadan reel with sound"
+    >
+      <video
+        ref={ref}
+        src="/annadan-reel.mp4"
+        poster="/annadan-reel-poster.jpg"
+        className="w-full h-full object-cover"
+        loop
+        muted
+        playsInline
+        preload="metadata"
+      />
+      {!playing && (
+        <div className="absolute inset-0 grid place-items-center bg-black/25 pointer-events-none">
+          <span className="grid place-items-center w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gold/90 text-maroon-deep shadow-gold group-hover:scale-110 transition-transform">
+            <Play className="w-5 h-5 sm:w-7 sm:h-7 translate-x-0.5" fill="currentColor" />
+          </span>
+        </div>
+      )}
+      <span className="hidden sm:inline-flex absolute top-2 left-2 items-center gap-1 bg-black/60 border border-gold/40 text-gold-bright text-[10px] font-bold px-2 py-0.5 rounded-full backdrop-blur pointer-events-none">
+        <HandHeart className="w-3 h-3" /> Annadan Reel
+      </span>
+      <span className="absolute bottom-1.5 inset-x-1.5 text-center text-[9px] sm:text-[10px] font-semibold text-gold-bright bg-black/60 rounded-full px-2 py-0.5 backdrop-blur pointer-events-none">
+        {soundBlocked ? 'Tap for sound 🔊' : playing ? '🔊 Playing' : 'Hover / tap for sound'}
+      </span>
+    </div>
+  )
+}
+
 function AnnadanSection() {
   const [currentImg, setCurrentImg] = useState(0)
   const [showDonors, setShowDonors] = useState(false)
@@ -2411,7 +2482,7 @@ function AnnadanSection() {
   return (
     <section
       id="annadan"
-      className="relative min-h-[620px] md:min-h-[700px] overflow-hidden text-ivory-warm"
+      className="relative min-h-[760px] md:min-h-[700px] overflow-hidden text-ivory-warm"
     >
       {/* Full-scale background image carousel */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-black">
@@ -2441,6 +2512,13 @@ function AnnadanSection() {
         <span className="hidden md:inline-flex items-center gap-2 text-xs text-ivory-cream/80 bg-black/50 px-3 py-1 rounded-full backdrop-blur border border-white/10">
           <Sparkles className="w-3.5 h-3.5 text-gold" /> {slides.length} Photos Showcase
         </span>
+      </div>
+
+      {/* Annadan reel — hover (desktop) / tap (mobile) to play with the song */}
+      <div className="relative z-30 max-w-7xl mx-auto w-full px-4 pt-4 flex justify-end">
+        <div className="w-32 sm:w-44 md:w-52">
+          <AnnadanReel />
+        </div>
       </div>
 
       {/* BOTTOM 10% WRITEUPS & CONTROLS STRIP */}
