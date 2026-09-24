@@ -311,6 +311,7 @@ const INVITATION_POSTERS = [
 const STALL_POSTERS = [
   { src: '/stall-booking.jpg?v=1', label: 'Stall Bookings Open', sub: 'Food & Non-Food stalls • 17–21 Oct 2026' },
   { src: '/invite-anandomela.jpg?v=5', label: 'Anando Mela', sub: 'Food • Shopping • Fun • Maha Shashti, 16 Oct' },
+  { src: '/banner-advertising.jpg?v=1', label: 'Banner & LED Advertising', sub: '10×5 ft / 6×3 ft banners from ₹15,000 • 16–21 Oct 2026' },
 ]
 
 function PosterGallery({
@@ -466,10 +467,10 @@ function StallBookingSection() {
       id="stall-booking"
       eyebrow="Bring Your Brand"
       title="Contact for Stall Booking"
-      subtitle="Book your Anando Mela table or a Durga Puja Utsav 2026 stall. Tap a poster for full pricing & contact numbers."
+      subtitle="Book your Anando Mela table, a Durga Puja Utsav 2026 stall, or banner & LED advertising space. Tap a poster for full pricing & contact numbers."
       posters={STALL_POSTERS}
-      maxW="max-w-5xl"
-      cols="md:grid-cols-2"
+      maxW="max-w-[1500px]"
+      cols="md:grid-cols-3"
     />
   )
 }
