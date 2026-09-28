@@ -487,6 +487,15 @@ const KUMARI_PUJA_FORM_URL =
 
 const CULTURAL_EVENTS = [
   {
+    name: 'Internal Cultural Event',
+    tag: 'Abriti • Singing • Dancing',
+    flyer: '/internal-cultural.jpg?v=1',
+    date: '16 October 2026',
+    details: '16th October, 7 PM onwards • Eviva Ground, Inside Palava Phase 2',
+    note: 'Inviting participation for Abriti, Singing, Dancing & other cultural activities',
+    extra: 'Want to perform? Reach out to the PKT team via Contact Us.',
+  },
+  {
     name: 'Kalaanjali',
     tag: 'Dance Competition',
     flyer: '/kalaanjali.jpg?v=2',
@@ -507,6 +516,14 @@ const CULTURAL_EVENTS = [
     extra: 'Multiple age categories • Exciting prizes • Showcase your talent',
   },
   {
+    name: 'Battle of the Bands',
+    tag: 'Live Music',
+    flyer: '/battle-of-bands.jpg?v=1',
+    date: '18 October 2026',
+    details: '18th October, 7:30 PM onwards • Eviva Ground, Inside Palava Phase 2',
+    note: 'Entry Free for All',
+  },
+  {
     name: 'Kumari Puja',
     tag: 'Sacred Ritual',
     flyer: '/kumari-puja.jpg?v=1',
@@ -517,6 +534,14 @@ const CULTURAL_EVENTS = [
       '20th October, Tuesday • Palava Kalibari Trust • Nominate your little girl (age below 12)',
     extra:
       'Selection process is strictly restricted to members and a lottery system',
+  },
+  {
+    name: 'Magic Show',
+    tag: 'Family Entertainment',
+    flyer: '/magic-show.jpg?v=1',
+    date: '20 October 2026',
+    details: '20th October, 7:30 PM onwards • Eviva Ground, Inside Palava Phase 2',
+    note: 'An evening of magic for the whole family',
   },
 ]
 
@@ -550,13 +575,12 @@ function CulturalEventsSection() {
             <span className="h-px w-16 bg-gradient-to-l from-transparent to-gold" />
           </div>
           <p className="text-charcoal/80 text-base md:text-lg">
-            More surprises are unfolding! ✨ Join us on{' '}
-            <strong className="text-maroon">17th October</strong> for{' '}
-            <strong className="text-maroon">Kalaanjali</strong> (dance) and{' '}
-            <strong className="text-maroon">Rangarekha</strong> (art), and on{' '}
-            <strong className="text-maroon">20th October</strong> for{' '}
-            <strong className="text-maroon">Kumari Puja</strong> — tap a poster
-            and register below.
+            Six events across Durga Puja! ✨{' '}
+            <strong className="text-maroon">16 Oct</strong> Internal Cultural Event •{' '}
+            <strong className="text-maroon">17 Oct</strong> Kalaanjali &amp; Rangarekha •{' '}
+            <strong className="text-maroon">18 Oct</strong> Battle of the Bands •{' '}
+            <strong className="text-maroon">20 Oct</strong> Kumari Puja &amp; Magic Show — tap a
+            poster to enlarge, and register below where applicable.
           </p>
         </div>
 
@@ -589,20 +613,26 @@ function CulturalEventsSection() {
                   className="w-14 h-14 mx-auto rounded-full object-contain"
                 />
                 <h3 className="font-display text-xl font-bold text-maroon mt-2">
-                  {ev.cta ? ev.name : `Register for ${ev.name}`}
+                  {ev.cta || !ev.form ? ev.name : `Register for ${ev.name}`}
                 </h3>
                 <p className="text-charcoal/70 text-sm mt-1">
                   {ev.tag} • {ev.details}
                 </p>
-                <a
-                  href={ev.form}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-gold-bright to-gold-deep text-maroon-deep font-bold px-6 py-3 rounded-full hover:shadow-gold-lg hover:scale-[1.03] transition-all"
-                >
-                  <FileText className="w-5 h-5" /> {ev.cta || 'Register Now'}
-                </a>
-                <p className="text-charcoal/50 text-xs mt-3">{ev.extra}</p>
+                {ev.form ? (
+                  <a
+                    href={ev.form}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-gold-bright to-gold-deep text-maroon-deep font-bold px-6 py-3 rounded-full hover:shadow-gold-lg hover:scale-[1.03] transition-all"
+                  >
+                    <FileText className="w-5 h-5" /> {ev.cta || 'Register Now'}
+                  </a>
+                ) : (
+                  <p className="mt-4 inline-flex items-center justify-center gap-2 border-2 border-gold/50 text-maroon font-bold px-5 py-2.5 rounded-full">
+                    <CalendarDays className="w-5 h-5 text-gold-deep shrink-0" /> {ev.note}
+                  </p>
+                )}
+                {ev.extra && <p className="text-charcoal/50 text-xs mt-3">{ev.extra}</p>}
               </div>
             </div>
           ))}
