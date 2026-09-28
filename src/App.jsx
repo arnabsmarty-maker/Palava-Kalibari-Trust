@@ -55,6 +55,7 @@ import {
   MEMBERSHIP_PLANS,
   MEMBER_PERKS,
   ANNADAN,
+  ANNADAN_2026,
   DONATION_CATEGORIES,
   DONATION_NOTE,
 } from './data.js'
@@ -2416,6 +2417,141 @@ function AnnadanReel() {
   )
 }
 
+// Annadan 2026 appeal: the items-required list, poster, UPI and donation contacts.
+function AnnadanAppeal() {
+  const [query, setQuery] = useState('')
+  const [zoom, setZoom] = useState(false)
+  const [copied, setCopied] = useState(false)
+  const A = ANNADAN_2026
+
+  const q = query.trim().toLowerCase()
+  const rows = A.items
+    .map(([name, qty], i) => ({ no: i + 1, name, qty }))
+    .filter((r) => !q || r.name.toLowerCase().includes(q))
+
+  const copyUpi = () => {
+    navigator.clipboard?.writeText(UPI_VPA).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1800)
+    })
+  }
+
+  return (
+    <div id="annadan-2026" className="mt-10 rounded-2xl border-2 border-gold/50 bg-black/40 overflow-hidden">
+      {/* Header */}
+      <div className="text-center px-4 pt-7 pb-5 bg-gradient-to-b from-maroon-deep/70 to-transparent">
+        <p className="text-[11px] md:text-xs font-bold tracking-[0.25em] uppercase text-gold">{A.presenter}</p>
+        <h3 className="font-display text-3xl md:text-5xl font-extrabold text-gold-bright mt-1">{A.title}</h3>
+        <p className="text-xs md:text-sm font-semibold tracking-[0.15em] uppercase text-ivory-cream/90 mt-1">{A.subtitle}</p>
+        <p className="max-w-3xl mx-auto text-xs md:text-sm text-ivory-cream/85 mt-4 leading-relaxed">{A.intro}</p>
+        <p className="text-gold-bright font-semibold mt-3">{A.shloka}</p>
+        <p className="italic text-xs md:text-sm text-ivory-cream/75">“{A.quote}”</p>
+      </div>
+
+      <div className="grid lg:grid-cols-[300px_minmax(0,1fr)] gap-5 px-3 md:px-6 pb-6">
+        {/* Poster + details */}
+        <div className="flex flex-col gap-3">
+          <button
+            onClick={() => setZoom(true)}
+            className="block rounded-xl overflow-hidden border border-gold/40 hover:border-gold transition-colors"
+            aria-label="View Annadan 2026 appeal poster"
+          >
+            <img src="/annadan-2026-appeal.jpg?v=1" alt="Annadan 2026 appeal poster" loading="lazy" className="w-full h-auto" />
+          </button>
+          <div className="grid grid-cols-3 lg:grid-cols-1 gap-2 text-[11px] md:text-xs">
+            <div className="flex items-start gap-2 rounded-lg bg-black/40 border border-white/10 p-2">
+              <CalendarDays className="w-4 h-4 text-gold shrink-0" /><span>{A.date}</span>
+            </div>
+            <div className="flex items-start gap-2 rounded-lg bg-black/40 border border-white/10 p-2">
+              <Clock className="w-4 h-4 text-gold shrink-0" /><span>{A.time}</span>
+            </div>
+            <div className="flex items-start gap-2 rounded-lg bg-black/40 border border-white/10 p-2">
+              <MapPin className="w-4 h-4 text-gold shrink-0" /><span>{A.venue}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Items required */}
+        <div className="min-w-0">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+            <h4 className="font-display text-lg md:text-xl font-bold text-gold-bright">
+              Items Required for Annadan 2026 <span className="text-xs font-semibold text-ivory-cream/60">({A.items.length})</span>
+            </h4>
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search items…"
+              className="w-full sm:w-56 rounded-lg bg-black/50 border border-gold/30 px-3 py-1.5 text-sm text-ivory-warm placeholder:text-ivory-cream/40 focus:outline-none focus:border-gold"
+            />
+          </div>
+          <ol className="sm:columns-2 xl:columns-3 gap-4 text-xs md:text-[13px]">
+            {rows.map((r) => (
+              <li
+                key={r.no}
+                className="break-inside-avoid flex items-center gap-2 px-2 py-1.5 border-b border-white/10 odd:bg-white/[0.03]"
+              >
+                <span className="w-6 text-right font-bold text-gold tabular-nums shrink-0">{r.no}</span>
+                <span className="flex-1 min-w-0 text-ivory-cream/90">{r.name}</span>
+                <span className="font-bold text-gold-bright whitespace-nowrap tabular-nums">{r.qty}</span>
+              </li>
+            ))}
+          </ol>
+          {rows.length === 0 && <p className="text-sm text-ivory-cream/60 py-4">No items match “{query}”.</p>}
+
+          {/* Donate + contacts */}
+          <div className="mt-5 grid md:grid-cols-2 gap-3">
+            <div className="rounded-xl border border-gold/40 bg-maroon-deep/50 p-3">
+              <p className="text-[11px] uppercase tracking-wider text-ivory-cream/70">M/s. Palava Kalibari Trust — UPI ID</p>
+              <div className="flex items-center gap-2 mt-1">
+                <span className="font-mono text-sm text-gold-bright break-all">{UPI_VPA}</span>
+                <button onClick={copyUpi} className="p-1.5 rounded-md border border-gold/40 text-gold-bright hover:bg-gold/20 shrink-0" aria-label="Copy UPI ID">
+                  {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                </button>
+              </div>
+              <a
+                href={upiUri(0)}
+                className="mt-2 inline-flex items-center gap-1.5 bg-gradient-to-r from-gold-bright to-gold-deep text-maroon-deep font-bold px-4 py-2 rounded-lg text-xs shadow-gold hover:scale-105 transition-all"
+              >
+                <Smartphone className="w-3.5 h-3.5" /> Donate via UPI
+              </a>
+            </div>
+            <div className="rounded-xl border border-gold/40 bg-maroon-deep/50 p-3">
+              <p className="text-[11px] uppercase tracking-wider text-ivory-cream/70">Contact us for donations</p>
+              <div className="mt-1 grid gap-1">
+                {A.contacts.map((c) => (
+                  <a key={c.phone} href={`tel:+91${c.phone}`} className="flex items-center justify-between gap-2 text-sm hover:text-gold-bright">
+                    <span className="font-semibold">{c.name}</span>
+                    <span className="inline-flex items-center gap-1 font-mono text-gold-bright">
+                      <Phone className="w-3.5 h-3.5" /> {c.phone}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {zoom && (
+        <Modal onClose={() => setZoom(false)} maxW="max-w-3xl">
+          <div className="relative bg-[#1c0008] border-2 border-gold/50 rounded-2xl overflow-hidden p-2">
+            <button
+              onClick={() => setZoom(false)}
+              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/60 border border-gold/30 text-gold-bright hover:bg-gold/20"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="max-h-[85vh] overflow-y-auto rounded-xl">
+              <img src="/annadan-2026-appeal.jpg?v=1" alt="Annadan 2026 appeal poster" className="w-full h-auto" />
+            </div>
+          </div>
+        </Modal>
+      )}
+    </div>
+  )
+}
+
 function AnnadanSection() {
   const [currentImg, setCurrentImg] = useState(0)
   const [showDonors, setShowDonors] = useState(false)
@@ -2586,6 +2722,8 @@ function AnnadanSection() {
             </a>
           </div>
         </div>
+
+        <AnnadanAppeal />
       </div>
 
       {showDonors && (
