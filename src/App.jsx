@@ -481,6 +481,8 @@ const KALAANJALI_FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLScppslCBX0rcLeFTmifBf0O4G6PS2pq4reoC1el3hF9xC98lQ/viewform'
 const RANGAREKHA_FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSch2gq620i1m4GpQY02s3vXmxCB-nzwP8PCAbaY166_07WRpA/viewform'
+const SAJER_GOLPO_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSf__nrmSU8H12Hf1tVfjFRIvlzpBC9c3aoCAUEKXojtYphIYw/viewform'
 // Kumari Puja nomination Google Form
 const KUMARI_PUJA_FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSfY_Lf3TJUCtydps-T4FhZBMhdNePJj1J5ZkHg3PHMKSVjRDQ/viewform'
@@ -522,6 +524,17 @@ const CULTURAL_EVENTS = [
     date: '18 October 2026',
     details: '18th October, 7:30 PM onwards • Eviva Ground, Inside Palava Phase 2',
     note: 'Entry Free for All',
+  },
+  {
+    name: 'Sajer Golpo',
+    tag: 'Kids Fashion & Storytelling',
+    flyer: '/sajer-golpo.jpg?v=1',
+    form: SAJER_GOLPO_FORM_URL,
+    date: '19 October 2026',
+    details:
+      '19th October (Monday), 7 PM onwards • Eviva Ground, Palava Phase 2 • Entry Free',
+    extra:
+      'Boys & Girls • Cat 1: 5–11 yrs, Cat 2: 12–17 yrs • Winner ₹2000 / 1st Runner-up ₹1000 (each category) • 2–3 min each',
   },
   {
     name: 'Kumari Puja',
@@ -575,10 +588,11 @@ function CulturalEventsSection() {
             <span className="h-px w-16 bg-gradient-to-l from-transparent to-gold" />
           </div>
           <p className="text-charcoal/80 text-base md:text-lg">
-            Six events across Durga Puja! ✨{' '}
+            Seven events across Durga Puja! ✨{' '}
             <strong className="text-maroon">16 Oct</strong> Internal Cultural Event •{' '}
             <strong className="text-maroon">17 Oct</strong> Kalaanjali &amp; Rangarekha •{' '}
             <strong className="text-maroon">18 Oct</strong> Battle of the Bands •{' '}
+            <strong className="text-maroon">19 Oct</strong> Sajer Golpo •{' '}
             <strong className="text-maroon">20 Oct</strong> Kumari Puja &amp; Magic Show — tap a
             poster to enlarge, and register below where applicable.
           </p>
