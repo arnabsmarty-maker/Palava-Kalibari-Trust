@@ -537,6 +537,16 @@ const CULTURAL_EVENTS = [
       'Boys & Girls • Cat 1: 5–11 yrs, Cat 2: 12–17 yrs • Winner ₹2000 / 1st Runner-up ₹1000 (each category) • 2–3 min each',
   },
   {
+    name: 'Bhuter Raja Dil Bor',
+    tag: 'Bengali Drama • ভুতের রাজা দিল বর',
+    flyer: '/bhuter-raja.jpg?v=1',
+    date: '19 October 2026',
+    details: '19th October (Monday), 8 PM',
+    note: 'Bengali stage play',
+    extra:
+      'Director & Actor: সুমি • Co-Director & Actor: দীপ্তেন • Cast: শোহাম, ঐন্দ্রিলা, ইন্দ্রনীল, জয়শ্রী, অনুরাধা, সৌনিতা, বনশ্রী, প্রীতম, সৌভিক',
+  },
+  {
     name: 'Kumari Puja',
     tag: 'Sacred Ritual',
     flyer: '/kumari-puja.jpg?v=1',
@@ -588,11 +598,11 @@ function CulturalEventsSection() {
             <span className="h-px w-16 bg-gradient-to-l from-transparent to-gold" />
           </div>
           <p className="text-charcoal/80 text-base md:text-lg">
-            Seven events across Durga Puja! ✨{' '}
+            Eight events across Durga Puja! ✨{' '}
             <strong className="text-maroon">16 Oct</strong> Internal Cultural Event •{' '}
             <strong className="text-maroon">17 Oct</strong> Kalaanjali &amp; Rangarekha •{' '}
             <strong className="text-maroon">18 Oct</strong> Battle of the Bands •{' '}
-            <strong className="text-maroon">19 Oct</strong> Sajer Golpo •{' '}
+            <strong className="text-maroon">19 Oct</strong> Sajer Golpo &amp; Bhuter Raja Dil Bor •{' '}
             <strong className="text-maroon">20 Oct</strong> Kumari Puja &amp; Magic Show — tap a
             poster to enlarge, and register below where applicable.
           </p>
