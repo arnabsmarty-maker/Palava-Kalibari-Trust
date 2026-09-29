@@ -616,159 +616,236 @@ const SCHEDULE_SLOTS = EVENT_SCHEDULE.flatMap((d) =>
   }))
 )
 
+// Fixed ember layout (no Math.random, so renders are stable).
+const EMBERS = Array.from({ length: 22 }, (_, i) => ({
+  left: `${(i * 37) % 100}%`,
+  size: 3 + ((i * 7) % 6),
+  dur: 9 + ((i * 5) % 9),
+  delay: -((i * 3) % 14),
+  dx: `${((i * 13) % 60) - 30}px`,
+}))
+
+const pad2 = (n) => String(n).padStart(2, '0')
+
+function CountdownUnit({ value, label }) {
+  return (
+    <div className="flex flex-col items-center">
+      <div className="relative w-12 h-14 md:w-16 md:h-[72px] rounded-lg bg-gradient-to-b from-[#2a0008] to-black border border-gold/50 shadow-[inset_0_1px_0_rgba(255,215,0,0.25),0_8px_20px_rgba(0,0,0,0.5)] grid place-items-center overflow-hidden [perspective:400px]">
+        <span key={value} className="cine-digit font-display text-2xl md:text-4xl font-extrabold text-gold-bright tabular-nums">
+          {value}
+        </span>
+        <span className="absolute inset-x-0 top-1/2 h-px bg-black/60" />
+      </div>
+      <span className="mt-1 text-[9px] md:text-[10px] font-bold tracking-[0.2em] text-ivory-cream/70 uppercase">{label}</span>
+    </div>
+  )
+}
+
 function ScheduleSection() {
   const ref = useRef(null)
+  const videoRef = useRef(null)
   const [now, setNow] = useState(() => new Date())
-  const [inView, setInView] = useState(false)
+  const [opened, setOpened] = useState(false)
   const [shown, setShown] = useState(() => new Set())
   const [zoom, setZoom] = useState(false)
 
   useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 30000)
+    const t = setInterval(() => setNow(new Date()), 1000)
     return () => clearInterval(t)
   }, [])
 
-  // Animate the timeline line, then each day card as it scrolls into view.
+  // Open the letterbox, then bring each day card into focus as it scrolls in.
   useEffect(() => {
     const root = ref.current
     if (!root) return
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
+          if (e.target === root) {
+            // Letterbox opens once and stays open; video plays only while visible.
+            if (e.isIntersecting) setOpened(true)
+            const v = videoRef.current
+            if (v) e.isIntersecting ? v.play().catch(() => {}) : v.pause()
+            return
+          }
           if (!e.isIntersecting) return
-          if (e.target === root) setInView(true)
-          else setShown((prev) => new Set(prev).add(e.target.dataset.day))
+          setShown((prev) => new Set(prev).add(e.target.dataset.day))
           io.unobserve(e.target)
         })
       },
-      { threshold: 0.15 }
+      { threshold: 0.12 }
     )
     io.observe(root)
     root.querySelectorAll('[data-day]').forEach((el) => io.observe(el))
     return () => io.disconnect()
   }, [])
-
   const live = SCHEDULE_SLOTS.filter((s) => now >= s.from && now < s.to)
   const next = SCHEDULE_SLOTS.find((s) => s.from > now)
-  const first = SCHEDULE_SLOTS[0].from
-  const diff = first - now
+  const diff = SCHEDULE_SLOTS[0].from - now
   const status = (s) => (now >= s.to ? 'done' : now >= s.from ? 'live' : s === next ? 'next' : 'upcoming')
+  const slotOf = (d, s) => SCHEDULE_SLOTS.find((x) => x.date === d.date && x.title === s.title)
 
-  let banner
+  let countdown
   if (diff > 0) {
-    const d = Math.floor(diff / 864e5)
-    const h = Math.floor((diff % 864e5) / 36e5)
-    const m = Math.floor((diff % 36e5) / 6e4)
-    banner = (
+    const secs = Math.floor(diff / 1000)
+    countdown = (
       <>
-        <Clock className="w-4 h-4" /> Festivities begin in{' '}
-        <strong className="tabular-nums">{d}d {h}h {m}m</strong> — Anondomela, 16 Oct, 7 PM
+        <p className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-gold">Puja starts in</p>
+        <div className="mt-2 flex items-start gap-1.5 md:gap-2">
+          <CountdownUnit value={pad2(Math.floor(secs / 86400))} label="Days" />
+          <span className="font-display text-2xl md:text-3xl text-gold/70 mt-2.5 md:mt-4">:</span>
+          <CountdownUnit value={pad2(Math.floor((secs % 86400) / 3600))} label="Hours" />
+          <span className="font-display text-2xl md:text-3xl text-gold/70 mt-2.5 md:mt-4">:</span>
+          <CountdownUnit value={pad2(Math.floor((secs % 3600) / 60))} label="Mins" />
+          <span className="font-display text-2xl md:text-3xl text-gold/70 mt-2.5 md:mt-4">:</span>
+          <CountdownUnit value={pad2(secs % 60)} label="Secs" />
+        </div>
+        <p className="mt-2 text-[11px] md:text-xs text-ivory-cream/75">Anondomela • 16 Oct, 7:00 PM</p>
       </>
     )
   } else if (live.length) {
-    banner = (
+    countdown = (
       <>
-        <span className="w-2.5 h-2.5 rounded-full bg-green-500 sched-live" /> Happening now:{' '}
-        <strong>{live.map((s) => s.title).join(' • ')}</strong>
+        <p className="inline-flex items-center gap-2 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-green-400">
+          <span className="w-2.5 h-2.5 rounded-full bg-green-500 sched-live" /> Happening now
+        </p>
+        <p className="mt-2 font-display text-lg md:text-2xl font-bold text-gold-bright">{live.map((s) => s.title).join(' • ')}</p>
       </>
     )
   } else if (next) {
-    banner = (
+    countdown = (
       <>
-        <Clock className="w-4 h-4" /> Up next: <strong>{next.title}</strong> —{' '}
-        {next.from.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', timeZone: 'Asia/Kolkata' })},{' '}
-        {fmt12(next.start)}
+        <p className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-gold">Up next</p>
+        <p className="mt-2 font-display text-lg md:text-2xl font-bold text-gold-bright">{next.title}</p>
+        <p className="text-xs text-ivory-cream/75">
+          {next.from.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', timeZone: 'Asia/Kolkata' })}, {fmt12(next.start)}
+        </p>
       </>
     )
   } else {
-    banner = <>🙏 Thank you for celebrating Durga Puja 2026 with us — Subho Bijoya!</>
+    countdown = <p className="font-display text-lg text-gold-bright">🙏 Subho Bijoya — thank you for celebrating with us!</p>
   }
 
   return (
-    <section id="schedule" className="relative py-16 md:py-20 overflow-hidden bg-gradient-to-b from-ivory-cream to-ivory">
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-gold/10 blur-3xl rounded-full" />
-      <div className="relative max-w-5xl mx-auto px-4 md:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-8">
-          <span className="inline-flex items-center gap-2 text-gold-deep font-semibold tracking-[0.25em] uppercase text-xs">
-            <CalendarDays className="w-4 h-4" /> Durga Puja 2026
-          </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-maroon mt-3">Event Schedule</h2>
-          <p className="text-charcoal/70 text-xs md:text-sm tracking-[0.2em] uppercase mt-2">
-            Faith | Culture | Community | Togetherness
-          </p>
-          <div className="mt-5 inline-flex flex-wrap items-center justify-center gap-2 rounded-full bg-maroon text-ivory-warm px-4 py-2 text-sm shadow-lg">
-            {banner}
+    <section
+      id="schedule"
+      ref={ref}
+      className={`relative overflow-hidden text-ivory-warm bg-gradient-to-b from-maroon-deep via-[#3a0010] to-[#1a0008] ${opened ? 'cine-on' : ''}`}
+    >
+      {/* Cinematic backdrop: Devi video + maroon grade + vignette + embers */}
+      <div className="absolute inset-0 pointer-events-none">
+        <video
+          ref={videoRef}
+          src="/nirghanta-bg.mp4"
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className="cine-kenburns absolute inset-0 w-full h-full object-cover opacity-30"
+          style={{ objectPosition: 'center 20%' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-maroon-deep/90 via-[#3a0010]/85 to-[#1a0008]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.7)_100%)]" />
+        {EMBERS.map((e, i) => (
+          <span
+            key={i}
+            className="cine-ember"
+            style={{
+              left: e.left,
+              width: e.size,
+              height: e.size,
+              animationDuration: `${e.dur}s`,
+              animationDelay: `${e.delay}s`,
+              '--dx': e.dx,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Letterbox bars */}
+      <div className="cine-bar absolute inset-x-0 top-0 z-30 bg-black pointer-events-none" />
+      <div className="cine-bar absolute inset-x-0 bottom-0 z-30 bg-black pointer-events-none" />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 md:px-8 py-14 md:py-20">
+        {/* Top: countdown window (left) + heading */}
+        <div className="grid lg:grid-cols-[auto_1fr] gap-6 lg:gap-10 items-center mb-10 md:mb-14">
+          <div className="justify-self-center lg:justify-self-start rounded-2xl border border-gold/40 bg-black/45 backdrop-blur-md px-4 py-4 md:px-5 shadow-[0_0_40px_rgba(212,175,55,0.15)]">
+            {countdown}
+          </div>
+          <div className="text-center lg:text-left">
+            <span className="inline-flex items-center gap-2 text-gold font-semibold tracking-[0.3em] uppercase text-xs">
+              <CalendarDays className="w-4 h-4" /> Durga Puja 2026
+            </span>
+            <h2 className="cine-sweep relative inline-block overflow-hidden font-display text-4xl md:text-6xl font-bold text-ivory-warm mt-2 px-1">
+              Event <span className="text-gold-bright">Schedule</span>
+            </h2>
+            <p className="text-ivory-cream/65 text-xs md:text-sm tracking-[0.25em] uppercase mt-2">
+              Faith | Culture | Community | Togetherness
+            </p>
+            <div className="mt-4 h-px w-40 mx-auto lg:mx-0 bg-gradient-to-r from-transparent via-gold to-transparent" />
           </div>
         </div>
 
-        <div ref={ref} className={`relative ${inView ? 'sched-in' : ''}`}>
-          {/* Timeline spine */}
-          <div className="sched-line absolute left-[27px] md:left-[39px] top-2 bottom-2 w-1 rounded-full bg-gradient-to-b from-maroon via-gold to-green-700" />
+        {/* Timeline */}
+        <div className="relative">
+          <div className="sched-line absolute left-[27px] md:left-[39px] top-2 bottom-2 w-[3px] rounded-full bg-gradient-to-b from-gold-bright via-gold to-gold-deep shadow-[0_0_12px_rgba(255,215,0,0.6)]">
+            <span className="sched-spark absolute -left-[5px] w-[13px] h-[13px] rounded-full bg-gold-bright shadow-[0_0_16px_6px_rgba(255,215,0,0.7)]" />
+          </div>
 
-          <div className="flex flex-col gap-5 md:gap-6">
-            {EVENT_SCHEDULE.map((d, i) => {
-              const isIn = shown.has(d.date)
-              const dayLive = d.slots.some((s) => status(SCHEDULE_SLOTS.find((x) => x.date === d.date && x.title === s.title)) === 'live')
+          <div className="flex flex-col gap-5 md:gap-7">
+            {EVENT_SCHEDULE.map((d) => {
+              const dayLive = d.slots.some((s) => status(slotOf(d, s)) === 'live')
               return (
                 <div
                   key={d.date}
                   data-day={d.date}
-                  className={`sched-day ${i % 2 ? 'from-right' : ''} ${isIn ? 'is-in' : ''} relative flex items-stretch gap-3 md:gap-5`}
+                  className={`sched-day ${shown.has(d.date) ? 'is-in' : ''} relative flex items-stretch gap-3 md:gap-5`}
                 >
-                  {/* Date badge on the spine */}
-                  <div
-                    className="sched-dot relative z-10 shrink-0 w-14 md:w-20 self-start rounded-2xl text-white text-center py-2 shadow-lg border-2 border-gold/70"
-                    style={{ background: `linear-gradient(160deg, ${d.color[0]}, ${d.color[1]})` }}
-                  >
+                  <div className="sched-dot relative z-10 shrink-0 w-14 md:w-20 self-start rounded-2xl text-center py-2 bg-gradient-to-b from-gold-bright to-gold-deep text-maroon-deep shadow-[0_0_25px_rgba(212,175,55,0.45)] border-2 border-gold-bright">
                     <div className="font-display text-2xl md:text-4xl font-extrabold leading-none">{d.day}</div>
                     <div className="text-[10px] md:text-xs font-bold mt-0.5">OCT</div>
-                    <div className="text-[9px] md:text-[11px] font-semibold uppercase opacity-90">{d.weekday.slice(0, 3)}</div>
+                    <div className="text-[9px] md:text-[11px] font-semibold uppercase">{d.weekday.slice(0, 3)}</div>
                   </div>
 
-                  {/* Day card */}
                   <div
-                    className={`flex-1 min-w-0 rounded-2xl bg-white shadow-xl border-2 overflow-hidden ${dayLive ? 'border-green-500' : 'border-gold/40'}`}
+                    className={`flex-1 min-w-0 rounded-2xl overflow-hidden bg-black/35 backdrop-blur-sm border shadow-[0_20px_50px_rgba(0,0,0,0.45)] ${
+                      dayLive ? 'border-green-500' : 'border-gold/35'
+                    }`}
                   >
-                    <div
-                      className="px-4 py-2 text-white text-xs md:text-sm font-bold tracking-wider uppercase flex items-center justify-between"
-                      style={{ background: `linear-gradient(90deg, ${d.color[0]}, ${d.color[1]})` }}
-                    >
-                      <span>{d.weekday}, {d.day} October</span>
-                      <span className="opacity-80">{d.slots.length} {d.slots.length > 1 ? 'events' : 'event'}</span>
+                    <div className="cine-sweep relative overflow-hidden px-4 py-2 bg-gradient-to-r from-maroon via-maroon-light to-maroon flex items-center justify-between text-xs md:text-sm font-bold tracking-wider uppercase border-b border-gold/30">
+                      <span className="text-gold-bright">{d.weekday}, {d.day} October</span>
+                      <span className="text-ivory-cream/70">{d.slots.length} {d.slots.length > 1 ? 'events' : 'event'}</span>
                     </div>
-                    <ul className="divide-y divide-gold/15">
+                    <ul className="divide-y divide-gold/10">
                       {d.slots.map((s, j) => {
                         const Icon = SCHEDULE_ICONS[s.icon] || Sparkles
-                        const st = status(SCHEDULE_SLOTS.find((x) => x.date === d.date && x.title === s.title))
+                        const st = status(slotOf(d, s))
+                        const time = `${fmt12(s.start)} – ${s.end ? fmt12(s.end) : 'Onwards'}`
                         return (
                           <li
                             key={s.title}
-                            className={`sched-row flex items-center gap-3 px-3 md:px-4 py-2.5 ${st === 'done' ? 'opacity-50' : ''} ${st === 'live' ? 'bg-green-50' : ''}`}
-                            style={{ transitionDelay: `${250 + j * 140}ms` }}
+                            className={`sched-row flex items-center gap-3 px-3 md:px-4 py-2.5 md:py-3 hover:bg-gold/5 transition-colors ${
+                              st === 'done' ? 'opacity-45' : ''
+                            } ${st === 'live' ? 'bg-green-500/10' : ''}`}
+                            style={{ transitionDelay: `${350 + j * 160}ms` }}
                           >
-                            <Icon className="w-5 h-5 shrink-0 sm:order-2" style={{ color: d.color[0] }} />
-                            <span
-                              className="hidden sm:inline-block sm:order-1 shrink-0 rounded-lg text-white text-xs font-bold px-2 py-1 tabular-nums w-[150px] text-center"
-                              style={{ background: d.color[0] }}
-                            >
-                              {fmt12(s.start)} – {s.end ? fmt12(s.end) : 'Onwards'}
+                            <Icon className="w-5 h-5 shrink-0 text-gold sm:order-2" />
+                            <span className="hidden sm:inline-block sm:order-1 shrink-0 w-[150px] text-center rounded-lg border border-gold/40 bg-maroon-deep/70 text-gold-bright text-xs font-bold px-2 py-1 tabular-nums">
+                              {time}
                             </span>
                             <span className="sm:order-3 flex-1 min-w-0">
-                              <span
-                                className="sm:hidden inline-block rounded-md text-white text-[10px] font-bold px-1.5 py-0.5 tabular-nums mb-0.5"
-                                style={{ background: d.color[0] }}
-                              >
-                                {fmt12(s.start)} – {s.end ? fmt12(s.end) : 'Onwards'}
+                              <span className="sm:hidden inline-block rounded-md border border-gold/40 bg-maroon-deep/70 text-gold-bright text-[10px] font-bold px-1.5 py-0.5 tabular-nums mb-0.5">
+                                {time}
                               </span>
-                              <span className="block font-semibold text-maroon-deep text-sm md:text-base leading-snug">{s.title}</span>
+                              <span className="block font-semibold text-ivory-warm text-sm md:text-base leading-snug">{s.title}</span>
                             </span>
                             {st === 'live' && (
-                              <span className="sm:order-4 shrink-0 inline-flex items-center gap-1.5 text-[10px] font-bold text-green-700 uppercase">
+                              <span className="sm:order-4 shrink-0 inline-flex items-center gap-1.5 text-[10px] font-bold text-green-400 uppercase">
                                 <span className="w-2 h-2 rounded-full bg-green-500 sched-live" /> Live
                               </span>
                             )}
                             {st === 'next' && (
-                              <span className="sm:order-4 shrink-0 text-[10px] font-bold text-gold-deep uppercase">Up next</span>
+                              <span className="sm:order-4 shrink-0 text-[10px] font-bold text-gold-bright uppercase tracking-wider">Up next</span>
                             )}
                           </li>
                         )
@@ -781,13 +858,13 @@ function ScheduleSection() {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
-          <span className="inline-flex items-center gap-2 text-maroon font-semibold">
-            <MapPin className="w-5 h-5 text-gold-deep" /> Eviva Ground, Inside Palava Phase 2
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
+          <span className="inline-flex items-center gap-2 text-ivory-cream/85 font-semibold">
+            <MapPin className="w-5 h-5 text-gold" /> Eviva Ground, Inside Palava Phase 2
           </span>
           <button
             onClick={() => setZoom(true)}
-            className="inline-flex items-center gap-2 border-2 border-gold/60 text-maroon font-bold px-4 py-2 rounded-full hover:bg-gold/15 transition-colors text-sm"
+            className="inline-flex items-center gap-2 border border-gold/60 text-gold-bright font-bold px-4 py-2 rounded-full hover:bg-gold/15 transition-colors text-sm"
           >
             <ImageIcon className="w-4 h-4" /> View schedule poster
           </button>
