@@ -511,7 +511,7 @@ const CULTURAL_EVENTS = [
     tag: 'Abriti • Singing • Dancing',
     flyer: '/internal-cultural.jpg?v=1',
     date: '16 October 2026',
-    details: '16th October, 7 PM onwards • Eviva Ground, Inside Palava Phase 2',
+    details: '16th October, 8 PM onwards • Eviva Ground, Inside Palava Phase 2',
     note: 'Inviting participation for Abriti, Singing, Dancing & other cultural activities',
     extra: 'Want to perform? Reach out to the PKT team via Contact Us.',
   },
