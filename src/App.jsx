@@ -536,6 +536,15 @@ const CULTURAL_EVENTS = [
     extra: 'Multiple age categories • Exciting prizes • Showcase your talent',
   },
   {
+    name: 'PKT Kids Band',
+    tag: 'Live Music',
+    flyer: '/pkt-kids-band.jpg?v=1',
+    date: '18 October 2026',
+    details: '18th October, 8 PM onwards • Eviva Ground, Inside Palava Phase 2',
+    note: "Our young musicians take the stage",
+    extra: 'In association with George • Sound-Crave Music School & Store',
+  },
+  {
     name: 'Battle of the Bands',
     tag: 'Live Music',
     flyer: '/battle-of-bands.jpg?v=1',
@@ -921,10 +930,10 @@ function CulturalEventsSection() {
             <span className="h-px w-16 bg-gradient-to-l from-transparent to-gold" />
           </div>
           <p className="text-charcoal/80 text-base md:text-lg">
-            Nine events across Durga Puja! ✨{' '}
+            Ten events across Durga Puja! ✨{' '}
             <strong className="text-maroon">16 Oct</strong> Agomoni &amp; Internal Cultural Event •{' '}
             <strong className="text-maroon">17 Oct</strong> Kalaanjali &amp; Rangarekha •{' '}
-            <strong className="text-maroon">18 Oct</strong> Battle of the Bands •{' '}
+            <strong className="text-maroon">18 Oct</strong> PKT Kids Band &amp; Battle of the Bands •{' '}
             <strong className="text-maroon">19 Oct</strong> Sajer Golpo &amp; Bhuter Raja Dil Bor •{' '}
             <strong className="text-maroon">20 Oct</strong> Kumari Puja &amp; Magic Show — tap a
             poster to enlarge, and register below where applicable.
