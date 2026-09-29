@@ -509,7 +509,7 @@ const CULTURAL_EVENTS = [
   {
     name: 'Internal Cultural Event',
     tag: 'Abriti • Singing • Dancing',
-    flyer: '/internal-cultural.jpg?v=1',
+    flyer: '/internal-cultural.jpg?v=2',
     date: '16 October 2026',
     details: '16th October, 8 PM onwards • Eviva Ground, Inside Palava Phase 2',
     note: 'Inviting participation for Abriti, Singing, Dancing & other cultural activities',
