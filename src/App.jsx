@@ -499,6 +499,14 @@ const KUMARI_PUJA_FORM_URL =
 
 const CULTURAL_EVENTS = [
   {
+    name: 'Agomoni',
+    tag: 'আগমনী • Cultural Evening',
+    flyer: '/agomoni.jpg?v=1',
+    date: '16 October 2026',
+    details: '16th October, 7 PM onwards • Eviva Ground, Inside Palava Phase 2',
+    note: 'A Cultural Evening to Welcome Maa Durga',
+  },
+  {
     name: 'Internal Cultural Event',
     tag: 'Abriti • Singing • Dancing',
     flyer: '/internal-cultural.jpg?v=1',
@@ -836,8 +844,8 @@ function CulturalEventsSection() {
             <span className="h-px w-16 bg-gradient-to-l from-transparent to-gold" />
           </div>
           <p className="text-charcoal/80 text-base md:text-lg">
-            Eight events across Durga Puja! ✨{' '}
-            <strong className="text-maroon">16 Oct</strong> Internal Cultural Event •{' '}
+            Nine events across Durga Puja! ✨{' '}
+            <strong className="text-maroon">16 Oct</strong> Agomoni &amp; Internal Cultural Event •{' '}
             <strong className="text-maroon">17 Oct</strong> Kalaanjali &amp; Rangarekha •{' '}
             <strong className="text-maroon">18 Oct</strong> Battle of the Bands •{' '}
             <strong className="text-maroon">19 Oct</strong> Sajer Golpo &amp; Bhuter Raja Dil Bor •{' '}
