@@ -43,6 +43,14 @@ import {
   FileText,
   Volume2,
   VolumeX,
+  Music,
+  Palette,
+  Drum,
+  Guitar,
+  Drama,
+  Shirt,
+  WandSparkles,
+  PersonStanding,
 } from 'lucide-react'
 import QRCode from 'qrcode'
 import DurgaFace from './DurgaFace.jsx'
@@ -56,6 +64,7 @@ import {
   MEMBER_PERKS,
   ANNADAN,
   ANNADAN_2026,
+  EVENT_SCHEDULE,
   DONATION_CATEGORIES,
   DONATION_NOTE,
 } from './data.js'
@@ -66,6 +75,7 @@ const NAV = [
   { label: 'Durga Puja 2026', href: '#durga' },
   { label: 'Invitation', href: '#invitation' },
   { label: 'Stall Booking', href: '#stall-booking' },
+  { label: 'Schedule', href: '#schedule' },
   { label: 'Cultural Events', href: '#cultural-events' },
   { label: 'Donate', href: '#donate' },
   { label: 'Sponsorship', href: '#sponsorship' },
@@ -567,6 +577,234 @@ const CULTURAL_EVENTS = [
     note: 'An evening of magic for the whole family',
   },
 ]
+
+const SCHEDULE_ICONS = {
+  food: UtensilsCrossed,
+  music: Music,
+  people: Users,
+  art: Palette,
+  dance: PersonStanding,
+  drum: Drum,
+  guitar: Guitar,
+  drama: Drama,
+  fashion: Shirt,
+  magic: WandSparkles,
+  flame: Flame,
+}
+
+const istDate = (date, hhmm) => new Date(`${date}T${hhmm}:00+05:30`)
+const fmt12 = (hhmm) => {
+  const [h, m] = hhmm.split(':').map(Number)
+  return `${((h + 11) % 12) + 1}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`
+}
+
+// Every slot with its real start/end instants; "onwards" slots run until 11 PM.
+const SCHEDULE_SLOTS = EVENT_SCHEDULE.flatMap((d) =>
+  d.slots.map((s) => ({
+    ...s,
+    date: d.date,
+    from: istDate(d.date, s.start),
+    to: istDate(d.date, s.end || '23:00'),
+  }))
+)
+
+function ScheduleSection() {
+  const ref = useRef(null)
+  const [now, setNow] = useState(() => new Date())
+  const [inView, setInView] = useState(false)
+  const [shown, setShown] = useState(() => new Set())
+  const [zoom, setZoom] = useState(false)
+
+  useEffect(() => {
+    const t = setInterval(() => setNow(new Date()), 30000)
+    return () => clearInterval(t)
+  }, [])
+
+  // Animate the timeline line, then each day card as it scrolls into view.
+  useEffect(() => {
+    const root = ref.current
+    if (!root) return
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return
+          if (e.target === root) setInView(true)
+          else setShown((prev) => new Set(prev).add(e.target.dataset.day))
+          io.unobserve(e.target)
+        })
+      },
+      { threshold: 0.15 }
+    )
+    io.observe(root)
+    root.querySelectorAll('[data-day]').forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [])
+
+  const live = SCHEDULE_SLOTS.filter((s) => now >= s.from && now < s.to)
+  const next = SCHEDULE_SLOTS.find((s) => s.from > now)
+  const first = SCHEDULE_SLOTS[0].from
+  const diff = first - now
+  const status = (s) => (now >= s.to ? 'done' : now >= s.from ? 'live' : s === next ? 'next' : 'upcoming')
+
+  let banner
+  if (diff > 0) {
+    const d = Math.floor(diff / 864e5)
+    const h = Math.floor((diff % 864e5) / 36e5)
+    const m = Math.floor((diff % 36e5) / 6e4)
+    banner = (
+      <>
+        <Clock className="w-4 h-4" /> Festivities begin in{' '}
+        <strong className="tabular-nums">{d}d {h}h {m}m</strong> — Anondomela, 16 Oct, 7 PM
+      </>
+    )
+  } else if (live.length) {
+    banner = (
+      <>
+        <span className="w-2.5 h-2.5 rounded-full bg-green-500 sched-live" /> Happening now:{' '}
+        <strong>{live.map((s) => s.title).join(' • ')}</strong>
+      </>
+    )
+  } else if (next) {
+    banner = (
+      <>
+        <Clock className="w-4 h-4" /> Up next: <strong>{next.title}</strong> —{' '}
+        {next.from.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', timeZone: 'Asia/Kolkata' })},{' '}
+        {fmt12(next.start)}
+      </>
+    )
+  } else {
+    banner = <>🙏 Thank you for celebrating Durga Puja 2026 with us — Subho Bijoya!</>
+  }
+
+  return (
+    <section id="schedule" className="relative py-16 md:py-20 overflow-hidden bg-gradient-to-b from-ivory-cream to-ivory">
+      <div className="absolute -top-24 -left-24 w-96 h-96 bg-gold/10 blur-3xl rounded-full" />
+      <div className="relative max-w-5xl mx-auto px-4 md:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-8">
+          <span className="inline-flex items-center gap-2 text-gold-deep font-semibold tracking-[0.25em] uppercase text-xs">
+            <CalendarDays className="w-4 h-4" /> Durga Puja 2026
+          </span>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-maroon mt-3">Event Schedule</h2>
+          <p className="text-charcoal/70 text-xs md:text-sm tracking-[0.2em] uppercase mt-2">
+            Faith | Culture | Community | Togetherness
+          </p>
+          <div className="mt-5 inline-flex flex-wrap items-center justify-center gap-2 rounded-full bg-maroon text-ivory-warm px-4 py-2 text-sm shadow-lg">
+            {banner}
+          </div>
+        </div>
+
+        <div ref={ref} className={`relative ${inView ? 'sched-in' : ''}`}>
+          {/* Timeline spine */}
+          <div className="sched-line absolute left-[27px] md:left-[39px] top-2 bottom-2 w-1 rounded-full bg-gradient-to-b from-maroon via-gold to-green-700" />
+
+          <div className="flex flex-col gap-5 md:gap-6">
+            {EVENT_SCHEDULE.map((d, i) => {
+              const isIn = shown.has(d.date)
+              const dayLive = d.slots.some((s) => status(SCHEDULE_SLOTS.find((x) => x.date === d.date && x.title === s.title)) === 'live')
+              return (
+                <div
+                  key={d.date}
+                  data-day={d.date}
+                  className={`sched-day ${i % 2 ? 'from-right' : ''} ${isIn ? 'is-in' : ''} relative flex items-stretch gap-3 md:gap-5`}
+                >
+                  {/* Date badge on the spine */}
+                  <div
+                    className="sched-dot relative z-10 shrink-0 w-14 md:w-20 self-start rounded-2xl text-white text-center py-2 shadow-lg border-2 border-gold/70"
+                    style={{ background: `linear-gradient(160deg, ${d.color[0]}, ${d.color[1]})` }}
+                  >
+                    <div className="font-display text-2xl md:text-4xl font-extrabold leading-none">{d.day}</div>
+                    <div className="text-[10px] md:text-xs font-bold mt-0.5">OCT</div>
+                    <div className="text-[9px] md:text-[11px] font-semibold uppercase opacity-90">{d.weekday.slice(0, 3)}</div>
+                  </div>
+
+                  {/* Day card */}
+                  <div
+                    className={`flex-1 min-w-0 rounded-2xl bg-white shadow-xl border-2 overflow-hidden ${dayLive ? 'border-green-500' : 'border-gold/40'}`}
+                  >
+                    <div
+                      className="px-4 py-2 text-white text-xs md:text-sm font-bold tracking-wider uppercase flex items-center justify-between"
+                      style={{ background: `linear-gradient(90deg, ${d.color[0]}, ${d.color[1]})` }}
+                    >
+                      <span>{d.weekday}, {d.day} October</span>
+                      <span className="opacity-80">{d.slots.length} {d.slots.length > 1 ? 'events' : 'event'}</span>
+                    </div>
+                    <ul className="divide-y divide-gold/15">
+                      {d.slots.map((s, j) => {
+                        const Icon = SCHEDULE_ICONS[s.icon] || Sparkles
+                        const st = status(SCHEDULE_SLOTS.find((x) => x.date === d.date && x.title === s.title))
+                        return (
+                          <li
+                            key={s.title}
+                            className={`sched-row flex items-center gap-3 px-3 md:px-4 py-2.5 ${st === 'done' ? 'opacity-50' : ''} ${st === 'live' ? 'bg-green-50' : ''}`}
+                            style={{ transitionDelay: `${250 + j * 140}ms` }}
+                          >
+                            <Icon className="w-5 h-5 shrink-0 sm:order-2" style={{ color: d.color[0] }} />
+                            <span
+                              className="hidden sm:inline-block sm:order-1 shrink-0 rounded-lg text-white text-xs font-bold px-2 py-1 tabular-nums w-[150px] text-center"
+                              style={{ background: d.color[0] }}
+                            >
+                              {fmt12(s.start)} – {s.end ? fmt12(s.end) : 'Onwards'}
+                            </span>
+                            <span className="sm:order-3 flex-1 min-w-0">
+                              <span
+                                className="sm:hidden inline-block rounded-md text-white text-[10px] font-bold px-1.5 py-0.5 tabular-nums mb-0.5"
+                                style={{ background: d.color[0] }}
+                              >
+                                {fmt12(s.start)} – {s.end ? fmt12(s.end) : 'Onwards'}
+                              </span>
+                              <span className="block font-semibold text-maroon-deep text-sm md:text-base leading-snug">{s.title}</span>
+                            </span>
+                            {st === 'live' && (
+                              <span className="sm:order-4 shrink-0 inline-flex items-center gap-1.5 text-[10px] font-bold text-green-700 uppercase">
+                                <span className="w-2 h-2 rounded-full bg-green-500 sched-live" /> Live
+                              </span>
+                            )}
+                            {st === 'next' && (
+                              <span className="sm:order-4 shrink-0 text-[10px] font-bold text-gold-deep uppercase">Up next</span>
+                            )}
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
+          <span className="inline-flex items-center gap-2 text-maroon font-semibold">
+            <MapPin className="w-5 h-5 text-gold-deep" /> Eviva Ground, Inside Palava Phase 2
+          </span>
+          <button
+            onClick={() => setZoom(true)}
+            className="inline-flex items-center gap-2 border-2 border-gold/60 text-maroon font-bold px-4 py-2 rounded-full hover:bg-gold/15 transition-colors text-sm"
+          >
+            <ImageIcon className="w-4 h-4" /> View schedule poster
+          </button>
+        </div>
+      </div>
+
+      {zoom && (
+        <Modal onClose={() => setZoom(false)} maxW="max-w-3xl">
+          <div className="relative bg-[#1c0008] border-2 border-gold/50 rounded-2xl overflow-hidden p-2">
+            <button
+              onClick={() => setZoom(false)}
+              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/60 border border-gold/30 text-gold-bright hover:bg-gold/20"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="max-h-[85vh] overflow-y-auto rounded-xl">
+              <img src="/event-schedule.jpg?v=1" alt="Durga Puja 2026 event schedule poster" className="w-full h-auto" />
+            </div>
+          </div>
+        </Modal>
+      )}
+    </section>
+  )
+}
 
 function CulturalEventsSection() {
   const [zoom, setZoom] = useState(null)
@@ -5243,6 +5481,7 @@ export default function App() {
         <Hero onJoin={goJoin} onSponsor={openSponsor} />
         <InvitationSection />
         <StallBookingSection />
+        <ScheduleSection />
         <CulturalEventsSection />
         <DurgaSection />
         <AnnadanSection />

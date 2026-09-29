@@ -438,3 +438,52 @@ export const ANNADAN_2026 = {
     ['Water Bottle (225 ml)', '4000 pcs'],
   ],
 }
+
+// ── Durga Puja 2026 event schedule (per the schedule poster) ─
+// Times are IST, 24h. end: null = "onwards".
+export const EVENT_SCHEDULE = [
+  {
+    date: '2026-10-16', day: '16', weekday: 'Friday', color: ['#8b0f1e', '#c2410c'],
+    slots: [
+      { start: '19:00', end: '22:00', title: 'Anondomela', icon: 'food' },
+      { start: '19:00', end: '20:00', title: 'Agomoni', icon: 'music' },
+      { start: '20:00', end: '21:00', title: 'Internal Performances', icon: 'people' },
+    ],
+  },
+  {
+    date: '2026-10-17', day: '17', weekday: 'Saturday', color: ['#9d174d', '#db2777'],
+    slots: [
+      { start: '10:00', end: '12:00', title: 'Drawing Competition', icon: 'art' },
+      { start: '19:30', end: '20:15', title: 'Navdurga Dance', icon: 'dance' },
+      { start: '20:30', end: '22:30', title: 'Dance Competition', icon: 'people' },
+    ],
+  },
+  {
+    date: '2026-10-18', day: '18', weekday: 'Sunday', color: ['#1e3a8a', '#2563eb'],
+    slots: [
+      { start: '20:00', end: '20:30', title: "PKT Kids' Band", icon: 'drum' },
+      { start: '20:30', end: '22:00', title: 'External Band Performances', icon: 'guitar' },
+    ],
+  },
+  {
+    date: '2026-10-19', day: '19', weekday: 'Monday', color: ['#92400e', '#d97706'],
+    slots: [
+      { start: '20:00', end: '21:00', title: 'Bangla Natok', icon: 'drama' },
+      { start: '20:00', end: '22:00', title: 'Fashion Show', icon: 'fashion' },
+    ],
+  },
+  {
+    date: '2026-10-20', day: '20', weekday: 'Tuesday', color: ['#5b21b6', '#9333ea'],
+    slots: [
+      { start: '19:00', end: '20:00', title: 'Shankha Protijogita & Dhaak Protijogita', icon: 'drum' },
+      { start: '20:00', end: '20:30', title: 'Dance Performances', icon: 'dance' },
+      { start: '20:30', end: null, title: 'Magic Show', icon: 'magic' },
+    ],
+  },
+  {
+    date: '2026-10-21', day: '21', weekday: 'Wednesday', color: ['#166534', '#16a34a'],
+    slots: [
+      { start: '10:00', end: '13:00', title: 'Sindoor Khela & Dhunochi Naach', icon: 'flame' },
+    ],
+  },
+]
