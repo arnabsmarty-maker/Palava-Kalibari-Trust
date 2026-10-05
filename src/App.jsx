@@ -636,32 +636,105 @@ const EMBERS = Array.from({ length: 22 }, (_, i) => ({
 
 const pad2 = (n) => String(n).padStart(2, '0')
 
-function CountdownUnit({ value, label }) {
+function CountdownUnit({ value, label, compact = false }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="relative w-12 h-14 md:w-16 md:h-[72px] rounded-lg bg-gradient-to-b from-[#2a0008] to-black border border-gold/50 shadow-[inset_0_1px_0_rgba(255,215,0,0.25),0_8px_20px_rgba(0,0,0,0.5)] grid place-items-center overflow-hidden [perspective:400px]">
-        <span key={value} className="cine-digit font-display text-2xl md:text-4xl font-extrabold text-gold-bright tabular-nums">
+      <div
+        className={`relative rounded-lg bg-gradient-to-b from-[#2a0008] to-black border border-gold/50 shadow-[inset_0_1px_0_rgba(255,215,0,0.25),0_8px_20px_rgba(0,0,0,0.5)] grid place-items-center overflow-hidden [perspective:400px] ${
+          compact ? 'w-10 h-11 sm:w-12 sm:h-[52px]' : 'w-12 h-14 md:w-16 md:h-[72px]'
+        }`}
+      >
+        <span
+          key={value}
+          className={`cine-digit font-display font-extrabold text-gold-bright tabular-nums ${
+            compact ? 'text-xl sm:text-2xl' : 'text-2xl md:text-4xl'
+          }`}
+        >
           {value}
         </span>
         <span className="absolute inset-x-0 top-1/2 h-px bg-black/60" />
       </div>
-      <span className="mt-1 text-[9px] md:text-[10px] font-bold tracking-[0.2em] text-ivory-cream/70 uppercase">{label}</span>
+      <span
+        className={`mt-1 font-bold text-ivory-cream/70 uppercase ${
+          compact ? 'text-[8px] sm:text-[9px] tracking-[0.15em]' : 'text-[9px] md:text-[10px] tracking-[0.2em]'
+        }`}
+      >
+        {label}
+      </span>
     </div>
+  )
+}
+
+// Days / hours / mins / secs boxes counting down to `target`.
+function CountdownDigits({ secs, compact = false }) {
+  const colon = compact
+    ? 'font-display text-lg sm:text-xl text-gold/70 mt-2 sm:mt-2.5'
+    : 'font-display text-2xl md:text-3xl text-gold/70 mt-2.5 md:mt-4'
+  return (
+    <div className={`flex items-start ${compact ? 'gap-1 sm:gap-1.5' : 'gap-1.5 md:gap-2'}`}>
+      <CountdownUnit compact={compact} value={pad2(Math.floor(secs / 86400))} label="Days" />
+      <span className={colon}>:</span>
+      <CountdownUnit compact={compact} value={pad2(Math.floor((secs % 86400) / 3600))} label="Hours" />
+      <span className={colon}>:</span>
+      <CountdownUnit compact={compact} value={pad2(Math.floor((secs % 3600) / 60))} label="Mins" />
+      <span className={colon}>:</span>
+      <CountdownUnit compact={compact} value={pad2(secs % 60)} label="Secs" />
+    </div>
+  )
+}
+
+const useNow = () => {
+  const [now, setNow] = useState(() => new Date())
+  useEffect(() => {
+    const t = setInterval(() => setNow(new Date()), 1000)
+    return () => clearInterval(t)
+  }, [])
+  return now
+}
+
+// Compact countdown pinned to the top-left of the hero; links to the schedule.
+function HeroCountdown() {
+  const now = useNow()
+  const diff = SCHEDULE_SLOTS[0].from - now
+  const live = SCHEDULE_SLOTS.filter((s) => now >= s.from && now < s.to)
+  const festivalOver = now >= SCHEDULE_SLOTS[SCHEDULE_SLOTS.length - 1].to
+  if (festivalOver) return null
+
+  return (
+    <a
+      href="#schedule"
+      className="absolute z-30 top-[72px] sm:top-[84px] left-3 sm:left-6 rounded-2xl border border-gold/40 bg-black/55 backdrop-blur-md px-3 py-2.5 sm:px-4 sm:py-3 shadow-[0_0_40px_rgba(212,175,55,0.2)] hover:border-gold transition-colors animate-fade-up"
+      aria-label="Durga Puja 2026 countdown — view event schedule"
+    >
+      {diff > 0 ? (
+        <>
+          <p className="text-[9px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-gold">Puja starts in</p>
+          <div className="mt-1.5">
+            <CountdownDigits compact secs={Math.floor(diff / 1000)} />
+          </div>
+          <p className="mt-1 text-[10px] sm:text-xs text-ivory-cream/75">Anondomela • 16 Oct, 7:00 PM</p>
+        </>
+      ) : (
+        <>
+          <p className="inline-flex items-center gap-2 text-[9px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-green-400">
+            <span className="w-2 h-2 rounded-full bg-green-500 sched-live" /> {live.length ? 'Happening now' : 'Durga Puja 2026'}
+          </p>
+          <p className="mt-1 font-display text-sm sm:text-lg font-bold text-gold-bright max-w-[220px] sm:max-w-[280px]">
+            {live.length ? live.map((s) => s.title).join(' • ') : 'See today’s schedule →'}
+          </p>
+        </>
+      )}
+    </a>
   )
 }
 
 function ScheduleSection() {
   const ref = useRef(null)
   const videoRef = useRef(null)
-  const [now, setNow] = useState(() => new Date())
+  const now = useNow()
   const [opened, setOpened] = useState(false)
   const [shown, setShown] = useState(() => new Set())
   const [zoom, setZoom] = useState(false)
-
-  useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 1000)
-    return () => clearInterval(t)
-  }, [])
 
   // Open the letterbox, then bring each day card into focus as it scrolls in.
   useEffect(() => {
@@ -700,14 +773,8 @@ function ScheduleSection() {
     countdown = (
       <>
         <p className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-gold">Puja starts in</p>
-        <div className="mt-2 flex items-start gap-1.5 md:gap-2">
-          <CountdownUnit value={pad2(Math.floor(secs / 86400))} label="Days" />
-          <span className="font-display text-2xl md:text-3xl text-gold/70 mt-2.5 md:mt-4">:</span>
-          <CountdownUnit value={pad2(Math.floor((secs % 86400) / 3600))} label="Hours" />
-          <span className="font-display text-2xl md:text-3xl text-gold/70 mt-2.5 md:mt-4">:</span>
-          <CountdownUnit value={pad2(Math.floor((secs % 3600) / 60))} label="Mins" />
-          <span className="font-display text-2xl md:text-3xl text-gold/70 mt-2.5 md:mt-4">:</span>
-          <CountdownUnit value={pad2(secs % 60)} label="Secs" />
+        <div className="mt-2">
+          <CountdownDigits secs={secs} />
         </div>
         <p className="mt-2 text-[11px] md:text-xs text-ivory-cream/75">Anondomela • 16 Oct, 7:00 PM</p>
       </>
@@ -1856,6 +1923,8 @@ function Hero({ onJoin, onSponsor }) {
 
       {/* Feather-light scrim so the clean footage stays visible. */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/35" />
+
+      <HeroCountdown />
 
       {/* First-open intro — welcome line, then it fades away */}
       <div
