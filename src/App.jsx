@@ -48,7 +48,6 @@ import {
   Drum,
   Guitar,
   Drama,
-  Shirt,
   WandSparkles,
   PersonStanding,
 } from 'lucide-react'
@@ -591,7 +590,6 @@ const SCHEDULE_ICONS = {
   drum: Drum,
   guitar: Guitar,
   drama: Drama,
-  fashion: Shirt,
   magic: WandSparkles,
   flame: Flame,
 }

@@ -469,7 +469,6 @@ export const EVENT_SCHEDULE = [
     date: '2026-10-19', day: '19', weekday: 'Monday', color: ['#92400e', '#d97706'],
     slots: [
       { start: '20:00', end: '21:00', title: 'Bangla Natok', icon: 'drama' },
-      { start: '20:00', end: '22:00', title: 'Fashion Show', icon: 'fashion' },
     ],
   },
   {
