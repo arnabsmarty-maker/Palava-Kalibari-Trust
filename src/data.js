@@ -440,7 +440,7 @@ export const ANNADAN_2026 = {
 }
 
 // ── Durga Puja 2026 event schedule (per the schedule poster) ─
-// Times are IST, 24h. end: null = "onwards".
+// Times are IST, 24h. end: null = "onwards" (treated as a 2-hour slot for live status).
 export const EVENT_SCHEDULE = [
   {
     date: '2026-10-16', day: '16', weekday: 'Friday', color: ['#8b0f1e', '#c2410c'],
@@ -482,7 +482,8 @@ export const EVENT_SCHEDULE = [
   {
     date: '2026-10-21', day: '21', weekday: 'Wednesday', color: ['#166534', '#16a34a'],
     slots: [
-      { start: '10:00', end: '13:00', title: 'Sindoor Khela & Dhunochi Naach', icon: 'flame' },
+      { start: '10:00', end: '13:00', title: 'Sindoor Khela', icon: 'people' },
+      { start: '10:30', end: null, title: 'Dhunochi Naach', icon: 'flame' },
     ],
   },
 ]

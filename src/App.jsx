@@ -579,6 +579,14 @@ const CULTURAL_EVENTS = [
     details: '20th October, 7:30 PM onwards • Eviva Ground, Inside Palava Phase 2',
     note: 'An evening of magic for the whole family',
   },
+  {
+    name: 'Dhunochi Naach',
+    tag: 'Traditional Dance',
+    flyer: '/dhunochi-naach.jpg?v=1',
+    date: '21 October 2026',
+    details: '21st October (Wednesday), 10:30 AM onwards • Eviva Ground, Inside Palava Phase 2',
+    note: 'Registration Open to All & Spot Registration',
+  },
 ]
 
 const SCHEDULE_ICONS = {
@@ -600,15 +608,17 @@ const fmt12 = (hhmm) => {
   return `${((h + 11) % 12) + 1}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`
 }
 
-// Every slot with its real start/end instants; "onwards" slots run until 11 PM.
+// Every slot with its real start/end instants; "onwards" slots count as 2 hours.
 const SCHEDULE_SLOTS = EVENT_SCHEDULE.flatMap((d) =>
   d.slots.map((s) => ({
     ...s,
     date: d.date,
     from: istDate(d.date, s.start),
-    to: istDate(d.date, s.end || '23:00'),
+    to: s.end ? istDate(d.date, s.end) : new Date(istDate(d.date, s.start).getTime() + 2 * 36e5),
   }))
 )
+// When the last event of the festival finishes (not just the last-listed one).
+const SCHEDULE_END = new Date(Math.max(...SCHEDULE_SLOTS.map((s) => s.to)))
 
 // Fixed ember layout (no Math.random, so renders are stable).
 const EMBERS = Array.from({ length: 22 }, (_, i) => ({
@@ -682,7 +692,7 @@ function HeroCountdown() {
   const now = useNow()
   const diff = SCHEDULE_SLOTS[0].from - now
   const live = SCHEDULE_SLOTS.filter((s) => now >= s.from && now < s.to)
-  const festivalOver = now >= SCHEDULE_SLOTS[SCHEDULE_SLOTS.length - 1].to
+  const festivalOver = now >= SCHEDULE_END
   if (festivalOver) return null
 
   return (
@@ -982,12 +992,13 @@ function CulturalEventsSection() {
             <span className="h-px w-16 bg-gradient-to-l from-transparent to-gold" />
           </div>
           <p className="text-charcoal/80 text-base md:text-lg">
-            Nine events across Durga Puja! ✨{' '}
+            Ten events across Durga Puja! ✨{' '}
             <strong className="text-maroon">16 Oct</strong> Agomoni &amp; Internal Cultural Event •{' '}
             <strong className="text-maroon">17 Oct</strong> Kalaanjali &amp; Rangarekha •{' '}
             <strong className="text-maroon">18 Oct</strong> PKT Kids Band &amp; Battle of the Bands •{' '}
             <strong className="text-maroon">19 Oct</strong> Bhuter Raja Dil Bor •{' '}
-            <strong className="text-maroon">20 Oct</strong> Kumari Puja &amp; Magic Show — tap a
+            <strong className="text-maroon">20 Oct</strong> Kumari Puja &amp; Magic Show •{' '}
+            <strong className="text-maroon">21 Oct</strong> Dhunochi Naach — tap a
             poster to enlarge, and register below where applicable.
           </p>
         </div>
