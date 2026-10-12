@@ -63,6 +63,7 @@ import {
   MEMBER_PERKS,
   ANNADAN,
   ANNADAN_2026,
+  ANNADAN_DONORS_2026,
   EVENT_SCHEDULE,
   DONATION_CATEGORIES,
   DONATION_NOTE,
@@ -3106,12 +3107,22 @@ function AnnadanSection() {
             >
               <X className="w-5 h-5" />
             </button>
-            <div className="max-h-[85vh] overflow-y-auto rounded-xl">
-              <img
-                src="/annadan-donors-2025.jpg"
-                alt="Palava Kalibari Trust Annadan Donor List 2025-26"
-                className="w-full h-auto object-contain"
-              />
+            <div className="max-h-[85vh] overflow-y-auto rounded-xl p-4 md:p-6">
+              <div className="text-center pr-8 pl-8">
+                <p className="text-[11px] font-bold tracking-[0.25em] uppercase text-gold">Palava Kalibari Trust</p>
+                <h3 className="font-display text-2xl md:text-3xl font-bold text-gold-bright mt-1">Annadan Donor List 2026-27</h3>
+                <p className="text-xs md:text-sm text-ivory-cream/75 mt-2">
+                  With heartfelt gratitude to every contributor who made Annadan 2026 possible 🙏
+                </p>
+              </div>
+              <ol className="mt-5 grid sm:grid-cols-2 gap-x-6 text-sm">
+                {ANNADAN_DONORS_2026.map((name, i) => (
+                  <li key={name} className="flex items-baseline gap-2 py-1.5 border-b border-gold/15">
+                    <span className="w-6 text-right text-xs font-bold text-gold tabular-nums shrink-0">{i + 1}</span>
+                    <span className="text-ivory-warm">{name}</span>
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
         </Modal>
