@@ -389,7 +389,7 @@ export const ANNADAN_DONORS_2026 = [
   'Chirag Joshi',
   'Jivan Kumar Jha',
   'Anand Singh',
-  'Pushpa Navle',
+  'Pushpa Navale',
   'Surendra Prasad',
   'Aditi Biswas',
   'Mahalaxmi Flour',
@@ -407,14 +407,14 @@ export const ANNADAN_DONORS_2026 = [
   'Priyanka & Ritapratim Das',
   "Abhraneel Chattopadhyay's Mother",
   'Abhraneel Chattopadhyay',
-  'Mayur Gujrathi',
+  'Mayur Gujarathi',
   'Dipak Kumar',
   'Gobindo Dairy',
   'Deboshree',
   'Nitesh Bangar',
   'Chandrasekhar',
   'Relief Medical',
-  'Ammit Trripathi',
+  'Amit Tripathi',
 ]
 
 // ── Durga Puja 2026 event schedule (per the schedule poster) ─
