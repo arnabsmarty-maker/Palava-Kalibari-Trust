@@ -2892,7 +2892,7 @@ function AnnadanAppeal() {
           className="block w-full max-w-[300px] mx-auto rounded-xl overflow-hidden border border-gold/40 hover:border-gold transition-colors"
           aria-label="View Annadan 2026 poster"
         >
-          <img src="/annadan-2026-appeal.jpg?v=1" alt="Annadan 2026 poster" loading="lazy" className="w-full h-auto" />
+          <img src="/annadan-2026-appeal.jpg?v=2" alt="Annadan 2026 poster" loading="lazy" className="w-full h-auto" />
         </button>
 
         <div className="text-center md:text-left">
@@ -2924,7 +2924,7 @@ function AnnadanAppeal() {
               <X className="w-5 h-5" />
             </button>
             <div className="max-h-[85vh] overflow-y-auto rounded-xl">
-              <img src="/annadan-2026-appeal.jpg?v=1" alt="Annadan 2026 poster" className="w-full h-auto" />
+              <img src="/annadan-2026-appeal.jpg?v=2" alt="Annadan 2026 poster" className="w-full h-auto" />
             </div>
           </div>
         </Modal>
