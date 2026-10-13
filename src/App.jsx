@@ -534,6 +534,16 @@ const CULTURAL_EVENTS = [
     extra: 'Multiple age categories • Exciting prizes • Showcase your talent',
   },
   {
+    name: 'Noykanya',
+    tag: 'নয়কন্যা • Nine Forms of the Goddess',
+    flyer: '/noykanya.jpg?v=1',
+    date: '17 October 2026',
+    details: '17th October, 7:30 PM onwards',
+    note: 'Shailaputri to Siddhidatri — the Navadurga on stage',
+    extra:
+      'Shailaputri • Brahmacharini • Chandraghanta • Kushmanda • Skandamata • Katyayani • Kaalratri • Mahagauri • Siddhidatri',
+  },
+  {
     name: 'PKT Kids Band',
     tag: 'Live Music',
     flyer: '/pkt-kids-band.jpg?v=1',
@@ -993,9 +1003,9 @@ function CulturalEventsSection() {
             <span className="h-px w-16 bg-gradient-to-l from-transparent to-gold" />
           </div>
           <p className="text-charcoal/80 text-base md:text-lg">
-            Ten events across Durga Puja! ✨{' '}
+            Eleven events across Durga Puja! ✨{' '}
             <strong className="text-maroon">16 Oct</strong> Agomoni &amp; Internal Cultural Event •{' '}
-            <strong className="text-maroon">17 Oct</strong> Kalaanjali &amp; Rangarekha •{' '}
+            <strong className="text-maroon">17 Oct</strong> Kalaanjali, Rangarekha &amp; Noykanya •{' '}
             <strong className="text-maroon">18 Oct</strong> PKT Kids Band &amp; Battle of the Bands •{' '}
             <strong className="text-maroon">19 Oct</strong> Bhuter Raja Dil Bor •{' '}
             <strong className="text-maroon">20 Oct</strong> Kumari Puja &amp; Magic Show •{' '}
